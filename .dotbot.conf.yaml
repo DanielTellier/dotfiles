@@ -1,12 +1,15 @@
-- clean: [
-  '~'
-]
+- defaults:
+    link:
+        create: true
+        relink: true
+
+- clean: ['~']
 
 - link:
-  ~/.bash_profile: bash_profile
-  ~/.bashrc: bashrc
-  ~/.gitconfig: gitconfig
-  ~/.config/nvim: nvim
+    ~/.bash_profile: bash_profile
+    ~/.bashrc: bashrc
+    ~/.gitconfig: gitconfig
+    ~/.config/nvim: nvim
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+    - [git submodule update --init --recursive, Installing submodules]
