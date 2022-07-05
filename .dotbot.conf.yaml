@@ -3,8 +3,9 @@
 - link:
     ~/.bash_profile: bash_profile
     ~/.bashrc: bashrc
-    ~/.gitconfig: gitconfig
+    ~/.dircolors: dircolors
     ~/.config/nvim: nvim
+    ~/.gitconfig: gitconfig
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
