@@ -16,10 +16,10 @@ command! -nargs=1 -complete=file FindIncFile call FindIncFile_(<f-args>)
 nnoremap <buffer> <space> :silent make <bar> redraw!<cr>
 
 " Comments
-nnoremap <leader>sc :s/^\s*/\/\/<cr>
+nnoremap <leader>sc :s/^\s*/\/\/<cr>:nohlsearch<cr>
 nnoremap <leader>su :s/^\s*\/\//<cr>
 
-vnoremap <leader>mc :s/^\s*/\/\/<cr>
+vnoremap <leader>mc :s/^\s*/\/\/<cr>:nohlsearch<cr>
 vnoremap <leader>mu :s/^\s*\/\//<cr>
 
 " Find header files

@@ -126,7 +126,7 @@ else # OS X `ls`
 	colorflag="-G"
 fi
 
-alias ls='ls -lhF ${colorflag}'
+alias ls='ls -lahF ${colorflag}'
 alias lsa='ls -A'
 alias lsd="ls ${colorflag} | /usr/bin/grep --color=never '^d'"
 alias lsda="lsa | /usr/bin/grep --color=never '^d'"
