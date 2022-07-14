@@ -141,6 +141,8 @@ alias du="du -h"
 alias vim='nvim'
 alias vi='nvim'
 
+alias cdp='cd ~/Projects'
+
 if [ -f /usr/bin/xdg-open ]; then
     alias open='/usr/bin/xdg-open'
 fi

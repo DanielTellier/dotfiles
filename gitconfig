@@ -1,3 +1,5 @@
 [user]
 	email = telldanieljames@gmail.com
 	name = DanielTellier
+[core]
+	editor = /usr/bin/nvim

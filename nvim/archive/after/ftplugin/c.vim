@@ -12,9 +12,6 @@ command! -nargs=1 -complete=file FindIncFile call FindIncFile_(<f-args>)
 
 "" Mappings
 
-" Compiler
-nnoremap <buffer> <space> :silent make <bar> redraw!<cr>
-
 " Comments
 nnoremap <leader>sc :s/^\s*/\/\/<cr>:nohlsearch<cr>
 nnoremap <leader>su :s/^\s*\/\//<cr>

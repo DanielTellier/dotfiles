@@ -3,7 +3,7 @@ set runtimepath+=$HOME/.config/nvim
 set colorcolumn=80
 colorscheme monokai
 set statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-set expandtab shiftwidth=4 tabstop=4 softtabstop=4
+set expandtab shiftwidth=2 tabstop=2 softtabstop=2
 set textwidth=79
 set ignorecase smartcase
 set noswapfile
@@ -94,7 +94,7 @@ let mapleader = "\\"
 nmap <leader>ve :edit $VRC<cr>
 nmap <leader>vr :source $VRC<cr>
 
-" Delete buffer
+" Quit buffer
 nmap <leader>qq :bufdo q<cr>
 
 " Remove highlight after search
