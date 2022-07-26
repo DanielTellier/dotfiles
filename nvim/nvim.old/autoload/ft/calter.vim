@@ -32,7 +32,7 @@ function! ft#calter#Cdef_(funcName)
   if len(newqfLst) > 0
     let qfi = newqfLst[0]
     let fpath = bufname(qfi.bufnr)
-    if len(foundqfLst) == 1
+    if len(newqfLst) == 1
       setqflist([], 'r')
     else
       setqflist(newqfLst, 'r')

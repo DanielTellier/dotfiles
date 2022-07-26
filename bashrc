@@ -5,6 +5,9 @@
 # General #
 ###########
 
+# Map escape to capslock (`setxkbmap -option` restores the mapping)
+setxkbmap -option caps:escape
+
 # Auto "cd" when entering just a path
 shopt -s autocd 2> /dev/null
 
@@ -126,7 +129,7 @@ else # OS X `ls`
 	colorflag="-G"
 fi
 
-alias ls='ls -lahF ${colorflag}'
+alias ll='ls -lahF ${colorflag}'
 alias lsa='ls -A'
 alias lsd="ls ${colorflag} | /usr/bin/grep --color=never '^d'"
 alias lsda="lsa | /usr/bin/grep --color=never '^d'"

@@ -133,10 +133,6 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
 
-" Easy insertion of a trailing ; or , from insert mode
-imap ;; <Esc>A;<Esc>
-imap ,, <Esc>A,<Esc>
-
 " Force use of hjkl-style movement and up(c-b)/down(c-f)
 map <up> <nop>
 map <down> <nop>
@@ -155,9 +151,6 @@ imap <pageup> <nop>
 imap <pagedown> <nop>
 imap <home> <nop>
 imap <end> <nop>
-
-" Escape to normal mode
-imap jj <esc>
 
 " Command line mode without shift+:
 noremap ; :
