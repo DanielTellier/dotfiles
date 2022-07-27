@@ -1,5 +1,6 @@
 -- Setting options
-vim.cmd('set runtimepath=' .. vim.env.HOME .. '/.config/nvim,$VIMRUNTIME')
+vim.cmd('set runtimepath=' .. vim.env.HOME .. ',' .. vim.env.HOME .. 
+        '/.config/nvim,$VIMRUNTIME')
 vim.opt.colorcolumn = '80'
 vim.cmd('colorscheme monokai')
 vim.opt.laststatus = 2
@@ -32,7 +33,7 @@ vim.opt.splitright = true
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.confirm = true
 vim.opt.backup = true
-vim.opt.backupdir = '~/.local/share/nvim/backup/'
+vim.opt.backupdir = vim.env.HOME .. '/.local/share/nvim/backup/'
 vim.opt.updatetime = 300 -- Highlight time
 vim.opt.redrawtime = 10000 -- Loading syntax in files
 
