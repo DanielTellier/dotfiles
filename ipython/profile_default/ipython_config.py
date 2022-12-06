@@ -734,7 +734,7 @@ class CustomPrompts(itp.ClassicPrompts):
         venv = os.getenv('VIRTUAL_ENV', '').split('/')[-1]
         prompt_info = f'{venv}:{cwd}' if venv else cwd
         return [
-            (itp.Token.Prompt, f'[{prompt_info}]\n>>> '),
+            (itp.Token.Prompt, f'🐍[{prompt_info}]\n>>> '),
         ]
 
     def continuation_prompt_tokens(self, width=None):
