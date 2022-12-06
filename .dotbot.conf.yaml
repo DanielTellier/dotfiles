@@ -1,0 +1,15 @@
+- clean: ['~']
+
+- link:
+    ~/.bash_profile: bash_profile
+    ~/.bashrc: bashrc
+    ~/.config/wezterm: wezterm
+    ~/.dircolors: dircolors
+    ~/.gitconfig: gitconfig
+    ~/.git-prompt.sh: git-prompt.sh
+    ~/.ipython: ipython
+    ~/.local/bin/imgcat: imgcat
+    ~/.vim: vim
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]

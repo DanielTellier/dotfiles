@@ -1,0 +1,33 @@
+*snippets.txt* list of useful snippets (use :helptags ~/.vim/doc)
+
+vim file found at following url:
+https://www.vim.org/scripts/script.php?script_id=2152
+
+*SnippetsLeader* = \<space>
+
+==============================================================================
+CONTENTS                                                   *snippets-contents*
+
+    1. Commands .......................................... |SnippetsCommands|
+    2. Keyboard Shortcuts ................................ |SnippetsShortcuts|
+
+==============================================================================
+1. Commands                                                 *SnippetsCommands*
+
+- AddSnippet: adds new snippet that contain a range of lines
+- EditSnippet: edits a snippet in a new tab
+- DeleteSnippet: deletes a snippet with confirmation
+- InsertSnippet: inserts a snippet before the current line
+- AppendSnippet: inserts a snippet after the current line
+- ListSnippets: lists snippets
+
+==============================================================================
+2. Keyboard Shortcuts                                      *SnippetsShortcuts*
+
+- AddSnippet with current buffer (normal mode): <leader>ssa
+- AddSnippet with range of lines (visual mode): <leader>ssa
+- EditSnippet: <leader>sse
+- DeleteSnippet: <leader>ssd
+- AppendSnippet: <leader>ssp
+- InsertSnippet: <leader>ssP
+- ListSnippets: <leader>ssl

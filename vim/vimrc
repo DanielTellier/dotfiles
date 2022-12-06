@@ -1,0 +1,202 @@
+" Settings
+let g:fugitive_git_executable = "/usr/bin/git"
+let $VRC=$HOME."/.vim/vimrc"
+
+colorscheme desert
+filetype plugin indent on
+syntax on
+
+if system('uname -s') == "Darwin\n"
+  set clipboard=unnamed " Mac
+else
+  set clipboard=unnamedplus " Linux
+endif
+
+set autoindent autoread
+set backspace=start,eol,indent
+set backupdir=$HOME/.local/share/vim/backup/
+set colorcolumn=80
+highlight ColorColumn ctermbg=22
+set complete=.,w,b,u,t
+set noconfirm
+set encoding=utf-8
+set expandtab tabstop=4 softtabstop=4 shiftwidth=4
+set fillchars=vert:\|,fold:-
+set formatoptions=tcqj
+set hidden
+set history=10000
+set hlsearch incsearch
+set ignorecase smartcase
+set laststatus=2
+set list
+set listchars=tab:>-,precedes:.,trail:.,extends:.,eol:$
+set nocompatible
+set nojoinspaces
+set nostartofline
+set noswapfile
+set nowrap
+set number relativenumber
+set redrawtime=10000 " Loading syntax in files
+set ruler
+set runtimepath+=$HOME/.vim/after
+let $RTP=split(&runtimepath,',')[0]
+set viminfo+=n~/.viminfo
+set scrolloff=8
+set showcmd
+set sidescroll=1
+set sidescrolloff=8
+set smarttab
+set splitright
+set statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+set t_Co=256
+set title
+set ttyfast
+set undolevels=100
+set undodir=$HOME/.local/state/vim/undo/
+set undofile
+set updatetime=10000 " Time in milliseconds for CursorHold to take effect
+set wildignore=*.o,*.d,*.exe,*.a,*.so,*.out
+set wildmenu
+set wildmode=longest:full,full
+set writebackup
+
+" Functions
+function! ToggleNumbers_()
+  if &relativenumber
+    set norelativenumber
+  elseif &number
+    set nonumber
+  else
+    set number relativenumber
+  endif
+endfunction
+
+"" Commands
+command! -nargs=0 ToggleNumbers call ToggleNumbers_()
+
+command! -nargs=+ -complete=file Grep call search#Grep_(<f-args>)
+
+"" Spell check
+augroup spellcheck
+  autocmd!
+  autocmd FileType gitcommit,markdown setlocal spell spelllang=en_us
+  autocmd FileType gitcommit,markdown setlocal complete+=kspell
+  autocmd FileType tex,latex,context,plaintex setlocal spell spelllang=en_us
+  autocmd FileType tex,latex,context,plaintex setlocal complete+=kspell
+augroup end
+
+"" File templates
+augroup templates
+  autocmd!
+  autocmd BufNewFile *.py 0r $RTP/templates/template.py
+augroup END
+
+"" Autosave features
+augroup autosave
+  autocmd!
+  autocmd CursorHold,CursorHoldI,QuitPre * :wa
+augroup END
+
+" Mappings
+let mapleader="\<space>"
+
+"" Saving
+nnoremap <silent> <leader>w :wa<cr>
+nnoremap <silent> <leader>x :xa<cr>
+
+"" Delete without yanking
+nnoremap <silent> <leader>d "_d
+xnoremap <silent> <leader>d "_d
+xnoremap <silent> <leader>p "_dp
+
+"" Deal with vimrc (init.vim)
+nnoremap <silent> <leader>ev :edit $VRC<cr>
+nnoremap <silent> <leader>sv :source $VRC<cr>
+
+"" Open mapping docs
+nnoremap <silent> <leader>hv :help vimmaps.txt<cr>
+nnoremap <silent> <leader>hw :help wezterm.txt<cr>
+
+"" Focus on current split window
+nnoremap <silent> <leader>ef :tabe %<cr>
+
+"" Quit all buffers
+nnoremap <silent> <leader>q :qa<cr>
+
+"" Toggle highlights
+nnoremap <silent> <leader>th
+\ :if (&hls && v:hlsearch) \| nohlsearch \| else \| set hlsearch \| endif<cr>
+
+"" Buffer Mappings
+nnoremap <leader>eb :buffers<cr>:buffer<space>
+nnoremap <leader>ob :sp<cr>:buffers<cr>:buffer<space>
+nnoremap <leader>vb :vs<cr>:buffers<cr>:buffer<space>
+nnoremap <silent> <leader>tb :e#<cr>
+
+"" Search word under cursor
+nnoremap <silent> <leader>gw :Grep . all "\b<c-r><c-w>\b"<cr>:cw<cr>
+
+"" Search word user input
+nnoremap <leader>gi :Grep<space>
+
+"" Make Y behave like the other capitals
+nnoremap Y y$
+
+"" Keep it centered
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+"" Command line mode without shift+:
+nnoremap ; :
+
+"" Faster split window navigation
+nnoremap <c-h> <c-w><c-h>
+nnoremap <c-j> <c-w><c-j>
+nnoremap <c-k> <c-w><c-k>
+nnoremap <c-l> <c-w><c-l>
+
+"" Move windows
+nnoremap <leader>mt <c-w><s-t> " Move window to tab
+nnoremap <leader>mu <c-w><s-r> " Move window up/left
+nnoremap <leader>md <c-w>r " Move window down/right
+
+"" Toggle numbers
+nnoremap <silent> <leader>tn :ToggleNumbers<cr>
+
+"" Toggle listchars
+nnoremap <silent> <leader>tl
+\ :if (&list) \| set nolist \| else \| set list \| endif<cr>
+
+"" Mappings for quickfix list
+nnoremap <silent> <c-n> :cn<cr>zv
+nnoremap <silent> <c-p> :cp<cr>zv
+
+"" Reize Window
+""" Equal
+nnoremap <silent> <leader>re <c-w>=
+""" Height
+nnoremap <silent> <leader>rhn :resize -5<cr>
+nnoremap <silent> <leader>rhp :resize +5<cr>
+""" Width
+nnoremap <silent> <leader>rvn :vertical-resize -5<cr>
+nnoremap <silent> <leader>rvp :vertical-resize +5<cr>
+
+"" Force use of hjkl-style movement and up(c-b)/down(c-f)
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+map <pageup> <nop>
+map <pagedown> <nop>
+map <home> <nop>
+map <end> <nop>
+
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
+imap <pageup> <nop>
+imap <pagedown> <nop>
+imap <home> <nop>
+imap <end> <nop>

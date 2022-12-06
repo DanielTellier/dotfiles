@@ -1,0 +1,8 @@
+[user]
+  email = telldanieljames@gmail.com
+  name = DanielTellier
+[core]
+  editor = vim
+[alias]
+  ac = !git add -A && git commit -m
+  acp = "!f() { git add --all && git commit -m \"$1\" && git push; }; f"

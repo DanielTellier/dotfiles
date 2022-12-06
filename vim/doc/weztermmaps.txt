@@ -1,0 +1,33 @@
+*weztermmaps.txt* list of my minimal key mappings (use :helptags ~/.vim/doc)
+
+*WeztermLeader* = '`'
+
+==============================================================================
+CONTENTS                                                    *wezterm-contents*
+
+    1. Mappings ................................ |WeztermMappings|
+
+==============================================================================
+1. Mappings                                                  *WeztermMappings*
+
+- Activate Copy Mode: <leader>a
+- Close Window: <leader>w
+- Close tab: <leader>q
+- Copy: <c-s-c> or <cmd-c>
+- Next tab: <leader>n
+- Open new tab: <leader>t
+- Paste: <c-s-p> or <cmd-p>
+- Previous tab: <leader>p
+- Scroll backward: <c-uparrow>
+- Scroll forward: <c-downarrow>
+- Split Horizontal: <leader>o
+- Split Vertical: <leader>v
+- Toggle Full Screen: <leader>f
+- Toggle Window Zoom State: <leader>z (focuses on current selected window)
+- Window Movement: <leader>hjkl (same as vim movement)
+- Enter search overlay in current tab: <c-s-f> or <cmd-f>
+  - Find prior match: <enter> or <c-p>
+  - Find next match: <c-n>
+  - Cycle match type (i,I,...): <c-r>
+  - Clear search pattern: <c-u>
+  - Close search overlay mode: <esc>
