@@ -213,35 +213,42 @@ export PS1+='\[$prompt_r\]$(virtualenv_info)\[$reset\]\
 # Functions #
 #############
 
-so() { # source py env
+function cdb() {
+    for (( i=1; i<=$1; i++ ))
+    do
+        cd ..
+    done
+}
+
+function so() { # source py env
     source ~/Venvs/$1/bin/activate
 }
 
 # Search in files
-sif() {
-grep -EiIrl "$*" .
+function sif() {
+    grep -EiIrl "$*" .
 }
 
 # Colored man pages
-man() {
-env LESS_TERMCAP_mb=$'\E[01;31m' \
-LESS_TERMCAP_md=$'\E[01;38;5;74m' \
-LESS_TERMCAP_me=$'\E[0m' \
-LESS_TERMCAP_se=$'\E[0m' \
-LESS_TERMCAP_so=$'\E[38;5;246m' \
-LESS_TERMCAP_ue=$'\E[0m' \
-LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-man "$@"
+function man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    man "$@"
 }
 
-cl() {
-local dir="$1"
-local dir="${dir:=$HOME}"
-if [[ -d "$dir" ]]; then
-    cd "$dir" >/dev/null; ls
-else
-    echo "bash: cl: $dir: Directory not found"
-fi
+function cl() {
+    local dir="$1"
+    local dir="${dir:=$HOME}"
+    if [[ -d "$dir" ]]; then
+        cd "$dir" >/dev/null; ls
+    else
+        echo "bash: cl: $dir: Directory not found"
+    fi
 }
 
 ##########
