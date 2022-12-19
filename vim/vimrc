@@ -115,7 +115,7 @@ nnoremap <silent> <leader>sv :source $VRC<cr>
 
 "" Open mapping docs
 nnoremap <silent> <leader>hv :help vimmaps.txt<cr>
-nnoremap <silent> <leader>hw :help wezterm.txt<cr>
+nnoremap <silent> <leader>hw :help weztermmaps.txt<cr>
 
 "" Focus on current split window
 nnoremap <silent> <leader>ef :tabe %<cr>
