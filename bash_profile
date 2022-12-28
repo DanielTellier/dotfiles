@@ -1,3 +1,5 @@
+#!/bin/bash
+
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 #if [[ -z $(pidof ssh-agent) && -z $(pidof gpg-agent) ]]; then

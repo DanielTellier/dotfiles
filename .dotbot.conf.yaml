@@ -3,6 +3,8 @@
 - link:
     ~/.bash_profile: bash_profile
     ~/.bashrc: bashrc
+    ~/.bashrc_linux: bashrc_linux
+    ~/.bashrc_mac: bashrc_mac
     ~/.config/wezterm: wezterm
     ~/.dircolors: dircolors
     ~/.gitconfig: gitconfig

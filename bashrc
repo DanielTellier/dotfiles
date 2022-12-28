@@ -6,33 +6,23 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-if [ -f ~/.bashrc_local ]; then
+if [[ -f ~/.bashrc_local ]]; then
     source ~/.bashrc_local
 fi
 
-if [[ $OSTYPE == 'linux-gnu'* ]]; then # Linux settings
-    # Map escape to capslock (`setxkbmap -option`
-    # restores the mapping) Linux specific
-    setxkbmap -option caps:escape
+# TODO: Change .bashrc_local on mac work laptop to .bashrc_work
+# TODO: Also create a .bashrc_mac for generic mac settings here.
+if [[ -f ~/.bashrc_work ]]; then
+    source ~/.bashrc_work
+fi
 
-    ###########
-    # EXPORTS #
-    ###########
-    export PATH="$PATH:~/Dev/apache-maven-3.8.6/bin"
-    export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+if [[ "$OSTYPE" == "darwin"* && -f ~/.bashrc_mac ]]; then
+    echo "TODO Here..."
+    source ~/.bashrc_mac
+fi
 
-    ###########
-    # ALIASES #
-    ###########
-    alias supr='sudo apt update; sudo apt upgrade; sudo reboot'
-
-    #############
-    # Functions #
-    #############
-    function dbp() {
-        export MAVEN_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000,suspend=n"
-        mvn hpi:run
-    }
+if [[ "$OSTYPE" == "linux-gnu"* && -f ~/.bashrc_linux ]]; then
+    source ~/.bashrc_linux
 fi
 
 ########
@@ -40,7 +30,6 @@ fi
 ########
 export EDITOR='vim'
 export TERM='xterm-256color'
-export PATH="$PATH:/usr/local/bin:$HOME/.local/bin"
 export IPYTHONDIR="$HOME/.dotfiles/ipython"
 
 # Auto "cd" when entering just a path
@@ -79,7 +68,6 @@ fi
 # Append to the Bash history file, rather than overwriting
 shopt -s histappend 2> /dev/null
 
-
 export HISTFILE="$HOME/.bash_history"
 # Hide some commands from the history
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
@@ -98,18 +86,6 @@ export HISTFILESIZE=10000
 ###########
 # Aliases #
 ###########
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then # GNU `ls`
-  colorflag="--color"
-else # OS X `ls`
-  colorflag="-G"
-fi
-
 alias ll='ls -lahF ${colorflag}'
 alias lsa='ls -A'
 alias lsd="ls ${colorflag} | /usr/bin/grep --color=never '^d'"
@@ -139,7 +115,6 @@ alias ipy='ipython3'
 ##########
 # Colors #
 ##########
-
 if dircolors > /dev/null 2>&1; then
     eval $(dircolors -b ~/.dircolors)
 fi
@@ -258,10 +233,3 @@ function cl() {
         echo "bash: cl: $dir: Directory not found"
     fi
 }
-
-##########
-# Jekyll #
-##########
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
