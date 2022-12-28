@@ -114,10 +114,6 @@ xnoremap <silent> <leader>p "_dp
 nnoremap <silent> <leader>ev :edit $VRC<cr>
 nnoremap <silent> <leader>sv :source $VRC<cr>
 
-"" Open mapping docs
-nnoremap <silent> <leader>hv :help vimmaps.txt<cr>
-nnoremap <silent> <leader>hw :help weztermmaps.txt<cr>
-
 "" Focus on current split window
 nnoremap <silent> <leader>ef :tabe %<cr>
 
@@ -140,7 +136,7 @@ nnoremap <silent> <leader>gw :Grep . all "\b<c-r><c-w>\b"<cr>:cw<cr>
 "" Search word user input
 nnoremap <leader>gi :Grep<space>
 
-"" Make Y behave like the other capitals
+"" Make Y behave like other capitals
 nnoremap Y y$
 
 "" Keep it centered
