@@ -1,6 +1,8 @@
 " Settings
-let g:fugitive_git_executable = "/usr/bin/git"
+let $RTP=split(&runtimepath,',')[0]
 let $VRC=$HOME."/.vim/vimrc"
+let g:fugitive_git_executable = "/usr/bin/git"
+let g:snippets_base_directory = $RTP.'/plugin/vim-snippets/snippets'
 
 colorscheme desert
 filetype plugin indent on
@@ -39,7 +41,6 @@ set number relativenumber
 set redrawtime=10000 " Loading syntax in files
 set ruler
 set runtimepath+=$HOME/.vim/after
-let $RTP=split(&runtimepath,',')[0]
 set viminfo+=n~/.viminfo
 set scrolloff=8
 set showcmd
@@ -200,3 +201,6 @@ imap <pageup> <nop>
 imap <pagedown> <nop>
 imap <home> <nop>
 imap <end> <nop>
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %

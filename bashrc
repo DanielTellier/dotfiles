@@ -11,20 +11,28 @@ if [ -f ~/.bashrc_local ]; then
 fi
 
 if [[ $OSTYPE == 'linux-gnu'* ]]; then # Linux settings
-  # Map escape to capslock (`setxkbmap -option`
-  # restores the mapping) Linux specific
-  setxkbmap -option caps:escape
+    # Map escape to capslock (`setxkbmap -option`
+    # restores the mapping) Linux specific
+    setxkbmap -option caps:escape
 
-  ###########
-  # EXPORTS #
-  ###########
-  export PATH="$PATH:~/Dev/apache-maven-3.8.6/bin"
-  export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+    ###########
+    # EXPORTS #
+    ###########
+    export PATH="$PATH:~/Dev/apache-maven-3.8.6/bin"
+    export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 
-  ###########
-  # ALIASES #
-  ###########
-  alias supr='sudo apt update; sudo apt upgrade; sudo reboot'
+    ###########
+    # ALIASES #
+    ###########
+    alias supr='sudo apt update; sudo apt upgrade; sudo reboot'
+
+    #############
+    # Functions #
+    #############
+    function dbp() {
+        export MAVEN_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000,suspend=n"
+        mvn hpi:run
+    }
 fi
 
 ########
