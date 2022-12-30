@@ -1,0 +1,40 @@
+*commonmaps.txt* list of my minimal key mappings (use :helptags ~/.vim/doc)
+
+*CommonMapsleader* = \<space>
+
+==============================================================================
+CONTENTS                                                  *CommonMapsContents*
+
+    1. Vimrc ................................ |CommonMapsVimrc|
+    2. Cpp   ................................ |CommonMapsCpp|
+    3. Tpope ................................ |commonmapsTpope|
+
+==============================================================================
+1. Settings                                               *CommonMapsSettings*
+
+- Grep user input word: <leader>gi
+- Grep word under cursor: <leader>gw
+- Split window navigation (hjkl): <c-hjkl>
+- Toggle highlights: <leader>th
+- Toggle listchars: <leader>tl
+- Toggle numbers: <leader>tn
+
+==============================================================================
+2. Cpp                                                            *commonmapsCpp*
+
+- Find C/Cpp function definition under cursor: <leader>cg
+- Find header file under cursor: <leader>fg
+- Find header file user input: <leader>fi
+
+==============================================================================
+3. Tpope                                                        *commonmapsTpope*
+
+- Change surround from <x> to <y>: csxy ex. cs"' (changes from " to ')
+- Change tag to <y>: csty
+- Delete nested surrounds <x> and <y>: dsxdsy
+- Delete surround <x> with: dsx
+- Surround entire line with <x>: yssx
+- Surround in <x> visual mode: S<x>
+- Surround word with <x>: ysiwx
+- Toggle line comment or in visual mode for block: gcc
+- Toggle motion: gc{motions} ex. gcap (comments out a paragraph)
