@@ -5,15 +5,15 @@
 ==============================================================================
 CONTENTS                                                  *CommonMapsContents*
 
-    1. Vimrc ................................ |CommonMapsVimrc|
-    2. Cpp   ................................ |CommonMapsCpp|
+    1. Vimrc .................................... |CommonMapsVimrc|
+    2. Cpp ...................................... |CommonMapsCpp|
     3. AutoPairs ................................ |CommonMapsAutoPairs|
-    4. Comments ................................ |CommonMapsComments|
-    5. Comments ................................ |CommonMapsComments|
-    6. Comments ................................ |CommonMapsComments|
+    4. Comments ................................. |CommonMapsComments|
+    5. Snippets ................................. |CommonMapsSnippets|
+    6. Surrounds ................................ |CommonMapsSurrounds|
 
 ==============================================================================
-1. Vimrc                                               *CommonMapsVimrc*
+1. Vimrc                                                     *CommonMapsVimrc*
 
 - Split window navigation (hjkl): <c-hjkl>
 - Toggle highlights: <leader>th
@@ -28,7 +28,7 @@ CONTENTS                                                  *CommonMapsContents*
 - Quick Fix previous: <leader>qp
 
 ==============================================================================
-2. Cpp                                                            *commonmapsCpp*
+2. Cpp                                                         *CommonMapsCpp*
 
 - Find C/Cpp function definition under cursor: <leader>cg
 - Find header file under cursor: <leader>fg
@@ -63,10 +63,7 @@ CONTENTS                                                  *CommonMapsContents*
 ==============================================================================
 6. Surrounds                                             *CommonMapsSurrounds*
 
-- Change surround from <x> to <y>: csxy ex. cs"' (changes from " to ')
-- Change tag to <y>: csty
-- Delete nested surrounds <x> and <y>: dsxdsy
-- Delete surround <x> with: dsx
-- Surround entire line with <x>: yssx
-- Surround in <x> visual mode: S<x>
-- Surround word with <x>: ysiwx
+- Surround word with <x>: <leader>w<x>
+- Surround line with <x>: <leader>l<x>
+- Change surround from <x> to <y>: <leader><x><y>
+- Delete surround <x>: <leader>d<x>

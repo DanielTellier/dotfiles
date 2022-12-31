@@ -60,6 +60,26 @@ set wildmenu
 set wildmode=longest:full,full
 set writebackup
 
+function! SurroundMappings(map_type)
+    let chars = ['`', "'", '"', ']', '}', ')', '>', 't']
+    for char in chars
+        if a:map_type == "word"
+            exe 'nmap <leader>w'.char.' ysiw'.char
+        elseif a:map_type == "line"
+            exe 'nmap <leader>l'.char.' yss'.char
+        elseif a:map_type == "change"
+            for curr_char in chars
+                if curr_char == char
+                    continue
+                endif
+                exe 'nmap <leader>'.curr_char.char.' cs'.curr_char.char
+            endfor
+        elseif a:map_type == "delete"
+            exe 'nmap <leader>d'.char.' ds'.char
+        endif
+    endfor
+endfunction
+
 function! ToggleNumbers_()
   if &relativenumber
     set norelativenumber
@@ -125,24 +145,16 @@ nmap ,p "0p
 nmap ,P "0P
 
 " You Surrounds word
-nmap <leader>w` ysiw`
-nmap <leader>w' ysiw'
-nmap <leader>w" ysiw"
-nmap <leader>w] ysiw]
-nmap <leader>w} ysiw}
-nmap <leader>w) ysiw)
+call SurroundMappings("word")
 
 " You Surrounds line
-nmap <leader>l` yss`
-nmap <leader>l' yss'
-nmap <leader>l" yss"
-nmap <leader>l] yss]
-nmap <leader>l} yss}
-nmap <leader>l) yss)
+call SurroundMappings("line")
 
 " Change Surrounds
+call SurroundMappings("change")
 
 " Delete Surrounds
+call SurroundMappings("delete")
 
 " Compiler make
 nnoremap <silent> <leader>cm :make % <bar> redraw!<cr><cr>

@@ -55,6 +55,14 @@
 :Gwq	fugitive.txt	/*:Gwq*
 :Gwrite	fugitive.txt	/*:Gwrite*
 AutoPairs.txt	AutoPairs.txt	/*AutoPairs.txt*
+CommonMapsAutoPairs	common-maps.txt	/*CommonMapsAutoPairs*
+CommonMapsComments	common-maps.txt	/*CommonMapsComments*
+CommonMapsContents	common-maps.txt	/*CommonMapsContents*
+CommonMapsCpp	common-maps.txt	/*CommonMapsCpp*
+CommonMapsSnippets	common-maps.txt	/*CommonMapsSnippets*
+CommonMapsSurrounds	common-maps.txt	/*CommonMapsSurrounds*
+CommonMapsVimrc	common-maps.txt	/*CommonMapsVimrc*
+CommonMapsleader	common-maps.txt	/*CommonMapsleader*
 FugitiveStatusline()	fugitive.txt	/*FugitiveStatusline()*
 SnippetsCommands	snippets.txt	/*SnippetsCommands*
 SnippetsLeader	snippets.txt	/*SnippetsLeader*
@@ -70,10 +78,6 @@ User_FugitivePager	fugitive.txt	/*User_FugitivePager*
 User_FugitiveStageBlob	fugitive.txt	/*User_FugitiveStageBlob*
 User_FugitiveTag	fugitive.txt	/*User_FugitiveTag*
 User_FugitiveTree	fugitive.txt	/*User_FugitiveTree*
-VimmapsCpp	mymaps.txt	/*VimmapsCpp*
-VimmapsLeader	mymaps.txt	/*VimmapsLeader*
-VimmapsSettings	mymaps.txt	/*VimmapsSettings*
-VimmapsTpope	mymaps.txt	/*VimmapsTpope*
 WeztermLeader	wezterm.txt	/*WeztermLeader*
 WeztermMappings	wezterm.txt	/*WeztermMappings*
 autopairs-contents	AutoPairs.txt	/*autopairs-contents*
@@ -86,6 +90,7 @@ autopairs-troubleshooting	AutoPairs.txt	/*autopairs-troubleshooting*
 b:AutoPairs	AutoPairs.txt	/*b:AutoPairs*
 cS	surround.txt	/*cS*
 commentary.txt	commentary.txt	/*commentary.txt*
+commonmaps.txt	common-maps.txt	/*commonmaps.txt*
 cs	surround.txt	/*cs*
 ds	surround.txt	/*ds*
 fugitive	fugitive.txt	/*fugitive*
@@ -204,8 +209,6 @@ surround.txt	surround.txt	/*surround.txt*
 vS	surround.txt	/*vS*
 v_gc	commentary.txt	/*v_gc*
 vgS	surround.txt	/*vgS*
-vimmaps-contents	mymaps.txt	/*vimmaps-contents*
-vimmaps.txt	mymaps.txt	/*vimmaps.txt*
 wezterm-contents	wezterm.txt	/*wezterm-contents*
 weztermmaps.txt	wezterm.txt	/*weztermmaps.txt*
 yS	surround.txt	/*yS*
