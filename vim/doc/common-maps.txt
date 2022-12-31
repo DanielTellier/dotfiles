@@ -7,17 +7,25 @@ CONTENTS                                                  *CommonMapsContents*
 
     1. Vimrc ................................ |CommonMapsVimrc|
     2. Cpp   ................................ |CommonMapsCpp|
-    3. Tpope ................................ |commonmapsTpope|
+    3. AutoPairs ................................ |CommonMapsAutoPairs|
+    4. Comments ................................ |CommonMapsComments|
+    5. Comments ................................ |CommonMapsComments|
+    6. Comments ................................ |CommonMapsComments|
 
 ==============================================================================
-1. Settings                                               *CommonMapsSettings*
+1. Vimrc                                               *CommonMapsVimrc*
 
-- Grep user input word: <leader>gi
-- Grep word under cursor: <leader>gw
 - Split window navigation (hjkl): <c-hjkl>
 - Toggle highlights: <leader>th
 - Toggle listchars: <leader>tl
 - Toggle numbers: <leader>tn
+- Grep word under cursor: <leader>gw
+- Grep user input word: <leader>gi
+- Paste last thing yanked: ,p
+- Surround word with <x>: <leader><x>
+- Compiler Make: <leader>cm
+- Quick Fix next: <leader>qn
+- Quick Fix previous: <leader>qp
 
 ==============================================================================
 2. Cpp                                                            *commonmapsCpp*
@@ -27,7 +35,33 @@ CONTENTS                                                  *CommonMapsContents*
 - Find header file user input: <leader>fi
 
 ==============================================================================
-3. Tpope                                                        *commonmapsTpope*
+3. AutoPairs                                             *CommonMapsAutoPairs*
+
+- AutoPairs Fast Wrap: <leader>fw
+- AutoPairs Jump: <leader>aj
+- AutoPairs Back Insert for mistaken fly mode movement: <leader>ab
+
+==============================================================================
+4. Comments                                               *CommonMapsComments*
+
+- Toggle line comment: gcc
+- Toggle comment in visual mode: gc
+- Toggle motion: gc{motions} ex. gcap (comments out a paragraph)
+- Uncomment the current and adjacent commented lines: gcu
+
+==============================================================================
+5. Snippets                                               *CommonMapsSnippets*
+
+- AddSnippet with current buffer (normal mode): <leader>sa
+- AddSnippet with range of lines (visual mode): <leader>sa
+- EditSnippet: <leader>se
+- DeleteSnippet: <leader>sd
+- AppendSnippet: <leader>sp
+- InsertSnippet: <leader>sP
+- ListSnippets: <leader>sl
+
+==============================================================================
+6. Surrounds                                             *CommonMapsSurrounds*
 
 - Change surround from <x> to <y>: csxy ex. cs"' (changes from " to ')
 - Change tag to <y>: csty
@@ -36,5 +70,3 @@ CONTENTS                                                  *CommonMapsContents*
 - Surround entire line with <x>: yssx
 - Surround in <x> visual mode: S<x>
 - Surround word with <x>: ysiwx
-- Toggle line comment or in visual mode for block: gcc
-- Toggle motion: gc{motions} ex. gcap (comments out a paragraph)

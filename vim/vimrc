@@ -94,6 +94,9 @@ augroup END
 
 let mapleader="\<space>"
 
+" Move cursor infront of closing pair symbol
+let g:AutoPairsShortcutJump = "<c-j>"
+
 " Toggle highlights
 nnoremap <silent> <leader>th
 \ :if (&hls && v:hlsearch) \| nohlsearch \| else \| set hlsearch \| endif<cr>
@@ -121,16 +124,28 @@ nnoremap <leader>gi :Grep<space>
 nmap ,p "0p
 nmap ,P "0P
 
-" Surrounds
-nmap <leader>` ysiw`
-nmap <leader>' ysiw'
-nmap <leader>" ysiw"
-nmap <leader>] ysiw]
-nmap <leader>} ysiw}
-nmap <leader>) ysiw)
+" You Surrounds word
+nmap <leader>w` ysiw`
+nmap <leader>w' ysiw'
+nmap <leader>w" ysiw"
+nmap <leader>w] ysiw]
+nmap <leader>w} ysiw}
+nmap <leader>w) ysiw)
+
+" You Surrounds line
+nmap <leader>l` yss`
+nmap <leader>l' yss'
+nmap <leader>l" yss"
+nmap <leader>l] yss]
+nmap <leader>l} yss}
+nmap <leader>l) yss)
+
+" Change Surrounds
+
+" Delete Surrounds
 
 " Compiler make
-nnoremap <silent> <leader>cp :make % <bar> redraw!<cr><cr>
+nnoremap <silent> <leader>cm :make % <bar> redraw!<cr><cr>
 
 " Quick Fix List next and previous
 nnoremap <leader>qn :cn

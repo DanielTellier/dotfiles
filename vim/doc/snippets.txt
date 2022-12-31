@@ -24,10 +24,10 @@ CONTENTS                                                   *snippets-contents*
 ==============================================================================
 2. Keyboard Shortcuts                                      *SnippetsShortcuts*
 
-- AddSnippet with current buffer (normal mode): <leader>ssa
-- AddSnippet with range of lines (visual mode): <leader>ssa
-- EditSnippet: <leader>sse
-- DeleteSnippet: <leader>ssd
-- AppendSnippet: <leader>ssp
-- InsertSnippet: <leader>ssP
-- ListSnippets: <leader>ssl
+- AddSnippet with current buffer (normal mode): <leader>sa
+- AddSnippet with range of lines (visual mode): <leader>sa
+- EditSnippet: <leader>se
+- DeleteSnippet: <leader>sd
+- AppendSnippet: <leader>sp
+- InsertSnippet: <leader>sP
+- ListSnippets: <leader>sl

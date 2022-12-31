@@ -19,31 +19,31 @@ let s:snippet_filetype = ""
 
 " Mappings {{{
 if !hasmapto('<Plug>SnippetsAddSnippet', 'n')
-	nmap <silent> <unique> <leader>ssa <Plug>SnippetsAddSnippet
+	nmap <silent> <unique> <leader>sa <Plug>SnippetsAddSnippet
 endif
 
 if !hasmapto('<Plug>SnippetsAddSnippet', 'v')
-	vmap <silent> <unique> <leader>ssa <Plug>SnippetsAddSnippet
+	vmap <silent> <unique> <leader>sa <Plug>SnippetsAddSnippet
 endif
 
 if !hasmapto('<Plug>SnippetsAppendSnippet', 'n')
-	nmap <silent> <unique> <leader>ssp <Plug>SnippetsAppendSnippet
+	nmap <silent> <unique> <leader>sp <Plug>SnippetsAppendSnippet
 endif
 
 if !hasmapto('<Plug>SnippetsInsertSnippet', 'n')
-	nmap <silent> <unique> <leader>ssP <Plug>SnippetsInsertSnippet
+	nmap <silent> <unique> <leader>sP <Plug>SnippetsInsertSnippet
 endif
 
 if !hasmapto('<Plug>SnippetsEditSnippet', 'n')
-	nmap <silent> <unique> <leader>sse <Plug>SnippetsEditSnippet
+	nmap <silent> <unique> <leader>se <Plug>SnippetsEditSnippet
 endif
 
 if !hasmapto('<Plug>SnippetsDeleteSnippet', 'n')
-	nmap <silent> <unique> <leader>ssd <Plug>SnippetsDeleteSnippet
+	nmap <silent> <unique> <leader>sd <Plug>SnippetsDeleteSnippet
 endif
 
 if !hasmapto('<Plug>SnippetsListSnippets', 'n')
-	nmap <silent> <unique> <leader>ssl <Plug>SnippetsListSnippets
+	nmap <silent> <unique> <leader>sl <Plug>SnippetsListSnippets
 endif
 
 nnoremap <unique> <script> <Plug>SnippetsAddSnippet    <SID>AddSnippet
