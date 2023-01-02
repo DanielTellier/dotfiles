@@ -196,9 +196,9 @@ export PS1+='\[$prompt_r\]$(virtualenv_info)\[$reset\]\
 # Functions #
 #############
 
-function cdb() {
-    for (( i=1; i<=$1; i++ ))
-    do
+function up() {
+    levels=${1-1}
+    while ((levels--)); do
         cd ..
     done
 }
