@@ -10,14 +10,11 @@ if [[ -f ~/.bashrc_local ]]; then
     source ~/.bashrc_local
 fi
 
-# TODO: Change .bashrc_local on mac work laptop to .bashrc_work
-# TODO: Also create a .bashrc_mac for generic mac settings here.
 if [[ -f ~/.bashrc_work ]]; then
     source ~/.bashrc_work
 fi
 
 if [[ "$OSTYPE" == "darwin"* && -f ~/.bashrc_mac ]]; then
-    echo "TODO Here..."
     source ~/.bashrc_mac
 fi
 

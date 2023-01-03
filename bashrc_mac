@@ -1,3 +1,5 @@
 #!/bin/bash
 
+export PATH="/opt/homebrew/bin:$PATH"
+export BASH_SILENCE_DEPRECATION_WARNING=1
 colorflag="-G"
