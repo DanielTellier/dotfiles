@@ -37,9 +37,7 @@ CONTENTS                                                  *CommonMapsContents*
 ==============================================================================
 3. AutoPairs                                             *CommonMapsAutoPairs*
 
-- AutoPairs Fast Wrap: <leader>fw
-- AutoPairs Jump: <leader>aj
-- AutoPairs Back Insert for mistaken fly mode movement: <leader>ab
+- AutoPairs Jump: <c-,>
 
 ==============================================================================
 4. Comments                                               *CommonMapsComments*

@@ -115,7 +115,7 @@ augroup END
 let mapleader="\<space>"
 
 " Move cursor infront of closing pair symbol
-let g:AutoPairsShortcutJump = "<c-j>"
+let g:AutoPairsShortcutJump = "<c-,>"
 
 " Toggle highlights
 nnoremap <silent> <leader>th
