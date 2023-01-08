@@ -81,8 +81,6 @@ function! SplitNetrw(split)
     elseif a:split == "vertical"
         exe 'vsplit ' . bufn
     else
-        " Move to first window in tab
-        exe 1 .. 'wincmd w'
         exe 'edit ' . bufn
     endif
 endfunction
