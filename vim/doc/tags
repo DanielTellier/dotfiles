@@ -59,6 +59,7 @@ CommonMapsAutoPairs	common-maps.txt	/*CommonMapsAutoPairs*
 CommonMapsComments	common-maps.txt	/*CommonMapsComments*
 CommonMapsContents	common-maps.txt	/*CommonMapsContents*
 CommonMapsCpp	common-maps.txt	/*CommonMapsCpp*
+CommonMapsNetrw	common-maps.txt	/*CommonMapsNetrw*
 CommonMapsSnippets	common-maps.txt	/*CommonMapsSnippets*
 CommonMapsSurrounds	common-maps.txt	/*CommonMapsSurrounds*
 CommonMapsVimrc	common-maps.txt	/*CommonMapsVimrc*
