@@ -5,8 +5,7 @@ let g:snippets_base_directory = $RTP.'/plugin/vim-snippets/snippets'
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
-let g:netrw_winsize = 20
-let g:NetrwIsOpen=0
+let g:netrw_winsize = 0
 
 colorscheme desert
 filetype plugin indent on
@@ -65,23 +64,6 @@ set wildmenu
 set wildmode=longest:full,full
 set writebackup
 
-" Allow for netrw to be toggled
-function! ToggleNetrw()
-    if g:NetrwIsOpen
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i
-            endif
-            let i-=1
-        endwhile
-        let g:NetrwIsOpen=0
-    else
-        let g:NetrwIsOpen=1
-        silent Lexplore
-    endif
-endfunction
-
 function! ToggleNumbers()
   if &relativenumber
     set norelativenumber
@@ -114,6 +96,12 @@ endfunction
 
 command! -nargs=+ -complete=file Grep call search#Grep_(<f-args>)
 
+augroup netrw_mappings
+    autocmd!
+    " Hack fix to make ctrl-l work properly
+    autocmd filetype netrw noremap <buffer> <c-l> <c-w>l
+augroup END
+
 augroup spellcheck
   autocmd!
   autocmd FileType gitcommit,markdown setlocal spell spelllang=en_us
@@ -138,8 +126,8 @@ let mapleader="\<space>"
 " Move cursor infront of closing pair symbol
 let g:AutoPairsShortcutJump = "<c-,>"
 
-" Netrw builtin vim file explorer
-noremap <silent> <leader>tw :call ToggleNetrw()<cr>
+" Toggle Netrw builtin vim file explorer
+noremap <silent> <leader>tw :Vexplore<cr>
 
 " Toggle highlights
 nnoremap <silent> <leader>th
@@ -200,10 +188,10 @@ nnoremap ; :
 vnoremap ; :
 
 " Faster split window navigation
-nnoremap <c-h> <c-w><c-h>
-nnoremap <c-j> <c-w><c-j>
-nnoremap <c-k> <c-w><c-k>
-nnoremap <c-l> <c-w><c-l>
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
 
 " Force use of hjkl-style movement and up(c-b)/down(c-f)
 map <up> <nop>
