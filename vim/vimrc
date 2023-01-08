@@ -5,7 +5,8 @@ let g:snippets_base_directory = $RTP.'/plugin/vim-snippets/snippets'
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
-let g:netrw_winsize = 0
+let g:netrw_preview = 1
+let g:netrw_winsize = 80
 
 colorscheme desert
 filetype plugin indent on
@@ -64,6 +65,26 @@ set wildmenu
 set wildmode=longest:full,full
 set writebackup
 
+function! OpenNetrw()
+    exe '0tabnew'
+    exe 'Explore'
+    exe '2tabnext'
+endfunction
+
+function! SplitNetrw(split)
+    exe 'normal v'
+    let bufn = bufname()
+    exe 'close!'
+    exe '2tabnext'
+    if a:split == "horizontal"
+        exe 'split ' . bufn
+    elseif a:split == "vertical"
+        exe 'vsplit ' . bufn
+    else
+        exe 'edit ' . bufn
+    endif
+endfunction
+
 function! ToggleNumbers()
   if &relativenumber
     set norelativenumber
@@ -96,12 +117,6 @@ endfunction
 
 command! -nargs=+ -complete=file Grep call search#Grep_(<f-args>)
 
-augroup netrw_mappings
-    autocmd!
-    " Hack fix to make ctrl-l work properly
-    autocmd filetype netrw noremap <buffer> <c-l> <c-w>l
-augroup END
-
 augroup spellcheck
   autocmd!
   autocmd FileType gitcommit,markdown setlocal spell spelllang=en_us
@@ -121,13 +136,26 @@ augroup autosave
   autocmd CursorHold,CursorHoldI,QuitPre * :wa
 augroup END
 
+augroup netrw
+    autocmd!
+    autocmd VimEnter * :call OpenNetrw()
+    " Close Netrw if it's the only buffer open
+    autocmd WinEnter * if &ft ==# "netrw" && tabpagenr('$') == 1 | :qa | endif
+    " Hack fix to make ctrl-l work properly
+    autocmd FileType netrw noremap <buffer> <c-l> <c-w>l
+
+    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>e :call SplitNetrw("edit")<cr>
+    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>o :call SplitNetrw("horizontal")<cr>
+    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>v :call SplitNetrw("vertical")<cr>
+augroup END
+
 let mapleader="\<space>"
 
 " Move cursor infront of closing pair symbol
 let g:AutoPairsShortcutJump = "<c-,>"
 
 " Toggle Netrw builtin vim file explorer
-noremap <silent> <leader>tw :Vexplore<cr>
+noremap <silent> <leader>tw :Explore<cr>
 
 " Toggle highlights
 nnoremap <silent> <leader>th
@@ -228,4 +256,4 @@ vnoremap <tab> >>
 vnoremap <s-tab> <<
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
+" cmap w!! w !sudo tee > /dev/null %
