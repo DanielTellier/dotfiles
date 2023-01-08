@@ -212,6 +212,8 @@ noremap L $
 " Tabbing
 nnoremap <tab> >>
 nnoremap <s-tab> <<
+vnoremap <tab> >>
+vnoremap <s-tab> <<
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
