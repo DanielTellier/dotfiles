@@ -153,6 +153,12 @@ let mapleader="\<space>"
 " Move cursor infront of closing pair symbol
 let g:AutoPairsShortcutJump = "<c-,>"
 
+" Open key mappings doc
+noremap <silent> <leader>hd :tabnew $RTP/doc/common-maps.txt<cr>
+
+" Open vimrc
+noremap <silent> <leader>hv :tabnew $RTP/vimrc<cr>
+
 " Toggle Netrw builtin vim file explorer
 noremap <silent> <leader>tw :Explore<cr>
 
