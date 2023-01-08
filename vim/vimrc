@@ -81,6 +81,8 @@ function! SplitNetrw(split)
     elseif a:split == "vertical"
         exe 'vsplit ' . bufn
     else
+        " Move to first window in tab
+        exe 1 .. 'wincmd w'
         exe 'edit ' . bufn
     endif
 endfunction
@@ -143,7 +145,6 @@ augroup netrw
     autocmd WinEnter * if &ft ==# "netrw" && tabpagenr('$') == 1 | :qa | endif
     " Hack fix to make ctrl-l work properly
     autocmd FileType netrw noremap <buffer> <c-l> <c-w>l
-
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>e :call SplitNetrw("edit")<cr>
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>o :call SplitNetrw("horizontal")<cr>
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>v :call SplitNetrw("vertical")<cr>
