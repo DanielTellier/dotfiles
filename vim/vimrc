@@ -159,9 +159,6 @@ noremap <silent> <leader>hd :tabnew $RTP/doc/common-maps.txt<cr>
 " Open vimrc
 noremap <silent> <leader>hv :tabnew $RTP/vimrc<cr>
 
-" Toggle Netrw builtin vim file explorer
-noremap <silent> <leader>tw :Explore<cr>
-
 " Toggle highlights
 nnoremap <silent> <leader>th
 \ :if (&hls && v:hlsearch) \| nohlsearch \| else \| set hlsearch \| endif<cr>
