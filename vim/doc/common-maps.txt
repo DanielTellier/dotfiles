@@ -12,6 +12,7 @@ CONTENTS                                                  *CommonMapsContents*
     5. Snippets ................................. |CommonMapsSnippets|
     6. Surrounds ................................ |CommonMapsSurrounds|
     7. Netrw .................................... |CommonMapsNetrw|
+    8. Sessions ................................. |CommonMapsSessions|
 
 ==============================================================================
 1. Vimrc                                                     *CommonMapsVimrc*
@@ -81,3 +82,9 @@ CONTENTS                                                  *CommonMapsContents*
 - Create new dir: d
 - Rename file/dir: R
 - Delete file/dir: D
+
+==============================================================================
+8. Sessions                                               *CommonMapsSessions*
+
+- Make session at sessions dir: <leader>sm
+- Source session from sessions dir: <leader>ss
