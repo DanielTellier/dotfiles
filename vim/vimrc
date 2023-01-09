@@ -67,8 +67,11 @@ set wildmode=longest:full,full
 set writebackup
 
 function! OpenNetrw()
-    exe '0tabnew'
-    exe 'Explore'
+    exe '1tabnext'
+    if &ft !=# "netrw"
+        exe '0tabnew'
+        exe 'Explore'
+    endif
     exe '2tabnext'
 endfunction
 
