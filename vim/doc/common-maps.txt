@@ -38,7 +38,7 @@ CONTENTS                                                  *CommonMapsContents*
 ==============================================================================
 3. AutoPairs                                             *CommonMapsAutoPairs*
 
-- AutoPairs Jump: <c-,>
+- AutoPairs Jump: <c-p>
 
 ==============================================================================
 4. Comments                                               *CommonMapsComments*
