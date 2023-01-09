@@ -71,7 +71,7 @@ function! OpenNetrw()
     exe '2tabnext'
 endfunction
 
-function! SplitNetrw(split)
+function! SplitNetrw(split, is_stay)
     exe 'normal v'
     let bufn = bufname()
     exe 'close!'
@@ -82,6 +82,11 @@ function! SplitNetrw(split)
         exe 'vsplit ' . bufn
     else
         exe 'edit ' . bufn
+    endif
+
+    " If true move back to netrw on first tab
+    if a:is_stay
+        exe '1tabnext'
     endif
 endfunction
 
@@ -143,9 +148,12 @@ augroup netrw
     autocmd WinEnter * if &ft ==# "netrw" && tabpagenr('$') == 1 | :qa | endif
     " Hack fix to make ctrl-l work properly
     autocmd FileType netrw noremap <buffer> <c-l> <c-w>l
-    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>e :call SplitNetrw("edit")<cr>
-    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>o :call SplitNetrw("horizontal")<cr>
-    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>v :call SplitNetrw("vertical")<cr>
+    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>e :call SplitNetrw("edit", 0)<cr>
+    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>o :call SplitNetrw("horizontal", 0)<cr>
+    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>v :call SplitNetrw("vertical", 0)<cr>
+    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>E :call SplitNetrw("edit", 1)<cr>
+    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>O :call SplitNetrw("horizontal", 1)<cr>
+    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>V :call SplitNetrw("vertical", 1)<cr>
 augroup END
 
 let mapleader="\<space>"
