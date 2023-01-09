@@ -1,6 +1,7 @@
-let $RTP=split(&runtimepath,',')[0]
-let $VRC=$HOME."/.vim/vimrc"
-let g:fugitive_git_executable = "/usr/bin/git"
+let $RTP = split(&runtimepath,',')[0]
+let $VRC = $RTP.'/vimrc'
+let $SDIR = $RTP.'/sessions'
+let g:fugitive_git_executable = '/usr/bin/git'
 let g:snippets_base_directory = $RTP.'/plugin/vim-snippets/snippets'
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -120,6 +121,24 @@ function! SurroundMappings(map_type)
     endfor
 endfunction
 
+function! MkSession()
+    let sfile = $RTP."/sessions/".substitute(getcwd()[1:].".vim", "/", "-", "g")
+    exe 'mksession! '.sfile
+endfunction
+
+function! SoSession()
+    let sfile = $RTP."/sessions/".substitute(getcwd()[1:].".vim", "/", "-", "g")
+    if filereadable(sfile)
+        exe 'source '.sfile
+        highlight ColorColumn ctermbg=22
+        exe '1tabnext'
+        exe 'Explore'
+        exe '2tabnext'
+    else
+        echo "File does not exist ".sfile
+    endif
+endfunction
+
 command! -nargs=+ -complete=file Grep call search#Grep_(<f-args>)
 
 augroup spellcheck
@@ -159,7 +178,13 @@ augroup END
 let mapleader="\<space>"
 
 " Move cursor infront of closing pair symbol
-let g:AutoPairsShortcutJump = "<c-,>"
+let g:AutoPairsShortcutJump = "<c-p>"
+
+" Make session file for cwd
+noremap <silent> <leader>sm :call MkSession()<cr>
+
+" Source session file at cwd
+noremap <silent> <leader>ss :call SoSession()<cr>
 
 " Open key mappings doc
 noremap <silent> <leader>hd :tabnew $RTP/doc/common-maps.txt<cr>
