@@ -66,13 +66,14 @@ set wildmenu
 set wildmode=longest:full,full
 set writebackup
 
-function! OpenNetrw()
+function! ToggleNetrw()
     exe '1tabnext'
     if &ft !=# "netrw"
         exe '0tabnew'
         exe 'Explore'
+    else
+        exe 'tabclose'
     endif
-    exe '2tabnext'
 endfunction
 
 function! SplitNetrw(split, is_stay)
@@ -126,6 +127,11 @@ endfunction
 
 function! MkSession()
     let sfile = $RTP."/sessions/".substitute(getcwd()[1:].".vim", "/", "-", "g")
+    " Close netrw before saving session
+    " exe '1tabnext'
+    " if &ft ==# "netrw"
+    "     exe 'tabclose'
+    " endif
     exe 'mksession! '.sfile
 endfunction
 
@@ -134,9 +140,6 @@ function! SoSession()
     if filereadable(sfile)
         exe 'source '.sfile
         highlight ColorColumn ctermbg=22
-        exe '1tabnext'
-        exe 'Explore'
-        exe '2tabnext'
     else
         echo "File does not exist ".sfile
     endif
@@ -165,9 +168,6 @@ augroup END
 
 augroup netrw
     autocmd!
-    autocmd VimEnter * :call OpenNetrw()
-    " Close Netrw if it's the only buffer open
-    autocmd WinEnter * if &ft ==# "netrw" && tabpagenr('$') == 1 | :qa | endif
     " Hack fix to make ctrl-l work properly
     autocmd FileType netrw noremap <buffer> <c-l> <c-w>l
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>e :call SplitNetrw("edit", 0)<cr>
@@ -182,6 +182,9 @@ let mapleader="\<space>"
 
 " Move cursor infront of closing pair symbol
 let g:AutoPairsShortcutJump = "<c-p>"
+
+" Quit vim
+noremap <silent> <leader>qq :qa<cr>
 
 " Make session file for cwd
 noremap <silent> <leader>sm :call MkSession()<cr>
@@ -205,6 +208,9 @@ nnoremap <silent> <leader>tl
 
 " Toggle numbers
 nnoremap <silent> <leader>tn :call ToggleNumbers()<cr>
+
+" Toggle netrw
+nnoremap <silent> <leader>tw :call ToggleNetrw()<cr>
 
 " Global substitution
 nnoremap <leader>rg :%s/<c-r><c-w>//g<left><left>
@@ -238,8 +244,8 @@ call SurroundMappings("delete")
 nnoremap <silent> <leader>cm :make % <bar> redraw!<cr><cr>
 
 " Quick Fix List next and previous
-nnoremap <leader>qn :cn
-nnoremap <leader>qp :cp
+noremap <leader>fn :cn
+noremap <leader>fp :cp
 
 " Make Y behave like other capitals
 nnoremap Y y$
