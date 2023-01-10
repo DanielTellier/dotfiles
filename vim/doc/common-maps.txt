@@ -26,8 +26,9 @@ CONTENTS                                                  *CommonMapsContents*
 - Paste last thing yanked: ,p
 - Surround word with <x>: <leader><x>
 - Compiler Make: <leader>cm
-- Quick Fix next: <leader>qn
-- Quick Fix previous: <leader>qp
+- Quick Fix next: <leader>fn
+- Quick Fix previous: <leader>fp
+- Quit vim: <leader>q
 
 ==============================================================================
 2. Cpp                                                         *CommonMapsCpp*
@@ -72,6 +73,7 @@ CONTENTS                                                  *CommonMapsContents*
 7. Netrw                                                     *CommonMapsNetrw*
 
 - Note: All mappings only apply to filetype == 'netrw'
+- Toggle netrw: <leader>tw
 - Open file in vertical mode in same tab as netrw: <cr>
 - Open file in tab 2: <leader>e
 - Open file in horizontal split in tab 2: <leader>o

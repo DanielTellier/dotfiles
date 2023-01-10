@@ -184,7 +184,7 @@ let mapleader="\<space>"
 let g:AutoPairsShortcutJump = "<c-p>"
 
 " Quit vim
-noremap <silent> <leader>qq :qa<cr>
+noremap <silent> <leader>q :qa<cr>
 
 " Make session file for cwd
 noremap <silent> <leader>sm :call MkSession()<cr>
@@ -244,8 +244,8 @@ call SurroundMappings("delete")
 nnoremap <silent> <leader>cm :make % <bar> redraw!<cr><cr>
 
 " Quick Fix List next and previous
-noremap <leader>fn :cn
-noremap <leader>fp :cp
+noremap <silent> <leader>fn :cn<cr>
+noremap <silent> <leader>fp :cp<cr>
 
 " Make Y behave like other capitals
 nnoremap Y y$
