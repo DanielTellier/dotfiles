@@ -128,10 +128,10 @@ endfunction
 function! MkSession()
     let sfile = $RTP."/sessions/".substitute(getcwd()[1:].".vim", "/", "-", "g")
     " Close netrw before saving session
-    " exe '1tabnext'
-    " if &ft ==# "netrw"
-    "     exe 'tabclose'
-    " endif
+    exe '1tabnext'
+    if &ft ==# "netrw"
+        exe 'tabclose'
+    endif
     exe 'mksession! '.sfile
 endfunction
 
