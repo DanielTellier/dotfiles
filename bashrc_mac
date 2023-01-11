@@ -3,6 +3,11 @@
 export PATH="/opt/homebrew/bin:$PATH"
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export GROOVY_HOME=/opt/homebrew/opt/groovy/libexec
+export BROWSER="open /Applications/Firefox.app"
 colorflag="-G"
 
-alias groovysh='groovysh -Djava.awt.headless=true'
+# NOTE: Enabling :inspect mode (ergo. having headless set to false)
+# with mac menu bar on top set to hide always will cause unncessary output
+# to print to console when running `groovysh`
+alias grvi='groovysh'
+alias grv='groovysh -Djava.awt.headless=true' # Groovy with :inspect disabled
