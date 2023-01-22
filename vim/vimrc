@@ -97,6 +97,14 @@ function! SplitNetrw(bufcmd, is_stay)
     endif
 endfunction
 
+function! ToggleAll()
+    if &number || &relativenumber || &list
+        set nonumber norelativenumber nolist
+    else
+        set number relativenumber list
+    endif
+endfunction
+
 function! ToggleNumbers()
   if &relativenumber
     set norelativenumber
@@ -203,6 +211,9 @@ noremap <silent> <leader>hv :tabnew $RTP/vimrc<cr>
 " Toggle highlights
 nnoremap <silent> <leader>th
 \ :if (&hls && v:hlsearch) \| nohlsearch \| else \| set hlsearch \| endif<cr>
+
+" Toggle listchars and numbers
+nnoremap <silent> <leader>ta :call ToggleAll()<cr>
 
 " Toggle listchars
 nnoremap <silent> <leader>tl
