@@ -87,20 +87,14 @@ alias ll='ls -lahF ${colorflag}'
 alias lsa='ls -A'
 alias lsd="ls ${colorflag} | /usr/bin/grep --color=never '^d'"
 alias lsda="lsa | /usr/bin/grep --color=never '^d'"
-
 alias grep='grep --color=auto -n -i'
-
 alias clear="clear && printf '\e[3J'";
-
 alias df="df -h"
 alias du="du -h"
-
 alias vi='vim'
-
 if [ -f /usr/bin/xdg-open ]; then
     alias open='/usr/bin/xdg-open'
 fi
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -108,6 +102,7 @@ alias bjf='bundle install && bundle exec jekyll serve | firefox --new-tab --url 
 alias py2='python2'
 alias py3='python3'
 alias ipy='ipython3'
+alias myfuncs='declare -F'
 
 ##########
 # Colors #
@@ -200,7 +195,11 @@ function up() {
     done
 }
 
-function so() { # source py env
+function mvenv() {
+    python3 -m venv ~/Venvs/$1
+}
+
+function sov() { # source py env
     source ~/Venvs/$1/bin/activate
 }
 
