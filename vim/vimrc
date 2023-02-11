@@ -194,7 +194,7 @@ let mapleader="\<space>"
 let g:AutoPairsShortcutJump = "<c-p>"
 
 " Quit vim
-noremap <silent> <leader>q :qa<cr>
+noremap <silent> <leader>q :qa!<cr>
 
 " Make session file for cwd
 noremap <silent> <leader>sm :call MkSession()<cr>
@@ -240,6 +240,23 @@ nnoremap <leader>gi :Grep<space>
 " paste last thing yanked, not deleted
 nmap ,p "0p
 nmap ,P "0P
+
+" Terminal access
+nnoremap <silent> <leader>me :terminal<cr>
+nnoremap <silent> <leader>mv :vertical terminal<cr>
+nnoremap <silent> <leader>mh :horizontal terminal<cr>
+nnoremap <silent> <leader>mt :tab terminal<cr>
+tnoremap <silent> <leader>mc <c-w>:hide<cr>
+tnoremap <silent> <leader>mq <c-w>:quit!<cr>
+
+" Terminal modes
+tnoremap <silent> <esc> <c-w>n
+
+" Terminal window movement
+tnoremap <c-h> <c-w><c-w>h
+tnoremap <c-j> <c-w><c-w>j
+tnoremap <c-k> <c-w><c-w>k
+tnoremap <c-l> <c-w><c-w>l
 
 " You Surrounds word
 call SurroundMappings("word")
