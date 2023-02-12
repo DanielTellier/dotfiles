@@ -59,11 +59,13 @@ CommonMapsAutoPairs	common-maps.txt	/*CommonMapsAutoPairs*
 CommonMapsComments	common-maps.txt	/*CommonMapsComments*
 CommonMapsContents	common-maps.txt	/*CommonMapsContents*
 CommonMapsCpp	common-maps.txt	/*CommonMapsCpp*
+CommonMapsGeneral	common-maps.txt	/*CommonMapsGeneral*
 CommonMapsNetrw	common-maps.txt	/*CommonMapsNetrw*
 CommonMapsSessions	common-maps.txt	/*CommonMapsSessions*
 CommonMapsSnippets	common-maps.txt	/*CommonMapsSnippets*
 CommonMapsSurrounds	common-maps.txt	/*CommonMapsSurrounds*
-CommonMapsVimrc	common-maps.txt	/*CommonMapsVimrc*
+CommonMapsTerm	common-maps.txt	/*CommonMapsTerm*
+CommonMapsToggles	common-maps.txt	/*CommonMapsToggles*
 CommonMapsleader	common-maps.txt	/*CommonMapsleader*
 FugitiveStatusline()	fugitive.txt	/*FugitiveStatusline()*
 SnippetsCommands	snippets.txt	/*SnippetsCommands*

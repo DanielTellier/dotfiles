@@ -131,6 +131,8 @@ function! SurroundMappings(map_type)
             endfor
         elseif a:map_type == "delete"
             exe 'nmap <leader>d'.char.' ds'.char
+        elseif a:map_type == "visual"
+            exe 'vmap <leader>v'.char.' S'.char
         endif
     endfor
 endfunction
@@ -227,9 +229,9 @@ nnoremap <silent> <leader>tw :call ToggleNetrw()<cr>
 
 " Global substitution
 nnoremap <leader>rg :%s/<c-r><c-w>//g<left><left>
-nnoremap <leader>rc :%s/<c-r><c-w>//gc<left><left><left>
+nnoremap <leader>rp :%s/<c-r><c-w>//gc<left><left><left>
 vnoremap <leader>rg "zy:%s/<c-r>z//g<left><left>
-vnoremap <leader>rc "zy:%s/<c-r>z//gc<left><left><left>
+vnoremap <leader>rp "zy:%s/<c-r>z//gc<left><left><left>
 
 " Search word under cursor
 nnoremap <silent> <leader>gw :Grep . all "\b<c-r><c-w>\b"<cr>:cw<cr>
@@ -269,6 +271,9 @@ call SurroundMappings("change")
 
 " Delete Surrounds
 call SurroundMappings("delete")
+
+" Visual Surrounds
+call SurroundMappings("visual")
 
 " Compiler make
 nnoremap <silent> <leader>cm :make % <bar> redraw!<cr><cr>

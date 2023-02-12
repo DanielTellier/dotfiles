@@ -5,7 +5,7 @@
 ==============================================================================
 CONTENTS                                                  *CommonMapsContents*
 
-    1. Vimrc .................................... |CommonMapsVimrc|
+    1. General .................................. |CommonMapsGeneral|
     2. Cpp ...................................... |CommonMapsCpp|
     3. AutoPairs ................................ |CommonMapsAutoPairs|
     4. Comments ................................. |CommonMapsComments|
@@ -13,22 +13,24 @@ CONTENTS                                                  *CommonMapsContents*
     6. Surrounds ................................ |CommonMapsSurrounds|
     7. Netrw .................................... |CommonMapsNetrw|
     8. Sessions ................................. |CommonMapsSessions|
+    9. Toggles .................................. |CommonMapsToggles|
+    10. Term .................................... |CommonMapsTerm|
 
 ==============================================================================
-1. Vimrc                                                     *CommonMapsVimrc*
+1. General                                                 *CommonMapsGeneral*
 
 - Split window navigation (hjkl): <c-hjkl>
-- Toggle highlights: <leader>th
-- Toggle listchars: <leader>tl
-- Toggle numbers: <leader>tn
 - Grep word under cursor: <leader>gw
 - Grep user input word: <leader>gi
 - Paste last thing yanked: ,p
-- Surround word with <x>: <leader><x>
 - Compiler Make: <leader>cm
 - Quick Fix next: <leader>fn
 - Quick Fix previous: <leader>fp
 - Quit vim: <leader>q
+- Open key mappings doc in new tab: <leader>hd
+- Open vimrc in new tab: <leader>hv
+- Global replace of selection: <leader>rg
+- Global replace of selection with prompt: <leader>rp
 
 ==============================================================================
 2. Cpp                                                         *CommonMapsCpp*
@@ -66,6 +68,7 @@ CONTENTS                                                  *CommonMapsContents*
 
 - Surround word with <x>: <leader>w<x>
 - Surround line with <x>: <leader>l<x>
+- Surround visual selection with <x>: <leader>v<x>
 - Change surround from <x> to <y>: <leader><x><y>
 - Delete surround <x>: <leader>d<x>
 
@@ -78,6 +81,9 @@ CONTENTS                                                  *CommonMapsContents*
 - Open file in tab 2: <leader>e
 - Open file in horizontal split in tab 2: <leader>o
 - Open file in vertical split in tab 2: <leader>v
+- Open file in tab 2 and stay on netrw: <leader>E
+- Open file in horizontal split in tab 2 and stay on netrw: <leader>O
+- Open file in vertical split in tab 2 and stay on netrw: <leader>V
 - Go up dir: -
 - Sort toggle: s
 - Create new file: %
@@ -90,3 +96,23 @@ CONTENTS                                                  *CommonMapsContents*
 
 - Make session at sessions dir: <leader>sm
 - Source session from sessions dir: <leader>ss
+
+==============================================================================
+9. Toggles                                                 *CommonMapsToggles*
+
+- Toggle highlights: <leader>th
+- Toggle listchars: <leader>tl
+- Toggle numbers: <leader>tn
+- Toggle listchars and numbers: <leader>ta
+- Toggle netrw: <leader>tw
+
+==============================================================================
+10. Term                                                      *CommonMapsTerm*
+
+- Split window navigation (hjkl): <c-hjkl>
+- Open terminal: <leader>me
+- Open vertical terminal: <leader>mv
+- Open horizontal terminal: <leader>mh
+- Open terminal in new tab: <leader>mt
+- Close (hide) terminal: <leader>mc
+- Quit terminal: <leader>mq
