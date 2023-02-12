@@ -252,13 +252,13 @@ tnoremap <silent> <leader>mc <c-w>:hide<cr>
 tnoremap <silent> <leader>mq <c-w>:quit!<cr>
 
 " Terminal modes
-tnoremap <silent> <esc> <c-w>n
+tnoremap <esc> <c-\><c-n>
 
 " Terminal window movement
-tnoremap <c-h> <c-w><c-w>h
-tnoremap <c-j> <c-w><c-w>j
-tnoremap <c-k> <c-w><c-w>k
-tnoremap <c-l> <c-w><c-w>l
+tnoremap <c-h> <c-w><c-h>
+tnoremap <c-j> <c-w><c-j>
+tnoremap <c-k> <c-w><c-k>
+tnoremap <c-l> <c-w><c-l>
 
 " Search file under cursor
 nnoremap <leader>fe gf
