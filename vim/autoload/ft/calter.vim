@@ -4,7 +4,7 @@ endif
 let g:autoloaded_calter = 1
 
 " Find a function definition for C/Cpp/Cu
-function ft#calter#Cdef_(funcName)
+function! ft#calter#Cdef_(funcName)
   exe 'silent grep! -wr --include="*.c" --include="*.cpp" ' .
      \ '--include="*.cu" ' . a:funcName . ' .' | redraw!
 

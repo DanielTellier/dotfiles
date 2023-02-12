@@ -260,6 +260,11 @@ tnoremap <c-j> <c-w><c-w>j
 tnoremap <c-k> <c-w><c-w>k
 tnoremap <c-l> <c-w><c-w>l
 
+" Search file under cursor
+nnoremap <leader>fe gf
+nnoremap <silent> <leader>fv :vertical wincmd f<cr>
+nnoremap <silent> <leader>fh :horizontal wincmd f<cr>
+
 " You Surrounds word
 call SurroundMappings("word")
 
@@ -279,8 +284,8 @@ call SurroundMappings("visual")
 nnoremap <silent> <leader>cm :make % <bar> redraw!<cr><cr>
 
 " Quick Fix List next and previous
-noremap <silent> <leader>fn :cn<cr>
-noremap <silent> <leader>fp :cp<cr>
+noremap <silent> <leader>kn :cn<cr>
+noremap <silent> <leader>kp :cp<cr>
 
 " Make Y behave like other capitals
 nnoremap Y y$

@@ -24,13 +24,16 @@ CONTENTS                                                  *CommonMapsContents*
 - Grep user input word: <leader>gi
 - Paste last thing yanked: ,p
 - Compiler Make: <leader>cm
-- Quick Fix next: <leader>fn
-- Quick Fix previous: <leader>fp
+- Quick Fix next: <leader>kn
+- Quick Fix previous: <leader>kp
 - Quit vim: <leader>q
 - Open key mappings doc in new tab: <leader>hd
 - Open vimrc in new tab: <leader>hv
 - Global replace of selection: <leader>rg
 - Global replace of selection with prompt: <leader>rp
+- Open file under cursor in same window: <leader>fe
+- Open file under cursor in vertical window: <leader>fv
+- Open file under cursor in horizontal window: <leader>fh
 
 ==============================================================================
 2. Cpp                                                         *CommonMapsCpp*
