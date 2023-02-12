@@ -67,6 +67,24 @@ set wildmenu
 set wildmode=longest:full,full
 set writebackup
 
+function! ToggleAll()
+    if &number || &relativenumber || &list
+        set nonumber norelativenumber nolist
+    else
+        set number relativenumber list
+    endif
+endfunction
+
+function! ToggleNumbers()
+  if &relativenumber
+    set norelativenumber
+  elseif &number
+    set nonumber
+  else
+    set number relativenumber
+  endif
+endfunction
+
 function! ToggleNetrw()
     exe '1tabnext'
     if &ft !=# "netrw"
@@ -75,6 +93,20 @@ function! ToggleNetrw()
     else
         exe 'tabclose'
     endif
+endfunction
+
+function! ChangeFileIndentSize(curr_size, new_size)
+    let l:curr_file = bufname('%')
+    let l:tmp_file = '/tmp/set_vim_file_indent.txt'
+    let l:curr_set = 'set tabstop='.a:curr_size.' softtabstop='.a:curr_size
+    let l:new_set = 'set tabstop='.a:new_size.' softtabstop='.a:new_size
+    exe '!cp '.l:curr_file.' '.l:tmp_file
+    exe 'edit '.l:tmp_file
+    exe l:curr_set.' noexpandtab | retab! | write'
+    exe '!cat '.l:tmp_file.' > '.l:curr_file
+    exe 'edit '.l:curr_file
+    exe l:new_set.' expandtab | retab | write'
+    exe '!rm '.l:tmp_file
 endfunction
 
 function! SplitNetrw(bufcmd, is_stay)
@@ -95,24 +127,6 @@ function! SplitNetrw(bufcmd, is_stay)
     if a:is_stay
         exe '1tabnext'
     endif
-endfunction
-
-function! ToggleAll()
-    if &number || &relativenumber || &list
-        set nonumber norelativenumber nolist
-    else
-        set number relativenumber list
-    endif
-endfunction
-
-function! ToggleNumbers()
-  if &relativenumber
-    set norelativenumber
-  elseif &number
-    set nonumber
-  else
-    set number relativenumber
-  endif
 endfunction
 
 function! SurroundMappings(map_type)
@@ -338,6 +352,10 @@ nnoremap <tab> >>
 nnoremap <s-tab> <<
 vnoremap <tab> >>
 vnoremap <s-tab> <<
+
+" Change file indent size
+nnoremap <silent> <leader>i2 :call ChangeFileIndentSize(4, 2)<cr><cr><cr><cr>
+nnoremap <silent> <leader>i4 :call ChangeFileIndentSize(2, 4)<cr><cr><cr><cr>
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 " cmap w!! w !sudo tee > /dev/null %

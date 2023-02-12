@@ -34,13 +34,13 @@ CONTENTS                                                  *CommonMapsContents*
 - Open file under cursor in same window: <leader>fe
 - Open file under cursor in vertical window: <leader>fv
 - Open file under cursor in horizontal window: <leader>fh
+- Change indent spaces size from 4 to 2: <leader>i2
+- Change indent spaces size from 2 to 4: <leader>i4
 
 ==============================================================================
 2. Cpp                                                         *CommonMapsCpp*
 
 - Find C/Cpp function definition under cursor: <leader>cg
-- Find header file under cursor: <leader>fg
-- Find header file user input: <leader>fi
 
 ==============================================================================
 3. AutoPairs                                             *CommonMapsAutoPairs*
