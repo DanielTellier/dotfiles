@@ -6,7 +6,7 @@ let g:autoloaded_calter = 1
 " Find a function definition for C/Cpp/Cu
 function! ft#calter#Cdef_(funcName)
     exe 'silent grep! -wr --include="*.c" --include="*.cpp" ' .
-         \ '--include="*.cu" ' . a:funcName . ' .' | redraw!
+         \ '--include="*.c[cu]" ' . a:funcName . ' .' | redraw!
 
     let newqfLst = []
     let qfLst = getqflist()
@@ -14,7 +14,7 @@ function! ft#calter#Cdef_(funcName)
         let fpath = bufname(qfi.bufnr)
         let isLoaded = bufloaded(fpath)
         if isLoaded == 0
-            exe 'new ' . fpath
+            exe 'tabnew ' . fpath
         endif
 
         let lineEOF = getbufline(fpath, '$')[0]
@@ -23,7 +23,7 @@ function! ft#calter#Cdef_(funcName)
         let matches = match(lineStr, '[/{;]')
         while matches == -1
             if lineEOF == lineStr
-                    break
+                break
             endif
 
             let lineNum += 1
@@ -48,7 +48,7 @@ function! ft#calter#Cdef_(funcName)
         else
             call setqflist(newqfLst, 'r')
         endif
-        exe 'new +' . qfi.lnum . ' ' . fpath
+        exe 'sp +' . qfi.lnum . ' ' . fpath
         echo "File Found at " . qfi.lnum
     else
         echo "File Not Found"
