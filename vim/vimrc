@@ -1,3 +1,4 @@
+" #LET
 let $RTP = split(&runtimepath,',')[0]
 let $VRC = $RTP.'/vimrc'
 let $SDIR = $RTP.'/sessions'
@@ -5,11 +6,10 @@ let g:fugitive_git_executable = '/usr/bin/git'
 let g:snippets_base_directory = $RTP.'/plugin/vim-snippets/snippets'
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
 let g:netrw_preview = 1
-let g:netrw_winsize = 80
 let g:rehash256 = 1
 
+" #SET
 colorscheme molokai
 filetype plugin indent on
 syntax on
@@ -67,6 +67,7 @@ set wildmenu
 set wildmode=longest:full,full
 set writebackup
 
+" #FUNC
 function! ToggleAll()
     if &number || &relativenumber || &list
         set nonumber norelativenumber nolist
@@ -85,15 +86,15 @@ function! ToggleNumbers()
   endif
 endfunction
 
-function! ToggleNetrw()
-    exe '1tabnext'
-    if &ft !=# "netrw"
-        exe '0tabnew'
-        exe 'Explore'
-    else
-        exe 'tabclose'
-    endif
-endfunction
+" function! ToggleNetrw()
+"     exe '1tabnext'
+"     if &ft !=# "netrw"
+"         exe '0tabnew'
+"         exe 'Explore'
+"     else
+"         exe 'tabclose'
+"     endif
+" endfunction
 
 function! ChangeFileIndentSize(curr_size, new_size)
     let l:curr_file = bufname('%')
@@ -111,21 +112,24 @@ endfunction
 
 function! SplitNetrw(bufcmd, is_stay)
     exe 'normal v'
-    let l:bufcmd = a:bufcmd
-    let bufn = bufname()
+    let l:bufname = bufname()
     exe 'close!'
-    if tabpagenr('$') == 1
+
+    let l:tabnext = tabpagenr() + 1
+    let l:tablast = tabpagenr('$')
+    let l:bufcmd = a:bufcmd
+    if l:tabnext > l:tablast
         exe 'tabnew'
         let l:bufcmd = 'edit'
     else
-        exe '2tabnext'
+        exe l:tabnext . 'tabnext'
     endif
 
-    exe l:bufcmd . ' ' . bufn
+    exe l:bufcmd . ' ' . l:bufname
 
-    " If true move back to netrw on first tab
+    " If true move back to location of netrw
     if a:is_stay
-        exe '1tabnext'
+        exe tabpagenr('#') . 'tabnext'
     endif
 endfunction
 
@@ -171,6 +175,16 @@ function! SoSession()
     endif
 endfunction
 
+function! OpenAfterFT()
+    let l:after_file = $RTP . "/after/ftplugin/" . &ft . ".vim"
+    if filereadable(after_file)
+        execute 'sp ' . l:after_file
+    else
+        echo "File does not exist: " . l:after_file
+    endif
+endfunction
+
+" #COMM
 command! -nargs=+ -complete=file Grep call search#Grep_(<f-args>)
 
 augroup spellcheck
@@ -204,42 +218,50 @@ augroup netrw
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>V :call SplitNetrw("vsplit", 1)<cr>
 augroup END
 
+" #MAP
 let mapleader="\<space>"
 
 " Move cursor infront of closing pair symbol
 let g:AutoPairsShortcutJump = "<c-p>"
 
 " Quit vim
-noremap <silent> <leader>q :qa!<cr>
+nnoremap <silent> <leader>q :qa!<cr>
 
 " Make session file for cwd
-noremap <silent> <leader>sm :call MkSession()<cr>
-
+nnoremap <silent> <leader>sm :call MkSession()<cr>
 " Source session file at cwd
-noremap <silent> <leader>ss :call SoSession()<cr>
+nnoremap <silent> <leader>ss :call SoSession()<cr>
 
-" Open key mappings doc
-noremap <silent> <leader>hd :tabnew $RTP/doc/common-maps.txt<cr>
-
+" Open docs
+nnoremap <silent> <leader>ed :sp $RTP/doc<cr>
 " Open vimrc
-noremap <silent> <leader>hv :tabnew $RTP/vimrc<cr>
+nnoremap <silent> <leader>ev :sp $VRC<cr>
+" Open my after file type if exists
+nnoremap <silent> <leader>ea :call OpenAfterFT()<cr>
+" Open bashrc
+nnoremap <silent> <leader>eb :sp ~/.bashrc<cr>
+
+" Planner
+nnoremap <silent> <leader>ep :sp ~/.local/share/planner<cr> " Open planner
+nnoremap <leader>pt :/-<space>[] " Find todos
+nnoremap <leader>pd :/-<space>[x] " Find dones
+nnoremap <leader>ph :/^#<space>High " Goto High tag
+nnoremap <leader>pm :/^#<space>Medium " Goto Medium tag
+nnoremap <leader>pl :/^#<space>Low " Goto Low tag
+nnoremap <leader>ps :/^## " Goto Sub-header
 
 " Toggle highlights
 nnoremap <silent> <leader>th
 \ :if (&hls && v:hlsearch) \| nohlsearch \| else \| set hlsearch \| endif<cr>
-
 " Toggle listchars and numbers
 nnoremap <silent> <leader>ta :call ToggleAll()<cr>
-
 " Toggle listchars
 nnoremap <silent> <leader>tl
 \ :if (&list) \| set nolist \| else \| set list \| endif<cr>
-
 " Toggle numbers
 nnoremap <silent> <leader>tn :call ToggleNumbers()<cr>
-
 " Toggle netrw
-nnoremap <silent> <leader>tw :call ToggleNetrw()<cr>
+" nnoremap <silent> <leader>tw :call ToggleNetrw()<cr>
 
 " Global substitution
 nnoremap <leader>rg :%s/<c-r><c-w>//g<left><left>
@@ -249,7 +271,6 @@ vnoremap <leader>rp "zy:%s/<c-r>z//gc<left><left><left>
 
 " Search word under cursor
 nnoremap <silent> <leader>gw :Grep . all "\b<c-r><c-w>\b"<cr>:cw<cr>
-
 " Search word user input
 nnoremap <leader>gi :Grep<space>
 
@@ -264,10 +285,8 @@ nnoremap <silent> <leader>mh :horizontal terminal<cr>
 nnoremap <silent> <leader>mt :tab terminal<cr>
 tnoremap <silent> <leader>mc <c-w>:hide<cr>
 tnoremap <silent> <leader>mq <c-w>:quit!<cr>
-
 " Terminal modes
 tnoremap <esc> <c-\><c-n>
-
 " Terminal window movement
 tnoremap <c-h> <c-w><c-h>
 tnoremap <c-j> <c-w><c-j>
@@ -298,8 +317,8 @@ call SurroundMappings("visual")
 nnoremap <silent> <leader>cm :make % <bar> redraw!<cr><cr>
 
 " Quick Fix List next and previous
-noremap <silent> <leader>kn :cn<cr>
-noremap <silent> <leader>kp :cp<cr>
+nnoremap <silent> <leader>kn :cn<cr>
+nnoremap <silent> <leader>kp :cp<cr>
 
 " Make Y behave like other capitals
 nnoremap Y y$
