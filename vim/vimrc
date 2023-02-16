@@ -244,7 +244,7 @@ nnoremap <silent> <leader>eb :sp ~/.bashrc<cr>
 " Planner
 nnoremap <silent> <leader>ep :sp ~/.local/share/planner<cr> " Open planner
 nnoremap <silent> <leader>pt :/-<space>[]<cr> " Find todos
-nnoremap <silent> <leader>pd :/-<space>[x]<cr> " Find dones
+nnoremap <silent> <leader>pd :/-<space>[x\]<cr> " Find dones
 nnoremap <silent> <leader>ph :/^#<space>High<cr> " Goto High tag
 nnoremap <silent> <leader>pm :/^#<space>Medium<cr> " Goto Medium tag
 nnoremap <silent> <leader>pl :/^#<space>Low<cr> " Goto Low tag
