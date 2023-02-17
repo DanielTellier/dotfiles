@@ -36,8 +36,8 @@ CONTENTS                                                  *CommonMapsContents*
 - Open file under cursor in same window: <leader>fe
 - Open file under cursor in vertical window: <leader>fv
 - Open file under cursor in horizontal window: <leader>fh
-- Change indent spaces size from 4 to 2: <leader>i2
-- Change indent spaces size from 2 to 4: <leader>i4
+- Change indent spaces size from 2 to 4: <leader>24i
+- Change indent spaces size from 4 to 2: <leader>42i
 
 ==============================================================================
 2. Cpp                                                         *CommonMapsCpp*
@@ -85,10 +85,10 @@ CONTENTS                                                  *CommonMapsContents*
 - Open file in new tab: t
 - Open file in horizontal split: o
 - Open file in vertical split: v
-- Open file in next tab: <leader>e
+- Open file in next tab: <leader>i
 - Open file in horizontal split in next tab: <leader>o
 - Open file in vertical split in next tab: <leader>v
-- Open file in next tab and stay on netrw: <leader>E
+- Open file in next tab and stay on netrw: <leader>I
 - Open file in horizontal split in next tab and stay on netrw: <leader>O
 - Open file in vertical split in next tab and stay on netrw: <leader>V
 - Go up dir: -

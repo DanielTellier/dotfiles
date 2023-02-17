@@ -15,9 +15,9 @@ filetype plugin indent on
 syntax on
 
 if system('uname -s') == "Darwin\n"
-  set clipboard=unnamed " Mac
+    set clipboard=unnamed " Mac
 else
-  set clipboard=unnamedplus " Linux
+    set clipboard=unnamedplus " Linux
 endif
 
 set autoindent autoread
@@ -77,23 +77,23 @@ function! ToggleAll()
 endfunction
 
 function! ToggleNumbers()
-  if &relativenumber
+    if &relativenumber
     set norelativenumber
-  elseif &number
+    elseif &number
     set nonumber
-  else
+    else
     set number relativenumber
-  endif
+    endif
 endfunction
 
 " function! ToggleNetrw()
-"     exe '1tabnext'
-"     if &ft !=# "netrw"
-"         exe '0tabnew'
-"         exe 'Explore'
-"     else
-"         exe 'tabclose'
-"     endif
+"       exe '1tabnext'
+"       if &ft !=# "netrw"
+"           exe '0tabnew'
+"           exe 'Explore'
+"       else
+"           exe 'tabclose'
+"       endif
 " endfunction
 
 function! ChangeFileIndentSize(curr_size, new_size)
@@ -188,32 +188,32 @@ endfunction
 command! -nargs=+ -complete=file Grep call search#Grep_(<f-args>)
 
 augroup spellcheck
-  autocmd!
-  autocmd FileType gitcommit,markdown setlocal spell spelllang=en_us
-  autocmd FileType gitcommit,markdown setlocal complete+=kspell
-  autocmd FileType tex,latex,context,plaintex setlocal spell spelllang=en_us
-  autocmd FileType tex,latex,context,plaintex setlocal complete+=kspell
+    autocmd!
+    autocmd FileType gitcommit,markdown setlocal spell spelllang=en_us
+    autocmd FileType gitcommit,markdown setlocal complete+=kspell
+    autocmd FileType tex,latex,context,plaintex setlocal spell spelllang=en_us
+    autocmd FileType tex,latex,context,plaintex setlocal complete+=kspell
 augroup end
 
 " File templates
 augroup templates
-  autocmd!
-  autocmd BufNewFile *.py 0r $RTP/templates/template.py
+    autocmd!
+    autocmd BufNewFile *.py 0r $RTP/templates/template.py
 augroup END
 
 augroup autosave
-  autocmd!
-  autocmd CursorHold,CursorHoldI,QuitPre * :wa
+    autocmd!
+    autocmd CursorHold,CursorHoldI,QuitPre * :wa
 augroup END
 
 augroup netrw
     autocmd!
     " Hack fix to make ctrl-l work properly
     autocmd FileType netrw noremap <buffer> <c-l> <c-w>l
-    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>e :call SplitNetrw("edit", 0)<cr>
+    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>i :call SplitNetrw("edit", 0)<cr>
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>o :call SplitNetrw("split", 0)<cr>
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>v :call SplitNetrw("vsplit", 0)<cr>
-    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>E :call SplitNetrw("edit", 1)<cr>
+    autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>I :call SplitNetrw("edit", 1)<cr>
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>O :call SplitNetrw("split", 1)<cr>
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>V :call SplitNetrw("vsplit", 1)<cr>
 augroup END
@@ -369,8 +369,8 @@ vnoremap <tab> >>
 vnoremap <s-tab> <<
 
 " Change file indent size
-nnoremap <silent> <leader>i2 :call ChangeFileIndentSize(4, 2)<cr><cr><cr><cr>
-nnoremap <silent> <leader>i4 :call ChangeFileIndentSize(2, 4)<cr><cr><cr><cr>
+nnoremap <silent> <leader>24i :call ChangeFileIndentSize(2, 4)<cr><cr><cr><cr>
+nnoremap <silent> <leader>42i :call ChangeFileIndentSize(4, 2)<cr><cr><cr><cr>
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 " cmap w!! w !sudo tee > /dev/null %
