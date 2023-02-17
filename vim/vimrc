@@ -67,7 +67,7 @@ set wildmenu
 set wildmode=longest:full,full
 set writebackup
 
-" #FUNC
+" #FUNCTION
 function! ToggleAll()
     if &number || &relativenumber || &list
         set nonumber norelativenumber nolist
@@ -184,7 +184,7 @@ function! OpenAfterFT()
     endif
 endfunction
 
-" #COMM
+" #COMMAND
 command! -nargs=+ -complete=file Grep call search#Grep_(<f-args>)
 
 augroup spellcheck
@@ -300,16 +300,12 @@ nnoremap <silent> <leader>fh :horizontal wincmd f<cr>
 
 " You Surrounds word
 call SurroundMappings("word")
-
 " You Surrounds line
 call SurroundMappings("line")
-
 " Change Surrounds
 call SurroundMappings("change")
-
 " Delete Surrounds
 call SurroundMappings("delete")
-
 " Visual Surrounds
 call SurroundMappings("visual")
 
