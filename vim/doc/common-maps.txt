@@ -20,9 +20,10 @@ CONTENTS                                                  *CommonMapsContents*
 ==============================================================================
 1. General                                                 *CommonMapsGeneral*
 
-- Open docs in new window: <leader>ed
-- Open vimrc in new window: <leader>ev
-- Open bashrc in new window: <leader>eb
+- Open docs in new tab: <leader>ed
+- Open vimrc in new tab: <leader>ev
+- Open bashrc in new tab: <leader>eb
+- Open after file for current filetype in new window: <leader>ea
 - Split window navigation (hjkl): <c-hjkl>
 - Grep word under cursor: <leader>gw
 - Grep user input word: <leader>gi
@@ -126,7 +127,7 @@ CONTENTS                                                  *CommonMapsContents*
 ==============================================================================
 11. Planner                                                *CommonMapsPlanner*
 
-- Open planner in new window: <leader>pe
+- Open planner in new tab: <leader>ep
 - Find todos: <leader>pt
 - Find dones: <leader>pd
 - Goto High tag: <leader>ph
