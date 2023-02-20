@@ -31,7 +31,8 @@ CONTENTS                                                  *CommonMapsContents*
 - Compiler Make: <leader>cm
 - Quick Fix next: <leader>kn
 - Quick Fix previous: <leader>kp
-- Quit vim: <leader>q
+- Quit vim: <leader>qq
+- Close Window: <leader>qc
 - Global replace of selection: <leader>rg
 - Global replace of selection with prompt: <leader>rp
 - Open file under cursor in same window: <leader>fe

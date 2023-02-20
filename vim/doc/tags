@@ -61,6 +61,7 @@ CommonMapsContents	common-maps.txt	/*CommonMapsContents*
 CommonMapsCpp	common-maps.txt	/*CommonMapsCpp*
 CommonMapsGeneral	common-maps.txt	/*CommonMapsGeneral*
 CommonMapsNetrw	common-maps.txt	/*CommonMapsNetrw*
+CommonMapsPlanner	common-maps.txt	/*CommonMapsPlanner*
 CommonMapsSessions	common-maps.txt	/*CommonMapsSessions*
 CommonMapsSnippets	common-maps.txt	/*CommonMapsSnippets*
 CommonMapsSurrounds	common-maps.txt	/*CommonMapsSurrounds*

@@ -112,6 +112,20 @@ function! ChangeFileIndentSize(curr_size, new_size)
     exe '!rm '.l:tmp_file
 endfunction
 
+function! OpenDir(dir)
+    let l:tabcurr = tabpagenr()
+    let l:tablast = tabpagenr('$')
+    for i in range(1, l:tablast)
+        if &ft ==# "netrw"
+            exe 'edit ' . a:dir
+            return
+        endif
+        exe i . 'tabnext'
+    endfor
+    exe l:tabcurr . 'tabnext'
+    exe 'tabnew ' . a:dir
+endfunction
+
 function! SplitNetrw(bufcmd, is_stay)
     exe 'normal v'
     let l:bufname = bufname()
@@ -229,7 +243,9 @@ let mapleader="\<space>"
 let g:AutoPairsShortcutJump = "<c-p>"
 
 " Quit vim
-nnoremap <silent> <leader>q :qa!<cr>
+nnoremap <silent> <leader>qq :qa!<cr>
+" Close Window
+nnoremap <silent> <leader>qc :q!<cr>
 
 " Make session file for cwd
 nnoremap <silent> <leader>sm :call MkSession()<cr>
@@ -237,7 +253,7 @@ nnoremap <silent> <leader>sm :call MkSession()<cr>
 nnoremap <silent> <leader>ss :call SoSession()<cr>
 
 " Open docs
-nnoremap <silent> <leader>ed :tabnew $RTP/doc<cr>
+nnoremap <silent> <leader>ed :tabnew $RTP/doc/common-maps.txt<cr>
 " Open vimrc
 nnoremap <silent> <leader>ev :tabnew $VRC<cr>
 " Open my after file type if exists
@@ -246,7 +262,7 @@ nnoremap <silent> <leader>ea :call OpenAfterFT()<cr>
 nnoremap <silent> <leader>eb :tabnew ~/.bashrc<cr>
 
 " Planner
-nnoremap <silent> <leader>ep :tabnew ~/.local/share/planner<cr> " Open planner
+nnoremap <silent> <leader>ep :call OpenDir("~/.local/share/planner")<cr> " Open planner
 nnoremap <silent> <leader>pt :/-<space>[]<cr> " Find todos
 nnoremap <silent> <leader>pd :/-<space>[x\]<cr> " Find dones
 nnoremap <silent> <leader>ph :/^#<space>High<cr> " Goto High tag
