@@ -128,7 +128,7 @@ endfunction
 
 function! SplitNetrw(bufcmd, is_stay)
     exe 'normal v'
-    let l:bufname = bufname()
+    let l:bufname = bufname('%')
     exe 'close!'
 
     let l:tabnext = tabpagenr() + 1
