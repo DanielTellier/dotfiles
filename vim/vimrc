@@ -265,10 +265,8 @@ nnoremap <silent> <leader>eb :tabnew ~/.bashrc<cr>
 nnoremap <silent> <leader>ep :call OpenDir("~/.local/share/planner")<cr> " Open planner
 nnoremap <silent> <leader>pt :/-<space>[]<cr> " Find todos
 nnoremap <silent> <leader>pd :/-<space>[x\]<cr> " Find dones
-nnoremap <silent> <leader>ph :/^#<space>High<cr> " Goto High tag
-nnoremap <silent> <leader>pm :/^#<space>Medium<cr> " Goto Medium tag
-nnoremap <silent> <leader>pl :/^#<space>Low<cr> " Goto Low tag
-nnoremap <silent> <leader>ps :/^##<cr> " Goto Sub-header
+nnoremap <silent> <leader>ph :/^#<space><cr> " Goto Main-header
+nnoremap <silent> <leader>ps :/^##<space><cr> " Goto Sub-header
 
 " Toggle highlights
 nnoremap <silent> <leader>th

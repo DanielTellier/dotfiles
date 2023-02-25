@@ -131,7 +131,5 @@ CONTENTS                                                  *CommonMapsContents*
 - Open planner in new tab: <leader>ep
 - Find todos: <leader>pt
 - Find dones: <leader>pd
-- Goto High tag: <leader>ph
-- Goto Medium tag: <leader>pm
-- Goto Low tag: <leader>pl
+- Goto Main-header: <leader>ph
 - Goto Sub-header: <leader>ps
