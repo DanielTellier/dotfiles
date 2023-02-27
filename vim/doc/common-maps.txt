@@ -133,3 +133,5 @@ CONTENTS                                                  *CommonMapsContents*
 - Find dones: <leader>pd
 - Goto Main-header: <leader>ph
 - Goto Sub-header: <leader>ps
+- Mark todo as done: <leader>pm
+- Unmark todo as done: <leader>pu

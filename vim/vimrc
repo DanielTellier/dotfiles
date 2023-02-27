@@ -78,13 +78,21 @@ function! ToggleAll()
     endif
 endfunction
 
+function! ToggleHighlights()
+    if &hls && v:hlsearch
+        set nohlsearch
+    else
+        set hlsearch
+    endif
+endfunction
+
 function! ToggleNumbers()
     if &relativenumber
-    set norelativenumber
+        set norelativenumber
     elseif &number
-    set nonumber
+        set nonumber
     else
-    set number relativenumber
+        set number relativenumber
     endif
 endfunction
 
@@ -263,14 +271,15 @@ nnoremap <silent> <leader>eb :tabnew ~/.bashrc<cr>
 
 " Planner
 nnoremap <silent> <leader>ep :call OpenDir("~/.local/share/planner")<cr> " Open planner
-nnoremap <silent> <leader>pt :/-<space>[]<cr> " Find todos
-nnoremap <silent> <leader>pd :/-<space>[x\]<cr> " Find dones
+nnoremap <silent> <leader>pt :/-<space>\[\]<cr> " Find todos
+nnoremap <silent> <leader>pd :/-<space>\[x\]<cr> " Find dones
 nnoremap <silent> <leader>ph :/^#<space><cr> " Goto Main-header
 nnoremap <silent> <leader>ps :/^##<space><cr> " Goto Sub-header
+nnoremap <silent> <leader>pm :s/\[\]/\[x\]/ <bar> call ToggleHighlights()<cr> " Mark todo as done
+nnoremap <silent> <leader>pu :s/\[x\]/\[\]/ <bar> call ToggleHighlights()<cr> " Unmark todo as done
 
 " Toggle highlights
-nnoremap <silent> <leader>th
-\ :if (&hls && v:hlsearch) \| nohlsearch \| else \| set hlsearch \| endif<cr>
+nnoremap <silent> <leader>th :call ToggleHighlights()<cr>
 " Toggle listchars and numbers
 nnoremap <silent> <leader>ta :call ToggleAll()<cr>
 " Toggle listchars
