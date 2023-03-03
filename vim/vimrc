@@ -242,6 +242,12 @@ augroup netrw
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>I :call SplitNetrw("edit", 1)<cr>
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>O :call SplitNetrw("split", 1)<cr>
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>V :call SplitNetrw("vsplit", 1)<cr>
+    autocmd FileType netrw setlocal bufhidden=delete
+augroup END
+
+augroup misc
+    autocmd!
+    autocmd FileType xml setlocal noeol
 augroup END
 
 
