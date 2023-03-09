@@ -15,11 +15,11 @@ CONTENTS                                                  *CommonMapsContents*
     8. Sessions ................................. |CommonMapsSessions|
     9. Toggles .................................. |CommonMapsToggles|
     10. Term .................................... |CommonMapsTerm|
-    11. Planner ................................. |CommonMapsPlanner|
 
 ==============================================================================
 1. General                                                 *CommonMapsGeneral*
 
+- Open planner in new tab: <leader>ep
 - Open docs in new tab: <leader>ed
 - Open vimrc in new tab: <leader>ev
 - Open bashrc in new tab: <leader>eb
@@ -124,14 +124,3 @@ CONTENTS                                                  *CommonMapsContents*
 - Open terminal in new tab: <leader>mt
 - Close (hide) terminal: <leader>mc
 - Quit terminal: <leader>mq
-
-==============================================================================
-11. Planner                                                *CommonMapsPlanner*
-
-- Open planner in new tab: <leader>ep
-- Find todos: <leader>pt
-- Find dones: <leader>pd
-- Goto Main-header: <leader>ph
-- Goto Sub-header: <leader>ps
-- Mark todo as done: <leader>pm
-- Unmark todo as done: <leader>pu

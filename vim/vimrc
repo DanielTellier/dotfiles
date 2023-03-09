@@ -267,6 +267,8 @@ nnoremap <silent> <leader>sm :call MkSession()<cr>
 " Source session file at cwd
 nnoremap <silent> <leader>ss :call SoSession()<cr>
 
+" Open planner
+nnoremap <silent> <leader>ep :call OpenDir("~/.local/share/planner")<cr> " Open planner
 " Open docs
 nnoremap <silent> <leader>ed :tabnew $RTP/doc/common-maps.txt<cr>
 " Open vimrc
@@ -275,15 +277,6 @@ nnoremap <silent> <leader>ev :tabnew $VRC<cr>
 nnoremap <silent> <leader>ea :call OpenAfterFT()<cr>
 " Open bashrc
 nnoremap <silent> <leader>eb :tabnew ~/.bashrc<cr>
-
-" Planner
-nnoremap <silent> <leader>ep :call OpenDir("~/.local/share/planner")<cr> " Open planner
-nnoremap <silent> <leader>pt :/-<space>\[\]<cr> " Find todos
-nnoremap <silent> <leader>pd :/-<space>\[x\]<cr> " Find dones
-nnoremap <silent> <leader>ph :/^#<space><cr> " Goto Main-header
-nnoremap <silent> <leader>ps :/^##<space><cr> " Goto Sub-header
-nnoremap <silent> <leader>pm :s/\[\]/\[x\]/ <bar> call ToggleHighlights()<cr> " Mark todo as done
-nnoremap <silent> <leader>pu :s/\[x\]/\[\]/ <bar> call ToggleHighlights()<cr> " Unmark todo as done
 
 " Toggle highlights
 nnoremap <silent> <leader>th :call ToggleHighlights()<cr>
