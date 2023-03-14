@@ -24,7 +24,7 @@ endif
 set autoindent autoread
 set backspace=start,eol,indent
 set backupdir=$HOME/.local/share/vim/backup/
-set colorcolumn=80
+set colorcolumn=100
 highlight ColorColumn ctermbg=22
 set complete=.,w,b,u,t
 set noconfirm
