@@ -228,8 +228,7 @@ augroup END
 
 augroup autosave
     autocmd!
-    " autocmd CursorHold,CursorHoldI,QuitPre * :wa
-    autocmd QuitPre * :wa
+    autocmd CursorHold,CursorHoldI,QuitPre * :wa
 augroup END
 
 augroup netrw
