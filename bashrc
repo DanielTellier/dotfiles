@@ -174,7 +174,7 @@ else
     user_name=""
 fi
 
-export PS1='\n\[$reset\]🐷\[$prompt_x\][$user_name$host_name$PWD]\[$reset\]\n'
+export PS1='\n\[$reset\]\[$prompt_x\][$user_name$host_name$PWD]\[$reset\]\n'
 
 if [ -f ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh
