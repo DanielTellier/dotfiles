@@ -66,6 +66,7 @@ CommonMapsSnippets	common-maps.txt	/*CommonMapsSnippets*
 CommonMapsSurrounds	common-maps.txt	/*CommonMapsSurrounds*
 CommonMapsTerm	common-maps.txt	/*CommonMapsTerm*
 CommonMapsToggles	common-maps.txt	/*CommonMapsToggles*
+CommonMapsWezterm	common-maps.txt	/*CommonMapsWezterm*
 CommonMapsleader	common-maps.txt	/*CommonMapsleader*
 FugitiveStatusline()	fugitive.txt	/*FugitiveStatusline()*
 SnippetsCommands	snippets.txt	/*SnippetsCommands*
@@ -82,8 +83,6 @@ User_FugitivePager	fugitive.txt	/*User_FugitivePager*
 User_FugitiveStageBlob	fugitive.txt	/*User_FugitiveStageBlob*
 User_FugitiveTag	fugitive.txt	/*User_FugitiveTag*
 User_FugitiveTree	fugitive.txt	/*User_FugitiveTree*
-WeztermLeader	wezterm.txt	/*WeztermLeader*
-WeztermMappings	wezterm.txt	/*WeztermMappings*
 autopairs-contents	AutoPairs.txt	/*autopairs-contents*
 autopairs-features	AutoPairs.txt	/*autopairs-features*
 autopairs-flymode	AutoPairs.txt	/*autopairs-flymode*
@@ -213,8 +212,6 @@ surround.txt	surround.txt	/*surround.txt*
 vS	surround.txt	/*vS*
 v_gc	commentary.txt	/*v_gc*
 vgS	surround.txt	/*vgS*
-wezterm-contents	wezterm.txt	/*wezterm-contents*
-weztermmaps.txt	wezterm.txt	/*weztermmaps.txt*
 yS	surround.txt	/*yS*
 ySS	surround.txt	/*ySS*
 ys	surround.txt	/*ys*
