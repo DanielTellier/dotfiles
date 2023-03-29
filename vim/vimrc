@@ -291,9 +291,13 @@ nnoremap <silent> <leader>tn :call ToggleNumbers()<cr>
 
 " Global substitution
 nnoremap <leader>rg :%s/<c-r><c-w>//g<left><left>
-nnoremap <leader>rp :%s/<c-r><c-w>//gc<left><left><left>
+nnoremap <leader>rc :%s/<c-r><c-w>//gc<left><left><left>
 vnoremap <leader>rg "zy:%s/<c-r>z//g<left><left>
-vnoremap <leader>rp "zy:%s/<c-r>z//gc<left><left><left>
+vnoremap <leader>rc "zy:%s/<c-r>z//gc<left><left><left>
+nnoremap <leader>rpg :%s/\(<c-r><c-w>\)/\1/g<left><left><left><left>
+nnoremap <leader>rpc :%s/\(<c-r><c-w>\)/\1/gc<left><left><left><left><left>
+vnoremap <leader>rpg "zy:%s/\(<c-r>z\)/\1/g<left><left><left><left>
+vnoremap <leader>rpc "zy:%s/\(<c-r>z\)/\1/gc<left><left><left><left><left>
 
 " Search word under cursor
 nnoremap <silent> <leader>gw :Grep . all "\b<c-r><c-w>\b"<cr>:cw<cr>

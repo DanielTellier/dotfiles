@@ -35,7 +35,9 @@ CONTENTS                                                  *CommonMapsContents*
 - Quit vim: <leader>qq
 - Close Window: <leader>qc
 - Global replace of selection: <leader>rg
-- Global replace of selection with prompt: <leader>rp
+- Global replace of selection with prompt: <leader>rc
+- Global replace including selection: <leader>rpg
+- Global replace including selection with prompt: <leader>rpc
 - Open file under cursor in same window: <leader>fe
 - Open file under cursor in vertical window: <leader>fv
 - Open file under cursor in horizontal window: <leader>fh
