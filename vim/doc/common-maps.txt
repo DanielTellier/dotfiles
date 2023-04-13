@@ -16,6 +16,7 @@ CONTENTS                                                  *CommonMapsContents*
     9. Toggles .................................. |CommonMapsToggles|
     10. Term .................................... |CommonMapsTerm|
     11. Wezterm ................................. |CommonMapsWezterm|
+    12. CopyQ ................................... |CommonMapsCopyQ|
 
 ==============================================================================
 1. General                                                 *CommonMapsGeneral*
@@ -152,3 +153,9 @@ CONTENTS                                                  *CommonMapsContents*
   - Cycle match type (i,I,...): <c-r>
   - Clear search pattern: <c-u>
   - Close search overlay mode: <esc>
+
+==============================================================================
+12. CopyQ                                                    *CommonMapsCopyQ*
+
+- Toggle main window: <c-s-m>
+- Copy from Wezterm: Highlight with mouse

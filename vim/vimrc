@@ -158,7 +158,7 @@ function! SplitNetrw(bufcmd, is_stay)
 endfunction
 
 function! SurroundMappings(map_type)
-    let chars = ['`', "'", '"', ']', '}', ')', '>', 't']
+    let chars = ['`', "'", '"', '[', ']', '{', '}', '(', ')', '<', '>', 't']
     for char in chars
         if a:map_type == "word"
             exe 'nmap <leader>w'.char.' ysiw'.char
@@ -174,7 +174,7 @@ function! SurroundMappings(map_type)
         elseif a:map_type == "delete"
             exe 'nmap <leader>d'.char.' ds'.char
         elseif a:map_type == "visual"
-            exe 'vmap <leader>v'.char.' S'.char
+            exe 'vmap <leader>'.char.' S'.char
         endif
     endfor
 endfunction
@@ -291,13 +291,13 @@ nnoremap <silent> <leader>tn :call ToggleNumbers()<cr>
 
 " Global substitution
 nnoremap <leader>rg :%s/<c-r><c-w>//g<left><left>
-nnoremap <leader>rc :%s/<c-r><c-w>//gc<left><left><left>
+nnoremap <leader>rc :,$s/<c-r><c-w>//gc<left><left><left>
 vnoremap <leader>rg "zy:%s/<c-r>z//g<left><left>
-vnoremap <leader>rc "zy:%s/<c-r>z//gc<left><left><left>
+vnoremap <leader>rc "zy:,$s/<c-r>z//gc<left><left><left>
 nnoremap <leader>rpg :%s/\(<c-r><c-w>\)/\1/g<left><left><left><left>
-nnoremap <leader>rpc :%s/\(<c-r><c-w>\)/\1/gc<left><left><left><left><left>
+nnoremap <leader>rpc :,$s/\(<c-r><c-w>\)/\1/gc<left><left><left><left><left>
 vnoremap <leader>rpg "zy:%s/\(<c-r>z\)/\1/g<left><left><left><left>
-vnoremap <leader>rpc "zy:%s/\(<c-r>z\)/\1/gc<left><left><left><left><left>
+vnoremap <leader>rpc "zy:,$s/\(<c-r>z\)/\1/gc<left><left><left><left><left>
 
 " Search word under cursor
 nnoremap <silent> <leader>gw :Grep . all "\b<c-r><c-w>\b"<cr>:cw<cr>
