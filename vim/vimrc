@@ -31,6 +31,10 @@ set noconfirm
 set encoding=utf-8
 set expandtab tabstop=4 softtabstop=4 shiftwidth=4
 set fillchars=vert:\|,fold:-
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
 set formatoptions=tcqj
 set hidden
 set history=10000
@@ -261,13 +265,16 @@ nnoremap <silent> <leader>qq :qa!<cr>
 " Close Window
 nnoremap <silent> <leader>qc :q!<cr>
 
+" Closes all open folds
+noremap zC zM
+
 " Make session file for cwd
 nnoremap <silent> <leader>sm :call MkSession()<cr>
 " Source session file at cwd
 nnoremap <silent> <leader>ss :call SoSession()<cr>
 
 " Open planner
-nnoremap <silent> <leader>ep :call OpenDir("~/.local/share/planner")<cr> " Open planner
+nnoremap <silent> <leader>ep :call OpenDir("~/.local/share/planner")<cr>
 " Open docs
 nnoremap <silent> <leader>ed :tabnew $RTP/doc/common-maps.txt<cr>
 " Open vimrc

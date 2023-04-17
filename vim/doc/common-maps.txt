@@ -17,6 +17,7 @@ CONTENTS                                                  *CommonMapsContents*
     10. Term .................................... |CommonMapsTerm|
     11. Wezterm ................................. |CommonMapsWezterm|
     12. CopyQ ................................... |CommonMapsCopyQ|
+    13. Folds ................................... |CommonMapsFolds|
 
 ==============================================================================
 1. General                                                 *CommonMapsGeneral*
@@ -159,3 +160,14 @@ CONTENTS                                                  *CommonMapsContents*
 
 - Toggle main window: <c-s-m>
 - Copy from Wezterm: Highlight with mouse
+
+==============================================================================
+13. Folds                                                    *CommonMapsFolds*
+
+- Opens a fold at the cursor: zo
+- Opens all folds at the cursor: zO
+- Closes a fold at the cursor: zc
+- Closes all open folds: zC
+- Increases the `foldlevel` by one: zm
+- Decreases the `foldlevel` by one: zr
+- Decreases the `foldlevel` to zero (all folds will be open): zR
