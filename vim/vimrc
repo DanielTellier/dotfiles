@@ -9,6 +9,10 @@ let g:netrw_liststyle = 3
 let g:netrw_preview = 1
 let g:rehash256 = 1
 
+" #MACROS
+" Jenkins confirm delete
+let @j = 'yypL2T/'
+
 
 " #SET
 colorscheme molokai
@@ -124,18 +128,25 @@ function! ChangeFileIndentSize(curr_size, new_size)
     exe '!rm '.l:tmp_file
 endfunction
 
-function! OpenDir(dir)
+function! OpenPath(path)
     let l:tabcurr = tabpagenr()
     let l:tablast = tabpagenr('$')
-    for i in range(1, l:tablast)
-        if &ft ==# "netrw"
-            exe 'edit ' . a:dir
-            return
-        endif
-        exe i . 'tabnext'
-    endfor
-    exe l:tabcurr . 'tabnext'
-    exe 'tabnew ' . a:dir
+    if isdirectory(a:path)
+        for i in range(1, l:tablast)
+            if &ft ==# "netrw"
+                exe 'edit ' . a:path
+                return
+            endif
+            exe i . 'tabnext'
+        endfor
+        exe l:tabcurr . 'tabnext'
+    endif
+
+    if len(bufname('%')) == 0
+        exe 'edit ' . a:path
+    else
+        exe 'tabnew ' . a:path
+    endif
 endfunction
 
 function! SplitNetrw(bufcmd, is_stay)
@@ -206,7 +217,7 @@ endfunction
 function! OpenAfterFT()
     let l:after_file = $RTP . "/after/ftplugin/" . &ft . ".vim"
     if filereadable(after_file)
-        execute 'tabnew ' . l:after_file
+        exe 'tabnew ' . l:after_file
     else
         echo "File does not exist: " . l:after_file
     endif
@@ -274,15 +285,15 @@ nnoremap <silent> <leader>sm :call MkSession()<cr>
 nnoremap <silent> <leader>ss :call SoSession()<cr>
 
 " Open planner
-nnoremap <silent> <leader>ep :call OpenDir("~/.local/share/planner")<cr>
+nnoremap <silent> <leader>ep :call OpenPath("~/.local/share/planner")<cr>
 " Open docs
-nnoremap <silent> <leader>ed :tabnew $RTP/doc/common-maps.txt<cr>
+nnoremap <silent> <leader>ed :call OpenPath("$RTP/doc/common-maps.txt")<cr>
 " Open vimrc
-nnoremap <silent> <leader>ev :tabnew $VRC<cr>
+nnoremap <silent> <leader>ev :call OpenPath("$VRC")<cr>
 " Open my after file type if exists
 nnoremap <silent> <leader>ea :call OpenAfterFT()<cr>
 " Open bashrc
-nnoremap <silent> <leader>eb :tabnew ~/.bashrc<cr>
+nnoremap <silent> <leader>eb :call OpenPath("$HOME/.bashrc")<cr>
 
 " Toggle highlights
 nnoremap <silent> <leader>th :call ToggleHighlights()<cr>
