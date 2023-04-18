@@ -9,6 +9,7 @@ let g:netrw_liststyle = 3
 let g:netrw_preview = 1
 let g:rehash256 = 1
 
+
 " #MACROS
 " Jenkins confirm delete
 let @j = 'yypL2T/'
