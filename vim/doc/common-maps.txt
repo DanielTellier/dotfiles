@@ -16,8 +16,7 @@ CONTENTS                                                  *CommonMapsContents*
     9. Toggles .................................. |CommonMapsToggles|
     10. Term .................................... |CommonMapsTerm|
     11. Wezterm ................................. |CommonMapsWezterm|
-    12. CopyQ ................................... |CommonMapsCopyQ|
-    13. Folds ................................... |CommonMapsFolds|
+    12. Folds ................................... |CommonMapsFolds|
 
 ==============================================================================
 1. General                                                 *CommonMapsGeneral*
@@ -156,13 +155,7 @@ CONTENTS                                                  *CommonMapsContents*
   - Close search overlay mode: <esc>
 
 ==============================================================================
-12. CopyQ                                                    *CommonMapsCopyQ*
-
-- Toggle main window: <c-s-m>
-- Copy from Wezterm: Highlight with mouse
-
-==============================================================================
-13. Folds                                                    *CommonMapsFolds*
+12. Folds                                                    *CommonMapsFolds*
 
 - Opens a fold at the cursor: zo
 - Opens all folds at the cursor: zO
