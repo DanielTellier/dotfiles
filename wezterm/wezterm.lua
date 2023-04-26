@@ -26,7 +26,7 @@ return {
     specified by timeout_milliseconds, at which point it will automatically
     cancel itself.
     --]]
-    leader = { key="t", mods="CTRL", timeout_milliseconds=1500 },
+    leader = { key="t", mods="CTRL", timeout_milliseconds=3000 },
 
     -- Key bindings
     keys = {
