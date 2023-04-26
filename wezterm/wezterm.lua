@@ -2,6 +2,7 @@ local wezterm = require('wezterm')
 local act = wezterm.action
 
 return {
+    -- General
     audible_bell = 'Disabled',
     check_for_updates = false,
     color_scheme = 'Monokai (base16)',
@@ -18,47 +19,45 @@ return {
     -- Disable ligatures
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
 
+    -- Leader key
+    --[[
+    LEADER stays active until a keypress is registered (whether it matches
+    a key binding or not), or until it has been active for the duration
+    specified by timeout_milliseconds, at which point it will automatically
+    cancel itself.
+    --]]
+    leader = { key="t", mods="CTRL", timeout_milliseconds=1500 },
+
     -- Key bindings
     keys = {
-        {key = 'o', mods="ALT",
+        -- Send "CTRL-t" to the terminal when pressing CTRL-t, CTRL-t
+        {key = 't', mods="LEADER|CTRL", action=act.SendString('\x14')},
+        {key = 'o', mods="LEADER",
             action=act{SplitVertical={domain="CurrentPaneDomain"}}},
-        {key = 'v', mods="ALT",
+        {key = 'v', mods="LEADER",
             action=act{SplitHorizontal={domain="CurrentPaneDomain"}}},
-        {key = 't', mods="ALT",
-            action=act{SpawnTab="CurrentPaneDomain"}},
-        {key = 'n', mods="ALT",
-            action=act.ActivateTabRelative(1)},
-        {key = 'p', mods="ALT",
-            action=act.ActivateTabRelative(-1)},
-        {key = 'q', mods="ALT",
+        {key = 't', mods="LEADER", action=act{SpawnTab="CurrentPaneDomain"}},
+        {key = 'n', mods="LEADER", action=act.ActivateTabRelative(1)},
+        {key = 'p', mods="LEADER", action=act.ActivateTabRelative(-1)},
+        {key = 'q', mods="LEADER",
             action=act.CloseCurrentTab{confirm = false }},
-        {key = 'h', mods="ALT",
-            action=act{ActivatePaneDirection="Left"}},
-        {key = 'l', mods="ALT",
-            action=act{ActivatePaneDirection="Right"}},
-        {key = 'k', mods="ALT",
-            action=act{ActivatePaneDirection="Up"}},
-        {key = 'j', mods="ALT",
-            action=act{ActivatePaneDirection="Down"}},
-        {key = 'w', mods="ALT",
+        {key = 'h', mods="LEADER", action=act{ActivatePaneDirection="Left"}},
+        {key = 'l', mods="LEADER", action=act{ActivatePaneDirection="Right"}},
+        {key = 'k', mods="LEADER", action=act{ActivatePaneDirection="Up"}},
+        {key = 'j', mods="LEADER", action=act{ActivatePaneDirection="Down"}},
+        {key = 'w', mods="LEADER",
             action=act.CloseCurrentPane{confirm = false}},
-        {key = 'z', mods="ALT",
-            action="TogglePaneZoomState"},
-        {key = 'f', mods="ALT",
-            action="ToggleFullScreen"},
-        {key = 'a', mods="ALT",
-            action="ActivateCopyMode"},
-        {key = 'UpArrow', mods="CTRL",
-            action=act.ScrollByPage(-0.5)},
-        {key = 'DownArrow', mods="CTRL",
-            action=act.ScrollByPage(0.5)},
-        {key = 'C', mods="CTRL",
+        {key = 'z', mods="LEADER", action="TogglePaneZoomState"},
+        {key = 'f', mods="LEADER", action="ToggleFullScreen"},
+        {key = 'a', mods="LEADER", action="ActivateCopyMode"},
+        {key = 'UpArrow', mods="CTRL", action=act.ScrollByPage(-0.5)},
+        {key = 'DownArrow', mods="CTRL", action=act.ScrollByPage(0.5)},
+        {key = 'c', mods="CTRL|SHIFT",
             action=act.CopyTo("ClipboardAndPrimarySelection")},
-        {key = 'V', mods="CTRL",
-            action=act.PasteFrom("Clipboard")},
-        {key = 'V', mods="CTRL",
+        {key = 'v', mods="CTRL|SHIFT", action=act.PasteFrom("Clipboard")},
+        {key = 'v', mods="CTRL|SHIFT",
             action=act.PasteFrom("PrimarySelection")},
-        {key = 'F', mods="CTRL",
+        {key = 'f', mods="CTRL|SHIFT",
             action=act.Search{CaseInSensitiveString=""}},
     },
 }

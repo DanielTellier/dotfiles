@@ -18,10 +18,12 @@ CONTENTS                                                  *CommonMapsContents*
     11. Wezterm ................................. |CommonMapsWezterm|
     12. CopyQ ................................... |CommonMapsCopyQ|
     13. Folds ................................... |CommonMapsFolds|
+    14. Bash .................................... |CommonMapsBash|
 
 ==============================================================================
 1. General                                                 *CommonMapsGeneral*
 
+- leader = <space>
 - Open planner in new tab: <leader>ep
 - Open docs in new tab: <leader>ed
 - Open vimrc in new tab: <leader>ev
@@ -133,6 +135,7 @@ CONTENTS                                                  *CommonMapsContents*
 ==============================================================================
 11. Wezterm                                                *CommonMapsWezterm*
 
+- leader = <c-t>
 - Activate Copy Mode: <leader>a
 - Close Window: <leader>w
 - Close tab: <leader>q
@@ -171,3 +174,26 @@ CONTENTS                                                  *CommonMapsContents*
 - Increases the `foldlevel` by one: zm
 - Decreases the `foldlevel` by one: zr
 - Decreases the `foldlevel` to zero (all folds will be open): zR
+
+==============================================================================
+14. Bash                                                      *CommonMapsBash*
+
+- Go to start of line: <c-a>
+- Go to end of line: <c-e>
+- Previous command: <c-p>
+- Next command: <c-n>
+- Back one word: <a-b>
+- Forward one word: <a-f>
+- Toggle between the start of line and current cursor position: <c-xx>
+- Clear screen: <c-l>
+- Delete word before cursor: <a-del>
+- Delete word after cursor: <a-d>
+- Search command history: <c-r>
+- Escape from history search mode: <c-g>
+- Previous command in history: <c-p>
+- Next command in history: <c-n>
+- Go back to next most recent command: <c-s>
+- Stop output to screen: <c-s>
+- Allow output to the screen if previouly stopped: <c-q>
+- Send process to background: <c-z>
+- Send process to foreground: fg

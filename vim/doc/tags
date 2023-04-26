@@ -56,6 +56,7 @@
 :Gwrite	fugitive.txt	/*:Gwrite*
 AutoPairs.txt	AutoPairs.txt	/*AutoPairs.txt*
 CommonMapsAutoPairs	common-maps.txt	/*CommonMapsAutoPairs*
+CommonMapsBash	common-maps.txt	/*CommonMapsBash*
 CommonMapsComments	common-maps.txt	/*CommonMapsComments*
 CommonMapsContents	common-maps.txt	/*CommonMapsContents*
 CommonMapsCopyQ	common-maps.txt	/*CommonMapsCopyQ*
