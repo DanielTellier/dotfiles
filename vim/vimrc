@@ -318,6 +318,9 @@ nnoremap <leader>rpc :,$s/\(<c-r><c-w>\)/\1/gc<left><left><left><left><left>
 vnoremap <leader>rpg "zy:%s/\(<c-r>z\)/\1/g<left><left><left><left>
 vnoremap <leader>rpc "zy:,$s/\(<c-r>z\)/\1/gc<left><left><left><left><left>
 
+" Search exact match
+nnoremap <leader>em /\<<c-r><c-w>\>
+
 " Search word under cursor
 nnoremap <silent> <leader>gw :Grep . all "\b<c-r><c-w>\b"<cr>:cw<cr>
 " Search word user input
