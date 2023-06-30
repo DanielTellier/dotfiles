@@ -41,6 +41,7 @@ set foldnestmax=10
 set nofoldenable
 set foldlevel=2
 set formatoptions=tcqj
+set guioptions+=k
 set hidden
 set history=10000
 set hlsearch incsearch
@@ -415,10 +416,10 @@ noremap H ^
 noremap L $
 
 " Tabbing
-nnoremap <tab> >>
-nnoremap <s-tab> <<
-vnoremap <tab> >>
-vnoremap <s-tab> <<
+nnoremap <tab> >><esc>
+nnoremap <s-tab> <<<esc>
+vnoremap <tab> >><esc>
+vnoremap <s-tab> <<<esc>
 
 " Change file indent size
 nnoremap <silent> <leader>24i :call ChangeFileIndentSize(2, 4)<cr><cr><cr><cr>

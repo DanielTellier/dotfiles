@@ -9,6 +9,7 @@
     ~/.dircolors: dircolors
     ~/.gitconfig: gitconfig
     ~/.git-prompt.sh: git-prompt.sh
+    ~/.gvimrc: gvimrc
     ~/.ipython: ipython
     ~/.local/bin/imgcat: imgcat
     ~/.vim: vim
