@@ -8,6 +8,8 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_preview = 1
 let g:rehash256 = 1
+let &t_SI = "\e[6 q" " Change cursor to steady bar in insert mode
+let &t_EI = "\e[2 q" " Change cursor to steady block in normal mode
 
 
 " #MACROS
@@ -264,6 +266,7 @@ augroup END
 augroup misc
     autocmd!
     autocmd FileType xml setlocal noeol
+    autocmd VimEnter * silent !echo -ne "\e[2 q"
 augroup END
 
 
