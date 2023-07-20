@@ -9,12 +9,8 @@ let g:netrw_liststyle = 3
 let g:netrw_preview = 1
 let g:rehash256 = 1
 let &t_SI = "\e[6 q" " Change cursor to steady bar in insert mode
+let &t_SR = "\e[4 q" " Change cursor to under bar in replace mode
 let &t_EI = "\e[2 q" " Change cursor to steady block in normal mode
-
-
-" #MACROS
-" Jenkins confirm delete
-let @j = 'yypL2T/'
 
 
 " #SET
@@ -71,10 +67,13 @@ set statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 set t_Co=256
 set title
 set ttyfast
+" Time out on mapping after three seconds,
+" Time out on key codes after a tenth of a second
+set timeout timeoutlen=3000 ttimeoutlen=100
 set undolevels=100
 set undodir=$HOME/.local/state/vim/undo/
 set undofile
-set updatetime=5000 " Time in milliseconds for CursorHold to take effect
+set updatetime=1000
 set wildignore=*.o,*.d,*.exe,*.a,*.so,*.out
 set wildmenu
 set wildmode=longest:full,full
@@ -107,16 +106,6 @@ function! ToggleNumbers()
         set number relativenumber
     endif
 endfunction
-
-" function! ToggleNetrw()
-"       exe '1tabnext'
-"       if &ft !=# "netrw"
-"           exe '0tabnew'
-"           exe 'Explore'
-"       else
-"           exe 'tabclose'
-"       endif
-" endfunction
 
 function! ChangeFileIndentSize(curr_size, new_size)
     let l:curr_file = bufname('%')
@@ -266,7 +255,7 @@ augroup END
 augroup misc
     autocmd!
     autocmd FileType xml setlocal noeol
-    autocmd VimEnter * silent !echo -ne "\e[2 q"
+    autocmd VimEnter * silent! echo -ne "\e[2 q"
 augroup END
 
 
