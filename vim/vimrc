@@ -13,6 +13,11 @@ let &t_SR = "\e[4 q" " Change cursor to under bar in replace mode
 let &t_EI = "\e[2 q" " Change cursor to steady block in normal mode
 
 
+" MACRO
+" Put line within parens on new line with parens on own lines
+let @n = "0f(a€ýa€kBLF)i€ýa€kB"
+
+
 " #SET
 colorscheme molokai
 filetype plugin indent on
