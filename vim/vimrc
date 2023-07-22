@@ -15,7 +15,7 @@ let &t_EI = "\e[2 q" " Change cursor to steady block in normal mode
 
 " MACRO
 " Put line within parens on new line with parens on own lines
-let @n = "0f(a€ýa€kBLF)i€ýa€kB"
+let @n = "0f(a^M^[<<LF)i^M^[<<^["
 
 
 " #SET
