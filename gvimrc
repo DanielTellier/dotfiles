@@ -1,6 +1,8 @@
 " Make gvim span whole window on gvim open
 set lines=999 columns=9999
 
+set guicursor+=a:blinkon0
+
 " Set font settings
 if has("gui_gtk2") || has("gui_gtk3")
     " Linux

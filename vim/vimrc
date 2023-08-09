@@ -239,11 +239,6 @@ augroup templates
     autocmd BufNewFile *.py 0r $RTP/templates/template.py
 augroup END
 
-augroup autosave
-    autocmd!
-    autocmd QuitPre * :wa
-augroup END
-
 augroup netrw
     autocmd!
     " Hack fix to make ctrl-l work properly
@@ -261,6 +256,11 @@ augroup misc
     autocmd!
     autocmd FileType xml setlocal noeol
     autocmd VimEnter * silent! echo -ne "\e[2 q"
+    " Return to last edit position when opening files (You want this!)
+    autocmd BufReadPost *
+         \ if line("'\"") > 0 && line("'\"") <= line("$") |
+         \   exe "normal! g`\"" |
+         \ endif
 augroup END
 
 
