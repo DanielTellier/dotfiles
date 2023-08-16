@@ -3,3 +3,6 @@
 
 # ipython
 *.sqlite
+
+# wezterm
+wezterm/work.lua

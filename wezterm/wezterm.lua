@@ -1,5 +1,13 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
+-- local work = require('work')
+
+-- wezterm.on('gui-startup', function(window, pane)
+--     work.startup({})
+-- end)
+-- wezterm.on('update-right-status', function(window, pane)
+--     window:set_right_status(window:active_workspace())
+-- end)
 
 return {
     -- General
@@ -59,5 +67,8 @@ return {
             action=act.PasteFrom("PrimarySelection")},
         {key = 'f', mods="CTRL|SHIFT",
             action=act.Search{CaseInSensitiveString=""}},
+        {key = '1', mods="ALT", action=act.SwitchWorkspaceRelative(-1)},
+        {key = '2', mods="ALT", action=act.SwitchWorkspaceRelative(1)},
+        {key = '3', mods="ALT", action=act.ShowLauncherArgs{flags = 'FUZZY|WORKSPACES'}},
     },
 }

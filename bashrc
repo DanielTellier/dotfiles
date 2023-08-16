@@ -103,6 +103,7 @@ alias py2='python2'
 alias py3='python3'
 alias ipy='ipython3'
 alias myfuncs='declare -F'
+alias wez='wezterm start &'
 
 ##########
 # Colors #
