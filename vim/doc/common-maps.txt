@@ -177,7 +177,7 @@ CONTENTS                                                  *CommonMapsContents*
 - Previous command: <c-p>
 - Next command: <c-n>
 - Back one word: <a-b>
-- Forward one word: <a-f>
+- Forward one word: <a-w>
 - Toggle between the start of line and current cursor position: <c-xx>
 - Clear screen: <c-l>
 - Delete word before cursor: <a-del>
