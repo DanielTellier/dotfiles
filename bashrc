@@ -205,8 +205,10 @@ function sov() { # source py env
 }
 
 # Search in files
+# If you substitute the -exec ending from /; to +, find will optimize the sub-process
+# creation by only calling grep the minimal possible number of times, often just once.
 function sif() {
-    grep -EiIrl "$*" .
+    find . -name "*$2" -exec grep -rEiIn "$1" {} +
 }
 
 # Colored man pages
