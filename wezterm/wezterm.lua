@@ -1,4 +1,5 @@
 local wezterm = require('wezterm')
+local color_themes = require('color_themes')
 local act = wezterm.action
 -- local work = require('work')
 
@@ -13,12 +14,15 @@ return {
     -- General
     audible_bell = 'Disabled',
     check_for_updates = false,
-    color_scheme = 'Monokai (base16)',
+    color_scheme = 'Snazzy',
+    color_schemes = {
+        Snazzy = color_themes.snazzy,
+    },
     default_cursor_style = 'SteadyBlock',
     disable_default_key_bindings = true,
     enable_scroll_bar = true,
-    font = wezterm.font_with_fallback {'DejaVu Sans Mono', 'Courier New',},
-    font_size = 13.0,
+    font = wezterm.font_with_fallback {'Fira Code', 'DejaVu Sans Mono', 'Courier New',},
+    font_size = 14.0,
     hide_tab_bar_if_only_one_tab = true,
     scrollback_lines = 3500,
     window_close_confirmation = 'NeverPrompt',
