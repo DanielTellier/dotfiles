@@ -1,11 +1,11 @@
 local wezterm = require('wezterm')
 local color_themes = require('color_themes')
 local act = wezterm.action
--- local work = require('work')
+local init = require('init')
 
--- wezterm.on('gui-startup', function(window, pane)
---     work.startup({})
--- end)
+wezterm.on('gui-startup', function(window, pane)
+    init.startup({})
+end)
 -- wezterm.on('update-right-status', function(window, pane)
 --     window:set_right_status(window:active_workspace())
 -- end)
