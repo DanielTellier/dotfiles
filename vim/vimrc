@@ -333,8 +333,6 @@ nnoremap <silent> <leader>me :terminal<cr>
 nnoremap <silent> <leader>mv :vertical terminal<cr>
 nnoremap <silent> <leader>mh :horizontal terminal<cr>
 nnoremap <silent> <leader>mt :tab terminal<cr>
-tnoremap <silent> <leader>mc <c-w>:hide<cr>
-tnoremap <silent> <leader>mq <c-w>:quit!<cr>
 " Terminal modes
 tnoremap <esc> <c-\><c-n>
 " Terminal window movement
