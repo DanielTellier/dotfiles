@@ -1,5 +1,4 @@
 local wezterm = require('wezterm')
-local color_themes = require('color_themes')
 local act = wezterm.action
 local init = require('init')
 
@@ -14,13 +13,7 @@ return {
     -- General
     audible_bell = 'Disabled',
     check_for_updates = false,
-    color_schemes = {
-        Dracula = color_themes.dracula,
-        DraculaPlus = color_themes.dracula_plus,
-        Molokai = color_themes.molokai,
-        Snazzy = color_themes.snazzy,
-    },
-    color_scheme = 'Dracula',
+    color_scheme = 'Monokai Dark (Gogh)',
     default_cursor_style = 'SteadyBlock',
     disable_default_key_bindings = true,
     enable_scroll_bar = true,
