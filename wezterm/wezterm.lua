@@ -14,10 +14,13 @@ return {
     -- General
     audible_bell = 'Disabled',
     check_for_updates = false,
-    color_scheme = 'Snazzy',
     color_schemes = {
+        Dracula = color_themes.dracula,
+        DraculaPlus = color_themes.dracula_plus,
+        Molokai = color_themes.molokai,
         Snazzy = color_themes.snazzy,
     },
+    color_scheme = 'Dracula',
     default_cursor_style = 'SteadyBlock',
     disable_default_key_bindings = true,
     enable_scroll_bar = true,
