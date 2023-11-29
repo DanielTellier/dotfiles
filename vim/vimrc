@@ -337,6 +337,8 @@ nnoremap <silent> <leader>mh :horizontal terminal<cr>
 nnoremap <silent> <leader>mt :tab terminal<cr>
 " Terminal modes
 tnoremap <esc> <c-\><c-n>
+" Terminal Paste
+tmap <c-w>p <c-w>"+
 " Terminal window movement
 tnoremap <c-h> <c-w><c-h>
 tnoremap <c-j> <c-w><c-j>
