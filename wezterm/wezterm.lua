@@ -18,7 +18,7 @@ return {
     disable_default_key_bindings = true,
     enable_scroll_bar = true,
     font = wezterm.font_with_fallback {'Fira Code', 'DejaVu Sans Mono', 'Courier New',},
-    font_size = 14.0,
+    font_size = 13.0,
     hide_tab_bar_if_only_one_tab = true,
     scrollback_lines = 3500,
     window_close_confirmation = 'NeverPrompt',
