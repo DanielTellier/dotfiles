@@ -67,6 +67,8 @@ return {
             action=act.PasteFrom("PrimarySelection")},
         {key = 'f', mods="CTRL|SHIFT",
             action=act.Search{CaseInSensitiveString=""}},
+        {key = 'r', mods="LEADER", action=act.RotatePanes("Clockwise")},
+        {key = '0', mods="LEADER", action=act.PaneSelect{mode="SwapWithActive"}},
         {key = '1', mods="ALT", action=act.SwitchWorkspaceRelative(-1)},
         {key = '2', mods="ALT", action=act.SwitchWorkspaceRelative(1)},
         {key = '3', mods="ALT", action=act.ShowLauncherArgs{flags = 'FUZZY|WORKSPACES'}},

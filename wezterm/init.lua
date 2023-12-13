@@ -3,7 +3,7 @@ local mux = wezterm.mux
 local init = {}
 
 
-function check_and_create_dir(dir)
+local function check_and_create_dir(dir)
     if os.execute('cd ' .. dir) ~= 0 then
         os.execute('mkdir ' .. dir)
     end
