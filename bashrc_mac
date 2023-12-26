@@ -12,15 +12,41 @@ fi
 
 # Setting PATH for Python 3.6
 # The original version is saved in .bash_profile.pysave
-export PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
+# export PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:$PATH"
+
+# Homebrew
 export BASH_SILENCE_DEPRECATION_WARNING=1
-export GROOVY_HOME=/opt/homebrew/opt/groovy/libexec
-export BROWSER="open /Applications/Firefox.app"
-colorflag="-G"
+hpath="/opt/homebrew"
+opath="$hpath/opt"
+export PATH="$hpath/bin:$PATH"
+pkgs=(
+    "bzip2"
+    "curl"
+    "libxml2"
+    "zlib"
+)
+pkg_configs=(
+    "bzip2"
+)
+for pkg in "${pkgs[@]}"; do
+    export PATH="$opath/$pkg/bin:$PATH"
+    if [[ ! "${no_configs[@]}" =~ $pkg ]]; then
+        export PKG_CONFIG_PATH="$opath/$pkg/lib/pkgconfig:$PKG_CONFIG_PATH"
+    fi
+    export LDFLAGS="-L$opath/$pkg/lib $LDFLAGS"
+    export CPPFLAGS="-I$opath/$pkg/include $CPPFLAGS"
+done
+export GROOVY_HOME="$opath/groovy/libexec"
+
 
 # NOTE: Enabling :inspect mode (ergo. having headless set to false)
 # with mac menu bar on top set to hide always will cause unncessary output
 # to print to console when running `groovysh`
+# Groovy
 alias grvi='groovysh'
 alias grv='groovysh -Djava.awt.headless=true' # Groovy with :inspect disabled
+
+
+# Misc
+export BROWSER="open /Applications/Firefox.app"
+colorflag="-G"
