@@ -39,6 +39,14 @@ done
 export GROOVY_HOME="$opath/groovy/libexec"
 
 
+# Clang
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+export CPPFLAGS="$CPPFLAGS -Xpreprocessor -fopenmp"
+export CFLAGS="$CFLAGS -I/usr/local/opt/libomp/include"
+export CXXFLAGS="$CXXFLAGS -I/usr/local/opt/libomp/include"
+export LDFLAGS="$LDFLAGS -Wl,-rpath,/usr/local/opt/libomp/lib -L/usr/local/opt/libomp/lib -lomp"
+
 # NOTE: Enabling :inspect mode (ergo. having headless set to false)
 # with mac menu bar on top set to hide always will cause unncessary output
 # to print to console when running `groovysh`
