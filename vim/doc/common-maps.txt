@@ -27,8 +27,6 @@ CONTENTS                                                  *CommonMapsContents*
 - Open after file for current filetype in new window: <leader>ea
 - Split window navigation (hjkl): <c-hjkl>
 - Search exact match under cursor: <leader>em
-- Grep word under cursor: <leader>gw
-- Grep user input word: <leader>gi
 - Paste last thing yanked: ,p
 - Compiler Make: <leader>cm
 - Quick Fix next: <leader>kn
