@@ -1,9 +1,7 @@
 " #LET
 let $RTP = split(&runtimepath,',')[0]
 let $VRC = $RTP.'/vimrc'
-let $SDIR = $RTP.'/sessions'
 let g:fugitive_git_executable = '/usr/bin/git'
-let g:snippets_base_directory = $RTP.'/plugin/vim-snippets/snippets'
 let g:monokai_term_italic = 1
 let g:monokai_gui_italic = 1
 let g:netrw_banner = 0
@@ -13,6 +11,7 @@ let g:rehash256 = 1
 let &t_SI = "\e[6 q" " Change cursor to steady bar in insert mode
 let &t_SR = "\e[4 q" " Change cursor to under bar in replace mode
 let &t_EI = "\e[2 q" " Change cursor to steady block in normal mode
+let $FZF_DEFAULT_COMMAND = 'ag --ignore .git --hidden --ignore .svn -g ""'
 
 
 " MACRO
@@ -25,9 +24,11 @@ colorscheme monokai
 filetype plugin indent on
 syntax on
 
-if system('uname -s') == "Darwin\n"
+if has('macunix')
+    set rtp+=/opt/homebrew/opt/fzf
     set clipboard=unnamed " Mac
 else
+    set rtp+=~/.local/share/fzf
     set clipboard=unnamedplus " Linux
 endif
 
@@ -194,26 +195,6 @@ function! SurroundMappings(map_type)
     endfor
 endfunction
 
-function! MkSession()
-    let sfile = $RTP."/sessions/".substitute(getcwd()[1:].".vim", "/", "-", "g")
-    " Close netrw before saving session
-    exe '1tabnext'
-    if &ft ==# "netrw"
-        exe 'tabclose'
-    endif
-    exe 'mksession! '.sfile
-endfunction
-
-function! SoSession()
-    let sfile = $RTP."/sessions/".substitute(getcwd()[1:].".vim", "/", "-", "g")
-    if filereadable(sfile)
-        exe 'source '.sfile
-        highlight ColorColumn ctermbg=22
-    else
-        echo "File does not exist ".sfile
-    endif
-endfunction
-
 function! OpenAfterFT()
     let l:after_file = $RTP . "/after/ftplugin/" . &ft . ".vim"
     if filereadable(after_file)
@@ -225,8 +206,6 @@ endfunction
 
 
 " #COMMAND
-command! -nargs=+ -complete=file Grep call search#Grep_(<f-args>)
-
 augroup spellcheck
     autocmd!
     autocmd FileType gitcommit,markdown setlocal spell spelllang=en_us
@@ -234,12 +213,6 @@ augroup spellcheck
     autocmd FileType tex,latex,context,plaintex setlocal spell spelllang=en_us
     autocmd FileType tex,latex,context,plaintex setlocal complete+=kspell
 augroup end
-
-" File templates
-augroup templates
-    autocmd!
-    autocmd BufNewFile *.py 0r $RTP/templates/template.py
-augroup END
 
 augroup netrw
     autocmd!
@@ -279,11 +252,6 @@ nnoremap <silent> <leader>qc :q!<cr>
 
 " Closes all open folds
 noremap zC zM
-
-" Make session file for cwd
-nnoremap <silent> <leader>sm :call MkSession()<cr>
-" Source session file at cwd
-nnoremap <silent> <leader>ss :call SoSession()<cr>
 
 " Open planner
 nnoremap <silent> <leader>ep :call OpenPath("~/.local/share/planner")<cr>
