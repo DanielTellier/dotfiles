@@ -204,6 +204,26 @@ function! OpenAfterFT()
     endif
 endfunction
 
+function! RemoveAllBuffers()
+  let l:current_pos = getpos('.')
+  exe "%bd | e# | echo 'Buffers Removed'"
+  call setpos('.', l:current_pos)
+endfunc
+
+function! RemoveMatchingBuffers(pattern)
+    let l:bufferList = filter(range(1, bufnr('$')), 'buflisted(v:val)')
+    let l:matchingBuffers = filter(bufferList, 'bufname(v:val) =~ a:pattern')
+    if len(l:matchingBuffers) < 1
+        echo 'No buffers found matching pattern ' . a:pattern
+        return
+    endif
+    exe 'bd ' . join(l:matchingBuffers, ' ')
+endfunction
+
+function! RemoveAllGlobalMarks()
+  exe "delm! | delm A-Z0-9 | echo 'All marks deleted'"
+endfunction
+
 
 " #COMMAND
 augroup spellcheck
@@ -237,6 +257,8 @@ augroup misc
          \   exe "normal! g`\"" |
          \ endif
 augroup END
+
+command! -nargs=1 RemoveWhichBuffer call RemoveMatchingBuffers('<args>')
 
 
 " #MAP
@@ -289,11 +311,6 @@ vnoremap <leader>rpc "zy:,$s/\(<c-r>z\)/\1/gc<left><left><left><left><left>
 " Search exact match
 nnoremap <leader>em /\<<c-r><c-w>\>
 
-" Search word under cursor
-nnoremap <silent> <leader>gw :Grep . all "\b<c-r><c-w>\b"<cr>:cw<cr>
-" Search word user input
-nnoremap <leader>gi :Grep<space>
-
 " paste last thing yanked, not deleted
 nmap ,p "0p
 nmap ,P "0P
@@ -312,11 +329,6 @@ tnoremap <c-h> <c-w><c-h>
 tnoremap <c-j> <c-w><c-j>
 tnoremap <c-k> <c-w><c-k>
 tnoremap <c-l> <c-w><c-l>
-
-" Search file under cursor
-nnoremap <leader>fe gf
-nnoremap <silent> <leader>fv :vertical wincmd f<cr>
-nnoremap <silent> <leader>fh :horizontal wincmd f<cr>
 
 " You Surrounds word
 call SurroundMappings("word")
@@ -392,5 +404,16 @@ vnoremap <s-tab> <<<esc>
 nnoremap <silent> <leader>24i :call ChangeFileIndentSize(2, 4)<cr><cr><cr><cr>
 nnoremap <silent> <leader>42i :call ChangeFileIndentSize(4, 2)<cr><cr><cr><cr>
 
+" Yank file name
+nnoremap <silent> <leader>f :let @* = expand("%:t")<cr>
+" Yank absolute path
+nnoremap <silent> <leader>F :let @* = expand("%:p")<cr>
+
+nnoremap <leader>rb :RemoveWhichBuffer<space>
+nnoremap <leader>rB :call RemoveAllBuffers()<cr>
+
+nnoremap <leader>rm :delm!<space>
+nnoremap <leader>rM :call RemoveAllGlobalMarks()<cr>
+
 " Allow saving of files as sudo when I forgot to start vim using sudo.
-" cmap w!! w !sudo tee > /dev/null %
+cmap w!! w !sudo tee > /dev/null %
