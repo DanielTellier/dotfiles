@@ -5,22 +5,11 @@
 ###########
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-
-if [[ -f ~/.bashrc_local ]]; then
-    source ~/.bashrc_local
-fi
-
-if [[ -f ~/.bashrc_work ]]; then
-    source ~/.bashrc_work
-fi
-
-if [[ "$OSTYPE" == "darwin"* && -f ~/.bashrc_mac ]]; then
-    source ~/.bashrc_mac
-fi
-
-if [[ "$OSTYPE" == "linux-gnu"* && -f ~/.bashrc_linux ]]; then
-    source ~/.bashrc_linux
-fi
+[[ -f ~/.bashrc_local ]] && source ~/.bashrc_local
+[[ -f ~/.bashrc_work ]] && source ~/.bashrc_work
+[[ "$OSTYPE" == "darwin"* && -f ~/.bashrc_mac ]] && source ~/.bashrc_mac
+[[ "$OSTYPE" == "linux-gnu"* && -f ~/.bashrc_linux ]] && source ~/.bashrc_linux
+[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
 ########
 # MISC #
