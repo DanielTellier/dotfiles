@@ -6,18 +6,15 @@
 CONTENTS                                                  *CommonMapsContents*
 
     1. General .................................. |CommonMapsGeneral|
-    2. Cpp ...................................... |CommonMapsCpp|
-    3. AutoPairs ................................ |CommonMapsAutoPairs|
-    4. Comments ................................. |CommonMapsComments|
-    5. Snippets ................................. |CommonMapsSnippets|
-    6. Surrounds ................................ |CommonMapsSurrounds|
-    7. Netrw .................................... |CommonMapsNetrw|
-    8. Sessions ................................. |CommonMapsSessions|
-    9. Toggles .................................. |CommonMapsToggles|
-    10. Term .................................... |CommonMapsTerm|
-    11. Wezterm ................................. |CommonMapsWezterm|
-    12. Folds ................................... |CommonMapsFolds|
-    13. Bash .................................... |CommonMapsBash|
+    2. AutoPairs ................................ |CommonMapsAutoPairs|
+    3. Comments ................................. |CommonMapsComments|
+    4. Surrounds ................................ |CommonMapsSurrounds|
+    5. Netrw .................................... |CommonMapsNetrw|
+    6. Toggles .................................. |CommonMapsToggles|
+    7. Term .................................... |CommonMapsTerm|
+    8. Wezterm ................................. |CommonMapsWezterm|
+    9. Folds ................................... |CommonMapsFolds|
+    10. Bash .................................... |CommonMapsBash|
 
 ==============================================================================
 1. General                                                 *CommonMapsGeneral*
@@ -30,8 +27,6 @@ CONTENTS                                                  *CommonMapsContents*
 - Open after file for current filetype in new window: <leader>ea
 - Split window navigation (hjkl): <c-hjkl>
 - Search exact match under cursor: <leader>em
-- Grep word under cursor: <leader>gw
-- Grep user input word: <leader>gi
 - Paste last thing yanked: ,p
 - Compiler Make: <leader>cm
 - Quick Fix next: <leader>kn
@@ -49,17 +44,12 @@ CONTENTS                                                  *CommonMapsContents*
 - Change indent spaces size from 4 to 2: <leader>42i
 
 ==============================================================================
-2. Cpp                                                         *CommonMapsCpp*
-
-- Find C/Cpp function definition under cursor: <leader>cg
-
-==============================================================================
-3. AutoPairs                                             *CommonMapsAutoPairs*
+2. AutoPairs                                             *CommonMapsAutoPairs*
 
 - AutoPairs Jump: <c-p>
 
 ==============================================================================
-4. Comments                                               *CommonMapsComments*
+3. Comments                                               *CommonMapsComments*
 
 - Toggle line comment: gcc
 - Toggle comment in visual mode: gc
@@ -67,18 +57,7 @@ CONTENTS                                                  *CommonMapsContents*
 - Uncomment the current and adjacent commented lines: gcu
 
 ==============================================================================
-5. Snippets                                               *CommonMapsSnippets*
-
-- AddSnippet with current buffer (normal mode): <leader>sa
-- AddSnippet with range of lines (visual mode): <leader>sa
-- EditSnippet: <leader>se
-- DeleteSnippet: <leader>sd
-- AppendSnippet: <leader>sp
-- InsertSnippet: <leader>sP
-- ListSnippets: <leader>sl
-
-==============================================================================
-6. Surrounds                                             *CommonMapsSurrounds*
+4. Surrounds                                             *CommonMapsSurrounds*
 
 - Surround word with <x>: <leader>w<x>
 - Surround line with <x>: <leader>l<x>
@@ -87,7 +66,7 @@ CONTENTS                                                  *CommonMapsContents*
 - Delete surround <x>: <leader>d<x>
 
 ==============================================================================
-7. Netrw                                                     *CommonMapsNetrw*
+5. Netrw                                                     *CommonMapsNetrw*
 
 - Note: All mappings only apply to filetype (&ft) == 'netrw'
 - Open file and close netrw: <cr>
@@ -108,13 +87,7 @@ CONTENTS                                                  *CommonMapsContents*
 - Delete file/dir: D
 
 ==============================================================================
-8. Sessions                                               *CommonMapsSessions*
-
-- Make session at sessions dir: <leader>sm
-- Source session from sessions dir: <leader>ss
-
-==============================================================================
-9. Toggles                                                 *CommonMapsToggles*
+6. Toggles                                                 *CommonMapsToggles*
 
 - Toggle highlights: <leader>th
 - Toggle listchars: <leader>tl
@@ -122,7 +95,7 @@ CONTENTS                                                  *CommonMapsContents*
 - Toggle listchars and numbers: <leader>ta
 
 ==============================================================================
-10. Term                                                      *CommonMapsTerm*
+7. Term                                                      *CommonMapsTerm*
 
 - Split window navigation (hjkl): <c-hjkl>
 - Open terminal: <leader>me
@@ -133,7 +106,7 @@ CONTENTS                                                  *CommonMapsContents*
 - Quit terminal: <leader>mq
 
 ==============================================================================
-11. Wezterm                                                *CommonMapsWezterm*
+8. Wezterm                                                *CommonMapsWezterm*
 
 - leader = <c-t>
 - Activate Copy Mode: <leader>a
@@ -159,7 +132,7 @@ CONTENTS                                                  *CommonMapsContents*
   - Close search overlay mode: <esc>
 
 ==============================================================================
-12. Folds                                                    *CommonMapsFolds*
+9. Folds                                                    *CommonMapsFolds*
 
 - Opens a fold at the cursor: zo
 - Opens all folds at the cursor: zO
@@ -170,7 +143,7 @@ CONTENTS                                                  *CommonMapsContents*
 - Decreases the `foldlevel` to zero (all folds will be open): zR
 
 ==============================================================================
-13. Bash                                                      *CommonMapsBash*
+10. Bash                                                      *CommonMapsBash*
 
 - Go to start of line: <c-a>
 - Go to end of line: <c-e>
