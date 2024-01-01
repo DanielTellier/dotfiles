@@ -29,8 +29,6 @@ CONTENTS                                                  *CommonMapsContents*
 - Search exact match under cursor: <leader>em
 - Paste last thing yanked: ,p
 - Compiler Make: <leader>cm
-- Quick Fix next: <leader>kn
-- Quick Fix previous: <leader>kp
 - Quit vim: <leader>qq
 - Close Window: <leader>qc
 - Global replace of selection: <leader>rg

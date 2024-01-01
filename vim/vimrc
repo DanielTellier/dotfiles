@@ -251,7 +251,7 @@ augroup misc
     autocmd!
     autocmd FileType xml setlocal noeol
     autocmd VimEnter * silent! echo -ne "\e[2 q"
-    " Return to last edit position when opening files (You want this!)
+    " Return to last edit position when opening files
     autocmd BufReadPost *
          \ if line("'\"") > 0 && line("'\"") <= line("$") |
          \   exe "normal! g`\"" |
@@ -288,6 +288,7 @@ nnoremap <silent> <leader>eb :call OpenPath("$HOME/.bashrc")<cr>
 
 " Toggle highlights
 nnoremap <silent> <leader>th :call ToggleHighlights()<cr>
+nnoremap / :set hlsearch<cr>/
 " Toggle listchars and numbers
 nnoremap <silent> <leader>ta :call ToggleAll()<cr>
 " Toggle listchars
@@ -295,18 +296,24 @@ nnoremap <silent> <leader>tl
 \ :if (&list) \| set nolist \| else \| set list \| endif<cr>
 " Toggle numbers
 nnoremap <silent> <leader>tn :call ToggleNumbers()<cr>
-" Toggle netrw
-" nnoremap <silent> <leader>tw :call ToggleNetrw()<cr>
 
 " Global substitution
-nnoremap <leader>rg :%s/<c-r><c-w>//g<left><left>
-nnoremap <leader>rc :,$s/<c-r><c-w>//gc<left><left><left>
-vnoremap <leader>rg "zy:%s/<c-r>z//g<left><left>
-vnoremap <leader>rc "zy:,$s/<c-r>z//gc<left><left><left>
-nnoremap <leader>rpg :%s/\(<c-r><c-w>\)/\1/g<left><left><left><left>
-nnoremap <leader>rpc :,$s/\(<c-r><c-w>\)/\1/gc<left><left><left><left><left>
-vnoremap <leader>rpg "zy:%s/\(<c-r>z\)/\1/g<left><left><left><left>
-vnoremap <leader>rpc "zy:,$s/\(<c-r>z\)/\1/gc<left><left><left><left><left>
+" Global Replace
+exe 'nnoremap <leader>sg :%s/<c-r><c-w>//g' . repeat('<left>', 2)
+exe 'vnoremap <leader>sg zy:%s/<c-r>z//g' . repeat('<left>', 2)
+" Confirm Replace
+exe 'nnoremap <leader>sc :,$s/<c-r><c-w>//gc' . repeat('<left>', 3)
+exe 'vnoremap <leader>sc "zy:,$s/<c-r>z//gc' . repeat('<left>', 3)
+" Global Pre-append
+exe 'nnoremap <leader>ag :%s/\(<c-r><c-w>\)/\1/g' . repeat('<left>', 4)
+exe 'vnoremap <leader>ag "zy:%s/\(<c-r>z\)/\1/g' . repeat('<left>', 4)
+" Confirm Pre-append
+exe 'nnoremap <leader>ac :,$s/\(<c-r><c-w>\)/\1/gc' . repeat('<left>', 5)
+exe 'vnoremap <leader>ac "zy:,$s/\(<c-r>z\)/\1/gc' . repeat('<left>', 5)
+" Global Buffers Replace
+" :bufdo %s/pancake/waffle/g | update
+" Global Args Replace
+" :argdo %s/method_a/method_b/g | update
 
 " Search exact match
 nnoremap <leader>em /\<<c-r><c-w>\>
@@ -343,10 +350,6 @@ call SurroundMappings("visual")
 
 " Compiler make
 nnoremap <silent> <leader>cm :make % <bar> redraw!<cr><cr>
-
-" Quick Fix List next and previous
-nnoremap <silent> <leader>kn :cn<cr>
-nnoremap <silent> <leader>kp :cp<cr>
 
 " Make Y behave like other capitals
 nnoremap Y y$
@@ -409,9 +412,10 @@ nnoremap <silent> <leader>f :let @* = expand("%:t")<cr>
 " Yank absolute path
 nnoremap <silent> <leader>F :let @* = expand("%:p")<cr>
 
+nnoremap <silent> <leader>bb :Buffers<cr>
+
 nnoremap <leader>rb :RemoveWhichBuffer<space>
 nnoremap <leader>rB :call RemoveAllBuffers()<cr>
-
 nnoremap <leader>rm :delm!<space>
 nnoremap <leader>rM :call RemoveAllGlobalMarks()<cr>
 
