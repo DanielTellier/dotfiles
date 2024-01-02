@@ -278,7 +278,7 @@ noremap zC zM
 " Open planner
 nnoremap <silent> <leader>ep :call OpenPath("~/.local/share/planner")<cr>
 " Open docs
-nnoremap <silent> <leader>ed :call OpenPath("$RTP/doc/common-maps.txt")<cr>
+nnoremap <silent> <leader>ed :call OpenPath("$RTP/doc")<cr>
 " Open vimrc
 nnoremap <silent> <leader>ev :call OpenPath("$VRC")<cr>
 " Open my after file type if exists
