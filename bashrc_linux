@@ -4,10 +4,11 @@
 # General #
 ###########
 colorflag="--color"
-
-# Map escape to capslock (`setxkbmap -option`
-# restores the mapping) Linux specific
-setxkbmap -option caps:escape
+# Map Escape to CapsLock
+xkb_ops=`dconf read /org/gnome/desktop/input-sources/xkb-options`
+if [[ $xkb_ops != *"caps:escape"* ]]; then
+    dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"
+fi
 
 ########
 # MISC #
