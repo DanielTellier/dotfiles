@@ -20,9 +20,14 @@ return {
     font = wezterm.font_with_fallback {'Fira Code', 'DejaVu Sans Mono', 'Courier New',},
     font_size = 13.0,
     hide_tab_bar_if_only_one_tab = true,
+    inactive_pane_hsb = {
+        saturation = 0.9,
+        brightness = 0.75,
+    },
+    window_background_opacity = 0.9,
+    text_background_opacity = 0.3,
     scrollback_lines = 3500,
     window_close_confirmation = 'NeverPrompt',
-    window_background_opacity = 1.0,
 
     -- Disable ligatures
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
