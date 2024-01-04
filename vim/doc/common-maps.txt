@@ -28,16 +28,12 @@ CONTENTS                                                  *CommonMapsContents*
 - Split window navigation (hjkl): <c-hjkl>
 - Search exact match under cursor: <leader>em
 - Paste last thing yanked: ,p
-- Compiler Make: <leader>cm
 - Quit vim: <leader>qq
-- Close Window: <leader>qc
-- Global replace of selection: <leader>rg
-- Global replace of selection with prompt: <leader>rc
-- Global replace including selection: <leader>rpg
-- Global replace including selection with prompt: <leader>rpc
-- Open file under cursor in same window: <leader>fe
-- Open file under cursor in vertical window: <leader>fv
-- Open file under cursor in horizontal window: <leader>fh
+- Close Window: <leader>qw
+- Global replace of selection: <leader>sg
+- Global replace of selection with prompt: <leader>sc
+- Global replace including selection: <leader>ag
+- Global replace including selection with prompt: <leader>ac
 - Change indent spaces size from 2 to 4: <leader>24i
 - Change indent spaces size from 4 to 2: <leader>42i
 
@@ -59,7 +55,6 @@ CONTENTS                                                  *CommonMapsContents*
 
 - Surround word with <x>: <leader>w<x>
 - Surround line with <x>: <leader>l<x>
-- Surround visual selection with <x>: <leader>v<x>
 - Change surround from <x> to <y>: <leader><x><y>
 - Delete surround <x>: <leader>d<x>
 

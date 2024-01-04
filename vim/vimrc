@@ -270,7 +270,7 @@ let g:AutoPairsShortcutJump = "<c-p>"
 " Quit vim
 nnoremap <silent> <leader>qq :qa!<cr>
 " Close Window
-nnoremap <silent> <leader>qc :q!<cr>
+nnoremap <silent> <leader>qw :q!<cr>
 
 " Closes all open folds
 noremap zC zM
@@ -347,9 +347,6 @@ call SurroundMappings("change")
 call SurroundMappings("delete")
 " Visual Surrounds
 call SurroundMappings("visual")
-
-" Compiler make
-nnoremap <silent> <leader>cm :make % <bar> redraw!<cr><cr>
 
 " Make Y behave like other capitals
 nnoremap Y y$
