@@ -20,8 +20,10 @@ let @p = "0f(a^M^[<<LF)i^M^[<<^["
 
 
 " #SET
-set termguicolors
-colorscheme xcode
+if (has("termguicolors"))
+    set termguicolors
+endif
+colorscheme onedark
 filetype plugin indent on
 syntax on
 
