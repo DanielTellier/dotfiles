@@ -37,7 +37,6 @@ set autoindent autoread
 set backspace=start,eol,indent
 set backupdir=$HOME/.local/share/vim/backup/
 set colorcolumn=90
-highlight ColorColumn ctermbg=22
 set complete=.,w,b,u,t
 set noconfirm
 set encoding=utf-8
@@ -248,10 +247,11 @@ augroup netrw
     autocmd FileType netrw setlocal bufhidden=delete
 augroup END
 
-augroup vim-colors-xcode
+augroup colors-group
     autocmd!
     autocmd ColorScheme * hi Comment        cterm=italic gui=italic
     autocmd ColorScheme * hi SpecialComment cterm=italic gui=italic
+    autocmd ColorScheme * hi ColorColumn ctermbg=0 guibg=lightgrey
 augroup END
 
 augroup misc
