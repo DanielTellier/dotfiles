@@ -13,7 +13,7 @@ return {
     -- General
     audible_bell = 'Disabled',
     check_for_updates = false,
-    color_scheme = 'Monokai Dark (Gogh)',
+    color_scheme = 'Monokai (base16)',
     default_cursor_style = 'SteadyBlock',
     disable_default_key_bindings = true,
     enable_scroll_bar = true,
@@ -24,7 +24,7 @@ return {
         saturation = 0.9,
         brightness = 0.75,
     },
-    window_background_opacity = 0.9,
+    window_background_opacity = 1.0,
     text_background_opacity = 0.3,
     scrollback_lines = 3500,
     window_close_confirmation = 'NeverPrompt',

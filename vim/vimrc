@@ -20,7 +20,8 @@ let @p = "0f(a^M^[<<LF)i^M^[<<^["
 
 
 " #SET
-colorscheme monokai
+set termguicolors
+colorscheme xcode
 filetype plugin indent on
 syntax on
 
@@ -245,6 +246,12 @@ augroup netrw
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>O :call SplitNetrw("split", 1)<cr>
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>V :call SplitNetrw("vsplit", 1)<cr>
     autocmd FileType netrw setlocal bufhidden=delete
+augroup END
+
+augroup vim-colors-xcode
+    autocmd!
+    autocmd ColorScheme * hi Comment        cterm=italic gui=italic
+    autocmd ColorScheme * hi SpecialComment cterm=italic gui=italic
 augroup END
 
 augroup misc
