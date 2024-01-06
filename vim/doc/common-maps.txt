@@ -36,6 +36,9 @@ CONTENTS                                                  *CommonMapsContents*
 - Global replace including selection with prompt: <leader>ac
 - Change indent spaces size from 2 to 4: <leader>24i
 - Change indent spaces size from 4 to 2: <leader>42i
+- Grep word under cursor: <leader>gw
+- Grep user input word: <leader>gi
+- Find C/Cpp function definition under cursor: <leader>cg
 
 ==============================================================================
 2. AutoPairs                                             *CommonMapsAutoPairs*

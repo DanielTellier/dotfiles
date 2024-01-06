@@ -2,8 +2,6 @@
 let $RTP = split(&runtimepath,',')[0]
 let $VRC = $RTP.'/vimrc'
 let g:fugitive_git_executable = '/usr/bin/git'
-let g:monokai_term_italic = 1
-let g:monokai_gui_italic = 1
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_preview = 1
@@ -28,10 +26,8 @@ filetype plugin indent on
 syntax on
 
 if has('macunix')
-    set rtp+=/opt/homebrew/opt/fzf
     set clipboard=unnamed " Mac
 else
-    set rtp+=~/.local/share/fzf
     set clipboard=unnamedplus " Linux
 endif
 
@@ -49,6 +45,7 @@ set foldnestmax=10
 set nofoldenable
 set foldlevel=2
 set formatoptions=tcqj
+set grepprg=git\ grep\ -n\ $*
 set guioptions+=k
 set hidden
 set history=10000
@@ -73,7 +70,7 @@ set sidescroll=1
 set sidescrolloff=8
 set smarttab
 set splitright
-set statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+set statusline=%02n:%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 set t_Co=256
 set title
 set ttyfast
@@ -267,6 +264,7 @@ augroup misc
          \ endif
 augroup END
 
+command! -nargs=+ -complete=file Grep call search#Grep_(<f-args>)
 command! -nargs=1 RemoveWhichBuffer call RemoveMatchingBuffers('<args>')
 
 
@@ -324,6 +322,10 @@ exe 'vnoremap <leader>ac "zy:,$s/\(<c-r>z\)/\1/gc' . repeat('<left>', 5)
 " Global Args Replace
 " :argdo %s/method_a/method_b/g | update
 
+" Search word under cursor
+nnoremap <silent> <leader>gw :Grep . all "\b<c-r><c-w>\b"<cr>:cw<cr>
+" Search word via user input
+nnoremap <leader>gi :Grep . all<space>
 " Search exact match
 nnoremap <leader>em /\<<c-r><c-w>\>
 
@@ -418,7 +420,7 @@ nnoremap <silent> <leader>f :let @* = expand("%:t")<cr>
 " Yank absolute path
 nnoremap <silent> <leader>F :let @* = expand("%:p")<cr>
 
-nnoremap <silent> <leader>bb :Buffers<cr>
+nnoremap <leader>bb :buffers<cr>:buffer<space>
 
 nnoremap <leader>rb :RemoveWhichBuffer<space>
 nnoremap <leader>rB :call RemoveAllBuffers()<cr>

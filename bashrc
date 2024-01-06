@@ -9,7 +9,6 @@
 [[ -f ~/.bashrc_work ]] && source ~/.bashrc_work
 [[ "$OSTYPE" == "darwin"* && -f ~/.bashrc_mac ]] && source ~/.bashrc_mac
 [[ "$OSTYPE" == "linux-gnu"* && -f ~/.bashrc_linux ]] && source ~/.bashrc_linux
-[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
 ########
 # MISC #
