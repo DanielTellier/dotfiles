@@ -44,7 +44,6 @@ set foldnestmax=10
 set nofoldenable
 set foldlevel=2
 set formatoptions=tcqj
-set grepprg=git\ grep\ -n\ $*
 set guioptions+=k
 set hidden
 set history=10000
@@ -307,17 +306,17 @@ nnoremap <silent> <leader>tn :call ToggleNumbers()<cr>
 
 " Global substitution
 " Global Replace
-exe 'nnoremap <leader>sg :%s/<c-r><c-w>//g' . repeat('<left>', 2)
-exe 'vnoremap <leader>sg zy:%s/<c-r>z//g' . repeat('<left>', 2)
+nnoremap <leader>sg :%s/<c-r><c-w>//g<left><left>
+vnoremap <leader>sg "zy:%s/<c-r>z//g<left><left>
 " Confirm Replace
-exe 'nnoremap <leader>sc :,$s/<c-r><c-w>//gc' . repeat('<left>', 3)
-exe 'vnoremap <leader>sc "zy:,$s/<c-r>z//gc' . repeat('<left>', 3)
-" Global Pre-append
-exe 'nnoremap <leader>ag :%s/\(<c-r><c-w>\)/\1/g' . repeat('<left>', 4)
-exe 'vnoremap <leader>ag "zy:%s/\(<c-r>z\)/\1/g' . repeat('<left>', 4)
-" Confirm Pre-append
-exe 'nnoremap <leader>ac :,$s/\(<c-r><c-w>\)/\1/gc' . repeat('<left>', 5)
-exe 'vnoremap <leader>ac "zy:,$s/\(<c-r>z\)/\1/gc' . repeat('<left>', 5)
+nnoremap <leader>sc :,$s/<c-r><c-w>//gc<left><left><left>
+vnoremap <leader>sc "zy:,$s/<c-r>z//gc<left><left><left>
+" Global Append
+nnoremap <leader>ag :%s/\(<c-r><c-w>\)/\1/g<left><left>
+vnoremap <leader>ag "zy:%s/\(<c-r>z\)/\1/g<left><left>
+" Confirm Append
+nnoremap <leader>ac :,$s/\(<c-r><c-w>\)/\1/gc<left><left><left>
+vnoremap <leader>ac "zy:,$s/\(<c-r>z\)/\1/gc<left><left><left>
 " Global Buffers Replace
 " :bufdo %s/pancake/waffle/g | update
 " Global Args Replace

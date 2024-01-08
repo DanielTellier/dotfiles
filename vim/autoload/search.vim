@@ -24,6 +24,96 @@ function! search#Grep_(dir, ext, pattern)
     endfor
   endif
 
-  exe 'silent Ggrep! -r ' . fincs . ' ' . a:pattern .
-    \ ' ' . a:dir | Gsplit | cw | redraw!
+  exe 'silent grep! -r ' . fincs . ' ' . a:pattern .
+    \ ' ' . a:dir | split | cw | redraw!
+endfunction
+
+function! s:CheckQFlist(qflist)
+    if len(a:qflist) > 0
+        let qfi = a:qflist[0]
+        let fpath = bufname(qfi.bufnr)
+        if len(a:qflist) == 1
+            call setqflist([], 'r')
+        else
+            call setqflist(a:qflist, 'r')
+        endif
+        exe 'sp +' . qfi.lnum . ' ' . fpath
+        echo "File Found at " . qfi.lnum
+    else
+        echo "File Not Found"
+    endif
+
+    return
+endfunction
+
+" Find a function definition for C/Cpp/Cu
+function! search#Cdef_(funcName)
+    exe 'silent grep! -wr --include="*.c" --include="*.cpp" ' .
+         \ '--include="*.c[cu]" ' . a:funcName . ' .' | redraw!
+
+    let newqfLst = []
+    let qfLst = getqflist()
+    for qfi in qfLst
+        let fpath = bufname(qfi.bufnr)
+        let isLoaded = bufloaded(fpath)
+        if isLoaded == 0
+            exe 'tabnew ' . fpath
+        endif
+
+        let lineEOF = getbufline(fpath, '$')[0]
+        let lineNum = qfi.lnum
+        let lineStr = getbufline(fpath, lineNum)[0]
+        let matches = match(lineStr, '[/{;]')
+        while matches == -1
+            if lineEOF == lineStr
+                break
+            endif
+
+            let lineNum += 1
+            let lineStr = getbufline(fpath, lineNum)[0]
+            let matches = match(lineStr, '[/{;]')
+        endwhile
+
+        if isLoaded == 0
+            exe 'bdelete ' . fpath
+        endif
+
+        if match(lineStr, '{') != -1
+            let newqfLst += [qfi] 
+        endif
+    endfor
+
+    call s:CheckQFlist(newqfLst)
+
+    return
+endfunction
+
+" Find a function definition for Python
+function! search#Pydef_(funcName)
+    exe 'silent grep! -wr --include="*.py" ' . a:funcName . ' .' | redraw!
+
+    let newqfLst = []
+    let qfLst = getqflist()
+    for qfi in qfLst
+        let fpath = bufname(qfi.bufnr)
+        let isLoaded = bufloaded(fpath)
+        if isLoaded == 0
+            exe 'tabnew ' . fpath
+        endif
+
+        let lineEOF = getbufline(fpath, '$')[0]
+        let lineNum = qfi.lnum
+        let lineStr = getbufline(fpath, lineNum)[0]
+        if isLoaded == 0
+            exe 'bdelete ' . fpath
+        endif
+
+        if match(lineStr, 'def') != -1
+            let newqfLst += [qfi] 
+        endif
+    endfor
+
+    call s:CheckQFlist(newqfLst)
+
+    return
 endfunction
