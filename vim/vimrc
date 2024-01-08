@@ -9,7 +9,6 @@ let g:rehash256 = 1
 let &t_SI = "\e[6 q" " Change cursor to steady bar in insert mode
 let &t_SR = "\e[4 q" " Change cursor to under bar in replace mode
 let &t_EI = "\e[2 q" " Change cursor to steady block in normal mode
-let $FZF_DEFAULT_COMMAND = 'ag --ignore .git --hidden --ignore .svn -g ""'
 
 
 " MACRO
@@ -379,6 +378,9 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
+" Moving windows around
+nnoremap <silent> <leader>wm <c-w><c-r>
+
 " Force use of hjkl-style movement and up(c-b)/down(c-f)
 map <up> <nop>
 map <down> <nop>
@@ -432,7 +434,6 @@ nnoremap <leader>rM :call RemoveAllGlobalMarks()<cr>
 " Quickfix List
 nnoremap <silent> <leader>co :copen<cr>
 nnoremap <silent> <leader>cc :cclose<cr>
-
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
