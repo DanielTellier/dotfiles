@@ -88,8 +88,9 @@ function! search#Cdef_(funcName)
     return
 endfunction
 
-" Find a function definition for Python
-function! search#Pydef_(funcName)
+" Find a function/class definition for Python
+function! search#Pydef_(funcName, def_type)
+    " a:def_type either 'def' or 'class'
     exe 'silent grep! -wr --include="*.py" ' . a:funcName . ' .' | redraw!
 
     let newqfLst = []
@@ -108,7 +109,7 @@ function! search#Pydef_(funcName)
             exe 'bdelete ' . fpath
         endif
 
-        if match(lineStr, 'def') != -1
+        if match(lineStr, a:def_type) != -1
             let newqfLst += [qfi] 
         endif
     endfor

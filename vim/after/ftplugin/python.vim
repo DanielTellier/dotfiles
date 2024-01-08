@@ -1,8 +1,11 @@
 setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 
-command! -nargs=1 Pydef call search#Pydef_(<f-args>)
+command! -nargs=* Pydef call search#Pydef_(<q-args>, 'def')
+command! -nargs=* Pyclass call search#Pydef_(<q-args>, 'class')
 
-" Python defintion Mapping under cursor
-nnoremap <silent> <leader>cg :Pydef "\b<c-r><c-w>\b"<cr>:cw<cr>
+" Python function defintion Mapping under cursor
+nnoremap <silent> <leader>df :Pydef "\b<c-r><c-w>\b"<cr>:cw<cr>
+" Python class defintion Mapping under cursor
+nnoremap <silent> <leader>dc :Pyclass "\b<c-r><c-w>\b"<cr>:cw<cr>
 
 compiler python
