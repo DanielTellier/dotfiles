@@ -17,7 +17,7 @@ let @p = "0f(a^M^[<<LF)i^M^[<<^["
 
 
 " #SET
-if (has("termguicolors"))
+if has("termguicolors")
     set termguicolors
 endif
 colorscheme onedark
