@@ -360,6 +360,9 @@ call SurroundMappings("delete")
 " Visual Surrounds
 call SurroundMappings("visual")
 
+" Compiler make
+nnoremap <silent> <leader>cm :make % <bar> redraw!<cr><cr>
+
 " Make Y behave like other capitals
 nnoremap Y y$
 
