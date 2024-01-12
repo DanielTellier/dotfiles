@@ -3,29 +3,55 @@ if exists('g:autoloaded_search')
 endif
 let g:autoloaded_search = 1
 
-function! search#Grep_(ext, pattern)
-    if a:ext == 'cc'
-        let fincs = '{c,cc,cpp,cu}'
-    elseif a:ext == 'hh'
-        let fincs = '{h,hpp,cuh}'
-    elseif a:ext == 'mk'
-        let fincs = '{Makefile,makefile,mk}'
-    elseif a:ext == 'py'
-        let fincs = 'py'
-    elseif a:ext == 'sh'
-        let fincs = 'sh'
-    elseif a:ext == 'all'
-        let fincs = '*'
+function! s:RunGrep(exts, pattern, gtype)
+    " a:gtype either 'exact' or 'nonexact'
+    let git_dir = FugitiveExtractGitDir('.')
+    " Check if in git repo so able to run Ggrep else run vimgrep
+    if git_dir != ''
+        let l:exts = split(a:exts, ",")
+        let fincs = ''
+        if a:exts != 'all'
+            let fincs = ''
+            for e in l:exts
+                let fincs = fincs . " '*.'" . e
+            endfor
+            let fincs = ' --' . fincs
+        endif
+        let cmd = 'silent Ggrep! '
+        if a:gtype == 'exact'
+            let cmd = cmd . '-wr'
+        else
+            let cmd = cmd . '-r'
+        endif
+        exe cmd . ' "' . a:pattern . '"' . fincs
+        echom 'Ran Ggrep!'
     else
-        " a:ext example: py,sh,c
-        " Need ',' at end in case only provide one extension
-        let fincs = '{' . a:ext . ',}'
+        if a:exts == 'all'
+            let fincs = '*'
+        else
+            " a:exts example: py,sh,c
+            " Need ',' at end in case only provide one extension
+            let fincs = '{' . a:exts . ',}'
+        endif
+        " Without the 'g' flag each line is added only once.
+        " With 'g' every match is added.
+        " With 'j' only the quickfix list is updated. With the [!] any changes
+        " in the current buffer are abandoned.
+        " Need *.{exts} **/*.{exts} since the latter does not search the top directory
+        let cmd = 'silent vimgrep! '
+        if a:gtype == 'exact'
+            let cmd = cmd . '/\<' . a:pattern . '\>/gj'
+        else
+            let cmd = cmd . '/' . a:pattern . '/gj'
+        endif
+        exe cmd . ' *.' . fincs . ' **/*.' . fincs
+        echom 'Ran vimgrep!'
     endif
+endfunction
 
-    " With 'j' only the quickfix list is updated. With the [!] any changes
-    " in the current buffer are abandoned.
-    " Need *.{exts} **/*.{exts} since the latter does not search the top directory
-    exe 'silent vimgrep! /' . a:pattern . '/j *.' . fincs . ' **/*.' . fincs | cw | redraw!
+function! search#Grep_(exts, pattern)
+    call s:RunGrep(a:exts, a:pattern, 'nonexact')
+    cw | redraw!
 endfunction
 
 function! s:CheckQFlist(qflist)
@@ -42,15 +68,11 @@ function! s:CheckQFlist(qflist)
     else
         echo "File Not Found"
     endif
-
-    return
 endfunction
 
 " Find a function definition for C/Cpp/Cu
 function! search#Cdef_(funcName)
-    let fincs = '{c,cc,cpp,cu}'
-    exe 'silent vimgrep! /\<' . a:funcName . '\>/j *.' . fincs
-        \ . ' **/*.' . fincs | redraw!
+    call s:RunGrep('c,cc,cpp,cu', a:funcName, 'exact')
 
     let newqfLst = []
     let qfLst = getqflist()
@@ -85,14 +107,12 @@ function! search#Cdef_(funcName)
     endfor
 
     call s:CheckQFlist(newqfLst)
-
-    return
 endfunction
 
 " Find a function/class definition for Python
 function! search#Pydef_(funcName, def_type)
     " a:def_type either 'def' or 'class'
-    exe 'silent vimgrep! /\<' . a:funcName . '\>/j *.py **/*.py' | redraw!
+    call s:RunGrep('py', a:funcName, 'exact')
 
     let newqfLst = []
     let qfLst = getqflist()
@@ -116,6 +136,4 @@ function! search#Pydef_(funcName, def_type)
     endfor
 
     call s:CheckQFlist(newqfLst)
-
-    return
 endfunction

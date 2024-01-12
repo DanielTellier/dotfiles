@@ -81,7 +81,7 @@ set undolevels=100
 set undodir=$HOME/.local/state/vim/undo/
 set undofile
 set updatetime=1000
-set wildignore=*.o,*.d,*.exe,*.a,*.so,*.out,*.pyc
+set wildignore=*/__pycache__/*,*.o,*.d,*.exe,*.a,*.so,*.out,*.pyc
 set wildmenu
 set wildmode=longest:full,full
 set writebackup
