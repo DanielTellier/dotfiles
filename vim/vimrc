@@ -444,7 +444,8 @@ nnoremap <silent> <leader>f :let @* = expand("%:t")<cr>
 " Yank absolute path
 nnoremap <silent> <leader>F :let @* = expand("%:p")<cr>
 
-nnoremap <leader>bb :buffers<cr>:sbuffer<space>
+nnoremap <leader>bs :buffers<cr>:sbuffer<space>
+nnoremap <leader>bv :buffers<cr>:vertical sbuffer<space>
 
 nnoremap <leader>rb :RemoveWhichBuffer<space>
 nnoremap <leader>rB :call RemoveAllBuffers()<cr>
