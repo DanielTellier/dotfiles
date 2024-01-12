@@ -3,29 +3,29 @@ if exists('g:autoloaded_search')
 endif
 let g:autoloaded_search = 1
 
-function! search#Grep_(dir, ext, pattern)
-  if a:ext == 'cc'
-    let fincs = '--include="*.c" --include="*.cpp" --include="*.cu"'
-  elseif a:ext == 'hh'
-    let fincs = '--include="*.h" --include="*.hpp" --include="*.cuh"'
-  elseif a:ext == 'mk'
-    let fincs = '--include="Makefile" --include="makefile" --include="*.mk"'
-  elseif a:ext == 'py'
-    let fincs = '--include="*.py"'
-  elseif a:ext == 'sh'
-    let fincs = '--include="*.sh"'
-  elseif a:ext == 'all'
-    let fincs = ''
-  else
-    let exts = split(a:ext, ",")
-    let fincs = ""
-    for e in exts
-      let fincs = '--include="' . e . '" ' . fincs
-    endfor
-  endif
+function! search#Grep_(ext, pattern)
+    if a:ext == 'cc'
+        let fincs = '{c,cc,cpp,cu}'
+    elseif a:ext == 'hh'
+        let fincs = '{h,hpp,cuh}'
+    elseif a:ext == 'mk'
+        let fincs = '{Makefile,makefile,mk}'
+    elseif a:ext == 'py'
+        let fincs = 'py'
+    elseif a:ext == 'sh'
+        let fincs = 'sh'
+    elseif a:ext == 'all'
+        let fincs = '*'
+    else
+        " a:ext example: py,sh,c
+        " Need ',' at end in case only provide one extension
+        let fincs = '{' . a:ext . ',}'
+    endif
 
-  exe 'silent grep! -r ' . fincs . ' ' . a:pattern .
-    \ ' ' . a:dir | split | cw | redraw!
+    " With 'j' only the quickfix list is updated. With the [!] any changes
+    " in the current buffer are abandoned.
+    " Need *.{exts} **/*.{exts} since the latter does not search the top directory
+    exe 'silent vimgrep! /' . a:pattern . '/j *.' . fincs . ' **/*.' . fincs | cw | redraw!
 endfunction
 
 function! s:CheckQFlist(qflist)
@@ -48,8 +48,9 @@ endfunction
 
 " Find a function definition for C/Cpp/Cu
 function! search#Cdef_(funcName)
-    exe 'silent grep! -wr --include="*.c" --include="*.cpp" ' .
-         \ '--include="*.c[cu]" ' . a:funcName . ' .' | redraw!
+    let fincs = '{c,cc,cpp,cu}'
+    exe 'silent vimgrep! /\<' . a:funcName . '\>/j *.' . fincs
+        \ . ' **/*.' . fincs | redraw!
 
     let newqfLst = []
     let qfLst = getqflist()
@@ -91,7 +92,7 @@ endfunction
 " Find a function/class definition for Python
 function! search#Pydef_(funcName, def_type)
     " a:def_type either 'def' or 'class'
-    exe 'silent grep! -wr --include="*.py" ' . a:funcName . ' .' | redraw!
+    exe 'silent vimgrep! /\<' . a:funcName . '\>/j *.py **/*.py' | redraw!
 
     let newqfLst = []
     let qfLst = getqflist()

@@ -70,7 +70,7 @@ set smarttab
 set splitright
 set statusline=%02n:%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 " Used for quickfix list
-set switchbuf=useopen
+set switchbuf=split
 set t_Co=256
 set title
 set ttyfast
@@ -223,6 +223,19 @@ function! RemoveAllGlobalMarks()
   exe "delm! | delm A-Z0-9 | echo 'All marks deleted'"
 endfunction
 
+function! RemoveDuplicateQuickfixEntries()
+    let seen = {}
+    let qflist = []
+    for item in getqflist()
+        let key = item.bufnr . ':' . item.lnum . ':' . item.col
+        if !has_key(seen, key)
+            call add(qflist, item)
+            let seen[key] = 1
+        endif
+    endfor
+    call setqflist(qflist, 'r')
+endfunction
+
 
 " #COMMAND
 augroup spellcheck
@@ -253,6 +266,11 @@ augroup colors-group
     autocmd ColorScheme * hi ColorColumn ctermbg=0 guibg=lightgrey
 augroup END
 
+augroup quickfix
+    autocmd!
+    autocmd QuickFixCmdPost [^l]* call RemoveDuplicateQuickfixEntries()
+augroup END
+
 augroup misc
     autocmd!
     autocmd FileType xml setlocal noeol
@@ -264,7 +282,7 @@ augroup misc
          \ endif
 augroup END
 
-command! -nargs=+ -complete=file Grep call search#Grep_(<f-args>)
+command! -nargs=+ Grep call search#Grep_(<f-args>)
 command! -nargs=1 RemoveWhichBuffer call RemoveMatchingBuffers('<args>')
 
 
@@ -323,9 +341,9 @@ vnoremap <leader>ac "zy:,$s/\(<c-r>z\)/\1/gc<left><left><left>
 " :argdo %s/method_a/method_b/g | update
 
 " Search word under cursor
-nnoremap <silent> <leader>gw :Grep . all "\b<c-r><c-w>\b"<cr>:cw<cr>
+nnoremap <silent> <leader>gw :Grep all "\b<c-r><c-w>\b"<cr>
 " Search word via user input
-nnoremap <leader>gi :Grep . all<space>
+nnoremap <leader>gi :Grep all<space>
 " Search exact match
 nnoremap <leader>em /\<<c-r><c-w>\>
 
