@@ -203,6 +203,19 @@ function! OpenAfterFT()
     endif
 endfunction
 
+function! SearchBuffers_(pattern)
+    " The redir command is used to redirect the output of commands to a
+    " variable, a file, or a register. In this case to `bufferlist`.
+    redir => bufferlist
+    silent ls
+    redir END
+    for line in split(bufferlist, '\n')
+        if line =~ a:pattern
+            echo line
+        endif
+    endfor
+endfunction
+
 function! RemoveAllBuffers()
   let l:current_pos = getpos('.')
   exe "%bd | e# | echo 'Buffers Removed'"
@@ -283,7 +296,8 @@ augroup misc
 augroup END
 
 command! -nargs=+ Grep call search#Grep_(<f-args>)
-command! -nargs=1 RemoveWhichBuffer call RemoveMatchingBuffers('<args>')
+command! -nargs=1 SearchBuffers call SearchBuffers_(<f-args>)
+command! -nargs=1 RemoveWhichBuffer call RemoveMatchingBuffers(<f-args>)
 
 
 " #MAP
@@ -324,17 +338,17 @@ nnoremap <silent> <leader>tn :call ToggleNumbers()<cr>
 
 " Global substitution
 " Global Replace
-nnoremap <leader>sg :%s/<c-r><c-w>//g<left><left>
-vnoremap <leader>sg "zy:%s/<c-r>z//g<left><left>
+exe 'nnoremap <leader>sg :%s/<c-r><c-w>//g' . repeat('<left>', 2)
+exe 'vnoremap <leader>sg zy:%s/<c-r>z//g' . repeat('<left>', 2)
 " Confirm Replace
-nnoremap <leader>sc :,$s/<c-r><c-w>//gc<left><left><left>
-vnoremap <leader>sc "zy:,$s/<c-r>z//gc<left><left><left>
-" Global Append
-nnoremap <leader>ag :%s/\(<c-r><c-w>\)/\1/g<left><left>
-vnoremap <leader>ag "zy:%s/\(<c-r>z\)/\1/g<left><left>
-" Confirm Append
-nnoremap <leader>ac :,$s/\(<c-r><c-w>\)/\1/gc<left><left><left>
-vnoremap <leader>ac "zy:,$s/\(<c-r>z\)/\1/gc<left><left><left>
+exe 'nnoremap <leader>sc :,$s/<c-r><c-w>//gc' . repeat('<left>', 3)
+exe 'vnoremap <leader>sc "zy:,$s/<c-r>z//gc' . repeat('<left>', 3)
+" Global Pre-append
+exe 'nnoremap <leader>ag :%s/\(<c-r><c-w>\)/\1/g' . repeat('<left>', 4)
+exe 'vnoremap <leader>ag "zy:%s/\(<c-r>z\)/\1/g' . repeat('<left>', 4)
+" Confirm Pre-append
+exe 'nnoremap <leader>ac :,$s/\(<c-r><c-w>\)/\1/gc' . repeat('<left>', 5)
+exe 'vnoremap <leader>ac "zy:,$s/\(<c-r>z\)/\1/gc' . repeat('<left>', 5)
 " Global Buffers Replace
 " :bufdo %s/pancake/waffle/g | update
 " Global Args Replace
@@ -444,8 +458,9 @@ nnoremap <silent> <leader>f :let @* = expand("%:t")<cr>
 " Yank absolute path
 nnoremap <silent> <leader>F :let @* = expand("%:p")<cr>
 
-nnoremap <leader>bs :buffers<cr>:sbuffer<space>
-nnoremap <leader>bv :buffers<cr>:vertical sbuffer<space>
+nnoremap <leader>sb :SearchBuffers<space>
+nnoremap <leader>bs :sbuffer<space>
+nnoremap <leader>bv :vertical sbuffer<space>
 
 nnoremap <leader>rb :RemoveWhichBuffer<space>
 nnoremap <leader>rB :call RemoveAllBuffers()<cr>
