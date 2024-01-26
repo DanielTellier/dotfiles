@@ -17,7 +17,7 @@ function! s:RunGrep(exts, pattern, gtype)
             endfor
             let fincs = ' --' . fincs
         endif
-        let cmd = 'silent Ggrep! '
+        let cmd = 'silent! Ggrep! '
         if a:gtype == 'exact'
             let cmd = cmd . '-wr'
         else
@@ -38,7 +38,7 @@ function! s:RunGrep(exts, pattern, gtype)
         " With 'j' only the quickfix list is updated. With the [!] any changes
         " in the current buffer are abandoned.
         " Need *.{exts} **/*.{exts} since the latter does not search the top directory
-        let cmd = 'silent vimgrep! '
+        let cmd = 'silent! vimgrep! '
         if a:gtype == 'exact'
             let cmd = cmd . '/\<' . a:pattern . '\>/gj'
         else
