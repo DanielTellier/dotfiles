@@ -3,7 +3,9 @@ let $RTP = split(&runtimepath,',')[0]
 let $VRC = $RTP.'/vimrc'
 let g:fugitive_git_executable = '/usr/bin/git'
 let g:netrw_banner = 0
-let g:netrw_liststyle = 3
+" Switch to using netrw as split windows via files to find
+" rather than using a tree style list
+let g:netrw_liststyle = 0
 let g:netrw_preview = 1
 let g:rehash256 = 1
 let &t_SI = "\e[6 q" " Change cursor to steady bar in insert mode
@@ -259,8 +261,9 @@ augroup spellcheck
     autocmd FileType tex,latex,context,plaintex setlocal complete+=kspell
 augroup end
 
-augroup netrw
+augroup netrw-group
     autocmd!
+    autocmd FileType netrw setlocal bufhidden=delete
     " Hack fix to make ctrl-l work properly
     autocmd FileType netrw noremap <buffer> <c-l> <c-w>l
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>i :call SplitNetrw("edit", 0)<cr>
@@ -269,7 +272,6 @@ augroup netrw
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>I :call SplitNetrw("edit", 1)<cr>
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>O :call SplitNetrw("split", 1)<cr>
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>V :call SplitNetrw("vsplit", 1)<cr>
-    autocmd FileType netrw setlocal bufhidden=delete
 augroup END
 
 augroup colors-group
