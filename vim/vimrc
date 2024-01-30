@@ -14,8 +14,8 @@ let &t_EI = "\e[2 q" " Change cursor to steady block in normal mode
 
 
 " MACRO
-" Put line within parens on new line with parens on own lines
-let @p = "0f(a^M^[<<LF)i^M^[<<^["
+" https://this/is/a/link --> [link](https://this/is/a/link)
+let @l = "0LT/€ýaYHi[€ýapllvLh )"
 
 
 " #SET
