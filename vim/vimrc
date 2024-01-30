@@ -415,7 +415,10 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
 " Moving windows around
-nnoremap <silent> <leader>wm <c-w><c-r>
+" Move window upwards/leftwards
+nnoremap <silent> <leader>wu <c-w>R
+" Move window downwards/rightwards
+nnoremap <silent> <leader>wd <c-w>r
 
 " Force use of hjkl-style movement and up(c-b)/down(c-f)
 map <up> <nop>
