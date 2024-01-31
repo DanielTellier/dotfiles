@@ -276,9 +276,9 @@ augroup END
 
 augroup colors-group
     autocmd!
-    autocmd ColorScheme * hi Comment        cterm=italic gui=italic
-    autocmd ColorScheme * hi SpecialComment cterm=italic gui=italic
-    autocmd ColorScheme * hi ColorColumn ctermbg=0 guibg=lightgrey
+    autocmd VimEnter,ColorScheme * hi Comment        cterm=italic gui=italic
+    autocmd VimEnter,ColorScheme * hi SpecialComment cterm=italic gui=italic
+    autocmd VimEnter,ColorScheme * hi ColorColumn ctermbg=gray guibg=gray
 augroup END
 
 augroup quickfix
