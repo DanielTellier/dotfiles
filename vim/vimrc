@@ -414,11 +414,17 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
-" Moving windows around
 " Move window upwards/leftwards
 nnoremap <silent> <leader>wu <c-w>R
 " Move window downwards/rightwards
 nnoremap <silent> <leader>wd <c-w>r
+" Move window hjkl-style (left, bottom, top, right)
+nnoremap <silent> <leader>wh <c-w>H
+nnoremap <silent> <leader>wj <c-w>J
+nnoremap <silent> <leader>wk <c-w>K
+nnoremap <silent> <leader>wl <c-w>L
+" Move window to new tab
+nnoremap <silent> <leader>wt <c-w>T
 
 " Force use of hjkl-style movement and up(c-b)/down(c-f)
 map <up> <nop>
