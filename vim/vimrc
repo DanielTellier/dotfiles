@@ -425,6 +425,10 @@ nnoremap <silent> <leader>wk <c-w>K
 nnoremap <silent> <leader>wl <c-w>L
 " Move window to new tab
 nnoremap <silent> <leader>wt <c-w>T
+" Copy current window to new tab
+nnoremap <silent> <leader>wc :exe 'tabnew ' . expand('%')<cr>
+" Copy previous window to current tab
+nnoremap <silent> <leader>wp :exe 'vs ' . expand('#')<cr>
 
 " Force use of hjkl-style movement and up(c-b)/down(c-f)
 map <up> <nop>
