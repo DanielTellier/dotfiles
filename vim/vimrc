@@ -26,8 +26,12 @@ colorscheme onedark
 filetype plugin indent on
 syntax on
 
-highlight Visual cterm=NONE ctermbg=green ctermfg=white
-highlight Visual gui=NONE guibg=green guifg=white
+highlight Visual cterm=NONE ctermbg=yellow ctermfg=white
+highlight Visual gui=NONE guibg=yellow guifg=white
+highlight IncSearch cterm=NONE ctermbg=blue ctermfg=white
+highlight IncSearch gui=NONE guibg=blue guifg=white
+highlight Search cterm=NONE ctermbg=green ctermfg=white
+highlight Search gui=NONE guibg=green guifg=white
 
 if has('macunix')
     set clipboard=unnamed " Mac
