@@ -15,7 +15,7 @@ let &t_EI = "\e[2 q" " Change cursor to steady block in normal mode
 
 " MACRO
 " https://this/is/a/link --> [link](https://this/is/a/link)
-let @l = "0LT/€ýaYHi[€ýapllvLh )"
+let @l = "La/€ýahT/€ýayt/€ýaLxHi[€ýa,pllvLh )"
 
 
 " #SET
