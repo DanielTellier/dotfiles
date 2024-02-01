@@ -26,6 +26,9 @@ colorscheme onedark
 filetype plugin indent on
 syntax on
 
+highlight Visual cterm=NONE ctermbg=green ctermfg=white
+highlight Visual gui=NONE guibg=green guifg=white
+
 if has('macunix')
     set clipboard=unnamed " Mac
 else
@@ -278,7 +281,7 @@ augroup colors-group
     autocmd!
     autocmd VimEnter,ColorScheme * hi Comment        cterm=italic gui=italic
     autocmd VimEnter,ColorScheme * hi SpecialComment cterm=italic gui=italic
-    autocmd VimEnter,ColorScheme * hi ColorColumn ctermbg=gray guibg=gray
+    autocmd VimEnter,ColorScheme * hi ColorColumn ctermbg=gray ctermfg=white guibg=gray guifg=white
 augroup END
 
 augroup quickfix
