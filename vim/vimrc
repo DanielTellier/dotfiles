@@ -3,9 +3,7 @@ let $RTP = split(&runtimepath,',')[0]
 let $VRC = $RTP.'/vimrc'
 let g:fugitive_git_executable = '/usr/bin/git'
 let g:netrw_banner = 0
-" Switch to using netrw as split windows via files to find
-" rather than using a tree style list
-let g:netrw_liststyle = 0
+let g:netrw_liststyle = 3
 let g:netrw_preview = 1
 let g:rehash256 = 1
 let &t_SI = "\e[6 q" " Change cursor to steady bar in insert mode
