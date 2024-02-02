@@ -277,6 +277,11 @@ augroup netrw-group
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>I :call SplitNetrw("edit", 1)<cr>
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>O :call SplitNetrw("split", 1)<cr>
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>V :call SplitNetrw("vsplit", 1)<cr>
+    " Hack to change buffer name from 'NetrwTreeListing' to 'No Name'.
+    " This avoids having netrw share the same window so
+    " can view different project trees in different windows,
+    " when setting `let g:netrw_liststyle = 3`
+    autocmd FileType netrw :exe '0file!'
 augroup END
 
 augroup colors-group
