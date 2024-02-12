@@ -193,10 +193,13 @@ function sov() { # source py env
 }
 
 # Search in files
-# If you substitute the -exec ending from /; to +, find will optimize the sub-process
-# creation by only calling grep the minimal possible number of times, often just once.
-function sif() {
-    find . -name "*$2" -exec grep -rEiIn "$1" {} +
+sif ()
+{
+    if [ -z "$3" ]; then
+        egrep --color=auto -rn "$1" -e "$2";
+    else
+        egrep --color=auto -rn --include=\*."$3" "$1" -e "$2";
+    fi
 }
 
 # Colored man pages
