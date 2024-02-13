@@ -24,8 +24,8 @@ return {
         saturation = 0.9,
         brightness = 0.75,
     },
-    window_background_opacity = 0.7,
-    text_background_opacity = 0.7,
+    window_background_opacity = 1.0,
+    text_background_opacity = 1.0,
     scrollback_lines = 3500,
     window_close_confirmation = 'NeverPrompt',
 
