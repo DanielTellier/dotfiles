@@ -25,7 +25,7 @@ return {
         brightness = 0.75,
     },
     window_background_opacity = 1.0,
-    text_background_opacity = 1.0,
+    text_background_opacity = 0.5,
     scrollback_lines = 3500,
     window_close_confirmation = 'NeverPrompt',
 
