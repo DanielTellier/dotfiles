@@ -72,4 +72,5 @@ return {
         {key = '3', mods="ALT", action=act.ShowLauncherArgs{flags = 'FUZZY|WORKSPACES'}},
         {key = 'Escape', mods="LEADER", action=act.QuitApplication},
     },
+    unicode_version = 15,
 }
