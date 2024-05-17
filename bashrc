@@ -179,9 +179,13 @@ export PS1+='\[$prompt_r\]$(virtualenv_info)\[$reset\]\
 
 function up() {
     levels=${1-1}
-    while ((levels--)); do
-        cd ..
-    done
+    if [[ "$levels" =~ ^[0-9]+$ ]]; then
+        while ((levels--)); do
+            cd ..
+        done
+    else
+        cd ../$levels
+    fi
 }
 
 function mvenv() {
