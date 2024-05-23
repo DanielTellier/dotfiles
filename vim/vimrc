@@ -489,6 +489,7 @@ nnoremap <silent> <leader>f :let @* = expand("%:t")<cr>
 nnoremap <silent> <leader>F :let @* = expand("%:p")<cr>
 
 nnoremap <leader>sb :SearchBuffers<space>
+nnoremap <leader>bl :buffers<cr>
 nnoremap <leader>bb :buffer<space>
 nnoremap <leader>bs :sbuffer<space>
 nnoremap <leader>bv :vertical sbuffer<space>
