@@ -1,6 +1,7 @@
 " #LET
 let $RTP = split(&runtimepath,',')[0]
 let $VRC = $RTP.'/vimrc'
+let $SESH_DIR = '~/.vim-sessions'
 let g:fugitive_git_executable = '/usr/bin/git'
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -92,6 +93,10 @@ set wildignore=*/__pycache__/*,*.o,*.d,*.exe,*.a,*.so,*.out,*.pyc
 set wildmenu
 set wildmode=longest:full,full
 set writebackup
+" Do not store global and local values in a session
+set ssop-=options
+" Do not store folds in a session
+set ssop-=folds
 
 
 " #FUNCTION
@@ -495,6 +500,13 @@ nnoremap <leader>rM :call RemoveAllGlobalMarks()<cr>
 " Quickfix List
 nnoremap <silent> <leader>co :copen<cr>
 nnoremap <silent> <leader>cc :cclose<cr>
+
+" Sessions
+" We used backspaces (<bs>) to remove the "*.vim" suffix after filtering files,
+" allowing us to type a new filename post-remap.
+exec 'nnoremap <leader>nm :mks! ' . $SESH_DIR . '/*.vim<c-d>' . repeat('<bs>', 5)
+exec 'nnoremap <leader>ns :so ' . $SESH_DIR . '/*.vim<c-d>' . repeat('<bs>', 5)
+
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
