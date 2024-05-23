@@ -4,48 +4,46 @@ endif
 let g:autoloaded_search = 1
 
 function! s:RunGrep(exts, pattern, gtype)
+    " a:exts example: py or py,sh,c
+    let l:exts = split(a:exts, ",")
     " a:gtype either 'exact' or 'nonexact'
     let git_dir = FugitiveExtractGitDir('.')
     " Check if in git repo so able to run Ggrep else run vimgrep
     if git_dir != ''
-        let l:exts = split(a:exts, ",")
         let fincs = ''
         if a:exts != 'all'
-            let fincs = ''
             for e in l:exts
                 let fincs = fincs . " '*.'" . e
             endfor
             let fincs = ' --' . fincs
         endif
-        let cmd = 'silent! Ggrep! '
+        let cmd = 'silent! Ggrep! -r'
         if a:gtype == 'exact'
-            let cmd = cmd . '-wr'
+            let cmd = cmd . ' -w'
         else
-            let cmd = cmd . '-r'
+            let cmd = cmd . ' -i'
         endif
-        exe cmd . ' "' . a:pattern . '"' . fincs
-        echom 'Ran Ggrep!'
+        let cmd = cmd . ' "' . a:pattern . '"' . fincs
+        exe cmd
+        echom 'Ran ' . cmd
     else
+        let fincs = ''
         if a:exts == 'all'
-            let fincs = '*'
+            let fincs = ' --include=*'
         else
-            " a:exts example: py,sh,c
-            " Need ',' at end in case only provide one extension
-            let fincs = '{' . a:exts . ',}'
+            for e in l:exts
+                let fincs = fincs . ' --include="*.' . e . '"'
+            endfor
         endif
-        " Without the 'g' flag each line is added only once.
-        " With 'g' every match is added.
-        " With 'j' only the quickfix list is updated. With the [!] any changes
-        " in the current buffer are abandoned.
-        " Need *.{exts} **/*.{exts} since the latter does not search the top directory
-        let cmd = 'silent! vimgrep! '
+        let cmd = 'silent! grep! -r'
         if a:gtype == 'exact'
-            let cmd = cmd . '/\<' . a:pattern . '\>/gj'
+            let cmd = cmd . ' -w'
         else
-            let cmd = cmd . '/' . a:pattern . '/gj'
+            let cmd = cmd . ' -i'
         endif
-        exe cmd . ' *.' . fincs . ' **/*.' . fincs
-        echom 'Ran vimgrep!'
+        let cmd = cmd . fincs . ' ' . a:pattern . ' .'
+        exe cmd
+        echom 'Ran ' . cmd
     endif
 endfunction
 
