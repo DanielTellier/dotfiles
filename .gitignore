@@ -1,5 +1,6 @@
 # vim
 .netrwhist
+Session.vim
 
 # ipython
 *.sqlite

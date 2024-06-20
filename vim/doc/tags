@@ -54,6 +54,7 @@
 :Gvsplit!	fugitive.txt	/*:Gvsplit!*
 :Gwq	fugitive.txt	/*:Gwq*
 :Gwrite	fugitive.txt	/*:Gwrite*
+:Obsession	obsession.txt	/*:Obsession*
 <P	unimpaired.txt	/*<P*
 <p	unimpaired.txt	/*<p*
 <s	unimpaired.txt	/*<s*
@@ -77,6 +78,7 @@ CommonMapsToggles	common-maps.txt	/*CommonMapsToggles*
 CommonMapsWezterm	common-maps.txt	/*CommonMapsWezterm*
 CommonMapsleader	common-maps.txt	/*CommonMapsleader*
 FugitiveStatusline()	fugitive.txt	/*FugitiveStatusline()*
+ObsessionStatus()	obsession.txt	/*ObsessionStatus()*
 User_Fugitive	fugitive.txt	/*User_Fugitive*
 User_FugitiveBlob	fugitive.txt	/*User_FugitiveBlob*
 User_FugitiveChanged	fugitive.txt	/*User_FugitiveChanged*
@@ -181,6 +183,9 @@ commentary.txt	commentary.txt	/*commentary.txt*
 commonmaps.txt	common-maps.txt	/*commonmaps.txt*
 cs	surround.txt	/*cs*
 ds	surround.txt	/*ds*
+flagship	flagship.txt	/*flagship*
+flagship-Hoist()	flagship.txt	/*flagship-Hoist()*
+flagship.txt	flagship.txt	/*flagship.txt*
 fugitive	fugitive.txt	/*fugitive*
 fugitive#statusline()	fugitive.txt	/*fugitive#statusline()*
 fugitive-:G	fugitive.txt	/*fugitive-:G*
@@ -279,6 +284,9 @@ g:AutoPairsShortcutJump	auto-pairs.txt	/*g:AutoPairsShortcutJump*
 g:AutoPairsShortcutToggle	auto-pairs.txt	/*g:AutoPairsShortcutToggle*
 g:fugitive_dynamic_colors	fugitive.txt	/*g:fugitive_dynamic_colors*
 g:fugitive_no_maps	fugitive.txt	/*g:fugitive_no_maps*
+g:tablabel	flagship.txt	/*g:tablabel*
+g:tabprefix	flagship.txt	/*g:tabprefix*
+g:tabsuffix	flagship.txt	/*g:tabsuffix*
 gc	commentary.txt	/*gc*
 gcc	commentary.txt	/*gcc*
 gcgc	commentary.txt	/*gcgc*
@@ -286,6 +294,9 @@ gcu	commentary.txt	/*gcu*
 i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
 i_CTRL-G_s	surround.txt	/*i_CTRL-G_s*
 o_gc	commentary.txt	/*o_gc*
+obsession	obsession.txt	/*obsession*
+obsession-status	obsession.txt	/*obsession-status*
+obsession.txt	obsession.txt	/*obsession.txt*
 surround	surround.txt	/*surround*
 surround-customizing	surround.txt	/*surround-customizing*
 surround-mappings	surround.txt	/*surround-mappings*

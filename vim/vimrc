@@ -1,8 +1,8 @@
 " #LET
-let $RTP = split(&runtimepath,',')[0]
-let $VRC = $RTP.'/vimrc'
-let $SESH_DIR = '~/.vim-sessions'
-let g:fugitive_git_executable = '/usr/bin/git'
+let $RTP = split(&runtimepath,",")[0]
+let $VRC = $RTP."/vimrc"
+let $SESH_DIR = "~/.vim-sessions"
+let g:fugitive_git_executable = "/usr/bin/git"
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_preview = 1
@@ -52,7 +52,7 @@ set foldnestmax=10
 set nofoldenable
 set foldlevel=2
 set formatoptions=tcqj
-set guioptions+=k
+set guioptions-=e
 set hidden
 set history=10000
 set hlsearch incsearch
@@ -72,11 +72,12 @@ set runtimepath+=$HOME/.vim/after
 set viminfo+=n~/.viminfo
 set scrolloff=8
 set showcmd
+set showtabline=2
 set sidescroll=1
 set sidescrolloff=8
 set smarttab
 set splitright
-set statusline=%02n:%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
+set statusline+=%02n:%<%f\ %h%m%r[Session(%{ObsessionSessionName()})]%=%-14.(%l,%c%V%)\ %P
 " Used for quickfix list
 set switchbuf=split
 set t_Co=256
@@ -100,6 +101,15 @@ set ssop-=folds
 
 
 " #FUNCTION
+function! ObsessionSessionName()
+    if exists('g:this_session')
+        let session_filename = fnamemodify(g:this_session, ':t')
+        return split(session_filename, '\.')[0]
+    else
+        return 'UnDef'
+    endif
+endfunction
+
 function! ToggleAll()
     if &number || &relativenumber || &list
         set nonumber norelativenumber nolist
