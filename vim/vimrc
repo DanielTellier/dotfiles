@@ -32,7 +32,7 @@ highlight IncSearch gui=NONE guibg=blue guifg=white
 highlight Search cterm=NONE ctermbg=green ctermfg=white
 highlight Search gui=NONE guibg=green guifg=white
 
-if has('macunix')
+if has("macunix")
     set clipboard=unnamed " Mac
 else
     set clipboard=unnamedplus " Linux
@@ -102,11 +102,11 @@ set ssop-=folds
 
 " #FUNCTION
 function! ObsessionSessionName()
-    if exists('g:this_session')
+    if exists("g:this_session")
         let session_filename = fnamemodify(g:this_session, ':t')
         return split(session_filename, '\.')[0]
     else
-        return 'UnDef'
+        return "UnDef"
     endif
 endfunction
 
