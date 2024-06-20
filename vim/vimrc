@@ -1,5 +1,5 @@
 " #LET
-let $RTP = split(&runtimepath,",")[0]
+let $RTP = split(&runtimepath, ",")[0]
 let $VRC = $RTP."/vimrc"
 let $SESH_DIR = "~/.vim-sessions"
 let g:fugitive_git_executable = "/usr/bin/git"
