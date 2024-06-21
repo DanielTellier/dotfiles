@@ -341,6 +341,10 @@ nnoremap <silent> <leader>qw :q!<cr>
 " Closes all open folds
 noremap zC zM
 
+" Open Explore
+nnoremap <silent> <leader>xe :e .<cr>
+nnoremap <leader>xv :vs<space>
+
 " Open planner
 nnoremap <silent> <leader>ep :call OpenPath("~/.local/share/planner")<cr>
 " Open docs
