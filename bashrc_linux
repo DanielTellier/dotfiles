@@ -13,17 +13,18 @@ fi
 ########
 # MISC #
 ########
-export PATH="$PATH:/usr/local/bin:$HOME/.local/bin"
-export PATH="$PATH:~/Dev/apache-maven-3.8.6/bin"
+M2_HOME='/opt/apache-maven-3.9.7'
+GEM_HOME="$HOME/gems"
+PATH="$PATH:/usr/local/bin:$HOME/.local/bin:$M2_HOME/bin:$GEM_HOME/bin"
 export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
+export GEM_HOME
+export PATH
 
 ###########
 # ALIASES #
 ###########
 alias supr='sudo apt update; sudo apt upgrade; sudo reboot'
+alias xon='xdg-open'
 
 #############
 # Functions #
