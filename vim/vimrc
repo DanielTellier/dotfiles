@@ -388,15 +388,24 @@ exe 'nnoremap <leader>cl :s///gn' . repeat('<left>', 4)
 " :argdo %s/method_a/method_b/g | update
 
 " Search word under cursor
-nnoremap <silent> <leader>gw :Grep all "\b<c-r><c-w>\b"<cr>
+nnoremap <silent> <leader>ws :Grep all "\b<c-r><c-w>\b"<cr>
 " Search word via user input
-nnoremap <leader>gi :Grep all<space>
+nnoremap <leader>is :Grep all<space>
 " Search exact match
 nnoremap <leader>em /\<<c-r><c-w>\>
 
 " paste last thing yanked, not deleted
 nmap ,p "0p
 nmap ,P "0P
+
+" Git
+nnoremap <silent> <leader>gs :Git status<cr>
+nnoremap <silent> <leader>gl :Git log<cr>
+nnoremap <silent> <leader>gd :Git diff<cr>
+nnoremap <silent> <leader>ga :Git add --all<cr>
+nnoremap <leader>gc :Git commit<space>
+nnoremap <silent> <leader>gu :Git pull<cr>
+nnoremap <silent> <leader>gp :Git push<cr>
 
 " Terminal access
 nnoremap <silent> <leader>me :terminal<cr>
