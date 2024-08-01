@@ -59,7 +59,7 @@ return {
         {key = 'w', mods="LEADER", action=act.CloseCurrentPane{confirm = false}},
         {key = 'z', mods="LEADER", action="TogglePaneZoomState"},
         {key = 'f', mods="LEADER", action="ToggleFullScreen"},
-        {key = 'a', mods="LEADER", action="ActivateCopyMode"},
+        {key = 'c', mods="LEADER", action="ActivateCopyMode"},
         {key = 'UpArrow', mods="CTRL", action=act.ScrollByPage(-0.5)},
         {key = 'DownArrow', mods="CTRL", action=act.ScrollByPage(0.5)},
         {key = 'c', mods="CMD", action=act.CopyTo("ClipboardAndPrimarySelection")},
