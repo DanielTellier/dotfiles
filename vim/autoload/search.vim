@@ -172,7 +172,7 @@ function! search#Cstruct_(name)
     let qfLst = getqflist()
     for qfi in qfLst
         let found = -1
-        let foundCol = s:FoundSymbol(qfi.bufnr, qfi.lnum, ';')
+        let foundCol = s:FoundSymbol(qfi.bufnr, qfi.lnum, '[;}]')
         if foundCol != -1
             let foundLine = s:FoundBufferMatch(qfi.bufnr, qfi.lnum, '[;}]', '}', 'backward')
             if foundLine == -1
