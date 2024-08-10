@@ -195,9 +195,7 @@ function! search#Cstruct_(name)
             exe 'norm! %'
             " Get line number where cursor is located
             let foundLine = line('.')
-            let found = s:FoundBufferMatch(
-                qfi.bufnr, foundLine, ';\|struct', 'struct', 'backward'
-            )
+            let found = s:FoundBufferMatch(qfi.bufnr, foundLine, ';\|struct', 'struct', 'backward')
             exe 'norm! e ' . curr_path
             if isLoaded == 0
                 exe 'bdelete ' . fpath
