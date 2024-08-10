@@ -10,6 +10,7 @@ let g:rehash256 = 1
 let &t_SI = "\e[6 q" " Change cursor to steady bar in insert mode
 let &t_SR = "\e[4 q" " Change cursor to under bar in replace mode
 let &t_EI = "\e[2 q" " Change cursor to steady block in normal mode
+let &path .= getcwd() . "/**"
 
 
 " MACRO

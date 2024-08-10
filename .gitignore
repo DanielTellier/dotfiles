@@ -4,6 +4,7 @@ Session.vim
 
 # ipython
 *.sqlite
+ipython/*/db/dhist
 
 # wezterm
 wezterm/work.lua
