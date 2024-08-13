@@ -383,6 +383,8 @@ exe 'nnoremap <leader>ac :,$s/\(<c-r><c-w>\)/\1/gc' . repeat('<left>', 5)
 exe 'vnoremap <leader>ac "zy:,$s/\(<c-r>z\)/\1/gc' . repeat('<left>', 5)
 " Count ocurrences of provided string in a line
 exe 'nnoremap <leader>cl :s///gn' . repeat('<left>', 4)
+" Count ocurrences of provided string globally
+exe 'nnoremap <leader>cg :%s///gn' . repeat('<left>', 4)
 " Global Buffers Replace
 " :bufdo %s/pancake/waffle/g | update
 " Global Args Replace
