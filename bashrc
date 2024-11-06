@@ -79,7 +79,7 @@ alias grep='grep --color=auto -n -i'
 alias clear="clear && printf '\e[3J'";
 alias df="df -h"
 alias du="du -h"
-alias vi='vim'
+alias vi='nvim'
 if [ -f /usr/bin/xdg-open ]; then
     alias open='/usr/bin/xdg-open'
 fi
