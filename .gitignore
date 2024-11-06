@@ -1,6 +1,9 @@
-# vim
+# Vim
+tags
 .netrwhist
-Session.vim
+
+# Neovim
+nvim/pack/
 
 # ipython
 *.sqlite

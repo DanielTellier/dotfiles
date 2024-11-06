@@ -1,0 +1,159 @@
+*commonmaps.txt* list of my minimal key mappings (use :helptags ~/.vim/doc)
+
+*CommonMapsleader* = \<space>
+
+==============================================================================
+CONTENTS                                                  *CommonMapsContents*
+
+    1. General .................................. |CommonMapsGeneral|
+    2. AutoPairs ................................ |CommonMapsAutoPairs|
+    3. Comments ................................. |CommonMapsComments|
+    4. Surrounds ................................ |CommonMapsSurrounds|
+    5. Netrw .................................... |CommonMapsNetrw|
+    6. Toggles .................................. |CommonMapsToggles|
+    7. Term .................................... |CommonMapsTerm|
+    8. Wezterm ................................. |CommonMapsWezterm|
+    9. Folds ................................... |CommonMapsFolds|
+    10. Bash .................................... |CommonMapsBash|
+
+==============================================================================
+1. General                                                 *CommonMapsGeneral*
+
+- leader = <space>
+- Open planner in new tab: <leader>ep
+- Open docs in new tab: <leader>ed
+- Open vimrc in new tab: <leader>ev
+- Open bashrc in new tab: <leader>eb
+- Open after file for current filetype in new window: <leader>ea
+- Split window navigation (hjkl): <c-hjkl>
+- Search exact match under cursor: <leader>em
+- Paste last thing yanked: ,p
+- Quit vim: <leader>qq
+- Close Window: <leader>qw
+- Global replace of selection: <leader>sg
+- Global replace of selection with prompt: <leader>sc
+- Global replace including selection: <leader>ag
+- Global replace including selection with prompt: <leader>ac
+- Change indent spaces size from 2 to 4: <leader>24i
+- Change indent spaces size from 4 to 2: <leader>42i
+
+==============================================================================
+2. AutoPairs                                             *CommonMapsAutoPairs*
+
+- AutoPairs Jump: <c-p>
+
+==============================================================================
+3. Comments                                               *CommonMapsComments*
+
+- Toggle line comment: gcc
+- Toggle comment in visual mode: gc
+- Toggle motion: gc{motions} ex. gcap (comments out a paragraph)
+- Uncomment the current and adjacent commented lines: gcu
+
+==============================================================================
+4. Surrounds                                             *CommonMapsSurrounds*
+
+- Surround word with <x>: <leader>w<x>
+- Surround line with <x>: <leader>l<x>
+- Change surround from <x> to <y>: <leader><x><y>
+- Delete surround <x>: <leader>d<x>
+
+==============================================================================
+5. Netrw                                                     *CommonMapsNetrw*
+
+- Note: All mappings only apply to filetype (&ft) == 'netrw'
+- Open file and close netrw: <cr>
+- Open file in new tab: t
+- Open file in horizontal split: o
+- Open file in vertical split: v
+- Open file in next tab: <leader>i
+- Open file in horizontal split in next tab: <leader>o
+- Open file in vertical split in next tab: <leader>v
+- Open file in next tab and stay on netrw: <leader>I
+- Open file in horizontal split in next tab and stay on netrw: <leader>O
+- Open file in vertical split in next tab and stay on netrw: <leader>V
+- Go up dir: -
+- Sort toggle: s
+- Create new file: %
+- Create new dir: d
+- Rename file/dir: R
+- Delete file/dir: D
+
+==============================================================================
+6. Toggles                                                 *CommonMapsToggles*
+
+- Toggle highlights: <leader>th
+- Toggle listchars: <leader>tl
+- Toggle numbers: <leader>tn
+- Toggle listchars and numbers: <leader>ta
+
+==============================================================================
+7. Term                                                      *CommonMapsTerm*
+
+- Split window navigation (hjkl): <c-hjkl>
+- Open terminal: <leader>me
+- Open vertical terminal: <leader>mv
+- Open horizontal terminal: <leader>mh
+- Open terminal in new tab: <leader>mt
+- Close (hide) terminal: <leader>mc
+- Quit terminal: <leader>mq
+
+==============================================================================
+8. Wezterm                                                *CommonMapsWezterm*
+
+- leader = <c-t>
+- Activate Copy Mode: <leader>a
+- Close Window: <leader>w
+- Close tab: <leader>q
+- Copy: <c-s-c> or <cmd-c>
+- Next tab: <leader>n
+- Open new tab: <leader>t
+- Paste: <c-s-p> or <cmd-p>
+- Previous tab: <leader>p
+- Scroll backward: <c-uparrow>
+- Scroll forward: <c-downarrow>
+- Split Horizontal: <leader>o
+- Split Vertical: <leader>v
+- Toggle Full Screen: <leader>f
+- Toggle Window Zoom State: <leader>z (focuses on current selected window)
+- Window Movement: <leader>hjkl (same as vim movement)
+- Enter search overlay in current tab: <c-s-f>
+  - Find prior match: <enter> or <c-p>
+  - Find next match: <c-n>
+  - Cycle match type (i,I,...): <c-r>
+  - Clear search pattern: <c-u>
+  - Close search overlay mode: <esc>
+
+==============================================================================
+9. Folds                                                    *CommonMapsFolds*
+
+- Opens a fold at the cursor: zo
+- Opens all folds at the cursor: zO
+- Closes a fold at the cursor: zc
+- Closes all open folds: zC
+- Increases the `foldlevel` by one: zm
+- Decreases the `foldlevel` by one: zr
+- Decreases the `foldlevel` to zero (all folds will be open): zR
+
+==============================================================================
+10. Bash                                                      *CommonMapsBash*
+
+- Go to start of line: <c-a>
+- Go to end of line: <c-e>
+- Previous command: <c-p>
+- Next command: <c-n>
+- Back one word: <a-b>
+- Forward one word: <a-f>
+- Toggle between the start of line and current cursor position: <c-xx>
+- Clear screen: <c-l>
+- Delete word before cursor: <a-del>
+- Delete word after cursor: <a-d>
+- Search command history: <c-r>
+- Escape from history search mode: <c-g>
+- Previous command in history: <c-p>
+- Next command in history: <c-n>
+- Go back to next most recent command: <c-s>
+- Stop output to screen: <c-s>
+- Allow output to the screen if previouly stopped: <c-q>
+- Send process to background: <c-z>
+- Send process to foreground: fg
