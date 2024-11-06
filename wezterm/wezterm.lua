@@ -32,6 +32,9 @@ return {
     -- Disable ligatures
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
 
+    -- Ensure that the Alt key is sent as Meta
+    send_composed_key_when_left_alt_is_pressed = true,
+    send_composed_key_when_right_alt_is_pressed = true,
     -- Leader key
     --[[
     LEADER stays active until a keypress is registered (whether it matches
@@ -40,7 +43,6 @@ return {
     cancel itself.
     --]]
     leader = { key="t", mods="CTRL", timeout_milliseconds=2000 },
-
     -- Key bindings
     keys = {
         -- Send "CTRL-t" to the terminal when pressing CTRL-t, CTRL-t
