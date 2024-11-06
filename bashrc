@@ -92,6 +92,7 @@ alias py3='python3'
 alias ipy='ipython3'
 alias myfuncs='declare -F'
 alias wez='wezterm start &'
+alias gs='git status'
 
 ##########
 # Colors #
