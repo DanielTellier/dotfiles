@@ -51,6 +51,7 @@ export CXX=/usr/bin/clang++
 # Groovy
 alias grvi='groovysh'
 alias grv='groovysh -Djava.awt.headless=true' # Groovy with :inspect disabled
+alias bup='brew update && brew doctor && brew upgrade'
 
 
 # Misc
