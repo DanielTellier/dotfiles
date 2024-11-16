@@ -108,5 +108,5 @@ return {
     leader = { key="t", mods="CTRL", timeout_milliseconds=2000 },
     -- Key bindings
     keys = keys,
-    unicode_version = 15,
+    unicode_version = 16,
 }
