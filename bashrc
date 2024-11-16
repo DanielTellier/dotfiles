@@ -143,17 +143,17 @@ if [[ "$USER" == "root" ]]; then
   prompt_r=$brightred
   prompt_g=$brightgreen
   prompt_b=$brightblue
-  prompt_x=$brightpink
+  prompt_x=$brightwhite
 elif [[ "$SSH_TTY" ]]; then
   prompt_r=$red
   prompt_g=$green
   prompt_b=$blue
-  prompt_x=$pink
+  prompt_x=$white
 else
   prompt_r=$red
   prompt_g=$green
   prompt_b=$blue
-  prompt_x=$pink
+  prompt_x=$white
 fi
 
 if [[ -n "$SSH_CONNECTION" ]]; then
