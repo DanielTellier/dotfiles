@@ -18,7 +18,7 @@ fi
 export BASH_SILENCE_DEPRECATION_WARNING=1
 hpath="/opt/homebrew"
 opath="$hpath/opt"
-export PATH="$hpath/bin:$PATH"
+export PATH="$hpath/bin:$hpath/sbin:$PATH"
 pkgs=(
     "bzip2"
     "curl"
@@ -51,6 +51,7 @@ export CXX=/usr/bin/clang++
 # Groovy
 alias grvi='groovysh'
 alias grv='groovysh -Djava.awt.headless=true' # Groovy with :inspect disabled
+alias bup='brew update && brew doctor && brew upgrade'
 
 
 # Misc

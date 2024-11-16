@@ -17,8 +17,7 @@ local ask_copilot = function()
     end
 end
 
--- Hard coded to false since not paying for copilot
-local have_copilot = false
+local have_copilot = os.getenv("COPILOT_ENABLED")
 local node_bin = "/usr/bin/node"
 if not path_exists(node_bin) then
     -- For Mac
@@ -28,7 +27,7 @@ end
 require('settings')
 require('commands')
 require('mappings')
-if have_copilot and path_exists(node_bin) then
+if have_copilot == "true" and path_exists(node_bin) then
     local prompts = {
         -- Code-related prompts
         Explain = "Please explain how the following code works.",

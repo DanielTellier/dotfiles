@@ -16,6 +16,17 @@ vim.cmd("colorscheme onedark")
 vim.cmd("filetype plugin indent on")
 vim.cmd("syntax on")
 
+-- Macros
+-- NOTE: ASCII representation of keys
+-- \032 -> <Space>
+-- \027 -> <Esc>
+-- To save a macro run `:registers` to copy the macro you ran
+-- https://this/is/a/link --> [link](https://this/is/a/link)
+-- Assumes does not end with a slash
+vim.fn.setreg('l', '0LT/vLhy0i[]\027hplli(\027La)\027j')
+-- Fix line to 75 + up to next space
+vim.fn.setreg('n', '075lf\032a\b\r\027j')
+
 -- Highlight settings
 vim.cmd([[
     highlight Visual cterm=NONE ctermbg=yellow ctermfg=white
