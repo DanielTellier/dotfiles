@@ -20,3 +20,4 @@ Plugins used:
 - Misc cloned at `~/.config/nvim/pack/plugins/start`:
     - https://github.com/windwp/nvim-autopairs.git
     - https://github.com/nvim-treesitter/nvim-treesitter.git
+    - https://github.com/navarasu/onedark.nvim.git

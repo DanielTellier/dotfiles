@@ -27,6 +27,7 @@ end
 require('settings')
 require('commands')
 require('mappings')
+require('onedark').load()
 if have_copilot == "true" and path_exists(node_bin) then
     local prompts = {
         -- Code-related prompts

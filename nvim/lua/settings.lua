@@ -12,7 +12,6 @@ vim.g.rehash256 = 1
 if vim.fn.has("termguicolors") == 1 then
     vim.opt.termguicolors = true
 end
-vim.cmd("colorscheme onedark")
 vim.cmd("filetype plugin indent on")
 vim.cmd("syntax on")
 
