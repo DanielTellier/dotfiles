@@ -120,6 +120,8 @@ brightcyan=$(tput setaf 14)
 brightwhite=$(tput setaf 15)
 brightpink=$(tput setaf 199)
 pink=$(tput setaf 217)
+brightorange=$(tput setaf 214)
+orange=$(tput setaf 208)
 
 ##########
 # Prompt #
@@ -143,17 +145,20 @@ if [[ "$USER" == "root" ]]; then
   prompt_r=$brightred
   prompt_g=$brightgreen
   prompt_b=$brightblue
-  prompt_x=$brightwhite
+  prompt_w=$brightwhite
+  prompt_o=$brightorange
 elif [[ "$SSH_TTY" ]]; then
   prompt_r=$red
   prompt_g=$green
   prompt_b=$blue
-  prompt_x=$white
+  prompt_w=$white
+  prompt_o=$orange
 else
   prompt_r=$red
   prompt_g=$green
   prompt_b=$blue
-  prompt_x=$white
+  prompt_w=$white
+  prompt_o=$orange
 fi
 
 if [[ -n "$SSH_CONNECTION" ]]; then
@@ -164,15 +169,15 @@ else
     user_name=""
 fi
 
-export PS1='\n\[$reset\]🐦‍🔥\[$prompt_x\][$user_name$host_name$PWD]\[$reset\]\n'
+export PS1='\n\[$reset\]🎃\[$prompt_g\][$user_name$host_name$PWD]\[$reset\]\n'
 
 if [ -f ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh
   export PS1+='\[$prompt_b\]$(__git_ps1 "(git:%s)")'
 fi
 
-export PS1+='\[$prompt_r\]$(virtualenv_info)\[$reset\]\
-\[$prompt_g\]\$\[$reset\] '
+export PS1+='\[$prompt_b\]$(virtualenv_info)\[$reset\]\
+\[$prompt_o\]\$\[$reset\] '
 
 #############
 # Functions #
