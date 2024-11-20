@@ -147,18 +147,21 @@ if [[ "$USER" == "root" ]]; then
   prompt_b=$brightblue
   prompt_w=$brightwhite
   prompt_o=$brightorange
+  prompt_x=$brightpink
 elif [[ "$SSH_TTY" ]]; then
   prompt_r=$red
   prompt_g=$green
   prompt_b=$blue
   prompt_w=$white
   prompt_o=$orange
+  prompt_x=$pink
 else
   prompt_r=$red
   prompt_g=$green
   prompt_b=$blue
   prompt_w=$white
   prompt_o=$orange
+  prompt_x=$pink
 fi
 
 if [[ -n "$SSH_CONNECTION" ]]; then
@@ -169,7 +172,7 @@ else
     user_name=""
 fi
 
-export PS1='\n\[$reset\]🎃\[$prompt_g\][$user_name$host_name$PWD]\[$reset\]\n'
+export PS1='\n\[$reset\]🐷\[$prompt_x\][$user_name$host_name$PWD]\[$reset\]\n'
 
 if [ -f ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh
@@ -177,7 +180,7 @@ if [ -f ~/.git-prompt.sh ]; then
 fi
 
 export PS1+='\[$prompt_b\]$(virtualenv_info)\[$reset\]\
-\[$prompt_o\]\$\[$reset\] '
+\[$prompt_g\]\$\[$reset\] '
 
 #############
 # Functions #

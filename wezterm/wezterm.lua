@@ -81,7 +81,7 @@ return {
     disable_default_key_bindings = true,
     enable_scroll_bar = true,
     font = wezterm.font_with_fallback {
-        'Fira Code', 'Apple Color Emoji', 'DejaVu Sans Mono', 'Courier New'
+        'Fira Code', 'DejaVu Sans Mono', 'Courier New'
     },
     font_size = 13.0,
     hide_tab_bar_if_only_one_tab = true,
