@@ -39,6 +39,8 @@ vim.cmd([[
 -- General settings
 vim.opt.writebackup = true
 vim.opt.backspace = "start,eol,indent"
+-- table.insert(vim.opt.clipboard, "unnamedplus")
+vim.opt.clipboard = "unnamedplus"
 vim.opt.colorcolumn = "90"
 vim.opt.complete = ".,w,b,u,t"
 vim.opt.confirm = false
