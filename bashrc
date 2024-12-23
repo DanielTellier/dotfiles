@@ -71,6 +71,7 @@ export HISTFILESIZE=10000
 ###########
 # Aliases #
 ###########
+alias l='ls -l'
 alias ll='ls -lahF ${colorflag}'
 alias lsa='ls -A'
 alias lsd="ls ${colorflag} | /usr/bin/grep --color=never '^d'"
