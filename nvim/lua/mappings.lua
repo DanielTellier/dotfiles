@@ -26,6 +26,10 @@ utils.map('n', '<leader>xv', ':vs<space>', { silent = false })
 -- Open docs
 utils.mapfunc('n', '<leader>ed', function() utils.open_path(rtp .. '/doc/common-maps.txt') end)
 
+-- Open key mappings
+utils.map('n', '<leader>k', ':tabnew ~/.config/nvim/lua/mappings.lua<cr>')
+
+
 -- Open vimrc
 utils.mapfunc('n', '<leader>ev', function() utils.open_path(vrc) end)
 
