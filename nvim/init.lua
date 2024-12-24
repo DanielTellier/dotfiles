@@ -135,4 +135,7 @@ if have_copilot == "true" and path_exists(node_bin) then
     end
     utils.map('x', '<leader>ccv', ':CopilotChatVisual', { silent = false, desc = 'CopilotChat - Open in vertical split' })
     utils.map('x', '<leader>ccx', ':CopilotChatInPlace<cr>', { desc = 'CopilotChat - Run in-place code' })
+    -- Git related commands
+    utils.map('n', '<leader>cgc', '<cmd>CopilotChatCommit<cr>', { desc = 'CopilotChat - Git commit suggestion for current file' })
+    utils.map('n', '<leader>cgs', '<cmd>CopilotChatCommitStaged<cr>', { desc = 'CopilotChat - Git commit suggestion for staged files' })
 end
