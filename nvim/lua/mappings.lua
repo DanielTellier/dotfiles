@@ -7,9 +7,6 @@ local home = os.getenv('HOME')
 -- Key mappings
 vim.g.mapleader = ' '
 
--- Move cursor in front of closing pair symbol
-vim.g.AutoPairsShortcutJump = "<c-p>"
-
 -- Quit vim
 utils.map('n', '<leader>qq', ':qa<cr>')
 
@@ -60,12 +57,15 @@ utils.map('n', '<leader>ag', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>'
 utils.map('v', '<leader>ag', '"zy:%s/\\(<c-r>z\\)/\\1/g' .. string.rep('<left>', 4), { silent = false })
 utils.map('n', '<leader>ac', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 5), { silent = false })
 utils.map('v', '<leader>ac', '"zy:%s/\\(<c-r>z\\)/\\1/gc' .. string.rep('<left>', 5), { silent = false })
-utils.map('n', '<leader>cl', ':s///gn' .. string.rep('<left>', 4), { silent = false })
-utils.map('n', '<leader>cg', ':%s///gn' .. string.rep('<left>', 4), { silent = false })
+
 -- Global Buffers Replace
 -- :bufdo %s/pancake/waffle/g | update
 -- Global Args Replace
 -- :argdo %s/method_a/method_b/g | update
+
+-- Count instances in line or globally
+utils.map('n', '<leader>cl', ':s///gn' .. string.rep('<left>', 4), { silent = false })
+utils.map('n', '<leader>cg', ':%s///gn' .. string.rep('<left>', 4), { silent = false })
 
 -- Search word under cursor
 utils.map('n', '<leader>ws', ':Grep all "\\b<c-r><c-w>\\b"<cr>:cw<cr>')
@@ -80,13 +80,16 @@ utils.map('n', '<leader>em', '/\\<<c-r><c-w>\\>', { silent = false })
 utils.map('n', ',p', '"0p', { noremap = false, silent = false })
 utils.map('n', ',P', '"0P', { noremap = false, silent = false })
 
--- Yank to system clipboard
-utils.map('n', '<leader>yy', '"+yy', { silent = false })
-utils.map('n', '<leader>yw', '"+yw', { silent = false })
-utils.map('v', '<leader>y', '"+y', { silent = false })
-
--- Paste from system clipboard
-utils.map('n', '<leader>p', '"+p', { silent = false })
+-- Yank to system clipboard if using the default OSC 52 clipboard
+local yanks = {'yy', 'yw', 'y^', 'y$', 'yiw', 'yaw'}
+for _, key in ipairs(yanks) do
+    if os.getenv("SSH_TTY") then
+        utils.map('n', "<leader>" .. key, '"+' .. key, { silent = false })
+    end
+end
+if os.getenv("SSH_TTY") then
+    utils.map('v', '<leader>y', '"+y', { silent = false })
+end
 
 -- Git commands
 utils.map('n', '<leader>gs', ':Git status<cr>')

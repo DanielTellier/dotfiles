@@ -39,8 +39,8 @@ vim.cmd([[
 -- General settings
 vim.opt.writebackup = true
 vim.opt.backspace = "start,eol,indent"
--- Attempt to enable clipboard support only if a provider is available
-if vim.fn.has("clipboard") == 1 then
+-- Attempt to enable clipboard support only if SSH_TTY is unset
+if not os.getenv("SSH_TTY") then
     vim.opt.clipboard:append("unnamedplus")
 end
 vim.opt.colorcolumn = "90"
