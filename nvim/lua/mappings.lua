@@ -1,6 +1,5 @@
 local utils = require('utils')
 local rtp = vim.split(vim.o.runtimepath, ",")[1]
-local vrc = rtp .. '/init.lua'
 local sesh_dir = "~/.vim-sessions"
 local home = os.getenv('HOME')
 
@@ -23,11 +22,11 @@ utils.map('n', '<leader>xv', ':vs<space>', { silent = false })
 -- Open docs
 utils.mapfunc('n', '<leader>ed', function() utils.open_path(rtp .. '/doc/common-maps.txt') end)
 
--- Open key mappings
-utils.map('n', '<leader>k', ':tabnew ~/.config/nvim/lua/mappings.lua<cr>')
-
 -- Open vimrc
-utils.mapfunc('n', '<leader>ev', function() utils.open_path(vrc) end)
+utils.mapfunc('n', '<leader>ev', function() utils.open_path(rtp .. '/init.lua') end)
+
+-- Open key mappings
+utils.mapfunc('n', '<leader>ek', function() utils.open_path(rtp .. '/lua/mappings.lua') end)
 
 -- Open my after file type if exists
 utils.mapfunc('n', '<leader>ea', function() utils.open_after_ft() end)
@@ -217,9 +216,42 @@ utils.map('n', '<leader>ms', ':Obsession ' .. sesh_dir .. '/*.vim<c-d>' .. strin
 utils.map('n', '<leader>ss', ':source ' .. sesh_dir .. '/*.vim<c-d>' .. string.rep('<bs>', 5), { silent = false })
 utils.map('n', '<leader>os', ':Obsession<cr>', { silent = false })
 
--- Copilot
-utils.map("i", "<c-j>", 'copilot#Accept("<cr>")', { expr = true, replace_keycodes= false, script = true })
-
 -- Allow saving of files as sudo when I forgot to start vim using sudo
 vim.cmd('cmap w!! w !sudo tee > /dev/null %')
 vim.cmd('cmap <c-p> <c-r>*')
+
+-- Copilot
+if vim.g.copilot_available then
+    local ask_copilot = function()
+        -- CopilotChat quick chat
+        local input = vim.fn.input("Ask Copilot: ")
+        if input ~= "" then
+            require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+        end
+    end
+    utils.mapfunc('n', '<leader>cci', function() ask_copilot() end, { silent = false, desc = 'CopilotChat - Ask input' })
+    utils.map('n', '<leader>ccD', '<cmd>CopilotChatDebugInfo<cr>', { desc = 'CopilotChat - Debug info' })
+    -- Reference prompts list set in init.lua for the below mappings
+    for _, mode in ipairs({'n', 'v'}) do
+        -- Code related commands
+        utils.map(mode, '<leader>cce', '<cmd>CopilotChatExplain<cr>', { desc = 'CopilotChat - Explain code' })
+        utils.map(mode, '<leader>cct', '<cmd>CopilotChatTests<cr>', { desc = 'CopilotChat - Generate Tests' })
+        utils.map(mode, '<leader>ccr', '<cmd>CopilotChatReview<cr>', { desc = 'CopilotChat - Review code' })
+        utils.map(mode, '<leader>ccR', '<cmd>CopilotChatRefactor<cr>', { desc = 'CopilotChat - Refactor code' })
+        utils.map(mode, '<leader>ccf', '<cmd>CopilotChatFixCode<cr>', { desc = 'CopilotChat - Fix code' })
+        utils.map(mode, '<leader>ccd', '<cmd>CopilotChatDocumentation<cr>', { desc = 'CopilotChat - Add documentation for code' })
+        utils.map(mode, '<leader>cca', '<cmd>CopilotChatSwaggerApiDocs<cr>', { desc = 'CopilotChat - Add Swagger API documentation' })
+        utils.map(mode, '<leader>ccA', '<cmd>CopilotChatSwaggerNumpyDocs<cr>', { desc = 'CopilotChat - Add Swagger API documentation with Numpy Documentation' })
+        -- Text related commands
+        utils.map(mode, '<leader>ccs', '<cmd>CopilotChatSummarize<cr>', { desc = 'CopilotChat - Summarize text' })
+        utils.map(mode, '<leader>ccS', '<cmd>CopilotChatSpelling<cr>', { desc = 'CopilotChat - Correct spelling' })
+        utils.map(mode, '<leader>ccw', '<cmd>CopilotChatWording<cr>', { desc = 'CopilotChat - Improve wording' })
+        utils.map(mode, '<leader>ccc', '<cmd>CopilotChatConcise<cr>', { desc = 'CopilotChat - Make text concise' })
+    end
+    utils.map('x', '<leader>ccv', ':CopilotChatVisual', { silent = false, desc = 'CopilotChat - Open in vertical split' })
+    utils.map('x', '<leader>ccx', ':CopilotChatInPlace<cr>', { desc = 'CopilotChat - Run in-place code' })
+    -- Git related commands
+    utils.map('n', '<leader>cgc', '<cmd>CopilotChatCommit<cr>', { desc = 'CopilotChat - Git commit suggestion for current file' })
+    utils.map('n', '<leader>cgs', '<cmd>CopilotChatCommitStaged<cr>', { desc = 'CopilotChat - Git commit suggestion for staged files' })
+    utils.map("i", "<c-j>", 'copilot#Accept("<cr>")', { expr = true, replace_keycodes= false, script = true })
+end

@@ -1,34 +1,17 @@
-local function path_exists(path)
-    local stat = vim.loop.fs_stat(path)
-    return stat ~= nil
-end
-
-local has_words_before = function()
-    if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
-end
-
-local ask_copilot = function()
-    -- CopilotChat quick chat
-    local input = vim.fn.input("Ask Copilot: ")
-    if input ~= "" then
-        require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
-    end
-end
-
-local have_copilot = os.getenv("COPILOT_ENABLED")
-local node_bin = "/usr/bin/node"
-if not path_exists(node_bin) then
+local utils = require('utils')
+local copilot_enabled = os.getenv("COPILOT_ENABLED")
+vim.g.node_bin = "/usr/bin/node"
+if not utils.path_exists(vim.g.node_bin) then
     -- For Mac
-    node_bin = "/opt/homebrew/opt/node/bin/node"
+    vim.g.node_bin = "/opt/homebrew/opt/node/bin/node"
 end
+vim.g.copilot_available = copilot_enabled == "true" and utils.path_exists(vim.g.node_bin)
 
 require('settings')
 require('commands')
 require('mappings')
 require('onedark').load()
-if have_copilot == "true" and path_exists(node_bin) then
+if vim.g.copilot_available then
     local prompts = {
         -- Code-related prompts
         Explain = "Please explain how the following code works.",
@@ -49,7 +32,7 @@ if have_copilot == "true" and path_exists(node_bin) then
         suggestion = { enabled = false },
         panel = { enabled = false },
         copilot_no_tab_map = true,
-        copilot_node_command = node_bin,
+        copilot_node_command = vim.g.node_bin,
         -- See Configuration section for rest
         -- https://github.com/zbirenbaum/copilot.lua/tree/master?tab=readme-ov-file#setup-and-configuration
     })
@@ -60,7 +43,7 @@ if have_copilot == "true" and path_exists(node_bin) then
         },
         mapping = {
             ["<tab>"] = vim.schedule_wrap(function(fallback)
-                if cmp.visible() and has_words_before() then
+                if cmp.visible() and utils.has_words_before() then
                     cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
                 else
                     fallback()
@@ -114,28 +97,4 @@ if have_copilot == "true" and path_exists(node_bin) then
         -- See Configuration section for rest
         -- https://github.com/CopilotC-Nvim/CopilotChat.nvim?tab=readme-ov-file#configuration
     })
-    local utils = require('utils')
-    utils.mapfunc('n', '<leader>cci', function() ask_copilot() end, { silent = false, desc = 'CopilotChat - Ask input' })
-    utils.map('n', '<leader>ccD', '<cmd>CopilotChatDebugInfo<cr>', { desc = 'CopilotChat - Debug info' })
-    for _, mode in ipairs({'n', 'v'}) do
-        -- Code related commands
-        utils.map(mode, '<leader>cce', '<cmd>CopilotChatExplain<cr>', { desc = 'CopilotChat - Explain code' })
-        utils.map(mode, '<leader>cct', '<cmd>CopilotChatTests<cr>', { desc = 'CopilotChat - Generate Tests' })
-        utils.map(mode, '<leader>ccr', '<cmd>CopilotChatReview<cr>', { desc = 'CopilotChat - Review code' })
-        utils.map(mode, '<leader>ccR', '<cmd>CopilotChatRefactor<cr>', { desc = 'CopilotChat - Refactor code' })
-        utils.map(mode, '<leader>ccf', '<cmd>CopilotChatFixCode<cr>', { desc = 'CopilotChat - Fix code' })
-        utils.map(mode, '<leader>ccd', '<cmd>CopilotChatDocumentation<cr>', { desc = 'CopilotChat - Add documentation for code' })
-        utils.map(mode, '<leader>cca', '<cmd>CopilotChatSwaggerApiDocs<cr>', { desc = 'CopilotChat - Add Swagger API documentation' })
-        utils.map(mode, '<leader>ccA', '<cmd>CopilotChatSwaggerNumpyDocs<cr>', { desc = 'CopilotChat - Add Swagger API documentation with Numpy Documentation' })
-        -- Text related commands
-        utils.map(mode, '<leader>ccs', '<cmd>CopilotChatSummarize<cr>', { desc = 'CopilotChat - Summarize text' })
-        utils.map(mode, '<leader>ccS', '<cmd>CopilotChatSpelling<cr>', { desc = 'CopilotChat - Correct spelling' })
-        utils.map(mode, '<leader>ccw', '<cmd>CopilotChatWording<cr>', { desc = 'CopilotChat - Improve wording' })
-        utils.map(mode, '<leader>ccc', '<cmd>CopilotChatConcise<cr>', { desc = 'CopilotChat - Make text concise' })
-    end
-    utils.map('x', '<leader>ccv', ':CopilotChatVisual', { silent = false, desc = 'CopilotChat - Open in vertical split' })
-    utils.map('x', '<leader>ccx', ':CopilotChatInPlace<cr>', { desc = 'CopilotChat - Run in-place code' })
-    -- Git related commands
-    utils.map('n', '<leader>cgc', '<cmd>CopilotChatCommit<cr>', { desc = 'CopilotChat - Git commit suggestion for current file' })
-    utils.map('n', '<leader>cgs', '<cmd>CopilotChatCommitStaged<cr>', { desc = 'CopilotChat - Git commit suggestion for staged files' })
 end

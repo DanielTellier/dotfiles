@@ -210,4 +210,15 @@ function M.mapbuf(mode, lhs, rhs, opts)
     vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, options)
 end
 
+function M.path_exists(path)
+    local stat = vim.loop.fs_stat(path)
+    return stat ~= nil
+end
+
+function M.has_words_before()
+    if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+end
+
 return M
