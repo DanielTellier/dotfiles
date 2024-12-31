@@ -78,5 +78,5 @@ vim.opt.updatetime = 1000
 vim.opt.viminfo:append("n~/.nviminfo")
 vim.opt.wildignore = "*/__pycache__/*,*.o,*.d,*.exe,*.a,*.so,*.out,*.pyc"
 vim.opt.wildmode = "longest:full,full"
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.writebackup = true
