@@ -37,7 +37,6 @@ vim.cmd([[
 ]])
 
 -- General settings
-vim.opt.writebackup = true
 vim.opt.backspace = "start,eol,indent"
 -- Attempt to enable clipboard support only if SSH_TTY is unset
 if not os.getenv("SSH_TTY") then
@@ -47,35 +46,37 @@ vim.opt.colorcolumn = "90"
 vim.opt.complete = ".,w,b,u,t"
 vim.opt.confirm = false
 vim.opt.expandtab = true
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.foldmethod = "indent"
-vim.opt.foldnestmax = 10
 vim.opt.foldenable = false
 vim.opt.foldlevel = 2
+vim.opt.foldmethod = "indent"
+vim.opt.foldnestmax = 10
 vim.opt.ignorecase = true
-vim.opt.smartcase = true
 vim.opt.list = true
 vim.opt.listchars = { tab = ">-", precedes = ".", trail = ".", extends = ".", eol = "$" }
-vim.opt.swapfile = false
-vim.opt.wrap = false
+vim.opt.mouse = ""
 vim.opt.number = true
-vim.opt.relativenumber = true
 vim.opt.redrawtime = 10000
-vim.opt.viminfo:append("n~/.nviminfo")
+vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
+vim.opt.sessionoptions:remove("folds")
+vim.opt.sessionoptions:remove("options")
+vim.opt.shiftwidth = 4
 vim.opt.sidescrolloff = 8
+vim.opt.smartcase = true
+vim.opt.softtabstop = 4
 vim.opt.splitright = true
 vim.opt.statusline = utils.statusline()
+vim.opt.swapfile = false
 vim.opt.switchbuf = "split"
-vim.opt.title = true
-vim.opt.ttyfast = true
+vim.opt.tabstop = 4
 vim.opt.timeoutlen = 3000
+vim.opt.title = true
 vim.opt.ttimeoutlen = 100
+vim.opt.ttyfast = true
 vim.opt.undolevels = 100
 vim.opt.updatetime = 1000
+vim.opt.viminfo:append("n~/.nviminfo")
 vim.opt.wildignore = "*/__pycache__/*,*.o,*.d,*.exe,*.a,*.so,*.out,*.pyc"
 vim.opt.wildmode = "longest:full,full"
-vim.opt.sessionoptions:remove("options")
-vim.opt.sessionoptions:remove("folds")
+vim.opt.wrap = false
+vim.opt.writebackup = true

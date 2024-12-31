@@ -123,7 +123,10 @@ utils.surround_mappings("visual")
 
 -- Move cursor in front of closing pair symbol
 -- Referenced from here: https://github.com/jiangmiao/auto-pairs/blob/master/plugin/auto-pairs.vim#L576
-utils.mapbuf('i', '<c-p>', [=[<esc>:call search('["\]'')}]','W')<cr>a]=])
+-- <buffer> (utils.mapbuf in my case) is not working for neovim so cannot do:
+-- vim.g.AutoPairsShortcutJump = "<c-p>"
+utils.map('i', '<c-p>', [=[<esc>:call search('["\]'')}]','W')<cr>a]=])
+utils.map('n', '<c-p>', [=[<esc>:call search('["\]'')}]','W')<cr>a]=])
 
 -- Compiler make
 utils.map('n', '<leader>cm', ':make % <bar> redraw!<cr><cr>')
@@ -248,10 +251,9 @@ if vim.g.copilot_available then
         utils.map(mode, '<leader>ccw', '<cmd>CopilotChatWording<cr>', { desc = 'CopilotChat - Improve wording' })
         utils.map(mode, '<leader>ccc', '<cmd>CopilotChatConcise<cr>', { desc = 'CopilotChat - Make text concise' })
     end
-    utils.map('x', '<leader>ccv', ':CopilotChatVisual', { silent = false, desc = 'CopilotChat - Open in vertical split' })
-    utils.map('x', '<leader>ccx', ':CopilotChatInPlace<cr>', { desc = 'CopilotChat - Run in-place code' })
+    utils.map('x', '<leader>ccv', '<cmd>CopilotChatVisual', { silent = false, desc = 'CopilotChat - Open in vertical split' })
+    utils.map('x', '<leader>ccx', '<cmd>CopilotChatInPlace<cr>', { desc = 'CopilotChat - Run in-place code' })
     -- Git related commands
     utils.map('n', '<leader>cgc', '<cmd>CopilotChatCommit<cr>', { desc = 'CopilotChat - Git commit suggestion for current file' })
     utils.map('n', '<leader>cgs', '<cmd>CopilotChatCommitStaged<cr>', { desc = 'CopilotChat - Git commit suggestion for staged files' })
-    utils.map("i", "<c-j>", 'copilot#Accept("<cr>")', { expr = true, replace_keycodes= false, script = true })
 end
