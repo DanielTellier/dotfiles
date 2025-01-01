@@ -3,11 +3,6 @@ local search = require('search')
 
 -- Autocommands
 vim.cmd([[
-augroup status-line
-    autocmd!
-    autocmd BufEnter,SourcePost * lua vim.opt.statusline=require('utils').statusline()
-augroup END
-
 augroup spellcheck
     autocmd!
     autocmd FileType gitcommit,markdown setlocal spell spelllang=en_us

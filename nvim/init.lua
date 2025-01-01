@@ -11,7 +11,12 @@ require('settings')
 require('commands')
 require('mappings')
 require('onedark').load()
-require('lualine').setup()
+require('lualine').setup({
+    sections = {
+        lualine_c = {'filename', utils.session_status},
+        lualine_x = {'encoding', 'filetype'},
+    }
+})
 local autopairs = require('nvim-autopairs')
 autopairs.setup({
     enable_check_bracket_line = false,

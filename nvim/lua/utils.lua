@@ -9,8 +9,8 @@ local function obsession_session_name()
     end
 end
 
-function M.statusline()
-    return "%02n:%<%f %h%m%r[Session(" .. obsession_session_name() .. ")] %=%-14.(%l,%c%V%) %P"
+function M.session_status()
+    return "Session(" .. obsession_session_name() .. ")"
 end
 
 function M.toggle_all()
