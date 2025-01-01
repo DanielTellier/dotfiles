@@ -11,7 +11,6 @@ Plugins used:
     - https://github.com/CopilotC-Nvim/CopilotChat.nvim.git
 - Tpope cloned at `~/.config/nvim/pack/plugins/start`:
     - https://github.com/tpope/vim-commentary.git
-    - https://github.com/tpope/vim-flagship.git
     - https://github.com/tpope/vim-fugitive.git
     - https://github.com/tpope/vim-obsession.git
     - https://github.com/tpope/vim-repeat.git
@@ -21,3 +20,4 @@ Plugins used:
     - https://github.com/windwp/nvim-autopairs.git
     - https://github.com/nvim-treesitter/nvim-treesitter.git
     - https://github.com/navarasu/onedark.nvim.git
+    - https://github.com/nvim-lualine/lualine.nvim.git

@@ -11,6 +11,12 @@ require('settings')
 require('commands')
 require('mappings')
 require('onedark').load()
+require('lualine').setup()
+local autopairs = require('nvim-autopairs')
+autopairs.setup({
+    enable_check_bracket_line = false,
+    ignored_next_char = "[%w%.]", -- will ignore alphanumeric and `.` symbol
+})
 if vim.g.copilot_available then
     local prompts = {
         -- Code-related prompts
@@ -62,11 +68,6 @@ if vim.g.copilot_available then
         sorting = {
             priority_weight = 2,
         },
-    })
-    local autopairs = require('nvim-autopairs')
-    autopairs.setup({
-        enable_check_bracket_line = false,
-        ignored_next_char = "[%w%.]", -- will ignore alphanumeric and `.` symbol
     })
     local cmp_autopairs = require('nvim-autopairs.completion.cmp')
     cmp.event:on(
