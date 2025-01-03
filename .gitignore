@@ -2,9 +2,6 @@
 tags
 .netrwhist
 
-# Neovim
-nvim/pack/
-
 # ipython
 *.sqlite
 ipython/*/db/dhist
