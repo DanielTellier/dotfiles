@@ -1,3 +1,4 @@
+local vim = vim
 local utils = require('utils')
 local copilot_enabled = os.getenv("COPILOT_ENABLED")
 vim.g.node_bin = "/usr/bin/node"
@@ -6,11 +7,33 @@ if not utils.path_exists(vim.g.node_bin) then
     vim.g.node_bin = "/opt/homebrew/opt/node/bin/node"
 end
 vim.g.copilot_available = copilot_enabled == "true" and utils.path_exists(vim.g.node_bin)
+utils.setup_vim_plug()
+local Plug = vim.fn['plug#']
 
+vim.call('plug#begin')
+    Plug('navarasu/onedark.nvim')
+    Plug('nvim-lualine/lualine.nvim')
+    Plug('nvim-treesitter/nvim-treesitter')
+    Plug('tpope/vim-commentary')
+    Plug('tpope/vim-fugitive')
+    Plug('tpope/vim-obsession')
+    Plug('tpope/vim-repeat')
+    Plug('tpope/vim-surround')
+    Plug('tpope/vim-unimpaired')
+    Plug('windwp/nvim-autopairs')
+    if vim.g.copilot_available then
+        Plug('hrsh7th/nvim-cmp')
+        Plug('nvim-lua/plenary.nvim')
+        Plug('CopilotC-Nvim/CopilotChat.nvim')
+        Plug('zbirenbaum/copilot-cmp')
+        Plug('zbirenbaum/copilot.lua')
+    end
+vim.call('plug#end')
+
+require('onedark').load()
 require('settings')
 require('commands')
 require('mappings')
-require('onedark').load()
 require('lualine').setup({
     sections = {
         lualine_c = {'filename', utils.session_status},
@@ -80,9 +103,9 @@ if vim.g.copilot_available then
         cmp_autopairs.on_confirm_done()
     )
     require("copilot_cmp").setup()
-    -- Registers copilot-chat source and enables it for copilot-chat filetype (so copilot chat window)
-    require("CopilotChat.integrations.cmp").setup()
     require("CopilotChat").setup({
+        -- Registers copilot-chat source and enables it for copilot-chat filetype (so copilot chat window)
+        chat_autocomplete = true,
         debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
         prompts = prompts,
         mappings = {
