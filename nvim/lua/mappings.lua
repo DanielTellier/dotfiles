@@ -255,5 +255,4 @@ if vim.g.copilot_available then
     utils.map('x', '<leader>ccx', '<cmd>CopilotChatInPlace<cr>', { desc = 'CopilotChat - Run in-place code' })
     -- Git related commands
     utils.map('n', '<leader>cgc', '<cmd>CopilotChatCommit<cr>', { desc = 'CopilotChat - Git commit suggestion for current file' })
-    utils.map('n', '<leader>cgs', '<cmd>CopilotChatCommitStaged<cr>', { desc = 'CopilotChat - Git commit suggestion for staged files' })
 end
