@@ -7,9 +7,9 @@ if not utils.path_exists(vim.g.node_bin) then
     vim.g.node_bin = "/opt/homebrew/opt/node/bin/node"
 end
 vim.g.copilot_available = copilot_enabled == "true" and utils.path_exists(vim.g.node_bin)
+
 utils.setup_vim_plug()
 local Plug = vim.fn['plug#']
-
 vim.call('plug#begin')
     Plug('navarasu/onedark.nvim')
     Plug('nvim-lualine/lualine.nvim')
