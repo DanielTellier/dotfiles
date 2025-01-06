@@ -91,7 +91,7 @@ if vim.g.copilot_available then
                 i = cmp.mapping.abort(),
                 c = cmp.mapping.close(),
             }),
-            ["<c-a>"] = cmp.mapping.confirm({ select = true }),
+            ["<c-c>"] = cmp.mapping.confirm({ select = true }),
         },
         sorting = {
             priority_weight = 2,
