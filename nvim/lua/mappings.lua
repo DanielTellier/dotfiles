@@ -6,13 +6,50 @@ local home = os.getenv('HOME')
 -- Key mappings
 vim.g.mapleader = ' '
 
--- General mappings
-utils.map('n', '<leader>qq', ':qa<cr>', { desc = "Quit neovim" })
-utils.map('n', '<leader>qc', ':q<cr>', { desc = "Close current window"})
-utils.map('n', 'zC', 'zM', { silent = false, desc = "Closes all open folds" })
-utils.map('n', '<leader>xe', ':e .<cr>', { desc = "Open Explorer" })
+-- Navigation
+utils.map(
+    'n', 'n', 'nzzzv',
+    { silent = false, desc = "Keep it centered when searching for next" }
+)
+utils.map(
+    'n', 'N', 'Nzzzv',
+    { silent = false, desc = "Keep it centered when searching for previous" }
+)
+utils.map(
+    'n', 'J', 'mzJ`z',
+    { silent = false, desc = "Join lines and keep cursor position" }
+)
+-- Referenced from here: https://github.com/jiangmiao/auto-pairs/blob/master/plugin/auto-pairs.vim#L576
+-- <buffer> (utils.mapbuf in my case) is not working for neovim so cannot do:
+-- vim.g.AutoPairsShortcutJump = "<c-p>"
+utils.map(
+    'n', '<c-p>', [=[<esc>:call search('["\]'')}]','W')<cr>a]=],
+    { desc = "Move cursor in front of closing pair symbol" }
+)
+utils.map(
+    'i', '<c-p>', [=[<esc>:call search('["\]'')}]','W')<cr>a]=],
+    { desc = "Move cursor in front of closing pair symbol in insert mode" }
+)
+utils.map('n', 'Y', 'y$', { silent = false, desc = "Yank to end of line" })
+-- Force use of hjkl-style movement and up(c-b)/down(c-f)
+local keys_to_nop = {
+    '<up>', '<down>', '<left>', '<right>', '<pageup>', '<pagedown>', '<home>', '<end>'
+}
+for _, key in ipairs(keys_to_nop) do
+    utils.map('', key, '<nop>', { noremap = false, silent = false })
+    utils.map('i', key, '<nop>', { noremap = false, silent = false })
+end
+-- Remap these keys to work with hjkl-style movement
+utils.map('', '$', '<nop>', { noremap = false, silent = false })
+utils.map('', '^', '<nop>', { noremap = false, silent = false })
+utils.map('', '{', '<nop>', { noremap = false, silent = false })
+utils.map('', '}', '<nop>', { noremap = false, silent = false })
+utils.map('', 'K', '{', { silent = false, desc = "Move up a paragraph" })
+utils.map('', 'J', '}', { silent = false, desc = "Move down a paragraph" })
+utils.map('', 'H', '^', { silent = false, desc = "Move to start of line" })
+utils.map('', 'L', '$', { silent = false, desc = "Move to end of line" })
 
--- Open files
+-- Open File
 utils.mapfunc('n', '<leader>ed', function()
     utils.open_path(rtp .. '/doc/common-maps.txt')
 end, { desc = "Open docs that contain key mappings" })
@@ -29,7 +66,7 @@ utils.mapfunc('n', '<leader>eb', function()
     utils.open_path(home .. '/.bashrc')
 end, { desc = "Open bashrc" })
 
--- Toggles
+-- Toggle
 utils.mapfunc('n', '<leader>th', function()
     utils.toggle_highlights()
 end, { desc = "Toggle highlights" })
@@ -37,54 +74,54 @@ utils.map(
     'n', '/', ':set hlsearch<cr>/',
     { silent = false, desc = "Ensure highlighting is on when searching" }
 )
-utils.mapfunc('n', '<leader>ta', function()
-    utils.toggle_all()
-end, { desc = "Toggle listchars and numbers" })
+utils.mapfunc('n', '<leader>tn', function()
+    utils.toggle_numbers()
+end, { desc = "Toggle numbers" })
 utils.map(
     'n', '<leader>tl', ':if (&list) | set nolist | else | set list | endif<cr>',
     { desc = "Toggle listchars" }
 )
-utils.mapfunc('n', '<leader>tn', function()
-    utils.toggle_numbers()
-end, { desc = "Toggle numbers" })
+utils.mapfunc('n', '<leader>ta', function()
+    utils.toggle_all()
+end, { desc = "Toggle listchars and numbers" })
 
--- Substitutions
+-- Substitution
 for _, mode in ipairs({'n', 'v'}) do
     utils.map(
-        mode, '<leader>sg', ':%s/<c-r><c-w>//g' .. string.rep('<left>', 2),
+        mode, '<leader>swg', ':%s/<c-r><c-w>//g' .. string.rep('<left>', 2),
         { silent = false, desc = "Global substitution with word under cursor" }
     )
     utils.map(
-        mode, '<leader>sc', ':%s/<c-r><c-w>//gc' .. string.rep('<left>', 3),
+        mode, '<leader>swc', ':%s/<c-r><c-w>//gc' .. string.rep('<left>', 3),
         {
             silent = false,
             desc = "Global substitution with word under cursor and confirmation",
         }
     )
     utils.map(
-        mode, '<leader>bg', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 4),
+        mode, '<leader>sbg', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 4),
         { silent = false, desc = "Global prefix with word under cursor" }
     )
     utils.map(
-        mode, '<leader>bc', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 5),
+        mode, '<leader>sbc', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 5),
         {
             silent = false,
             desc = "Global prefix with word under cursor and confirmation",
         }
     )
     utils.map(
-        mode, '<leader>ag', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 3),
+        mode, '<leader>sag', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 3),
         { silent = false, desc = "Global postfix with word under cursor" }
     )
     utils.map(
-        mode, '<leader>ac', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 4),
+        mode, '<leader>sac', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 4),
         {
             silent = false,
             desc = "Global postfix with word under cursor and confirmation",
         }
     )
     utils.map(
-        mode, '<leader>br',
+        mode, '<leader>sbr',
         ':bufdo %s/<c-r><c-w>//g | update' .. string.rep('<left>', 11),
         {
             silent = false,
@@ -93,7 +130,7 @@ for _, mode in ipairs({'n', 'v'}) do
     )
     -- Can add files to arg list via `:args *.txt` or `:args file1.txt file2.txt ...`
     utils.map(
-        mode, '<leader>ar',
+        mode, '<leader>sar',
         ':argdo %s/<c-r><c-w>//g | update' .. string.rep('<left>', 11),
         {
             silent = false,
@@ -103,7 +140,7 @@ for _, mode in ipairs({'n', 'v'}) do
     )
 end
 
--- Searches
+-- Search
 utils.map(
     'n', '<leader>cl', ':s///gn' .. string.rep('<left>', 4),
     { silent = false, desc = "Count instances in the current line" }
@@ -124,42 +161,10 @@ utils.map(
     'n', '<leader>em', '/\\<<c-r><c-w>\\>',
     { silent = false, desc = "Search exact match in current buffer" }
 )
+utils.map('n', '<leader>co', ':copen<cr>', { desc = "Open quickfix list" })
+utils.map('n', '<leader>cq', ':cclose<cr>', { desc = "Close quickfix list" })
 
--- Yanks and Pastes
-utils.map(
-    'n', ',p', '"0p', { noremap = false, silent = false, desc = "Paste last yanked" }
-)
-utils.map(
-    'n', ',P', '"0P',
-    {
-        noremap = false,
-        silent = false,
-        desc = "Paste last yanked before cursor position",
-    }
-)
-if os.getenv("SSH_TTY") then
-    local yanks = {'yy', 'yw', 'y^', 'y$', 'yiw', 'yaw'}
-    for _, key in ipairs(yanks) do
-            utils.map(
-                'n', "<leader>" .. key, '"+' .. key,
-                {
-                    silent = false,
-                    desc = "Yank to system clipboard if using the default " ..
-                    "OSC 52 clipboard for Neovim"
-                }
-            )
-    end
-    utils.map(
-        'v', '<leader>y', '"+y',
-        {
-            silent = false,
-            desc = "Yank to system clipboard in Visual mode " ..
-            "if using the default OSC 52 clipboard for Neovim"
-        }
-    )
-end
-
--- Git commands
+-- Git
 utils.map('n', '<leader>gs', ':Git status<cr>', { desc = "Git status" })
 utils.map('n', '<leader>gl', ':Git log<cr>', { desc = "Git log" })
 utils.map('n', '<leader>gd', ':Git diff<cr>', { desc = "Git diff" })
@@ -168,14 +173,14 @@ utils.map('n', '<leader>gc', ':Git commit ', { silent = false, desc = "Git commi
 utils.map('n', '<leader>gu', ':Git pull<cr>', { desc = "Git pull" })
 utils.map('n', '<leader>gp', ':Git push<cr>', { desc = "Git push" })
 
--- Terminal commands
+-- Terminal
 utils.map('n', '<leader>me', ':terminal<cr>', { desc = "Open terminal" })
+utils.map('n', '<leader>mq', ':q!<cr>', { desc = "Close terminal" })
 utils.map(
     'n', '<leader>mv', ':vertical terminal<cr>', { desc = "Open vertical terminal" }
 )
 utils.map(
-    'n', '<leader>mo', ':split | terminal<cr>',
-    { desc = "Open terminal in horizontal split" }
+    'n', '<leader>mo', ':split | terminal<cr>', { desc = "Open horizontal terminal" }
 )
 utils.map(
     'n', '<leader>mt', ':tab terminal<cr>', { desc = "Open terminal in new tab" }
@@ -189,55 +194,21 @@ utils.mapfunc('t', '<c-w>p', function()
     utils.paste_to_terminal()
 end, { desc = "Paste yanked text into terminal" })
 
--- Surround mappings
+-- Surround
 utils.surround_mappings("word")
 utils.surround_mappings("line")
 utils.surround_mappings("change")
 utils.surround_mappings("delete")
 utils.surround_mappings("visual")
 
--- Move cursor in front of closing pair symbol
--- Referenced from here: https://github.com/jiangmiao/auto-pairs/blob/master/plugin/auto-pairs.vim#L576
--- <buffer> (utils.mapbuf in my case) is not working for neovim so cannot do:
--- vim.g.AutoPairsShortcutJump = "<c-p>"
-utils.map(
-    'n', '<c-p>', [=[<esc>:call search('["\]'')}]','W')<cr>a]=],
-    { desc = "Move cursor in front of closing pair symbol" }
-)
-utils.map(
-    'i', '<c-p>', [=[<esc>:call search('["\]'')}]','W')<cr>a]=],
-    { desc = "Move cursor in front of closing pair symbol in insert mode" }
-)
-utils.map('n', 'Y', 'y$', { silent = false, desc = "Yank to end of line" })
-
--- Keep it centered
-utils.map(
-    'n', 'n', 'nzzzv',
-    { silent = false, desc = "Keep it centered when searching for next" }
-)
-utils.map(
-    'n', 'N', 'Nzzzv',
-    { silent = false, desc = "Keep it centered when searching for previous" }
-)
-utils.map(
-    'n', 'J', 'mzJ`z',
-    { silent = false, desc = "Join lines and keep cursor position" }
-)
-
--- Command line mode
-utils.map('n', ';', ':', { silent = false, desc = "Command line mode" })
-utils.map('v', ';', ':', { silent = false, desc = "Command line mode in Visual mode" })
-
--- Faster split window navigation
+-- Window
 utils.map('n', '<c-h>', '<c-w>h', { silent = false, desc = "Move to left window" })
 utils.map('n', '<c-j>', '<c-w>j', { silent = false, desc = "Move to bottom window" })
 utils.map('n', '<c-k>', '<c-w>k', { silent = false, desc = "Move to top window" })
 utils.map('n', '<c-l>', '<c-w>l', { silent = false, desc = "Move to right window" })
-
--- Move window
 utils.map('n', '<leader>wu', '<c-w>R', { desc = "Rotate window upwards or leftwards" })
 utils.map(
-    'n', '<leader>wd', '<c-w>r', { desc = "Rotate window, downwards or rightwords" }
+    'n', '<leader>wd', '<c-w>r', { desc = "Rotate window downwards or rightwords" }
 )
 utils.map('n', '<leader>wh', '<c-w>H', { desc = "Move window to left" })
 utils.map('n', '<leader>wj', '<c-w>J', { desc = "Move window to bottom" })
@@ -253,41 +224,7 @@ utils.map(
     { desc = "Move previous window to vertical split" }
 )
 
--- Force use of hjkl-style movement and up(c-b)/down(c-f)
-local keys_to_nop = {
-    '<up>', '<down>', '<left>', '<right>', '<pageup>', '<pagedown>', '<home>', '<end>'
-}
-for _, key in ipairs(keys_to_nop) do
-    utils.map('', key, '<nop>', { noremap = false, silent = false })
-    utils.map('i', key, '<nop>', { noremap = false, silent = false })
-end
-
--- Remap these keys to work with hjkl-style movement
-utils.map('', '$', '<nop>', { noremap = false, silent = false })
-utils.map('', '^', '<nop>', { noremap = false, silent = false })
-utils.map('', '{', '<nop>', { noremap = false, silent = false })
-utils.map('', '}', '<nop>', { noremap = false, silent = false })
-utils.map('', 'K', '{', { silent = false })
-utils.map('', 'J', '}', { silent = false })
-utils.map('', 'H', '^', { silent = false })
-utils.map('', 'L', '$', { silent = false })
-
--- Tabbing
-for _, mode in ipairs({'n', 'v'}) do
-    utils.map(mode, '<tab>', '>><esc>', { silent = false })
-    utils.map(mode, '<s-tab>', '<<<esc>', { silent = false })
-end
-utils.map('i', '<s-tab>', '<esc><<', { silent = false })
-
--- Change file indent size
-utils.mapfunc('n', '<leader>24i', function()
-    utils.change_file_indent_size(2, 4)
-end, { desc = "Change file indent size from 2 to 4" })
-utils.mapfunc('n', '<leader>42i', function()
-    utils.change_file_indent_size(4, 2)
-end, { desc = "Change file indent size from 4 to 2" })
-
--- Handle path info
+-- Path Info
 utils.map(
     'n', '<leader>fy', ':let @f = expand("%:t")<cr>', { desc = "Yank file name" }
 )
@@ -296,44 +233,38 @@ utils.map(
 )
 utils.map('n', '<leader>fp', '"fp', { desc = "Paste file name" })
 
--- Buffer commands
+-- Buffer
 utils.map(
-    'n', '<leader>sb', ':SearchBuffers ',
-    { silent = false, desc = "Search buffers in list, defined in commands.lua" }
+    'n', '<leader>bs', ':BuffersSearch ',
+    { silent = false, desc = "Search buffers in list defined in commands.lua" }
 )
 utils.map('n', '<leader>bl', ':buffers<cr>', { silent = false, desc = "List buffers" })
 utils.map('n', '<leader>bb', ':buffer ', { silent = false, desc = "Switch buffer" })
 utils.map(
-    'n', '<leader>bs', ':sbuffer ',
+    'n', '<leader>bo', ':sbuffer ',
     { silent = false, desc = "Switch buffer in horizontal split" }
 )
 utils.map(
     'n', '<leader>bv', ':vertical sbuffer ',
     { silent = false, desc = "Switch buffer in vertical split" }
 )
-
--- Remove buffers
 utils.map(
     'n', '<leader>rb', ':RemoveWhichBuffer ',
-    { silent = false, desc = "Remove buffer from list, defined in commands.lua" }
+    { silent = false, desc = "Remove buffer from list defined in commands.lua" }
 )
 utils.mapfunc('n', '<leader>rB', function()
     utils.remove_all_buffers()
 end, { silent = false, desc = "Remove all buffers from list" })
 
--- Remove marks
+-- Mark
 utils.map(
-    'n', '<leader>rm', ':delm! ', { silent = false, desc = "Remove mark from list" }
+    'n', '<leader>rm', ':delmarks ', { silent = false, desc = "Remove mark from list" }
 )
 utils.mapfunc('n', '<leader>rM', function()
     utils.remove_all_global_marks()
 end, { silent = false, desc = "Remove all global marks" })
 
--- Quickfix List
-utils.map('n', '<leader>co', ':copen<cr>', { desc = "Open quickfix list" })
-utils.map('n', '<leader>cq', ':cclose<cr>', { desc = "Close quickfix list" })
-
--- Sessions
+-- Session
 -- We used backspaces (<bs>) to remove the "*.vim" suffix after filtering files,
 -- allowing us to type a new filename post-remap.
 utils.map(
@@ -347,11 +278,8 @@ utils.map(
     { silent = false, desc = "Source session" }
 )
 utils.map(
-    'n', '<leader>os', ':Obsession<cr>', { silent = false, desc = "Toggle session" }
+    'n', '<leader>ts', ':Obsession<cr>', { silent = false, desc = "Toggle session" }
 )
-
-vim.cmd('cmap w!! w !sudo tee > /dev/null %', { desc = "Save file as sudo" })
-vim.cmd('cmap <c-p> <c-r>*', { desc = "Paste from system clipboard in command mode" })
 
 -- Copilot
 if vim.g.copilot_available then
@@ -371,9 +299,16 @@ if vim.g.copilot_available then
         'n', '<leader>ccD', '<cmd>CopilotChatDebugInfo<cr>',
         { desc = 'CopilotChat - Debug info' }
     )
+    utils.map(
+        'n', '<leader>cgc', '<cmd>CopilotChatCommit<cr>',
+        { desc = 'CopilotChat - Git commit suggestion' }
+    )
     -- Reference prompts list set in init.lua for the below mappings
     for _, mode in ipairs({'n', 'v'}) do
-        -- Code related commands
+        utils.map(
+            mode, '<leader>cco', '<cmd>CopilotChat<cr>',
+            { desc = 'CopilotChat - Open chat window' }
+        )
         utils.map(
             mode, '<leader>cce', '<cmd>CopilotChatExplain<cr>',
             { desc = 'CopilotChat - Explain code' }
@@ -406,7 +341,6 @@ if vim.g.copilot_available then
             mode, '<leader>ccA', '<cmd>CopilotChatSwaggerNumpyDocs<cr>',
             { desc = 'CopilotChat - Add Swagger API documentation with Numpy Documentation' }
         )
-        -- Text related commands
         utils.map(
             mode, '<leader>ccs', '<cmd>CopilotChatSummarize<cr>',
             { desc = 'CopilotChat - Summarize text' }
@@ -424,17 +358,58 @@ if vim.g.copilot_available then
             { desc = 'CopilotChat - Make text concise' }
         )
     end
+end
+
+-- Misc
+utils.map('n', '<leader>qq', ':qa<cr>', { desc = "Quit neovim" })
+utils.map('n', '<leader>qc', ':q<cr>', { desc = "Close current window"})
+utils.map('n', '<leader>ex', ':e .<cr>', { desc = "Open Explorer" })
+for _, mode in ipairs({'n', 'v'}) do
+    utils.map(mode, '<tab>', '>><esc>', { silent = false, desc = "Indent right" })
+    utils.map(mode, '<s-tab>', '<<<esc>', { silent = false, desc = "Indent left" })
+end
+utils.map(
+    'i', '<s-tab>', '<esc><<', { silent = false, desc = "Indent left in insert mode" }
+)
+vim.cmd('cmap w!! w !sudo tee > /dev/null %', { desc = "Save file as sudo" })
+vim.cmd('cmap <c-p> <c-r>*', { desc = "Paste from system clipboard in command mode" })
+utils.mapfunc('n', '<leader>24i', function()
+    utils.change_file_indent_size(2, 4)
+end, { desc = "Change file indent size from 2 to 4" })
+utils.mapfunc('n', '<leader>42i', function()
+    utils.change_file_indent_size(4, 2)
+end, { desc = "Change file indent size from 4 to 2" })
+utils.map('n', ';', ':', { silent = false, desc = "Command line mode" })
+utils.map('v', ';', ':', { silent = false, desc = "Command line mode in Visual mode" })
+utils.map(
+    'n', ',p', '"0p', { noremap = false, silent = false, desc = "Paste last yanked" }
+)
+utils.map(
+    'n', ',P', '"0P',
+    {
+        noremap = false,
+        silent = false,
+        desc = "Paste last yanked before cursor position",
+    }
+)
+if os.getenv("SSH_TTY") then
+    local yanks = {'yy', 'yw', 'y^', 'y$', 'yiw', 'yaw'}
+    for _, key in ipairs(yanks) do
+            utils.map(
+                'n', "<leader>" .. key, '"+' .. key,
+                {
+                    silent = false,
+                    desc = "Yank to system clipboard if using the default " ..
+                    "OSC 52 clipboard for Neovim"
+                }
+            )
+    end
     utils.map(
-        'x', '<leader>ccv', '<cmd>CopilotChatVisual',
-        { silent = false, desc = 'CopilotChat - Open in vertical split' }
-    )
-    utils.map(
-        'x', '<leader>ccx', '<cmd>CopilotChatInPlace<cr>',
-        { desc = 'CopilotChat - Run in-place code' }
-    )
-    -- Git related commands
-    utils.map(
-        'n', '<leader>cgc', '<cmd>CopilotChatCommit<cr>',
-        { desc = 'CopilotChat - Git commit suggestion for current file' }
+        'v', '<leader>y', '"+y',
+        {
+            silent = false,
+            desc = "Yank to system clipboard in Visual mode " ..
+            "if using the default OSC 52 clipboard for Neovim"
+        }
     )
 end

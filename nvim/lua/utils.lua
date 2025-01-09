@@ -183,7 +183,7 @@ function M.remove_matching_buffers(pattern)
 end
 
 function M.remove_all_global_marks()
-    vim.cmd("delm! | delm A-Z0-9 | echo 'All marks deleted'")
+    vim.cmd("delmarks! | delmarks A-Z0-9 | echo 'All marks deleted'")
 end
 
 function M.remove_duplicate_quickfix_entries()

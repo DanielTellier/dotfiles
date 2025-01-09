@@ -1,65 +1,183 @@
 *commonmaps.txt* list of my minimal key mappings (use :helptags ~/.vim/doc)
 
-*CommonMapsleader* = \<space>
+*CommonLeader* = \<space>
 
 ==============================================================================
-CONTENTS                                                  *CommonMapsContents*
+CONTENTS                                                  *CommonContents*
 
-    1. General .................................. |CommonMapsGeneral|
-    2. AutoPairs ................................ |CommonMapsAutoPairs|
-    3. Comments ................................. |CommonMapsComments|
-    4. Surrounds ................................ |CommonMapsSurrounds|
-    5. Netrw .................................... |CommonMapsNetrw|
-    6. Toggles .................................. |CommonMapsToggles|
-    7. Term .................................... |CommonMapsTerm|
-    8. Wezterm ................................. |CommonMapsWezterm|
-    9. Folds ................................... |CommonMapsFolds|
-    10. Bash .................................... |CommonMapsBash|
-
-==============================================================================
-1. General                                                 *CommonMapsGeneral*
-
-- leader = <space>
-- Open planner in new tab: <leader>ep
-- Open docs in new tab: <leader>ed
-- Open vimrc in new tab: <leader>ev
-- Open bashrc in new tab: <leader>eb
-- Open after file for current filetype in new window: <leader>ea
-- Split window navigation (hjkl): <c-hjkl>
-- Search exact match under cursor: <leader>em
-- Paste last thing yanked: ,p
-- Quit vim: <leader>qq
-- Close Window: <leader>qw
-- Global replace of selection: <leader>sg
-- Global replace of selection with prompt: <leader>sc
-- Global replace including selection: <leader>ag
-- Global replace including selection with prompt: <leader>ac
-- Change indent spaces size from 2 to 4: <leader>24i
-- Change indent spaces size from 4 to 2: <leader>42i
+    1. General .................................. |CommonGeneral|
+    2. AutoPairs ................................ |CommonAutoPairs|
+    3. Comments ................................. |CommonComments|
+    4. Surrounds ................................ |CommonSurrounds|
+    5. Netrw .................................... |CommonNetrw|
+    6. Toggles .................................. |CommonToggles|
+    7. Term ..................................... |CommonTerm|
+    8. Wezterm .................................. |CommonWezterm|
+    9. Folds .................................... |CommonFolds|
+    10. Bash .................................... |CommonBash|
 
 ==============================================================================
-2. AutoPairs                                             *CommonMapsAutoPairs*
+1. Navigation                                               *CommonNavigation*
 
-- AutoPairs Jump: <c-p>
-
-==============================================================================
-3. Comments                                               *CommonMapsComments*
-
-- Toggle line comment: gcc
-- Toggle comment in visual mode: gc
-- Toggle motion: gc{motions} ex. gcap (comments out a paragraph)
-- Uncomment the current and adjacent commented lines: gcu
+- AutoPairs Jump (i,n): <c-p>
+- Join lines (n): J
+- Yank to end of line (n): Y
+- Move up a paragraph (n): K
+- Move down a paragraph (n): J
+- Move to start of line (n): H
+- Move to end of line (n): L
 
 ==============================================================================
-4. Surrounds                                             *CommonMapsSurrounds*
+2. Open File                                                  *CommonOpenFile*
 
-- Surround word with <x>: <leader>w<x>
-- Surround line with <x>: <leader>l<x>
-- Change surround from <x> to <y>: <leader><x><y>
-- Delete surround <x>: <leader>d<x>
+- Open docs that contain key mappings (n): <leader>ed
+- Open init.lua (n): <leader>ev
+- Open mappings.lua (n): <leader>ek
+- Open custom after file type if exists (n): <leader>ea
+- Open bashrc (n): <leader>eb
 
 ==============================================================================
-5. Netrw                                                     *CommonMapsNetrw*
+3. Toggle                                                       *CommonToggle*
+
+- Toggle highlights (n): <leader>th
+- Toggle numbers (n): <leader>tn
+- Toggle listchars (n): <leader>tl
+- Toggle listchars and numbers (n): <leader>ta
+
+==============================================================================
+4. Substitution                                           *CommonSubstitution*
+
+- Global substitution with word under cursor (n, v): <leader>swg
+- Global substitution with word under cursor and
+  confirmation (n, v): <leader>swc
+- Global prefix with word under cursor (n, v): <leader>sbg
+- Global prefix with word under cursor and confirmation (n, v): <leader>sbc
+- Global postfix with word under cursor (n, v): <leader>sag
+- Global postfix with word under cursor and confirmation (n, v): <leader>sac
+- Global substitution across buffers with word under
+  cursor (n, v): <leader>sbr
+- Global substitution across file in argument list with word
+  under cursor (n,v): <leader>sar
+
+==============================================================================
+5. Search                                                       *CommonSearch*
+
+- Count instances in the current line (n): <leader>cl
+- Count instances globally (n): <leader>cg
+- Search word under cursor recursively under current directory (n): <leader>ws
+- Search word given user input recursively under
+  current directory (n): <leader>is
+- Search exact match in current buffer (n): <leader>em
+- Open quickfix list (n): <leader>co
+- Close quickfix list (n): <leader>cq
+
+==============================================================================
+6. Git                                                             *CommonGit*
+
+- Git status (n): <leader>gs
+- Git log (n): <leader>gl
+- Git diff (n): <leader>gd
+- Git add all (n): <leader>ga
+- Git commit (n): <leader>gc
+- Git pull (n): <leader>gu
+- Git push (n): <leader>gp
+
+==============================================================================
+7. Terminal                                                   *CommonTerminal*
+
+- Split window navigation (hjkl) (t): <c-hjkl>
+- Open terminal (n): <leader>me
+- Close terminal (n): <leader>mq
+- Open vertical terminal (n): <leader>mv
+- Open horizontal terminal (n): <leader>mo
+- Open terminal in new tab (n): <leader>mt
+- Exit terminal mode (t): <esc>
+- Paste yanked text into terminal (t): <c-w>p
+
+==============================================================================
+8. Surround                                                   *CommonSurround*
+
+- Surround word with <x> (n): <leader>w<x>
+- Surround line with <x> (n): <leader>l<x>
+- Surround selected with <x> (v): <leader><x>
+- Change surround from <x> to <y> (n): <leader><x><y>
+- Delete surround <x> (n): <leader>d<x>
+
+==============================================================================
+9. Window                                                       *CommonWindow*
+
+- Split window navigation (hjkl) (n): <c-hjkl>
+- Rotate window upwards or leftwards (n): <leader>wu
+- Rotate window downwards or rightwords (n): <leader>wd
+- Move window to left (n): <leader>wh
+- Move window to bottom (n): <leader>wj
+- Move window to top (n): <leader>wk
+- Move window to right (n): <leader>wl
+- Move window to new tab (n): <leader>wt
+- Move current window to new tab (n): <leader>wc
+- Move previous window to vertical split (n): <leader>wp
+
+==============================================================================
+10. Path Info                                                 *CommonPathInfo*
+
+- Yank file name (n): <leader>fy
+- Yank full file path (n): <leader>Fy
+- Paste file name (n): <leader>fp
+
+==============================================================================
+11. Buffer                                                      *CommonBuffer*
+
+- Search buffers in list defined in commands.lua (n): <leader>bs
+- List buffers (n): <leader>bl
+- Switch buffer (n): <leader>bb
+- Switch buffer in horizontal split (n): <leader>bo
+- Switch buffer in vertical split (n): <leader>bv
+- Remove buffer from list defined in commands.lua (n): <leader>rb
+- Remove all buffers from list (n): <leader>rB
+
+==============================================================================
+12. Mark                                                          *CommonMark*
+
+- Remove mark from list (n): <leader>rm
+- Remove all global marks (n): <leader>rM
+
+==============================================================================
+13. Session                                                    *CommonSession*
+
+- Save session (n): <leader>ms
+- Source session (n): <leader>ss
+- Toggle session (n): <leader>ts
+
+==============================================================================
+14. Copilot                                                    *CommonCopilot*
+
+- Ask input (n): <leader>cci
+- Debug info (n): <leader>ccD
+- Git commit suggestion (n): <leader>cgc
+- Open chat window (n, v): <leader>cco
+- Explain code (n, v): <leader>cce
+- Generate tests (n, v): <leader>cct
+- Review code (n, v): <leader>ccr
+- Refactor code (n, v): <leader>ccR
+- Fix code (n, v): <leader>ccf
+- Add documentation for code (n, v): <leader>ccd
+- Add Swagger API documentation (n, v): <leader>cca
+- Add Swagger API documentation with Numpy Documentation (n, v): <leader>ccA
+- Summarize text (n, v): <leader>ccs
+- Correct spelling (n, v): <leader>ccS
+- Improve wording (n, v): <leader>ccw
+- Make text concise (n, v): <leader>ccc
+
+==============================================================================
+15. Comment                                                    *CommonComment*
+
+- Toggle line comment (n): gcc
+- Toggle comment (v): gc
+- Toggle motion (n, v): gc{motions} ex. gcap (comments out a paragraph)
+- Uncomment the current and adjacent commented lines (n): gcu
+
+==============================================================================
+16. Netrw                                                        *CommonNetrw*
 
 - Note: All mappings only apply to filetype (&ft) == 'netrw'
 - Open file and close netrw: <cr>
@@ -80,26 +198,7 @@ CONTENTS                                                  *CommonMapsContents*
 - Delete file/dir: D
 
 ==============================================================================
-6. Toggles                                                 *CommonMapsToggles*
-
-- Toggle highlights: <leader>th
-- Toggle listchars: <leader>tl
-- Toggle numbers: <leader>tn
-- Toggle listchars and numbers: <leader>ta
-
-==============================================================================
-7. Term                                                      *CommonMapsTerm*
-
-- Split window navigation (hjkl): <c-hjkl>
-- Open terminal: <leader>me
-- Open vertical terminal: <leader>mv
-- Open horizontal terminal: <leader>mh
-- Open terminal in new tab: <leader>mt
-- Close (hide) terminal: <leader>mc
-- Quit terminal: <leader>mq
-
-==============================================================================
-8. Wezterm                                                *CommonMapsWezterm*
+17. Wezterm                                                    *CommonWezterm*
 
 - leader = <c-t>
 - Activate Copy Mode: <leader>a
@@ -125,18 +224,7 @@ CONTENTS                                                  *CommonMapsContents*
   - Close search overlay mode: <esc>
 
 ==============================================================================
-9. Folds                                                    *CommonMapsFolds*
-
-- Opens a fold at the cursor: zo
-- Opens all folds at the cursor: zO
-- Closes a fold at the cursor: zc
-- Closes all open folds: zC
-- Increases the `foldlevel` by one: zm
-- Decreases the `foldlevel` by one: zr
-- Decreases the `foldlevel` to zero (all folds will be open): zR
-
-==============================================================================
-10. Bash                                                      *CommonMapsBash*
+18. Bash                                                          *CommonBash*
 
 - Go to start of line: <c-a>
 - Go to end of line: <c-e>
@@ -157,3 +245,17 @@ CONTENTS                                                  *CommonMapsContents*
 - Allow output to the screen if previouly stopped: <c-q>
 - Send process to background: <c-z>
 - Send process to foreground: fg
+
+==============================================================================
+19. Misc                                                          *CommonMisc*
+
+- Quit neovim (n): <leader>qq
+- Close current window (n): <leader>qc
+- Open Explorer (n): <leader>ex
+- Change file indent size from 2 to 4 (n): <leader>24i
+- Change file indent size from 4 to 2 (n): <leader>42i
+- Command line mode (n, v): ;
+- Paste last yanked (n): ,p
+- Paste last yanked before cursor position (n): ,P
+- If SSH_TTY == 1 (on server) yank to system clipboard
+  via (n, v): <leader><yank action>
