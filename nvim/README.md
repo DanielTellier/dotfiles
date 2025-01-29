@@ -4,10 +4,14 @@ Neovim configuration
 # Setup
 Plugins used placed at ~/.local/share/nvim/plugged when call `:PlugInstall`:
 - Plugin Manager placed at ~/.local/share/nvim/site/autoload/plug.vim ([vim-plug](https://github.com/junegunn/vim-plug.git)):
-```
+```sh
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
+
+If you have a Copilot license setup on your system put the following in your ~/.bashrc:
+`export COPILOT_ENABLED="true"`
+
 - Tpope:
     - [vim-commentary](https://github.com/tpope/vim-commentary.git)
     - [vim-fugitive](https://github.com/tpope/vim-fugitive.git)
