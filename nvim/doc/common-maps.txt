@@ -35,6 +35,8 @@ CONTENTS                                                  *CommonContents*
 - Move down a paragraph (n): J
 - Move to start of line (n): H
 - Move to end of line (n): L
+- Move the current tab page to after tab page N (n): <cmd>[N]tabm
+- Move the current tab page to the first one (n): <cmd>0tabm
 
 ==============================================================================
 2. Open File                                                  *CommonOpenFile*
