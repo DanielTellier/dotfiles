@@ -249,4 +249,10 @@ function M.has_words_before()
     return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
 end
 
+function M.table_concat(table1, table2)
+    for i = 1, #table2 do
+        table1[#table1 + 1] = table2[i]
+    end
+end
+
 return M

@@ -1,6 +1,7 @@
-# Vim
+# Neovim
 tags
 .netrwhist
+lazy-lock.json
 
 # ipython
 *.sqlite
