@@ -60,6 +60,7 @@ local spec = {
         config = function()
             require("auto-session").setup({
                 auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+                bypass_save_filetypes = { "netrw" },
             })
         end,
     },
@@ -81,19 +82,19 @@ local spec = {
             },
         },
     },
-    {
-        "romgrk/barbar.nvim",
-        dependencies = {
-            "lewis6991/gitsigns.nvim",
-            "nvim-tree/nvim-web-devicons",
-        },
-        init = function()
-            vim.g.barbar_auto_setup = false
-        end,
-        opts = {
-            animation = false,
-        },
-    },
+    -- {
+    --     "romgrk/barbar.nvim",
+    --     dependencies = {
+    --         "lewis6991/gitsigns.nvim",
+    --         "nvim-tree/nvim-web-devicons",
+    --     },
+    --     init = function()
+    --         vim.g.barbar_auto_setup = false
+    --     end,
+    --     opts = {
+    --         animation = false,
+    --     },
+    -- },
     {
         "OXY2DEV/markview.nvim",
         lazy = false, -- Recommended
@@ -244,7 +245,7 @@ require("lazy").setup({
     },
     -- Configure any other settings here. See the documentation for more details.
     -- colorscheme that will be used when installing plugins.
-    install = { colorscheme = { "nightfox" } },
+    install = { colorscheme = { "onedark" } },
     -- automatically check for plugin updates
     checker = { enabled = true, notify = false },
 })
