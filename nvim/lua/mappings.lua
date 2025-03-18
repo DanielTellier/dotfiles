@@ -18,6 +18,10 @@ utils.map(
     'n', 'J', 'mzJ`z',
     { silent = false, desc = "Join lines and keep cursor position" }
 )
+utils.map(
+    "n", "<leader>oo", "o<esc>o<esc>o<esc>k",
+    { desc = "Create a new line with 2 spaces around it" }
+)
 -- Referenced from here: https://github.com/jiangmiao/auto-pairs/blob/master/plugin/auto-pairs.vim#L576
 -- <buffer> (utils.mapbuf in my case) is not working for neovim so cannot do:
 -- vim.g.AutoPairsShortcutJump = "<c-p>"
@@ -149,11 +153,11 @@ utils.map(
     { silent = false, desc = "Count instances globally" }
 )
 utils.map(
-    'n', '<leader>ws', ':Grep all "\\b<c-r><c-w>\\b"<cr>:cw<cr>',
+    'n', '<leader>ws', ':Mgrep all "\\b<c-r><c-w>\\b"<cr>:cw<cr>',
     { desc = "Search word under cursor recursively under current directory" }
 )
 utils.map(
-    'n', '<leader>is', ':Grep all ',
+    'n', '<leader>is', ':Mgrep all ',
     { desc = "Search word given user input recursively under current directory" }
 )
 utils.map(
@@ -164,26 +168,15 @@ utils.map('n', '<leader>co', ':copen<cr>', { desc = "Open quickfix list" })
 utils.map('n', '<leader>cq', ':cclose<cr>', { desc = "Close quickfix list" })
 
 -- Git
-utils.map('n', '<leader>gs', ':Git status<cr>', { desc = "Git status" })
-utils.map('n', '<leader>gl', ':Git log<cr>', { desc = "Git log" })
-utils.map('n', '<leader>gd', ':Git diff<cr>', { desc = "Git diff" })
-utils.map('n', '<leader>ga', ':Git add --all<cr>', { desc = "Git add all" })
-utils.map('n', '<leader>gc', ':Git commit ', { silent = false, desc = "Git commit" })
-utils.map('n', '<leader>gu', ':Git pull<cr>', { desc = "Git pull" })
-utils.map('n', '<leader>gp', ':Git push<cr>', { desc = "Git push" })
+utils.map(
+    "n", "<leader>do", "<cmd>DiffviewOpen<cr>", { desc = "Open git diff view plugin" }
+)
+utils.map(
+    "n", "<leader>dc", "<cmd>DiffviewClose<cr>", { desc = "Close git diff view plugin"}
+)
 
 -- Terminal
-utils.map('n', '<leader>me', ':terminal<cr>', { desc = "Open terminal" })
-utils.map('n', '<leader>mq', ':q!<cr>', { desc = "Close terminal" })
-utils.map(
-    'n', '<leader>mv', ':vertical terminal<cr>', { desc = "Open vertical terminal" }
-)
-utils.map(
-    'n', '<leader>mo', ':split | terminal<cr>', { desc = "Open horizontal terminal" }
-)
-utils.map(
-    'n', '<leader>mt', ':tab terminal<cr>', { desc = "Open terminal in new tab" }
-)
+utils.map('n', '<leader>mq', '<cmd>q!<cr>', { desc = "Close terminal" })
 utils.map('t', '<esc>', '<c-\\><c-n>', { silent = false, desc = "Exit terminal mode" })
 utils.map('t', '<c-h>', '<c-w><c-h>', { silent = false, desc = "Move to left window" })
 utils.map('t', '<c-j>', '<c-w><c-j>', { silent = false, desc = "Move to bottom window" })
@@ -221,6 +214,12 @@ utils.map(
 utils.map(
     'n', '<leader>wp', ':exe "vs " .. expand("#")<cr>',
     { desc = "Move previous window to vertical split" }
+)
+utils.map(
+    "n",
+    "<c-w>.",
+    "<c-w>=z12<cr>",
+    { desc = "Sets window size = ideal size for 2 buffers and 2 terms" }
 )
 
 -- Path Info

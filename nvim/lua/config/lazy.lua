@@ -47,6 +47,7 @@ local spec = {
     -- end color schemes
     {
         "nvim-treesitter/nvim-treesitter",
+        dependencies = { "windwp/nvim-ts-autotag" },
     },
     { "L3MON4D3/LuaSnip" },
     { "akinsho/toggleterm.nvim", version = "*", config = true },

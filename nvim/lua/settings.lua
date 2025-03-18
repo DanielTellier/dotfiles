@@ -63,7 +63,6 @@ vim.opt.sidescrolloff = 8
 vim.opt.smartcase = true
 vim.opt.softtabstop = 4
 vim.opt.splitright = true
--- vim.opt.statusline = utils.statusline()
 vim.opt.swapfile = false
 vim.opt.switchbuf = "split"
 vim.opt.tabstop = 4

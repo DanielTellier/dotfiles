@@ -185,6 +185,26 @@ function M.paste_to_terminal()
     end
 end
 
+function M.toggle_term_with_number(size, direction)
+    -- Prompt the user for a number from 1 to 9
+    local number = vim.fn.input("Enter a number (1-9): ")
+    if tonumber(number) and tonumber(number) >= 1 and tonumber(number) <= 9 then
+        local cmd = ""
+        if direction == "tab" then
+            cmd = string.format(
+                "%sToggleTerm direction=%s", number, direction
+            )
+        else
+            cmd = string.format(
+                "%sToggleTerm size=%d direction=%s", number, size, direction
+            )
+        end
+        vim.cmd(cmd)
+    else
+        print("Invalid input! Please enter a number between 1 and 9.")
+    end
+end
+
 -- Utility functions to set key mappings
 function M.map(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true }

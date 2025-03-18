@@ -40,13 +40,13 @@ augroup misc
     autocmd!
     autocmd FileType xml setlocal noeol
     autocmd VimEnter * silent! echo -ne "\e[2 q"
-    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
     autocmd BufEnter * setlocal formatoptions-=cro
 augroup END
 ]])
 
 -- Commands
-vim.api.nvim_create_user_command('Grep', function(args)
+vim.api.nvim_create_user_command('Mgrep', function(args)
     print(vim.inspect(args.fargs))
     search.search_grep(unpack(args.fargs))
 end, { nargs = '+' })
