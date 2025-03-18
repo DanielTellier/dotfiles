@@ -51,19 +51,19 @@ local spec = {
     { "L3MON4D3/LuaSnip" },
     { "akinsho/toggleterm.nvim", version = "*", config = true },
     { "sindrets/diffview.nvim" },
-    {
-        "rmagatti/auto-session",
-        lazy = false,
-        dependencies = {
-            "nvim-telescope/telescope.nvim", -- Only needed if you want to use sesssion lens
-        },
-        config = function()
-            require("auto-session").setup({
-                auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-                bypass_save_filetypes = { "netrw" },
-            })
-        end,
-    },
+    -- {
+    --     "rmagatti/auto-session",
+    --     lazy = false,
+    --     dependencies = {
+    --         "nvim-telescope/telescope.nvim", -- Only needed if you want to use sesssion lens
+    --     },
+    --     config = function()
+    --         require("auto-session").setup({
+    --             auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+    --             bypass_save_filetypes = { "netrw" },
+    --         })
+    --     end,
+    -- },
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
