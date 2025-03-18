@@ -48,26 +48,6 @@ local spec = {
     {
         "nvim-treesitter/nvim-treesitter",
     },
-    {
-        "VonHeikemen/lsp-zero.nvim",
-        branch = "v4.x",
-        dependencies = {
-            { "neovim/nvim-lspconfig" },
-            { "hrsh7th/cmp-buffer" },
-            { "hrsh7th/cmp-nvim-lsp" },
-            { "hrsh7th/nvim-cmp" },
-            { "hrsh7th/cmp-nvim-lua" },
-            { "hrsh7th/cmp-path" },
-            { "saadparwaiz1/cmp_luasnip" },
-            { "williamboman/mason.nvim" },
-            { "williamboman/mason-lspconfig.nvim" },
-        },
-    },
-    {
-        "ray-x/lsp_signature.nvim",
-        event = "VeryLazy",
-        opts = {},
-    },
     { "L3MON4D3/LuaSnip" },
     { "akinsho/toggleterm.nvim", version = "*", config = true },
     { "sindrets/diffview.nvim" },
