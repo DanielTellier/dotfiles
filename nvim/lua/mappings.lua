@@ -1,10 +1,9 @@
 local utils = require('utils')
 local rtp = vim.split(vim.o.runtimepath, ",")[1]
-local sesh_dir = "~/.vim-sessions"
 local home = os.getenv('HOME')
 
--- Key mappings
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
 -- Navigation
 utils.map(
@@ -263,23 +262,6 @@ utils.map(
 utils.mapfunc('n', '<leader>rM', function()
     utils.remove_all_global_marks()
 end, { silent = false, desc = "Remove all global marks" })
-
--- Session
--- We used backspaces (<bs>) to remove the "*.vim" suffix after filtering files,
--- allowing us to type a new filename post-remap.
-utils.map(
-    'n', '<leader>ms',
-    ':Obsession ' .. sesh_dir .. '/*.vim<c-d>' .. string.rep('<bs>', 5),
-    { silent = false, desc = "Save session" }
-)
-utils.map(
-    'n', '<leader>ss',
-    ':source ' .. sesh_dir .. '/*.vim<c-d>' .. string.rep('<bs>', 5),
-    { silent = false, desc = "Source session" }
-)
-utils.map(
-    'n', '<leader>ts', ':Obsession<cr>', { silent = false, desc = "Toggle session" }
-)
 
 -- Copilot
 if vim.g.copilot_available then

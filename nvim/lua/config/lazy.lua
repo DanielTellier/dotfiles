@@ -63,7 +63,6 @@ local spec = {
             })
         end,
     },
-    { "nvim-tree/nvim-web-devicons" },
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
@@ -115,7 +114,6 @@ local spec = {
     },
     { "tpope/vim-commentary" },
     { "tpope/vim-fugitive" },
-    { "tpope/vim-obsession" },
     { "tpope/vim-repeat" },
     { "tpope/vim-surround" },
     { "tpope/vim-unimpaired" },

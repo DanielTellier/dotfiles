@@ -1,31 +1,5 @@
 local M = {}
 
-local function obsession_session_name()
-    if vim.g.this_session then
-        local session_filename = vim.fn.fnamemodify(vim.g.this_session, ':t')
-        return vim.split(session_filename, '%.')[1]
-    else
-        return "UnDef"
-    end
-end
-
-function M.setup_vim_plug()
-    local data_dir = vim.fn.has('nvim') == 1 and vim.fn.stdpath('data') .. '/site'
-    local plug_path = data_dir .. '/autoload/plug.vim'
-
-    if vim.fn.empty(vim.fn.glob(plug_path)) == 1 then
-        vim.fn.system({
-            'curl', '-fLo', plug_path, '--create-dirs',
-            'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-        })
-        vim.cmd('autocmd VimEnter * PlugInstall --sync')
-    end
-end
-
-function M.session_status()
-    return "Session(" .. obsession_session_name() .. ")"
-end
-
 function M.toggle_all()
     if vim.wo.number or vim.wo.relativenumber or vim.wo.list then
         vim.wo.number = false

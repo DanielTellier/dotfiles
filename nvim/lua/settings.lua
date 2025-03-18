@@ -1,7 +1,6 @@
 local utils = require('utils')
 
 -- Variables
-local sesh_dir = "~/.nvim-sessions"
 vim.g.fugitive_git_executable = "/usr/bin/git"
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
@@ -37,6 +36,7 @@ vim.cmd([[
 ]])
 
 -- General settings
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 vim.opt.backspace = "start,eol,indent"
 -- Attempt to enable clipboard support only if SSH_TTY is unset
 if not os.getenv("SSH_TTY") then
@@ -58,8 +58,6 @@ vim.opt.number = true
 vim.opt.redrawtime = 10000
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
-vim.opt.sessionoptions:remove("folds")
-vim.opt.sessionoptions:remove("options")
 vim.opt.shiftwidth = 4
 vim.opt.sidescrolloff = 8
 vim.opt.smartcase = true
