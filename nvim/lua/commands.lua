@@ -40,7 +40,7 @@ augroup misc
     autocmd!
     autocmd FileType xml setlocal noeol
     autocmd VimEnter * silent! echo -ne "\e[2 q"
-    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     autocmd BufEnter * setlocal formatoptions-=cro
 augroup END
 ]])
