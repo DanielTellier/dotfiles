@@ -19,6 +19,22 @@ utils.map(
     { silent = false, desc = "Join lines and keep cursor position" }
 )
 utils.map(
+    'n', '<c-d>', '<c-d>zz',
+    { silent = false, desc = "Go down half a page and center." }
+)
+utils.map(
+    'n', '<c-u>', '<c-u>zz',
+    { silent = false, desc = "Go up half a page and center." }
+)
+utils.map(
+    'n', '<c-f>', '<c-f>zz',
+    { silent = false, desc = "Go down a page and center." }
+)
+utils.map(
+    'n', '<c-b>', '<c-b>zz',
+    { silent = false, desc = "Go up a page and center." }
+)
+utils.map(
     "n", "<leader>oo", "o<esc>o<esc>o<esc>k",
     { desc = "Create a new line with 2 spaces around it" }
 )
