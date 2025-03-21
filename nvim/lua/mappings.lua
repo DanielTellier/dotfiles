@@ -237,6 +237,18 @@ utils.map(
     "<c-w>=z12<cr>",
     { desc = "Sets window size = ideal size for 2 buffers and 2 terms" }
 )
+utils.map(
+    "n",
+    "<leader>=",
+    "<cmd>vertical resize +5<cr>",
+    { desc = "Increase window size vertically" }
+)
+utils.map(
+    "n",
+    "<leader>-",
+    "<cmd>vertical resize -5<cr>",
+    { desc = "Decrease window size vertically" }
+)
 
 -- Path Info
 utils.map(
