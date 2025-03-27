@@ -185,6 +185,65 @@ function M.paste_to_terminal()
     end
 end
 
+local function switch_to_buffer_if_open(desired_buf)
+    local current_buf = vim.api.nvim_get_current_buf()
+    local win_list = vim.api.nvim_list_wins()
+    local found_open_window = false
+    if current_buf == desired_buf then
+        print("Already in desired buffer: " .. desired_buf)
+        return true
+    end
+    for _, win in ipairs(win_list) do
+        if vim.api.nvim_win_get_buf(win) == desired_buf then
+            vim.api.nvim_set_current_win(win)
+            vim.api.nvim_set_current_buf(desired_buf)
+            found_open_window = true
+            break
+        end
+    end
+
+    return found_open_window
+end
+
+-- Function to toggle the last open terminal buffer
+function M.toggle_terminal()
+    local buffers = vim.api.nvim_list_bufs()
+    local last_terminal_buf = nil
+
+    -- Find the last terminal buffer
+    for _, buf in ipairs(buffers) do
+        if (
+            vim.api.nvim_buf_is_loaded(buf) and
+            vim.api.nvim_buf_get_option(buf, 'buftype') == 'terminal'
+        ) then
+            last_terminal_buf = buf
+        end
+    end
+
+    if last_terminal_buf then
+        local current_buf = vim.api.nvim_get_current_buf()
+        local alternate_buf = vim.fn.bufnr('#')
+        local win_list = vim.api.nvim_list_wins()
+        local found_open_window = false
+
+        if current_buf == last_terminal_buf then
+            found_open_window = switch_to_buffer_if_open(alternate_buf)
+            if not found_open_window then
+                -- Switch to the alternate buffer if not open in any window
+                vim.cmd('split | buffer #')
+            end
+        else
+            found_open_window = switch_to_buffer_if_open(last_terminal_buf)
+            if not found_open_window then
+                -- Open the terminal buffer in a new window
+                vim.cmd('split | buffer ' .. last_terminal_buf)
+            end
+        end
+    else
+        print("No terminal buffer found.")
+    end
+end
+
 -- Utility functions to set key mappings
 function M.map(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true }

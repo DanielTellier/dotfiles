@@ -192,7 +192,19 @@ utils.map(
 )
 
 -- Terminal
-utils.map('n', '<leader>mq', '<cmd>q!<cr>', { desc = "Close terminal" })
+utils.map('n', '<leader>me', ':terminal<cr>', { desc = "Open terminal" })
+utils.map(
+    'n', '<leader>mv', ':vertical terminal<cr>', { desc = "Open vertical terminal" }
+)
+utils.map(
+    'n', '<leader>mo', ':split | terminal<cr>', { desc = "Open horizontal terminal" }
+)
+utils.map(
+    'n', '<leader>mt', ':tab terminal<cr>', { desc = "Open terminal in new tab" }
+)
+utils.mapfunc('n', '<leader>tt', function()
+    utils.toggle_terminal()
+end, { desc = "Toggle the last terminal buffer" })
 utils.map('t', '<esc>', '<c-\\><c-n>', { silent = false, desc = "Exit terminal mode" })
 utils.map('t', '<c-h>', '<c-w><c-h>', { silent = false, desc = "Move to left window" })
 utils.map('t', '<c-j>', '<c-w><c-j>', { silent = false, desc = "Move to bottom window" })
@@ -201,6 +213,7 @@ utils.map('t', '<c-l>', '<c-w><c-l>', { silent = false, desc = "Move to right wi
 utils.mapfunc('t', '<c-w>p', function()
     utils.paste_to_terminal()
 end, { desc = "Paste yanked text into terminal" })
+utils.map('n', '<leader>mq', '<cmd>q!<cr>', { desc = "Exit terminal" })
 
 -- Surround
 utils.surround_mappings("word")

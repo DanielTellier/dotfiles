@@ -50,7 +50,6 @@ local spec = {
         dependencies = { "windwp/nvim-ts-autotag" },
     },
     { "L3MON4D3/LuaSnip" },
-    { "akinsho/toggleterm.nvim", version = "*", config = true },
     { "sindrets/diffview.nvim" },
     -- {
     --     "rmagatti/auto-session",
