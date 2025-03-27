@@ -36,6 +36,13 @@ augroup quickfix
     autocmd QuickFixCmdPost [^l]* lua require('utils').remove_duplicate_quickfix_entries()
 augroup END
 
+augroup terminal-group
+    autocmd!
+    autocmd TermOpen * setlocal nonumber norelativenumber
+    autocmd BufLeave * if &buftype == 'terminal' | let g:last_term = bufnr('%') | else | let g:last_buffer = bufnr('%') | endif
+    autocmd BufDelete * if &buftype == 'terminal' | let g:last_term = v:null | else | let g:last_buffer = v:null | endif
+augroup END
+
 augroup misc
     autocmd!
     autocmd FileType xml setlocal noeol

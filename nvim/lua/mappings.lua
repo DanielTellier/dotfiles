@@ -383,8 +383,8 @@ if vim.g.copilot_available then
 end
 
 -- Misc
-utils.map('n', '<leader>qq', ':qa<cr>', { desc = "Quit neovim" })
-utils.map('n', '<leader>qc', ':q<cr>', { desc = "Close current window"})
+utils.map('n', '<leader>q', ':q<cr>', { desc = "Close current window"})
+utils.map('n', '<leader>Q', ':qa<cr>', { desc = "Quit neovim" })
 utils.map('n', '<leader>ex', ':e .<cr>', { desc = "Open Explorer" })
 for _, mode in ipairs({'n', 'v'}) do
     utils.map(mode, '<tab>', '>><esc>', { silent = false, desc = "Indent right" })

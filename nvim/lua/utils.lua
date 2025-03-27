@@ -206,6 +206,9 @@ local function switch_to_buffer_if_open(desired_buf)
 end
 
 -- Function to toggle the last open terminal buffer
+-- NOTE:
+-- vim.g.last_buffer and vim.g.last_term are set in augroup terminal-group
+-- in the file lua/commands.lua
 function M.toggle_terminal()
     local buffers = vim.api.nvim_list_bufs()
     local last_terminal_buf = nil
@@ -226,13 +229,22 @@ function M.toggle_terminal()
         local win_list = vim.api.nvim_list_wins()
         local found_open_window = false
 
-        if current_buf == last_terminal_buf then
+        if (
+            current_buf == last_terminal_buf or
+            vim.api.nvim_buf_get_option(current_buf, 'buftype') == 'terminal'
+        )then
+            if vim.g.last_buffer then
+                alternate_buf = vim.g.last_buffer
+            end
             found_open_window = switch_to_buffer_if_open(alternate_buf)
             if not found_open_window then
                 -- Switch to the alternate buffer if not open in any window
                 vim.cmd('split | buffer #')
             end
         else
+            if vim.g.last_term then
+                last_terminal_buf = vim.g.last_term
+            end
             found_open_window = switch_to_buffer_if_open(last_terminal_buf)
             if not found_open_window then
                 -- Open the terminal buffer in a new window
