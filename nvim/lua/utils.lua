@@ -232,7 +232,7 @@ function M.toggle_terminal()
         if (
             current_buf == last_terminal_buf or
             vim.api.nvim_buf_get_option(current_buf, 'buftype') == 'terminal'
-        )then
+        ) then
             if vim.g.last_buffer then
                 alternate_buf = vim.g.last_buffer
             end
