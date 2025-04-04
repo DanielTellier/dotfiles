@@ -63,7 +63,7 @@ local function check_qflist(qflist)
       vim.fn.setqflist(qflist, 'r')
     end
     vim.cmd('sp +' .. qfi.lnum .. ' ' .. fpath)
-    vim.cmd('echo "File Found at " .. qfi.lnum')
+    vim.cmd('echo "File Found at "' .. qfi.lnum)
   else
     vim.cmd('echo "File Not Found"')
   end
