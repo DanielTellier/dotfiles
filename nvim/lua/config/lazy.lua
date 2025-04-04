@@ -232,15 +232,11 @@ if vim.g.copilot_available then
                         insert = '<c-j>',
                     },
                 },
-                -- Change the window layout to float and position relative to cursor to make
-                -- the window look like inline chat. This will allow you to chat with
-                -- Copilot without opening a new window.
                 window = {
-                    layout = 'float',
-                    relative = 'cursor',
-                    width = 1,
-                    height = 0.4,
-                    row = 1,
+                    layout = 'horizontal',
+                    relative = 'editor',
+                    width = 0.3,
+                    height = 0.3,
                 },
                 -- See Configuration section for rest
                 -- https://github.com/CopilotC-Nvim/CopilotChat.nvim?tab=readme-ov-file#configuration
