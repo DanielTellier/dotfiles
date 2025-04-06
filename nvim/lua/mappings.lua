@@ -325,6 +325,10 @@ if vim.g.copilot_available then
         'n', '<leader>cgc', '<cmd>CopilotChatCommit<cr>',
         { desc = 'CopilotChat - Git commit suggestion' }
     )
+    utils.map(
+        'n', '<leader>ccq', '<cmd>CopilotChatClose<cr>',
+        { desc = 'CopilotChat - Close chat window' }
+    )
     -- Reference prompts list set in init.lua for the below mappings
     for _, mode in ipairs({'n', 'v'}) do
         utils.map(

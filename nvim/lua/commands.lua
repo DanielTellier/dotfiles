@@ -13,6 +13,7 @@ augroup END
 
 augroup netrw-group
     autocmd!
+    autocmd SessionLoadPost * lua require('utils').open_cwd_in_tab1()
     autocmd FileType netrw setlocal bufhidden=delete
     autocmd FileType netrw noremap <buffer> <c-l> <c-w>l
     autocmd FileType netrw nnoremap <buffer> <silent> <nowait> <leader>i :lua require('utils').split_netrw("edit", false)<cr>

@@ -300,4 +300,8 @@ function M.table_concat(table1, table2)
     end
 end
 
+function M.open_cwd_in_tab1()
+    vim.cmd('tabnew . | tabmove 0')
+end
+
 return M

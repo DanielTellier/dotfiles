@@ -36,7 +36,10 @@ vim.cmd([[
 ]])
 
 -- General settings
--- vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+-- The following global variables stored must:
+--  * Start with an uppercase letter and contain at least one lowercase letter.
+--  * Only String and Number types are stored.
+vim.o.sessionoptions="blank,buffers,curdir,folds,globals,help,tabpages,winsize,winpos,terminal,localoptions"
 vim.opt.backspace = "start,eol,indent"
 -- Attempt to enable clipboard support only if SSH_TTY is unset
 if not os.getenv("SSH_TTY") then

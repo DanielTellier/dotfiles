@@ -33,6 +33,15 @@ local spec = {
         "nvim-telescope/telescope-file-browser.nvim",
         dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
     },
+    {
+        "Shatur/neovim-session-manager",
+        config = function()
+            local config = require("session_manager.config")
+            require("session_manager").setup({
+                autoload_mode = config.AutoloadMode.CurrentDir,
+            })
+        end,
+    },
     -- color schemes
     {
         "navarasu/onedark.nvim",
