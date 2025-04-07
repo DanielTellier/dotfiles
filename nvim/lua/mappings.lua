@@ -303,6 +303,11 @@ utils.mapfunc('n', '<leader>rM', function()
     utils.remove_all_global_marks()
 end, { silent = false, desc = "Remove all global marks" })
 
+-- Session
+utils.mapfunc('n', '<leader>n', function()
+    utils.open_cwd_in_tab1()
+end, { desc = "Open netrw in the first tab" })
+
 -- Copilot
 if vim.g.copilot_available then
     local ask_copilot = function()
@@ -388,8 +393,7 @@ end
 
 -- Misc
 utils.map('n', '<leader>q', ':q<cr>', { desc = "Close current window"})
-utils.map('n', '<leader>Q', ':qa<cr>', { desc = "Quit neovim" })
-utils.map('n', '<leader>ex', ':e .<cr>', { desc = "Open Explorer" })
+utils.map('n', '<leader>x', ':qa<cr>', { desc = "Quit neovim" })
 for _, mode in ipairs({'n', 'v'}) do
     utils.map(mode, '<tab>', '>><esc>', { silent = false, desc = "Indent right" })
     utils.map(mode, '<s-tab>', '<<<esc>', { silent = false, desc = "Indent left" })
