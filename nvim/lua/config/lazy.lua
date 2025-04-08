@@ -159,6 +159,7 @@ if vim.g.copilot_available then
         Wording = "Please improve the grammar and wording of the following text.",
         Concise = "Please rewrite the following text to make it more concise.",
     }
+    local copilot_model = "claude-3.7-sonnet"
     local copilot_spec = {
         {
             'zbirenbaum/copilot-cmp',
@@ -224,6 +225,7 @@ if vim.g.copilot_available then
                             panel = { enabled = false },
                             copilot_no_tab_map = true,
                             copilot_node_command = vim.g.node_bin,
+                            copilot_model = copilot_model,
                         })
                     end,
                 },
@@ -232,6 +234,7 @@ if vim.g.copilot_available then
             },
             build = "make tiktoken", -- Only on MacOS or Linux
             opts = {
+                model = copilot_model,
                 -- Registers copilot-chat source and enables it for copilot-chat filetype (so copilot chat window)
                 chat_autocomplete = false,
                 debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
