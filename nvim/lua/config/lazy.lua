@@ -143,6 +143,7 @@ local spec = {
     { "tpope/vim-unimpaired" },
 }
 if vim.g.copilot_available then
+    local copilot_model = "claude-3.7-sonnet"
     local prompts = {
         -- Code-related prompts
         Explain = "Please explain how the following code works.",
@@ -159,7 +160,6 @@ if vim.g.copilot_available then
         Wording = "Please improve the grammar and wording of the following text.",
         Concise = "Please rewrite the following text to make it more concise.",
     }
-    local copilot_model = "claude-3.7-sonnet"
     local copilot_spec = {
         {
             'zbirenbaum/copilot-cmp',
@@ -221,11 +221,11 @@ if vim.g.copilot_available then
                     "zbirenbaum/copilot.lua",
                     config = function()
                         require("copilot").setup({
+                            copilot_model = copilot_model,
                             suggestion = { enabled = false },
                             panel = { enabled = false },
                             copilot_no_tab_map = true,
                             copilot_node_command = vim.g.node_bin,
-                            copilot_model = copilot_model,
                         })
                     end,
                 },
