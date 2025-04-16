@@ -1,5 +1,6 @@
 echo "This is a master change"
 echo "This is a different change"
+echo "This is a change"; echo "More stuff"
 echo "zoo"
 echo "boo"
 echo "goo"
