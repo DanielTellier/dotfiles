@@ -1,2 +1,3 @@
-echo "foo"
+echo "zoo"
+echo "boo"
 echo "goo"
