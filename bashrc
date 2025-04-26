@@ -91,6 +91,7 @@ alias bjf='bundle install && bundle exec jekyll serve | firefox --new-tab --url 
 alias py2='python2'
 alias py3='python3'
 alias ipy='ipython3'
+alias ple='pylint -E'
 alias myfuncs='declare -F'
 alias wez='wezterm start &'
 alias gs='git status'
