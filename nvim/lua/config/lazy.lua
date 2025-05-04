@@ -33,15 +33,6 @@ local spec = {
         "nvim-telescope/telescope-file-browser.nvim",
         dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
     },
-    {
-        "Shatur/neovim-session-manager",
-        config = function()
-            local config = require("session_manager.config")
-            require("session_manager").setup({
-                autoload_mode = config.AutoloadMode.CurrentDir,
-            })
-        end,
-    },
     -- color schemes
     {
         "navarasu/onedark.nvim",
@@ -60,19 +51,6 @@ local spec = {
     },
     { "L3MON4D3/LuaSnip" },
     { "sindrets/diffview.nvim" },
-    -- {
-    --     "rmagatti/auto-session",
-    --     lazy = false,
-    --     dependencies = {
-    --         "nvim-telescope/telescope.nvim", -- Only needed if you want to use sesssion lens
-    --     },
-    --     config = function()
-    --         require("auto-session").setup({
-    --             auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-    --             bypass_save_filetypes = { "netrw" },
-    --         })
-    --     end,
-    -- },
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
@@ -91,19 +69,6 @@ local spec = {
             },
         },
     },
-    -- {
-    --     "romgrk/barbar.nvim",
-    --     dependencies = {
-    --         "lewis6991/gitsigns.nvim",
-    --         "nvim-tree/nvim-web-devicons",
-    --     },
-    --     init = function()
-    --         vim.g.barbar_auto_setup = false
-    --     end,
-    --     opts = {
-    --         animation = false,
-    --     },
-    -- },
     {
         "folke/flash.nvim",
         event = "VeryLazy",
