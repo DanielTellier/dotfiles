@@ -166,6 +166,8 @@ if vim.g.copilot_available then
             dependencies = {
                 {
                     "zbirenbaum/copilot.lua",
+                    cmd = "Copilot",
+                    event = "InsertEnter",
                     config = function()
                         require("copilot").setup({
                             copilot_model = copilot_model,
