@@ -125,7 +125,7 @@ if vim.g.copilot_available then
                             mapping = {
                                 ["<tab>"] = vim.schedule_wrap(function(fallback)
                                     if cmp.visible() and utils.has_words_before() then
-                                        cmp.select_next_item(
+                                        cmp.mapping.select_next_item(
                                             { behavior = cmp.SelectBehavior.Select }
                                         )
                                     else
