@@ -36,12 +36,6 @@ if vim.g.deprecation_warnings == false then
   vim.deprecate = function() end
 end
 
--- local spec = {
---   { import = "core.editor" },
---   { import = "core.coding" },
---   { import = "core.treesitter" },
---   { import = "plugins" },
--- }
 local spec = {
     { import = "plugins" },
     {
