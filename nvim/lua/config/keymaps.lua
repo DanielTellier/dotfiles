@@ -1,4 +1,5 @@
 local utils = require('utils')
+local search = require('search')
 local rtp = vim.split(vim.o.runtimepath, ",")[1]
 local home = os.getenv('HOME')
 
@@ -69,95 +70,97 @@ utils.map('', 'H', '^', { silent = false, desc = "Move to start of line" })
 utils.map('', 'L', '$', { silent = false, desc = "Move to end of line" })
 
 -- Open File
-utils.mapfunc('n', '<leader>ed', function()
+utils.map('n', '<leader>ed', function()
     utils.open_path(rtp .. '/doc/common-maps.txt')
 end, { desc = "Open docs that contain key mappings" })
-utils.mapfunc('n', '<leader>ev', function()
+utils.map('n', '<leader>ev', function()
     utils.open_path(rtp .. '/init.lua')
 end, { desc = "Open init.lua" })
-utils.mapfunc('n', '<leader>ek', function()
+utils.map('n', '<leader>ek', function()
     utils.open_path(rtp .. '/lua/mappings.lua')
 end, { desc = "Open mappings.lua" })
-utils.mapfunc('n', '<leader>ea', function()
+utils.map('n', '<leader>ea', function()
     utils.open_after_ft()
 end, { desc = "Open custom after file type if exists" })
-utils.mapfunc('n', '<leader>eb', function()
+utils.map('n', '<leader>eb', function()
     utils.open_path(home .. '/.bashrc')
 end, { desc = "Open bashrc" })
 
 -- Toggle
-utils.mapfunc('n', '<leader>th', function()
+utils.map('n', '<leader>th', function()
     utils.toggle_highlights()
 end, { desc = "Toggle highlights" })
 utils.map(
     'n', '/', ':set hlsearch<cr>/',
     { silent = false, desc = "Ensure highlighting is on when searching" }
 )
-utils.mapfunc('n', '<leader>tn', function()
+utils.map('n', '<leader>tn', function()
     utils.toggle_numbers()
 end, { desc = "Toggle numbers" })
 utils.map(
     'n', '<leader>tl', ':if (&list) | set nolist | else | set list | endif<cr>',
     { desc = "Toggle listchars" }
 )
-utils.mapfunc('n', '<leader>ta', function()
+utils.map('n', '<leader>ta', function()
     utils.toggle_all()
 end, { desc = "Toggle listchars and numbers" })
+utils.map(
+    "n", "<leader>tw", "<cmd>set wrap!<CR>",
+    { desc = "Toggle Wrap", silent = true }
+)
 
 -- Substitution
-for _, mode in ipairs({'n', 'v'}) do
-    utils.map(
-        mode, '<leader>swg', ':%s/<c-r><c-w>//g' .. string.rep('<left>', 2),
-        { silent = false, desc = "Global substitution with word under cursor" }
-    )
-    utils.map(
-        mode, '<leader>swc', ':%s/<c-r><c-w>//gc' .. string.rep('<left>', 3),
-        {
-            silent = false,
-            desc = "Global substitution with word under cursor and confirmation",
-        }
-    )
-    utils.map(
-        mode, '<leader>sbg', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 4),
-        { silent = false, desc = "Global prefix with word under cursor" }
-    )
-    utils.map(
-        mode, '<leader>sbc', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 5),
-        {
-            silent = false,
-            desc = "Global prefix with word under cursor and confirmation",
-        }
-    )
-    utils.map(
-        mode, '<leader>sag', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 3),
-        { silent = false, desc = "Global postfix with word under cursor" }
-    )
-    utils.map(
-        mode, '<leader>sac', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 4),
-        {
-            silent = false,
-            desc = "Global postfix with word under cursor and confirmation",
-        }
-    )
-    utils.map(
-        mode, '<leader>sbr',
-        ':bufdo %s/<c-r><c-w>//g | update' .. string.rep('<left>', 11),
-        {
-            silent = false,
-            desc = "Global substitution across buffers with word under cursor",
-        }
-    )
-    -- Can add files to arg list via `:args *.txt` or `:args file1.txt file2.txt ...`
-    utils.map(
-        mode, '<leader>sar',
-        ':argdo %s/<c-r><c-w>//g | update' .. string.rep('<left>', 11),
-        {
-            silent = false,
-            desc = "Global substitution across file in argument " ..
-            "list with word under cursor",
-        }
-    )
-end
+utils.map(
+    { 'n', 'v' }, '<leader>swg', ':%s/<c-r><c-w>//g' .. string.rep('<left>', 2),
+    { silent = false, desc = "Global substitution with word under cursor" }
+)
+utils.map(
+    { 'n', 'v' }, '<leader>swc', ':%s/<c-r><c-w>//gc' .. string.rep('<left>', 3),
+    {
+        silent = false,
+        desc = "Global substitution with word under cursor and confirmation",
+    }
+)
+utils.map(
+    { 'n', 'v' }, '<leader>sbg', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 4),
+    { silent = false, desc = "Global prefix with word under cursor" }
+)
+utils.map(
+    { 'n', 'v' }, '<leader>sbc', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 5),
+    {
+        silent = false,
+        desc = "Global prefix with word under cursor and confirmation",
+    }
+)
+utils.map(
+    { 'n', 'v' }, '<leader>sag', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 3),
+    { silent = false, desc = "Global postfix with word under cursor" }
+)
+utils.map(
+    { 'n', 'v' }, '<leader>sac', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 4),
+    {
+        silent = false,
+        desc = "Global postfix with word under cursor and confirmation",
+    }
+)
+utils.map(
+    { 'n', 'v' }, '<leader>sbr',
+    ':bufdo %s/<c-r><c-w>//g | update' .. string.rep('<left>', 11),
+    {
+        silent = false,
+        desc = "Global substitution across buffers with word under cursor",
+    }
+)
+-- Can add files to arg list via `:args *.txt` or `:args file1.txt file2.txt ...`
+utils.map(
+    { 'n', 'v' }, '<leader>sar',
+    ':argdo %s/<c-r><c-w>//g | update' .. string.rep('<left>', 11),
+    {
+        silent = false,
+        desc = "Global substitution across file in argument " ..
+        "list with word under cursor",
+    }
+)
 
 -- Search
 utils.map(
@@ -202,7 +205,7 @@ utils.map(
 utils.map(
     'n', '<leader>mt', ':tab terminal<cr>', { desc = "Open terminal in new tab" }
 )
-utils.mapfunc('n', '<leader>tt', function()
+utils.map('n', '<leader>tt', function()
     utils.toggle_terminal()
 end, { desc = "Toggle the last terminal buffer" })
 utils.map('t', '<esc>', '<c-\\><c-n>', { silent = false, desc = "Exit terminal mode" })
@@ -210,7 +213,7 @@ utils.map('t', '<c-h>', '<c-w><c-h>', { silent = false, desc = "Move to left win
 utils.map('t', '<c-j>', '<c-w><c-j>', { silent = false, desc = "Move to bottom window" })
 utils.map('t', '<c-k>', '<c-w><c-k>', { silent = false, desc = "Move to top window" })
 utils.map('t', '<c-l>', '<c-w><c-l>', { silent = false, desc = "Move to right window" })
-utils.mapfunc('t', '<c-w>p', function()
+utils.map('t', '<c-w>p', function()
     utils.paste_to_terminal()
 end, { desc = "Paste yanked text into terminal" })
 utils.map('n', '<leader>mq', '<cmd>q!<cr>', { desc = "Exit terminal" })
@@ -291,7 +294,7 @@ utils.map(
     'n', '<leader>rb', ':RemoveWhichBuffer ',
     { silent = false, desc = "Remove buffer from list defined in commands.lua" }
 )
-utils.mapfunc('n', '<leader>rB', function()
+utils.map('n', '<leader>rB', function()
     utils.remove_all_buffers()
 end, { silent = false, desc = "Remove all buffers from list" })
 
@@ -299,12 +302,12 @@ end, { silent = false, desc = "Remove all buffers from list" })
 utils.map(
     'n', '<leader>rm', ':delmarks ', { silent = false, desc = "Remove mark from list" }
 )
-utils.mapfunc('n', '<leader>rM', function()
+utils.map('n', '<leader>rM', function()
     utils.remove_all_global_marks()
 end, { silent = false, desc = "Remove all global marks" })
 
--- Session
-utils.mapfunc('n', '<leader>n', function()
+-- Netrw
+utils.map('n', '<leader>n', function()
     utils.open_cwd_in_tab1()
 end, { desc = "Open netrw in the first tab" })
 
@@ -319,7 +322,7 @@ if vim.g.copilot_available then
             )
         end
     end
-    utils.mapfunc('n', '<leader>cci', function()
+    utils.map('n', '<leader>cci', function()
         ask_copilot()
     end, { silent = false, desc = 'CopilotChat - Ask input' })
     utils.map(
@@ -335,82 +338,77 @@ if vim.g.copilot_available then
         { desc = 'CopilotChat - Close chat window' }
     )
     -- Reference prompts list set in init.lua for the below mappings
-    for _, mode in ipairs({'n', 'v'}) do
-        utils.map(
-            mode, '<leader>cco', '<cmd>CopilotChat<cr>',
-            { desc = 'CopilotChat - Open chat window' }
-        )
-        utils.map(
-            mode, '<leader>cce', '<cmd>CopilotChatExplain<cr>',
-            { desc = 'CopilotChat - Explain code' }
-        )
-        utils.map(
-            mode, '<leader>cct', '<cmd>CopilotChatTests<cr>',
-            { desc = 'CopilotChat - Generate Tests' }
-        )
-        utils.map(
-            mode, '<leader>ccr', '<cmd>CopilotChatReview<cr>',
-            { desc = 'CopilotChat - Review code' }
-        )
-        utils.map(
-            mode, '<leader>ccR', '<cmd>CopilotChatRefactor<cr>',
-            { desc = 'CopilotChat - Refactor code' }
-        )
-        utils.map(
-            mode, '<leader>ccf', '<cmd>CopilotChatFixCode<cr>',
-            { desc = 'CopilotChat - Fix code' }
-        )
-        utils.map(
-            mode, '<leader>ccd', '<cmd>CopilotChatDocumentation<cr>',
-            { desc = 'CopilotChat - Add documentation for code' }
-        )
-        utils.map(
-            mode, '<leader>cca', '<cmd>CopilotChatSwaggerApiDocs<cr>',
-            { desc = 'CopilotChat - Add Swagger API documentation' }
-        )
-        utils.map(
-            mode, '<leader>ccA', '<cmd>CopilotChatSwaggerNumpyDocs<cr>',
-            { desc = 'CopilotChat - Add Swagger API documentation with Numpy Documentation' }
-        )
-        utils.map(
-            mode, '<leader>ccs', '<cmd>CopilotChatSummarize<cr>',
-            { desc = 'CopilotChat - Summarize text' }
-        )
-        utils.map(
-            mode, '<leader>ccS', '<cmd>CopilotChatSpelling<cr>',
-            { desc = 'CopilotChat - Correct spelling' }
-        )
-        utils.map(
-            mode, '<leader>ccw', '<cmd>CopilotChatWording<cr>',
-            { desc = 'CopilotChat - Improve wording' }
-        )
-        utils.map(
-            mode, '<leader>ccc', '<cmd>CopilotChatConcise<cr>',
-            { desc = 'CopilotChat - Make text concise' }
-        )
-    end
+    utils.map(
+        { 'n', 'v' }, '<leader>cco', '<cmd>CopilotChat<cr>',
+        { desc = 'CopilotChat - Open chat window' }
+    )
+    utils.map(
+        { 'n', 'v' }, '<leader>cce', '<cmd>CopilotChatExplain<cr>',
+        { desc = 'CopilotChat - Explain code' }
+    )
+    utils.map(
+        { 'n', 'v' }, '<leader>cct', '<cmd>CopilotChatTests<cr>',
+        { desc = 'CopilotChat - Generate Tests' }
+    )
+    utils.map(
+        { 'n', 'v' }, '<leader>ccr', '<cmd>CopilotChatReview<cr>',
+        { desc = 'CopilotChat - Review code' }
+    )
+    utils.map(
+        { 'n', 'v' }, '<leader>ccR', '<cmd>CopilotChatRefactor<cr>',
+        { desc = 'CopilotChat - Refactor code' }
+    )
+    utils.map(
+        { 'n', 'v' }, '<leader>ccf', '<cmd>CopilotChatFixCode<cr>',
+        { desc = 'CopilotChat - Fix code' }
+    )
+    utils.map(
+        { 'n', 'v' }, '<leader>ccd', '<cmd>CopilotChatDocumentation<cr>',
+        { desc = 'CopilotChat - Add documentation for code' }
+    )
+    utils.map(
+        { 'n', 'v' }, '<leader>cca', '<cmd>CopilotChatSwaggerApiDocs<cr>',
+        { desc = 'CopilotChat - Add Swagger API documentation' }
+    )
+    utils.map(
+        { 'n', 'v' }, '<leader>ccA', '<cmd>CopilotChatSwaggerNumpyDocs<cr>',
+        { desc = 'CopilotChat - Add Swagger API documentation with Numpy Documentation' }
+    )
+    utils.map(
+        { 'n', 'v' }, '<leader>ccs', '<cmd>CopilotChatSummarize<cr>',
+        { desc = 'CopilotChat - Summarize text' }
+    )
+    utils.map(
+        { 'n', 'v' }, '<leader>ccS', '<cmd>CopilotChatSpelling<cr>',
+        { desc = 'CopilotChat - Correct spelling' }
+    )
+    utils.map(
+        { 'n', 'v' }, '<leader>ccw', '<cmd>CopilotChatWording<cr>',
+        { desc = 'CopilotChat - Improve wording' }
+    )
+    utils.map(
+        { 'n', 'v' }, '<leader>ccc', '<cmd>CopilotChatConcise<cr>',
+        { desc = 'CopilotChat - Make text concise' }
+    )
 end
 
 -- Misc
 utils.map('n', '<leader>q', ':q<cr>', { desc = "Close current window"})
 utils.map('n', '<leader>x', ':qa<cr>', { desc = "Quit neovim" })
-for _, mode in ipairs({'n', 'v'}) do
-    utils.map(mode, '<tab>', '>><esc>', { silent = false, desc = "Indent right" })
-    utils.map(mode, '<s-tab>', '<<<esc>', { silent = false, desc = "Indent left" })
-end
+utils.map({'n', 'v'}, '<tab>', '>><esc>', { silent = false, desc = "Indent right" })
+utils.map({'n', 'v'}, '<s-tab>', '<<<esc>', { silent = false, desc = "Indent left" })
 utils.map(
     'i', '<s-tab>', '<esc><<', { silent = false, desc = "Indent left in insert mode" }
 )
 vim.cmd('cmap w!! w !sudo tee > /dev/null %', { desc = "Save file as sudo" })
 vim.cmd('cmap <c-p> <c-r>*', { desc = "Paste from system clipboard in command mode" })
-utils.mapfunc('n', '<leader>24i', function()
+utils.map('n', '<leader>24i', function()
     utils.change_file_indent_size(2, 4)
 end, { desc = "Change file indent size from 2 to 4" })
-utils.mapfunc('n', '<leader>42i', function()
+utils.map('n', '<leader>42i', function()
     utils.change_file_indent_size(4, 2)
 end, { desc = "Change file indent size from 4 to 2" })
-utils.map('n', ';', ':', { silent = false, desc = "Command line mode" })
-utils.map('v', ';', ':', { silent = false, desc = "Command line mode in Visual mode" })
+utils.map({ "n", "v" }, ';', ':', { silent = false, desc = "Command line mode" })
 utils.map(
     'n', ',p', '"0p', { noremap = false, silent = false, desc = "Paste last yanked" }
 )
@@ -443,3 +441,18 @@ if os.getenv("SSH_TTY") then
         }
     )
 end
+utils.map({ 'i', 'x', 'n', 's' }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+utils.map('n', "<leader>zz", "<cmd>Lazy<cr>", { desc = "Lazy" })
+
+
+-- Commands
+vim.api.nvim_create_user_command('Mgrep', function(args)
+    print(vim.inspect(args.fargs))
+    search.search_grep(unpack(args.fargs))
+end, { nargs = '+' })
+vim.api.nvim_create_user_command('BuffersSearch', function(args)
+    utils.search_buffers_(args.args)
+end, { nargs = 1 })
+vim.api.nvim_create_user_command('RemoveWhichBuffer', function(args)
+    utils.remove_matching_buffers(args.args)
+end, { nargs = 1 })

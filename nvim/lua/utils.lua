@@ -1,5 +1,6 @@
 local M = {}
 
+-- Toggle
 function M.toggle_all()
     if vim.wo.number or vim.wo.relativenumber or vim.wo.list then
         vim.wo.number = false
@@ -31,6 +32,8 @@ function M.toggle_numbers()
     end
 end
 
+
+-- Files
 function M.change_file_indent_size(curr_size, new_size)
     local curr_file = vim.fn.bufname('%')
     local tmp_file = '/tmp/set_vim_file_indent.txt'
@@ -66,6 +69,22 @@ function M.open_path(path)
     end
 end
 
+function M.open_after_ft()
+    local after_file = rtp .. "/after/ftplugin/" .. vim.bo.filetype .. ".vim"
+    if vim.fn.filereadable(after_file) == 1 then
+        vim.cmd('tabnew ' .. after_file)
+    else
+        print("File does not exist: " .. after_file)
+    end
+end
+
+function M.path_exists(path)
+    local stat = vim.loop.fs_stat(path)
+    return stat ~= nil
+end
+
+
+-- Netrw
 function M.split_netrw(bufcmd, is_stay)
     vim.cmd('normal v')
     local bufname = vim.fn.bufname('%')
@@ -84,6 +103,7 @@ function M.split_netrw(bufcmd, is_stay)
     end
 end
 
+-- Surround
 function M.surround_mappings(map_type)
     local chars = { '`', "'", '"', '[', ']', '{', '}', '(', ')', '<', '>', 't' }
     for _, char in ipairs(chars) do
@@ -122,15 +142,8 @@ function M.surround_mappings(map_type)
     end
 end
 
-function M.open_after_ft()
-    local after_file = rtp .. "/after/ftplugin/" .. vim.bo.filetype .. ".vim"
-    if vim.fn.filereadable(after_file) == 1 then
-        vim.cmd('tabnew ' .. after_file)
-    else
-        print("File does not exist: " .. after_file)
-    end
-end
 
+-- Buffers
 function M.search_buffers_(pattern)
     local bufferlist = vim.fn.execute('ls')
     for _, line in ipairs(vim.split(bufferlist, '\n')) do
@@ -156,35 +169,6 @@ function M.remove_matching_buffers(pattern)
     vim.cmd('bd ' .. table.concat(matchingBuffers, ' '))
 end
 
-function M.remove_all_global_marks()
-    vim.cmd("delmarks! | delmarks A-Z0-9 | echo 'All marks deleted'")
-end
-
-function M.remove_duplicate_quickfix_entries()
-    local seen = {}
-    local qflist = {}
-    for _, item in ipairs(vim.fn.getqflist()) do
-        local key = item.bufnr .. ':' .. item.lnum .. ':' .. item.col
-        if not seen[key] then
-            table.insert(qflist, item)
-            seen[key] = true
-        end
-    end
-    vim.fn.setqflist(qflist, 'r')
-end
-
--- Function to paste yanked text into the terminal
-function M.paste_to_terminal()
-    -- Get the yanked text from the unnamed register
-    local yanked_text = vim.fn.getreg('"')
-    local bufnr = vim.api.nvim_get_current_buf()
-    if vim.bo[bufnr].buftype == 'terminal' then
-        vim.api.nvim_paste(yanked_text, true, -1)
-    else
-        print("Not in a terminal buffer")
-    end
-end
-
 local function switch_to_buffer_if_open(desired_buf)
     local current_buf = vim.api.nvim_get_current_buf()
     local win_list = vim.api.nvim_list_wins()
@@ -203,6 +187,20 @@ local function switch_to_buffer_if_open(desired_buf)
     end
 
     return found_open_window
+end
+
+
+-- Terminal
+-- Function to paste yanked text into the terminal
+function M.paste_to_terminal()
+    -- Get the yanked text from the unnamed register
+    local yanked_text = vim.fn.getreg('"')
+    local bufnr = vim.api.nvim_get_current_buf()
+    if vim.bo[bufnr].buftype == 'terminal' then
+        vim.api.nvim_paste(yanked_text, true, -1)
+    else
+        print("Not in a terminal buffer")
+    end
 end
 
 -- Function to toggle the last open terminal buffer
@@ -256,38 +254,31 @@ function M.toggle_terminal()
     end
 end
 
+
+-- Key Mappings
 -- Utility functions to set key mappings
-function M.map(mode, lhs, rhs, opts)
+function M.map(modes, lhs, rhs, opts)
     local options = { noremap = true, silent = true }
     if opts then
         options = vim.tbl_extend('force', options, opts)
     end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    vim.keymap.set(modes, lhs, rhs, options)
 end
 
-function M.mapfunc(mode, lhs, func, opts)
-    local options = { noremap = true, silent = true }
-    if opts then
-        options = vim.tbl_extend('force', options, opts)
-    end
-    vim.keymap.set(mode, lhs, func, options)
-end
-
-function M.mapbuf(mode, lhs, rhs, opts)
+function M.mapbuf(modes, lhs, rhs, opts)
     local bufnr = vim.api.nvim_get_current_buf()
     local options = { noremap = true, silent = true }
     if opts then
         -- 'force': use value from the rightmost map
         options = vim.tbl_extend('force', options, opts)
     end
-    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, options)
+    for _, mode in ipairs(modes) do
+        vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, options)
+    end
 end
 
-function M.path_exists(path)
-    local stat = vim.loop.fs_stat(path)
-    return stat ~= nil
-end
 
+-- Misc
 function M.has_words_before()
     if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -303,5 +294,23 @@ end
 function M.open_cwd_in_tab1()
     vim.cmd('tabnew . | tabmove 0')
 end
+
+function M.remove_all_global_marks()
+    vim.cmd("delmarks! | delmarks A-Z0-9 | echo 'All marks deleted'")
+end
+
+function M.remove_duplicate_quickfix_entries()
+    local seen = {}
+    local qflist = {}
+    for _, item in ipairs(vim.fn.getqflist()) do
+        local key = item.bufnr .. ':' .. item.lnum .. ':' .. item.col
+        if not seen[key] then
+            table.insert(qflist, item)
+            seen[key] = true
+        end
+    end
+    vim.fn.setqflist(qflist, 'r')
+end
+
 
 return M
