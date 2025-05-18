@@ -43,6 +43,7 @@ end
 --   { import = "plugins" },
 -- }
 local spec = {
+    { import = "plugins" },
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.8",
