@@ -3,9 +3,6 @@ local search = require('search')
 local rtp = vim.split(vim.o.runtimepath, ",")[1]
 local home = os.getenv('HOME')
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 -- Navigation
 utils.map(
     'n', 'n', 'nzzzv',
@@ -163,12 +160,16 @@ utils.map(
 )
 
 -- Search
+vim.api.nvim_create_user_command('Mgrep', function(args)
+    print(vim.inspect(args.fargs))
+    search.search_grep(unpack(args.fargs))
+end, { nargs = '+' })
 utils.map(
-    'n', '<leader>cl', ':s///gn' .. string.rep('<left>', 4),
+    'n', '<leader>lc', ':s///gn' .. string.rep('<left>', 4),
     { silent = false, desc = "Count instances in the current line" }
 )
 utils.map(
-    'n', '<leader>cg', ':%s///gn' .. string.rep('<left>', 4),
+    'n', '<leader>gc', ':%s///gn' .. string.rep('<left>', 4),
     { silent = false, desc = "Count instances globally" }
 )
 utils.map(
@@ -183,8 +184,8 @@ utils.map(
     'n', '<leader>em', '/\\<<c-r><c-w>\\>',
     { silent = false, desc = "Search exact match in current buffer" }
 )
-utils.map('n', '<leader>co', ':copen<cr>', { desc = "Open quickfix list" })
-utils.map('n', '<leader>cq', ':cclose<cr>', { desc = "Close quickfix list" })
+utils.map('n', '<leader>of', ':copen<cr>', { desc = "Open quickfix list" })
+utils.map('n', '<leader>qf', ':cclose<cr>', { desc = "Close quickfix list" })
 
 -- Git
 utils.map(
@@ -276,6 +277,12 @@ utils.map(
 utils.map('n', '<leader>fp', '"fp', { desc = "Paste file name" })
 
 -- Buffer
+vim.api.nvim_create_user_command('BuffersSearch', function(args)
+    utils.search_buffers_(args.args)
+end, { nargs = 1 })
+vim.api.nvim_create_user_command('RemoveWhichBuffer', function(args)
+    utils.remove_matching_buffers(args.args)
+end, { nargs = 1 })
 utils.map(
     'n', '<leader>bs', ':BuffersSearch ',
     { silent = false, desc = "Search buffers in list defined in commands.lua" }
@@ -311,89 +318,8 @@ utils.map('n', '<leader>n', function()
     utils.open_cwd_in_tab1()
 end, { desc = "Open netrw in the first tab" })
 
--- Copilot
-if vim.g.copilot_available then
-    local ask_copilot = function()
-        -- CopilotChat quick chat
-        local input = vim.fn.input("Ask Copilot: ")
-        if input ~= "" then
-            require("CopilotChat").ask(
-                input, { selection = require("CopilotChat.select").buffer }
-            )
-        end
-    end
-    utils.map('n', '<leader>cci', function()
-        ask_copilot()
-    end, { silent = false, desc = 'CopilotChat - Ask input' })
-    utils.map(
-        'n', '<leader>ccD', '<cmd>CopilotChatDebugInfo<cr>',
-        { desc = 'CopilotChat - Debug info' }
-    )
-    utils.map(
-        'n', '<leader>cgc', '<cmd>CopilotChatCommit<cr>',
-        { desc = 'CopilotChat - Git commit suggestion' }
-    )
-    utils.map(
-        'n', '<leader>ccq', '<cmd>CopilotChatClose<cr>',
-        { desc = 'CopilotChat - Close chat window' }
-    )
-    -- Reference prompts list set in init.lua for the below mappings
-    utils.map(
-        { 'n', 'v' }, '<leader>cco', '<cmd>CopilotChat<cr>',
-        { desc = 'CopilotChat - Open chat window' }
-    )
-    utils.map(
-        { 'n', 'v' }, '<leader>cce', '<cmd>CopilotChatExplain<cr>',
-        { desc = 'CopilotChat - Explain code' }
-    )
-    utils.map(
-        { 'n', 'v' }, '<leader>cct', '<cmd>CopilotChatTests<cr>',
-        { desc = 'CopilotChat - Generate Tests' }
-    )
-    utils.map(
-        { 'n', 'v' }, '<leader>ccr', '<cmd>CopilotChatReview<cr>',
-        { desc = 'CopilotChat - Review code' }
-    )
-    utils.map(
-        { 'n', 'v' }, '<leader>ccR', '<cmd>CopilotChatRefactor<cr>',
-        { desc = 'CopilotChat - Refactor code' }
-    )
-    utils.map(
-        { 'n', 'v' }, '<leader>ccf', '<cmd>CopilotChatFixCode<cr>',
-        { desc = 'CopilotChat - Fix code' }
-    )
-    utils.map(
-        { 'n', 'v' }, '<leader>ccd', '<cmd>CopilotChatDocumentation<cr>',
-        { desc = 'CopilotChat - Add documentation for code' }
-    )
-    utils.map(
-        { 'n', 'v' }, '<leader>cca', '<cmd>CopilotChatSwaggerApiDocs<cr>',
-        { desc = 'CopilotChat - Add Swagger API documentation' }
-    )
-    utils.map(
-        { 'n', 'v' }, '<leader>ccA', '<cmd>CopilotChatSwaggerNumpyDocs<cr>',
-        { desc = 'CopilotChat - Add Swagger API documentation with Numpy Documentation' }
-    )
-    utils.map(
-        { 'n', 'v' }, '<leader>ccs', '<cmd>CopilotChatSummarize<cr>',
-        { desc = 'CopilotChat - Summarize text' }
-    )
-    utils.map(
-        { 'n', 'v' }, '<leader>ccS', '<cmd>CopilotChatSpelling<cr>',
-        { desc = 'CopilotChat - Correct spelling' }
-    )
-    utils.map(
-        { 'n', 'v' }, '<leader>ccw', '<cmd>CopilotChatWording<cr>',
-        { desc = 'CopilotChat - Improve wording' }
-    )
-    utils.map(
-        { 'n', 'v' }, '<leader>ccc', '<cmd>CopilotChatConcise<cr>',
-        { desc = 'CopilotChat - Make text concise' }
-    )
-end
-
 -- Misc
-utils.map('n', '<leader>q', ':q<cr>', { desc = "Close current window"})
+utils.map('n', '<leader>qw', ':q<cr>', { desc = "Close current window"})
 utils.map('n', '<leader>x', ':qa<cr>', { desc = "Quit neovim" })
 utils.map({'n', 'v'}, '<tab>', '>><esc>', { silent = false, desc = "Indent right" })
 utils.map({'n', 'v'}, '<s-tab>', '<<<esc>', { silent = false, desc = "Indent left" })
@@ -443,16 +369,3 @@ if os.getenv("SSH_TTY") then
 end
 utils.map({ 'i', 'x', 'n', 's' }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 utils.map('n', "<leader>zz", "<cmd>Lazy<cr>", { desc = "Lazy" })
-
-
--- Commands
-vim.api.nvim_create_user_command('Mgrep', function(args)
-    print(vim.inspect(args.fargs))
-    search.search_grep(unpack(args.fargs))
-end, { nargs = '+' })
-vim.api.nvim_create_user_command('BuffersSearch', function(args)
-    utils.search_buffers_(args.args)
-end, { nargs = 1 })
-vim.api.nvim_create_user_command('RemoveWhichBuffer', function(args)
-    utils.remove_matching_buffers(args.args)
-end, { nargs = 1 })

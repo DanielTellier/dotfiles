@@ -1,22 +1,13 @@
 local utils = require('utils')
 local spec = {
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    opts = {
-      spec = {
-        { "<leader>d", group = "debug" },
-        { "<leader>r", group = "refactoring", icon = "" },
-      },
+    -- Code comment
+    {
+        "folke/ts-comments.nvim",
+        opts = {},
+        event = "VeryLazy",
     },
-  },
-  -- Code comment
-  {
-    "folke/ts-comments.nvim",
-    opts = {},
-    event = "VeryLazy",
-  },
 }
+
 
 if vim.g.copilot_available then
     local copilot_model = "claude-3.7-sonnet"
@@ -27,9 +18,8 @@ if vim.g.copilot_available then
         Tests = "Please explain how the selected code works, then generate unit tests for it.",
         Refactor = "Please refactor the following code to improve its clarity and readability.",
         FixCode = "Please fix the following code to make it work as intended.",
+        BetterNamings = "Please provide better names for the following variables and functions.",
         Documentation = "Please provide documentation for the following code.",
-        SwaggerApiDocs = "Please provide documentation for the following API using Swagger.",
-        SwaggerNumpyDocs = "Please write numpydoc for the following API using Swagger.",
         -- Text-related prompts
         Summarize = "Please summarize the following text.",
         Spelling = "Please correct any grammar and spelling errors in the following text.",
@@ -37,6 +27,15 @@ if vim.g.copilot_available then
         Concise = "Please rewrite the following text to make it more concise.",
     }
     local copilot_spec = {
+        {
+            "folke/which-key.nvim",
+            optional = true,
+            opts = {
+                spec = {
+                    { "<leader>a", group = "ai", mode = { "n", "v" } },
+                },
+            },
+        },
         {
             'zbirenbaum/copilot-cmp',
             config = function ()
@@ -117,8 +116,8 @@ if vim.g.copilot_available then
                 prompts = prompts,
                 mappings = {
                     complete = {
-                        detail = "Use @<tab> or /<tab> for options.",
-                        insert = '<tab>',
+                        detail = "Use @<Tab> or /<Tab> for options.",
+                        insert = '<Tab>',
                     },
                     -- Close the chat
                     close = {

@@ -312,5 +312,21 @@ function M.remove_duplicate_quickfix_entries()
     vim.fn.setqflist(qflist, 'r')
 end
 
+function M.get_files_from_path(path)
+    local files = {}
+    local dir_iterator = vim.fs.dir(path)
+    if not dir_iterator then
+        vim.notify("Error: Could not read directory: " .. path, vim.log.levels.ERROR)
+    else
+        for filename, entry_type in dir_iterator do
+            if entry_type == "file" then
+                -- local filename_without_ext = vim.fn.fnamemodify(filename_with_ext, ":r")
+                table.insert(files, filename)
+            end
+        end
+    end
+
+    return files
+end
 
 return M
