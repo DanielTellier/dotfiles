@@ -109,12 +109,12 @@ function M.surround_mappings(map_type)
     for _, char in ipairs(chars) do
         if map_type == "word" then
             vim.api.nvim_set_keymap(
-                'n', '<leader>w' .. char, 'ysiw' .. char,
+                'n', '<leader>uw' .. char, 'ysiw' .. char,
                 { noremap = false, desc = 'Surround word with ' .. char }
             )
         elseif map_type == "line" then
             vim.api.nvim_set_keymap(
-                'n', '<leader>l' .. char, 'yss' .. char,
+                'n', '<leader>ul' .. char, 'yss' .. char,
                 { noremap = false, desc = 'Surround line with ' .. char }
             )
         elseif map_type == "change" then
@@ -123,19 +123,19 @@ function M.surround_mappings(map_type)
                     goto continue
                 end
                 vim.api.nvim_set_keymap(
-                    'n', '<leader>' .. curr_char .. char, 'cs' .. curr_char .. char,
+                    'n', '<leader>u' .. curr_char .. char, 'cs' .. curr_char .. char,
                     { noremap = false, desc = 'Change ' .. curr_char .. ' to ' .. char }
                 )
                 ::continue::
             end
         elseif map_type == "delete" then
             vim.api.nvim_set_keymap(
-                'n', '<leader>d' .. char, 'ds' .. char,
+                'n', '<leader>ud' .. char, 'ds' .. char,
                 { noremap = false, desc = 'Delete ' .. char }
             )
         elseif map_type == "visual" then
             vim.api.nvim_set_keymap(
-                'v', '<leader>' .. char, 'S' .. char,
+                'v', '<leader>u' .. char, 'S' .. char,
                 { noremap = false, desc = 'Visual Surround with ' .. char }
             )
         end

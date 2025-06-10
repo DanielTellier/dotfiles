@@ -1,7 +1,39 @@
 local utils = require('utils')
 local search = require('search')
+local wk = require("which-key")
 local rtp = vim.split(vim.o.runtimepath, ",")[1]
 local home = os.getenv('HOME')
+
+wk.add({
+    { "<leader>e", group = "edit" }
+})
+wk.add({
+    { "<leader>q", group = "close" }
+})
+wk.add({
+    { "<leader>t", group = "toggle" }
+})
+wk.add({
+    { "<leader>s", group = "substitution" }
+})
+wk.add({
+    { "<leader>f", group = "find" }
+})
+wk.add({
+    { "<leader>m", group = "terminal" }
+})
+wk.add({
+    { "<leader>u", group = "surround" }
+})
+wk.add({
+    { "<leader>w", group = "window" }
+})
+wk.add({
+    { "<leader>y", group = "yank" }
+})
+wk.add({
+    { "<leader>b", group = "buffer" }
+})
 
 -- Navigation
 utils.map(
@@ -66,7 +98,7 @@ utils.map('', 'J', '}', { silent = false, desc = "Move down a paragraph" })
 utils.map('', 'H', '^', { silent = false, desc = "Move to start of line" })
 utils.map('', 'L', '$', { silent = false, desc = "Move to end of line" })
 
--- Open File
+-- Edit
 utils.map('n', '<leader>ed', function()
     utils.open_path(rtp .. '/doc/common-maps.txt')
 end, { desc = "Open docs that contain key mappings" })
@@ -82,6 +114,8 @@ end, { desc = "Open custom after file type if exists" })
 utils.map('n', '<leader>eb', function()
     utils.open_path(home .. '/.bashrc')
 end, { desc = "Open bashrc" })
+utils.map('n', '<leader>ef', ':copen<cr>', { desc = "Open quickfix list" })
+utils.map('n', '<leader>qf', ':cclose<cr>', { desc = "Close quickfix list" })
 
 -- Toggle
 utils.map('n', '<leader>th', function()
@@ -108,40 +142,40 @@ utils.map(
 
 -- Substitution
 utils.map(
-    { 'n', 'v' }, '<leader>swg', ':%s/<c-r><c-w>//g' .. string.rep('<left>', 2),
+    { 'n', 'v' }, '<leader>sw', ':%s/<c-r><c-w>//g' .. string.rep('<left>', 2),
     { silent = false, desc = "Global substitution with word under cursor" }
 )
 utils.map(
-    { 'n', 'v' }, '<leader>swc', ':%s/<c-r><c-w>//gc' .. string.rep('<left>', 3),
+    { 'n', 'v' }, '<leader>sW', ':%s/<c-r><c-w>//gc' .. string.rep('<left>', 3),
     {
         silent = false,
         desc = "Global substitution with word under cursor and confirmation",
     }
 )
 utils.map(
-    { 'n', 'v' }, '<leader>sbg', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 4),
+    { 'n', 'v' }, '<leader>sr', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 4),
     { silent = false, desc = "Global prefix with word under cursor" }
 )
 utils.map(
-    { 'n', 'v' }, '<leader>sbc', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 5),
+    { 'n', 'v' }, '<leader>sR', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 5),
     {
         silent = false,
         desc = "Global prefix with word under cursor and confirmation",
     }
 )
 utils.map(
-    { 'n', 'v' }, '<leader>sag', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 3),
+    { 'n', 'v' }, '<leader>so', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 3),
     { silent = false, desc = "Global postfix with word under cursor" }
 )
 utils.map(
-    { 'n', 'v' }, '<leader>sac', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 4),
+    { 'n', 'v' }, '<leader>sO', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 4),
     {
         silent = false,
         desc = "Global postfix with word under cursor and confirmation",
     }
 )
 utils.map(
-    { 'n', 'v' }, '<leader>sbr',
+    { 'n', 'v' }, '<leader>sb',
     ':bufdo %s/<c-r><c-w>//g | update' .. string.rep('<left>', 11),
     {
         silent = false,
@@ -150,7 +184,7 @@ utils.map(
 )
 -- Can add files to arg list via `:args *.txt` or `:args file1.txt file2.txt ...`
 utils.map(
-    { 'n', 'v' }, '<leader>sar',
+    { 'n', 'v' }, '<leader>sa',
     ':argdo %s/<c-r><c-w>//g | update' .. string.rep('<left>', 11),
     {
         silent = false,
@@ -159,40 +193,30 @@ utils.map(
     }
 )
 
--- Search
+-- Find
 vim.api.nvim_create_user_command('Mgrep', function(args)
     print(vim.inspect(args.fargs))
     search.search_grep(unpack(args.fargs))
 end, { nargs = '+' })
 utils.map(
-    'n', '<leader>lc', ':s///gn' .. string.rep('<left>', 4),
+    'n', '<leader>fl', ':s///gn' .. string.rep('<left>', 4),
     { silent = false, desc = "Count instances in the current line" }
 )
 utils.map(
-    'n', '<leader>gc', ':%s///gn' .. string.rep('<left>', 4),
+    'n', '<leader>fg', ':%s///gn' .. string.rep('<left>', 4),
     { silent = false, desc = "Count instances globally" }
 )
 utils.map(
-    'n', '<leader>ws', ':Mgrep all "\\b<c-r><c-w>\\b"<cr>:cw<cr>',
+    'n', '<leader>fw', ':Mgrep all "\\b<c-r><c-w>\\b"<cr>:cw<cr>',
     { desc = "Search word under cursor recursively under current directory" }
 )
 utils.map(
-    'n', '<leader>is', ':Mgrep all ',
+    'n', '<leader>fi', ':Mgrep all ',
     { desc = "Search word given user input recursively under current directory" }
 )
 utils.map(
-    'n', '<leader>em', '/\\<<c-r><c-w>\\>',
+    'n', '<leader>fm', '/\\<<c-r><c-w>\\>',
     { silent = false, desc = "Search exact match in current buffer" }
-)
-utils.map('n', '<leader>of', ':copen<cr>', { desc = "Open quickfix list" })
-utils.map('n', '<leader>qf', ':cclose<cr>', { desc = "Close quickfix list" })
-
--- Git
-utils.map(
-    "n", "<leader>do", "<cmd>DiffviewOpen<cr>", { desc = "Open git diff view plugin" }
-)
-utils.map(
-    "n", "<leader>dc", "<cmd>DiffviewClose<cr>", { desc = "Close git diff view plugin"}
 )
 
 -- Terminal
@@ -250,31 +274,31 @@ utils.map(
 )
 utils.map(
     "n",
-    "<c-w>.",
+    "w2",
     "<c-w>=z12<cr>",
     { desc = "Sets window size = ideal size for 2 buffers and 2 terms" }
 )
 utils.map(
     "n",
-    "<leader>=",
+    "<leader>w=",
     "<cmd>vertical resize +5<cr>",
     { desc = "Increase window size vertically" }
 )
 utils.map(
     "n",
-    "<leader>-",
+    "<leader>w-",
     "<cmd>vertical resize -5<cr>",
     { desc = "Decrease window size vertically" }
 )
 
 -- Path Info
 utils.map(
-    'n', '<leader>fy', ':let @f = expand("%:t")<cr>', { desc = "Yank file name" }
+    'n', '<leader>yf', ':let @f = expand("%:t")<cr>', { desc = "Yank file name" }
 )
 utils.map(
-    'n', '<leader>Fy', ':let @f = expand("%:p")<cr>', { desc = "Yank full file path" }
+    'n', '<leader>yF', ':let @f = expand("%:p")<cr>', { desc = "Yank full file path" }
 )
-utils.map('n', '<leader>fp', '"fp', { desc = "Paste file name" })
+utils.map('n', '<leader>yp', '"fp', { desc = "Paste file name" })
 
 -- Buffer
 vim.api.nvim_create_user_command('BuffersSearch', function(args)
@@ -298,10 +322,10 @@ utils.map(
     { silent = false, desc = "Switch buffer in vertical split" }
 )
 utils.map(
-    'n', '<leader>rb', ':RemoveWhichBuffer ',
+    'n', '<leader>br', ':RemoveWhichBuffer ',
     { silent = false, desc = "Remove buffer from list defined in commands.lua" }
 )
-utils.map('n', '<leader>rB', function()
+utils.map('n', '<leader>bR', function()
     utils.remove_all_buffers()
 end, { silent = false, desc = "Remove all buffers from list" })
 
@@ -347,7 +371,7 @@ utils.map(
     }
 )
 if os.getenv("SSH_TTY") then
-    local yanks = {'yy', 'yw', 'y^', 'y$', 'yiw', 'yaw'}
+    local yanks = {'yy', 'yw', 'y^', 'y$', 'yi', 'ya'}
     for _, key in ipairs(yanks) do
             utils.map(
                 'n', "<leader>" .. key, '"+' .. key,
@@ -359,7 +383,7 @@ if os.getenv("SSH_TTY") then
             )
     end
     utils.map(
-        'v', '<leader>y', '"+y',
+        'v', '<leader>yy', '"+y',
         {
             silent = false,
             desc = "Yank to system clipboard in Visual mode " ..
