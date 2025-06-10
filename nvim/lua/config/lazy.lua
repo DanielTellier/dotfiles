@@ -15,6 +15,18 @@ function M.load(name)
     vim.api.nvim_exec_autocmds("User", { pattern = pattern, modeline = false })
 end
 
+local function setup_keymaps(config_path)
+    local key_files = utils.get_files_from_path(config_path)
+    for _, file in ipairs(key_files) do
+        local keymap = vim.fn.fnamemodify(file, ":r")
+        if keymap == "copilot" and not vim.g.copilot_available then
+            goto continue
+        end
+        M.load("keymaps." .. keymap)
+        ::continue::
+    end
+end
+
 function M.setup()
     -- autocmds can be loaded lazily when not opening a file
     local lazy_autocmds = vim.fn.argc(-1) == 0
@@ -30,16 +42,8 @@ function M.setup()
             if lazy_autocmds then
                 M.load("autocmds")
             end
-            -- Setup keymaps
-            -- vim.g.mapleader = " "
-            -- vim.g.maplocalleader = "\\"
-            local key_files = utils.get_files_from_path(
-                vim.fn.stdpath("config") .. "/lua/config/keymaps"
-            )
-            for _, file in ipairs(key_files) do
-                local keymap = vim.fn.fnamemodify(file, ":r")
-                M.load("keymaps." .. keymap)
-            end
+            local config_path = vim.fn.stdpath("config") .. "/lua/config/keymaps"
+            setup_keymaps(config_path)
         end,
     })
 end
