@@ -2,7 +2,7 @@ local utils = require('utils')
 local wk = require("which-key")
 
 wk.add({
-    { "<leader>a", group = "copilot" }
+    { "<leader>a", group = "copilot", mode = { "n", "x", "v" } },
 })
 
 local ask_copilot = function()
@@ -38,7 +38,7 @@ utils.map("x", "<leader>ai",
 utils.map("n", "<leader>aq", function()
     quick_copilot()
 end, { desc = "CopilotChat - Quick chat" })
-utils.map("n", "<leader>aa", function()
+utils.map({ "n", "v" }, "<leader>aa", function()
     ask_copilot()
 end, { desc = "CopilotChat - Ask chat" })
 
@@ -61,7 +61,7 @@ utils.map(
 )
 utils.map(
     { "n", "v" },
-    "<leader>at",
+    "<leader>aT",
     "<cmd>CopilotChatTests<cr>",
     { desc = "CopilotChat - Generate tests" }
 )

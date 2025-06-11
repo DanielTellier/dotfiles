@@ -5,34 +5,34 @@ local rtp = vim.split(vim.o.runtimepath, ",")[1]
 local home = os.getenv('HOME')
 
 wk.add({
-    { "<leader>e", group = "edit" }
+    { "<leader>e", group = "edit", mode = "n" }
 })
 wk.add({
-    { "<leader>q", group = "close" }
+    { "<leader>q", group = "close", mode = "n" }
 })
 wk.add({
-    { "<leader>t", group = "toggle" }
+    { "<leader>t", group = "toggle", mode = "n" }
 })
 wk.add({
-    { "<leader>s", group = "substitution" }
+    { "<leader>s", group = "substitution", mode = { "n", "v" } }
 })
 wk.add({
-    { "<leader>f", group = "find" }
+    { "<leader>f", group = "find", mode = "n" }
 })
 wk.add({
-    { "<leader>m", group = "terminal" }
+    { "<leader>m", group = "terminal", mode = "n" }
 })
 wk.add({
-    { "<leader>u", group = "surround" }
+    { "<leader>u", group = "surround", mode = { "n", "v" } }
 })
 wk.add({
-    { "<leader>w", group = "window" }
+    { "<leader>w", group = "window", mode = "n" }
 })
 wk.add({
-    { "<leader>y", group = "yank" }
+    { "<leader>y", group = "yank", mode = { "n", "v" } }
 })
 wk.add({
-    { "<leader>b", group = "buffer" }
+    { "<leader>b", group = "buffer", mode = "n" }
 })
 
 -- Navigation
