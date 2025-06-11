@@ -25,10 +25,6 @@ local function setup_keymaps(config_path)
         M.load("keymaps." .. keymap)
         ::continue::
     end
-    -- TODO: This is not showing plugin grouped mappings
-    utils.map({ "n", "x", "v" }, "<leader>?", function()
-        require("which-key").show({ global = true })
-    end, { desc = "Show all Keymaps (which-key)" })
 end
 
 function M.setup()
