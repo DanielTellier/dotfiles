@@ -40,7 +40,11 @@ vim.cmd([[
 --  * Start with an uppercase letter and contain at least one lowercase letter.
 --  * Only String and Number types are stored.
 opt.backspace = "start,eol,indent"
-opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+if os.getenv("SSH_TTY") then
+    vim.cmd("let g:clipboard = 'osc52'")
+else
+    opt.clipboard = "unnamedplus"
+end
 opt.colorcolumn = "90"
 opt.complete = ".,w,b,u,t"
 opt.completeopt = "menu,menuone,noselect"
@@ -54,6 +58,7 @@ opt.foldmethod = "indent"
 opt.foldnestmax = 10
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
+opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,t:block"
 opt.ignorecase = true
 opt.inccommand = "nosplit" -- preview incremental substitute
 opt.laststatus = 3 -- global statusline
