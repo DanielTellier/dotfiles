@@ -24,7 +24,7 @@ local toggle_copilot = function()
     chat.toggle()
 end
 
-utils.map("n", "<leader>at", function()
+utils.map({ "n", "v" }, "<leader>at", function()
     toggle_copilot()
 end, { desc = "CopilotChat - Toggle Copilot" })
 utils.map("x", "<leader>av",
@@ -35,7 +35,7 @@ utils.map("x", "<leader>ai",
     "<cmd>CopilotChatInline<cr>",
     { desc = "CopilotChat - Inline chat" }
 )
-utils.map("n", "<leader>aq", function()
+utils.map({ "n", "v" }, "<leader>aq", function()
     quick_copilot()
 end, { desc = "CopilotChat - Quick chat" })
 utils.map({ "n", "v" }, "<leader>aa", function()
