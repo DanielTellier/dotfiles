@@ -242,6 +242,7 @@ utils.map('t', '<c-w>p', function()
     utils.paste_to_terminal()
 end, { desc = "Paste yanked text into terminal" })
 utils.map('n', '<leader>mq', '<cmd>q!<cr>', { desc = "Exit terminal" })
+utils.map('n', '<leader>mz', "<c-[>", { desc = "Exit insert mode in inner terminal" })
 
 -- Surround
 utils.surround_mappings("word")
