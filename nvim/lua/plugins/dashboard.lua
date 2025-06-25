@@ -43,6 +43,21 @@ return {
                             key = "u"
                         },
                         {
+                            icon = " ",
+                            icon_hl = "@variable",
+                            desc = "Files",
+                            group = "Label",
+                            action = [[lua require('fzf-lua').files({cwd_prompt = false})]],
+                            key = "f",
+                        },
+                        {
+                            icon = " ",
+                            desc = "Config",
+                            group = "Number",
+                            action = [[lua require('fzf-lua').files({ cwd = '~/.config/nvim' })]],
+                            key = "c",
+                        },
+                        {
                             icon = " ",
                             desc = " Restore Session",
                             group = "Number",
