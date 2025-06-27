@@ -62,8 +62,8 @@ return {
             require("onedark").load()
         end,
     },
-    {"ibhagwan/fzf-lua"},
     -- end color schemes
+    {"ibhagwan/fzf-lua"},
     { "sindrets/diffview.nvim" },
     { "tpope/vim-commentary" },
     { "tpope/vim-fugitive" },
