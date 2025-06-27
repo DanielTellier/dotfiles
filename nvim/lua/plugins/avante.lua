@@ -2,7 +2,6 @@ if not vim.g.copilot_available then
     return {}
 end
 
--- local utils = require('utils')
 local copilot_model = "claude-3.7-sonnet"
 
 return {
