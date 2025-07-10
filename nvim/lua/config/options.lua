@@ -24,6 +24,8 @@ vim.cmd("syntax on")
 vim.fn.setreg('l', '0LT/vLhy0i[]\027hplli(\027La)\027j')
 -- Fix line to 75 + up to next space
 vim.fn.setreg('n', '075lf\032a\b\r\027j')
+-- Move comma separated parameters to own line for a function call/definition
+vim.fn.setreg('f', 'f,lli\b\r\027')
 
 -- Highlight settings
 vim.cmd([[
