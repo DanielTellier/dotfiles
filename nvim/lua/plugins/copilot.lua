@@ -3,7 +3,9 @@ if not vim.g.copilot_available then
 end
 
 local utils = require('utils')
-local copilot_model = "claude-3.7-sonnet"
+-- To list available models, run: <cmd>CopilotChatModels
+-- local copilot_model = "claude-3.7-sonnet"
+local copilot_model = "claude-sonnet-4"
 local common_system_prompt = [[Analyze the code for:
 ### CODE QUALITY
 * Function and variable naming (clarity and consistency)
