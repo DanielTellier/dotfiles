@@ -187,15 +187,28 @@ return {
                             { name = "copilot", group_index = 2 },
                         },
                         mapping = {
-                            ["<tab>"] = vim.schedule_wrap(function(fallback)
-                                if cmp.visible() and utils.has_words_before() then
-                                    cmp.mapping.select_next_item(
+                            ["<tab>"] = cmp.mapping(function(fallback)
+                                if cmp.visible() then
+                                    cmp.select_next_item(
                                         { behavior = cmp.SelectBehavior.Select }
                                     )
+                                elseif utils.has_words_before() then
+                                    cmp.complete()
                                 else
                                     fallback()
                                 end
-                            end),
+                            end, { 'i', 's' }),
+                            ["<s-tab>"] = cmp.mapping(function(fallback)
+                                if cmp.visible() then
+                                    cmp.select_prev_item(
+                                        { behavior = cmp.SelectBehavior.Select }
+                                    )
+                                elseif utils.has_words_before() then
+                                    cmp.complete()
+                                else
+                                    fallback()
+                                end
+                            end, { 'i', 's' }),
                             ['<c-b>'] = cmp.mapping(
                                 cmp.mapping.scroll_docs(-4), { 'i', 'c' }
                             ),
