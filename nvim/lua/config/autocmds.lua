@@ -161,3 +161,21 @@ vim.api.nvim_create_autocmd('BufEnter', {
         vim.opt_local.formatoptions:remove('cro')
     end
 })
+
+-- Detect if Neotree was open in the session and then show Neotree in the correct window
+vim.api.nvim_create_autocmd("User", {
+    group = augroup("neotree"),
+    pattern = "PersistenceLoadPost",
+    callback = function()
+        for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            local name = vim.api.nvim_buf_get_name(buf)
+            if name:match("neo%-tree") then
+                local wins = vim.fn.win_findbuf(buf)
+                if #wins > 0 then
+                    vim.api.nvim_set_current_win(wins[1])
+                    vim.cmd("Neotree show")
+                end
+            end
+        end
+    end
+})
