@@ -83,26 +83,6 @@ function M.path_exists(path)
     return stat ~= nil
 end
 
-
--- Netrw
-function M.split_netrw(bufcmd, is_stay)
-    vim.cmd('normal v')
-    local bufname = vim.fn.bufname('%')
-    vim.cmd('close!')
-    local tabnext = vim.fn.tabpagenr() + 1
-    local tablast = vim.fn.tabpagenr('$')
-    if tabnext > tablast then
-        vim.cmd('tabnew')
-        bufcmd = 'edit'
-    else
-        vim.cmd(tabnext .. 'tabnext')
-    end
-    vim.cmd(bufcmd .. ' ' .. bufname)
-    if is_stay then
-        vim.cmd(vim.fn.tabpagenr('#') .. 'tabnext')
-    end
-end
-
 -- Surround
 function M.surround_mappings(map_type)
     local chars = { '`', "'", '"', '[', ']', '{', '}', '(', ')', '<', '>', 't' }
@@ -327,6 +307,41 @@ function M.get_files_from_path(path)
     end
 
     return files
+end
+
+local function open_in_tab(state, split_type)
+    -- 'split_type' can be 'split' or 'vsplit'
+    split_type = split_type or 'split'
+    if split_type ~= 'split' and split_type ~= 'vsplit' then
+        error("Invalid split type: " .. split_type)
+    end
+    if split_type == 'split' then
+        vim.cmd('normal S')
+    else -- vsplit
+        vim.cmd('normal s')
+    end
+    local node = state.tree:get_node()
+    vim.cmd('close!')
+    local tabnext = vim.fn.tabpagenr() + 1
+    local tablast = vim.fn.tabpagenr('$')
+    if tabnext > tablast then
+        vim.cmd('tabnew')
+        split_type = 'edit'
+    else
+        vim.cmd(tabnext .. 'tabnext')
+    end
+    vim.cmd(split_type .. ' ' .. node.path)
+    if is_stay then
+        vim.cmd(vim.fn.tabpagenr('#') .. 'tabnext')
+    end
+end
+
+function M.open_in_tab_vsplit(state)
+    open_in_tab(state, 'vsplit')
+end
+
+function M.open_in_tab_split(state)
+    open_in_tab(state, 'split')
 end
 
 return M
