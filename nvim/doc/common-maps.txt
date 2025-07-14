@@ -20,7 +20,7 @@ CONTENTS                                                  *CommonContents*
     13. Session ......................................... |CommonSession|
     14. Copilot ......................................... |CommonCopilot|
     15. Comment ......................................... |CommonComment|
-    16. Neo-Tree ........................................ |CommonNeoTree|
+    16. NeoTree ........................................ |CommonNeoTree|
     17. Wezterm ......................................... |CommonWezterm|
     18. Bash ............................................ |CommonBash|
     19. Misc ............................................ |CommonMisc|
