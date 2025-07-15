@@ -179,3 +179,18 @@ vim.api.nvim_create_autocmd("User", {
         end
     end
 })
+
+-- Attach Copilot to all loaded buffers after restoring session
+vim.api.nvim_create_autocmd("User", {
+    group = augroup("copilot"),
+    pattern = "PersistenceLoadPost",
+    callback = function()
+        for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+            if vim.api.nvim_buf_is_loaded(bufnr) then
+                vim.api.nvim_buf_call(bufnr, function()
+                    vim.cmd("Copilot attach")
+                end)
+            end
+        end
+    end
+})
