@@ -188,7 +188,7 @@ vim.api.nvim_create_autocmd("User", {
         for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
             if vim.api.nvim_buf_is_loaded(bufnr) then
                 vim.api.nvim_buf_call(bufnr, function()
-                    vim.cmd("Copilot attach")
+                    vim.cmd("Copilot! attach")
                 end)
             end
         end
