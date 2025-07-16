@@ -192,6 +192,10 @@ utils.map(
         "list with word under cursor",
     }
 )
+utils.map(
+    'n', '<leader>ss', ':%s/^\\s\\+$//g<cr>',
+    { desc = "Remove trailing spaces on an empty line" }
+)
 
 -- Find
 vim.api.nvim_create_user_command('Mgrep', function(args)
