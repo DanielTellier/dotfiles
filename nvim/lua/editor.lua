@@ -74,6 +74,7 @@ return {
         lazy = false, -- neo-tree will lazily load itself
         opts = {
             window = {
+                position = "bottom",
                 mappings = {
                     ["v"] = utils.open_in_tab_vsplit,
                     ["o"] = utils.open_in_tab_split,
