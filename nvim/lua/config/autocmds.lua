@@ -162,22 +162,19 @@ vim.api.nvim_create_autocmd('BufEnter', {
     end
 })
 
--- Detect if Neotree was open in the session and then show Neotree in the correct window
-vim.api.nvim_create_autocmd("User", {
-    group = augroup("neotree"),
-    pattern = "PersistenceLoadPost",
+vim.api.nvim_create_autocmd('FileType', {
+    group = augroup("netrw"),
+    pattern = 'netrw',
     callback = function()
-        for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-            local name = vim.api.nvim_buf_get_name(buf)
-            if name:match("neo%-tree") then
-                local wins = vim.fn.win_findbuf(buf)
-                if #wins > 0 then
-                    vim.api.nvim_set_current_win(wins[1])
-                end
-                vim.api.nvim_buf_delete(buf, { force = true })
-            end
-        end
-        vim.cmd("Neotree show")
+        vim.opt_local.bufhidden = 'delete'
+        utils.map('n', '<c-l>', '<c-w>l', { buffer = true })
+        utils.map('n', '<leader>i', function() utils.split_netrw("edit", false) end, { buffer = true, nowait = true })
+        utils.map('n', '<leader>o', function() utils.split_netrw("split", false) end, { buffer = true, nowait = true })
+        utils.map('n', '<leader>v', function() utils.split_netrw("vsplit", false) end, { buffer = true, nowait = true })
+        utils.map('n', '<leader>I', function() utils.split_netrw("edit", true) end, { buffer = true, nowait = true })
+        utils.map('n', '<leader>O', function() utils.split_netrw("split", true) end, { buffer = true, nowait = true })
+        utils.map('n', '<leader>V', function() utils.split_netrw("vsplit", true) end, { buffer = true, nowait = true })
+        vim.cmd('exe "0file!"')
     end
 })
 

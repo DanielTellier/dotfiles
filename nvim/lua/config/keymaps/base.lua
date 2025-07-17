@@ -343,9 +343,9 @@ utils.map('n', '<leader>rM', function()
 end, { silent = false, desc = "Remove all global marks" })
 
 -- Netrw
--- utils.map('n', '<leader>n', function()
---     utils.open_cwd_in_tab1()
--- end, { desc = "Open netrw in the first tab" })
+utils.map('n', '<leader>n', function()
+    utils.open_cwd_in_tab1()
+end, { desc = "Open netrw in the first tab" })
 
 -- Misc
 utils.map('n', '<leader>qw', ':q<cr>', { desc = "Close current window"})

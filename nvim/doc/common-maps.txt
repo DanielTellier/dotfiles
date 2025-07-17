@@ -20,7 +20,7 @@ CONTENTS                                                  *CommonContents*
     13. Session ......................................... |CommonSession|
     14. Copilot ......................................... |CommonCopilot|
     15. Comment ......................................... |CommonComment|
-    16. NeoTree ........................................ |CommonNeoTree|
+    16. Netrw ........................................... |CommonNetrw|
     17. Wezterm ......................................... |CommonWezterm|
     18. Bash ............................................ |CommonBash|
     19. Misc ............................................ |CommonMisc|
@@ -188,23 +188,25 @@ CONTENTS                                                  *CommonContents*
 - Uncomment the current and adjacent commented lines (n): gcu
 
 ==============================================================================
-16. NeoTree                                                  *CommonNeoTree*
+16. Netrw                                                        *CommonNetrw*
 
-- Note: All mappings only apply to filetype (&ft) == 'neo-tree'
-- Open file: <cr>
+- Note: All mappings only apply to filetype (&ft) == 'netrw'
+- Open file and close netrw: <cr>
 - Open file in new tab: t
-- Open file in horizontal split: S
-- Open file in vertical split: s
-- Open file in horizontal split in next tab: o
-- Open file in vertical split in next tab: v
-- Add new file: a
-- Add new dir: A
-- Rename file/dir: r
-- Delete file/dir: d
-- Move file/dir: m
-- Refresh NeoTree: R
-- Show ordered by options: o
-- Toggle whether hidden (filtered items) are shown or not: H
+- Open file in horizontal split: o
+- Open file in vertical split: v
+- Open file in next tab: <leader>i
+- Open file in horizontal split in next tab: <leader>o
+- Open file in vertical split in next tab: <leader>v
+- Open file in next tab and stay on netrw: <leader>I
+- Open file in horizontal split in next tab and stay on netrw: <leader>O
+- Open file in vertical split in next tab and stay on netrw: <leader>V
+- Go up dir: -
+- Sort toggle: s
+- Create new file: %
+- Create new dir: d
+- Rename file/dir: R
+- Delete file/dir: D
 
 ==============================================================================
 17. Wezterm                                                    *CommonWezterm*

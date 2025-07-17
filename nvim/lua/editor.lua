@@ -1,5 +1,3 @@
-local utils = require('utils')
-
 return {
     -- Which key
     {
@@ -63,25 +61,6 @@ return {
         end,
     },
     -- end color schemes
-    {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-            "MunifTanjim/nui.nvim",
-        },
-        lazy = false, -- neo-tree will lazily load itself
-        opts = {
-            window = {
-                position = "bottom",
-                mappings = {
-                    ["v"] = utils.open_in_tab_vsplit,
-                    ["o"] = utils.open_in_tab_split,
-                },
-            },
-        },
-    },
     { "ibhagwan/fzf-lua" },
     { "sindrets/diffview.nvim" },
     { "tpope/vim-commentary" },
