@@ -173,10 +173,11 @@ vim.api.nvim_create_autocmd("User", {
                 local wins = vim.fn.win_findbuf(buf)
                 if #wins > 0 then
                     vim.api.nvim_set_current_win(wins[1])
-                    vim.cmd("Neotree show")
                 end
+                vim.api.nvim_buf_delete(buf, { force = true })
             end
         end
+        vim.cmd("Neotree show")
     end
 })
 
