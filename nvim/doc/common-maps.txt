@@ -207,6 +207,12 @@ CONTENTS                                                  *CommonContents*
 - Create new dir: d
 - Rename file/dir: R
 - Delete file/dir: D
+- Bookmark file/dir: mb
+- Delete bookmark: {cnt}mB
+- List bookmarks: qb
+- Return to a bookmark: {cnt}gb
+- Changing to a predecessor directory: u
+- Changing to a successor directory: U
 
 ==============================================================================
 17. Wezterm                                                    *CommonWezterm*
