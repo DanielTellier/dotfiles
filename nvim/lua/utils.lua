@@ -102,6 +102,16 @@ function M.split_netrw(bufcmd, is_stay)
     end
 end
 
+M.bookmark = 1
+function M.toggle_netrw_dir()
+    if M.bookmark == 1 then
+        M.bookmark = 2
+    else
+        M.bookmark = 1
+    end
+    vim.cmd('normal ' .. M.bookmark .. 'gb')
+end
+
 
 -- Surround
 function M.surround_mappings(map_type)

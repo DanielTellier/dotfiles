@@ -166,15 +166,98 @@ vim.api.nvim_create_autocmd('FileType', {
     group = augroup("netrw"),
     pattern = 'netrw',
     callback = function()
+        local wk = require("which-key")
+        wk.add({
+            { "<leader>", group = "netrw", mode = "n" }
+        })
         utils.map('n', '<c-l>', '<c-w>l', { buffer = true })
-        utils.map('n', '<leader>i', function() utils.split_netrw("edit", false) end, { buffer = true, nowait = true })
-        utils.map('n', '<leader>o', function() utils.split_netrw("split", false) end, { buffer = true, nowait = true })
-        utils.map('n', '<leader>v', function() utils.split_netrw("vsplit", false) end, { buffer = true, nowait = true })
-        utils.map('n', '<leader>I', function() utils.split_netrw("edit", true) end, { buffer = true, nowait = true })
-        utils.map('n', '<leader>O', function() utils.split_netrw("split", true) end, { buffer = true, nowait = true })
-        utils.map('n', '<leader>V', function() utils.split_netrw("vsplit", true) end, { buffer = true, nowait = true })
+        utils.map(
+            'n',
+            '<leader>i', function() utils.split_netrw("edit", false) end,
+            { buffer = true, nowait = true, desc = "Open file on next tab" }
+        )
+        utils.map(
+            'n',
+            '<leader>o',
+            function() utils.split_netrw("split", false) end,
+            {
+                buffer = true,
+                nowait = true,
+                desc = "Open file in horizontal split on next tab"
+            }
+        )
+        utils.map(
+            'n',
+            '<leader>v',
+            function() utils.split_netrw("vsplit", false) end,
+            {
+                buffer = true,
+                nowait = true,
+                desc = "Open file in vertical split on next tab"
+            }
+        )
+        utils.map(
+            'n',
+            '<leader>I',
+            function() utils.split_netrw("edit", true) end,
+            {
+                buffer = true,
+                nowait = true,
+                desc = "Open file on next tab and stay in netrw"
+            }
+        )
+        utils.map(
+            'n',
+            '<leader>O',
+            function() utils.split_netrw("split", true) end,
+            {
+                buffer = true,
+                nowait = true,
+                desc = "Open file in horizontal split on next tab and stay in netrw"
+            }
+        )
+        utils.map(
+            'n',
+            '<leader>V',
+            function() utils.split_netrw("vsplit", true) end,
+            {
+                buffer = true,
+                nowait = true,
+                desc = "Open file in vertical split on next tab and stay in netrw"
+            }
+        )
+        utils.map(
+            'n',
+            '<leader>t',
+            function() utils.toggle_netrw_dir() end,
+            {
+                buffer = true,
+                nowait = true,
+                desc = "Toggle 2 different netrw directories based on bookmark 1 & 2"
+            }
+        )
         -- vim.opt_local.bufhidden = 'delete'
         -- vim.cmd('exe "0file!"')
+    end
+})
+vim.api.nvim_create_autocmd("User", {
+    group = augroup("netrw-session"),
+    pattern = "PersistenceLoadPost",
+    callback = function()
+        -- Schedule this to run after Neovim's UI has fully settled.
+        vim.schedule(function()
+            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+                local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
+                if filetype == "netrw" then
+                    local wins = vim.fn.win_findbuf(buf)
+                    if #wins > 0 then
+                        vim.api.nvim_set_current_win(wins[1])
+                        local cwd = vim.fn.getcwd()
+                        vim.cmd('edit ' .. cwd)
+                    end
+                end
+            end
+        end)
     end
 })
 

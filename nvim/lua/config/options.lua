@@ -6,9 +6,6 @@ vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_preview = 1
 vim.g.rehash256 = 1
--- Setting g:netrw_keepdir to 0 tells netrw to make vim's current directory
--- track netrw's browsing directory.
-vim.g.netrw_keepdir = 0
 
 -- Colorscheme and syntax
 if vim.fn.has("termguicolors") == 1 then
