@@ -1,4 +1,10 @@
 local search = require('search')
+local utils = require('utils')
+local wk = require("which-key")
+
+wk.add({
+    { "<leader>d", group = "py-lang", mode = "n" }
+})
 
 -- Set options
 vim.opt.expandtab = true
@@ -14,7 +20,6 @@ vim.api.nvim_create_user_command(
   end,
   { nargs = '+' }
 )
-
 vim.api.nvim_create_user_command(
   'Pyclass',
   function(opts)
@@ -23,11 +28,18 @@ vim.api.nvim_create_user_command(
   { nargs = '+' }
 )
 
--- Python function definition mapping under cursor
-vim.api.nvim_set_keymap('n', '<leader>df', ':Pydef <c-r><c-w><cr>:cw<cr>', { noremap = true, silent = true })
-
--- Python class definition mapping under cursor
-vim.api.nvim_set_keymap('n', '<leader>dc', ':Pyclass <c-r><c-w><cr>:cw<cr>', { noremap = true, silent = true })
+utils.map(
+  'n',
+  '<leader>df',
+  function() search.search_pydef(vim.fn.expand('<cword>'), 'def') end,
+  { desc = "Search Python function definition under cursor" }
+)
+utils.map(
+  'n',
+  '<leader>dc',
+  function() search.search_pydef(vim.fn.expand('<cword>'), 'class') end,
+  { desc = "Search Python class definition under cursor" }
+)
 
 -- Set compiler to python
 vim.cmd('compiler python')

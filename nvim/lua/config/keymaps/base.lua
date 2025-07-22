@@ -34,6 +34,9 @@ wk.add({
 wk.add({
     { "<leader>b", group = "buffer", mode = "n" }
 })
+wk.add({
+    { "<leader>i", group = "session", mode = "n" }
+})
 
 -- Navigation
 utils.map(
@@ -346,6 +349,15 @@ end, { silent = false, desc = "Remove all global marks" })
 utils.map('n', '<leader>n', function()
     utils.open_cwd_in_tab1()
 end, { desc = "Open netrw in the first tab" })
+
+-- Sessions
+utils.map('n', '<leader>im', function()
+    utils.make_session()
+end, { desc = "Make a session defined by the user" })
+utils.map('n', '<leader>il', function()
+    utils.load_session()
+end, { desc = "Load a session specified by the user" })
+
 
 -- Misc
 utils.map('n', '<leader>qw', ':q<cr>', { desc = "Close current window"})

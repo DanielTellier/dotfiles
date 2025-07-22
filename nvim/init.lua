@@ -15,6 +15,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.session_dir = vim.fn.stdpath("state") .. "/sessions"
+-- Ensure the directory exists
+if vim.fn.isdirectory(vim.g.session_dir) == 0 then
+    vim.fn.mkdir(vim.g.session_dir, 'p')
+end
 local utils = require('utils')
 local copilot_enabled = os.getenv("COPILOT_ENABLED")
 vim.g.node_bin = "/usr/bin/node"
@@ -23,6 +28,10 @@ if not utils.path_exists(vim.g.node_bin) then
     vim.g.node_bin = "/opt/homebrew/opt/node/bin/node"
 end
 vim.g.copilot_available = copilot_enabled == "true" and utils.path_exists(vim.g.node_bin)
+if vim.g.copilot_available then
+    -- To list available models, run: <cmd>CopilotChatModels
+    vim.g.copilot_model = "claude-sonnet-4"
+end
 
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.

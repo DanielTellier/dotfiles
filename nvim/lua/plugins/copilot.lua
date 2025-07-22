@@ -3,9 +3,6 @@ if not vim.g.copilot_available then
 end
 
 local utils = require('utils')
--- To list available models, run: <cmd>CopilotChatModels
--- local copilot_model = "claude-3.7-sonnet"
-local copilot_model = "claude-sonnet-4"
 local common_system_prompt = [[Analyze the code for:
 ### CODE QUALITY
 * Function and variable naming (clarity and consistency)
@@ -244,7 +241,7 @@ return {
                 event = "InsertEnter",
                 config = function()
                     require("copilot").setup({
-                        copilot_model = copilot_model,
+                        copilot_model = vim.g.copilot_model,
                         suggestion = { enabled = false },
                         panel = { enabled = false },
                         copilot_no_tab_map = true,
@@ -260,7 +257,7 @@ return {
             question_header = "## User ",
             answer_header = "## Copilot ",
             error_header = "## Error ",
-            model = copilot_model,
+            model = vim.g.copilot_model,
             -- Registers copilot-chat source and enables it for copilot-chat filetype (so copilot chat window)
             chat_autocomplete = false,
             debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.

@@ -226,45 +226,40 @@ vim.api.nvim_create_autocmd('FileType', {
                 desc = "Open file in vertical split on next tab and stay in netrw"
             }
         )
-        utils.map(
-            'n',
-            '<leader>t',
-            function() utils.toggle_netrw_dir() end,
-            {
-                buffer = true,
-                nowait = true,
-                desc = "Toggle 2 different netrw directories based on bookmark 1 & 2"
-            }
-        )
-        -- vim.opt_local.bufhidden = 'delete'
-        -- vim.cmd('exe "0file!"')
     end
 })
-vim.api.nvim_create_autocmd("User", {
+vim.api.nvim_create_autocmd("SessionLoadPost", {
     group = augroup("netrw-session"),
-    pattern = "PersistenceLoadPost",
     callback = function()
         -- Schedule this to run after Neovim's UI has fully settled.
         vim.schedule(function()
             for _, buf in ipairs(vim.api.nvim_list_bufs()) do
                 local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
                 if filetype == "netrw" then
+                    -- Close all windows showing this buffer
                     local wins = vim.fn.win_findbuf(buf)
-                    if #wins > 0 then
-                        vim.api.nvim_set_current_win(wins[1])
-                        local cwd = vim.fn.getcwd()
-                        vim.cmd('edit ' .. cwd)
+                    for _, win in ipairs(wins) do
+                        vim.api.nvim_win_close(win, false)
                     end
+                    -- Delete the buffer
+                    vim.api.nvim_buf_delete(buf, { force = true })
                 end
             end
+            print("Opening netrw with sessions cwd in the first tab")
+            vim.cmd('tabnew')
+            vim.cmd('tabmove 0')
+            local netrw_win = vim.api.nvim_get_current_win()
+            vim.cmd("tabnext 1")
+            vim.api.nvim_set_current_win(netrw_win)
+            local cwd = vim.fn.getcwd()
+            vim.cmd('edit ' .. cwd)
         end)
     end
 })
 
 -- Attach Copilot to all loaded buffers after restoring session
-vim.api.nvim_create_autocmd("User", {
+vim.api.nvim_create_autocmd("SessionLoadPost", {
     group = augroup("copilot"),
-    pattern = "PersistenceLoadPost",
     callback = function()
         for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
             if vim.api.nvim_buf_is_loaded(bufnr) then

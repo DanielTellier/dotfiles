@@ -83,6 +83,7 @@ function M.path_exists(path)
     return stat ~= nil
 end
 
+
 -- Netrw
 function M.split_netrw(bufcmd, is_stay)
     vim.cmd('normal v')
@@ -102,14 +103,69 @@ function M.split_netrw(bufcmd, is_stay)
     end
 end
 
-M.bookmark = 1
-function M.toggle_netrw_dir()
-    if M.bookmark == 1 then
-        M.bookmark = 2
+
+-- Sessions
+-- Show file list in a scratch split
+local function open_file_list_split(dir, title, split_type)
+    split_type = split_type or "split"
+    local prev_win = vim.api.nvim_get_current_win()
+    vim.cmd(split_type)
+    local split_win = vim.api.nvim_get_current_win()
+    local buf = vim.api.nvim_create_buf(false, true)
+    local files = vim.fn.readdir(dir)
+    local lines = {title or "Files:"}
+    if #files == 0 then
+        table.insert(lines, "(No files yet)")
     else
-        M.bookmark = 1
+        vim.list_extend(lines, files)
     end
-    vim.cmd('normal ' .. M.bookmark .. 'gb')
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+    vim.api.nvim_win_set_buf(split_win, buf)
+    vim.api.nvim_buf_set_option(buf, 'buftype', 'nofile')
+    vim.api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
+    vim.api.nvim_buf_set_option(buf, 'swapfile', false)
+    vim.api.nvim_win_set_option(split_win, 'number', false)
+    vim.api.nvim_win_set_option(split_win, 'relativenumber', false)
+    vim.api.nvim_set_current_win(prev_win)
+    return split_win
+end
+
+function M.make_session()
+    local split_win = open_file_list_split(vim.g.session_dir, "Session files:")
+    vim.cmd("redraw")  -- Force UI update so the split is visible
+    local name = vim.fn.input("Session name to save: ")
+    pcall(vim.api.nvim_win_close, split_win, true)
+    if name == "" then
+        print("No name entered. Aborting.")
+        return
+    end
+    if not name:match("%.vim$") then
+        name = name .. ".vim"
+    end
+    local session_path = vim.g.session_dir .. "/" .. name
+    vim.cmd("mksession! " .. vim.fn.fnameescape(session_path))
+    print("Session saved as: " .. name)
+end
+
+function M.load_session()
+    local split_win = open_file_list_split(vim.g.session_dir, "Session files:")
+    vim.cmd("redraw")  -- Force UI update so the split is visible
+    local name = vim.fn.input("Session name to load: ")
+    pcall(vim.api.nvim_win_close, split_win, true)
+    if name == "" then
+        print("No name entered. Aborting.")
+        return
+    end
+    if not name:match("%.vim$") then
+        name = name .. ".vim"
+    end
+    local session_path = vim.g.session_dir .. "/" .. name
+    if vim.fn.filereadable(session_path) == 0 then
+        print("Session file not found: " .. name)
+        return
+    end
+    vim.cmd("source " .. vim.fn.fnameescape(session_path))
+    print("Session loaded: " .. name)
 end
 
 

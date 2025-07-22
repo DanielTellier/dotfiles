@@ -2,8 +2,6 @@ if not vim.g.copilot_available then
     return {}
 end
 
-local copilot_model = "claude-3.7-sonnet"
-
 return {
     "yetone/avante.nvim",
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -22,7 +20,7 @@ return {
         provider = "copilot",
         providers = {
             copilot = {
-                model = copilot_model,
+                model = vim.g.copilot_model,
                 timeout = 30000, -- Timeout in milliseconds
                 extra_request_body = {
                     temperature = 0.75,
