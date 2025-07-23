@@ -258,6 +258,7 @@ return {
             answer_header = "## Copilot ",
             error_header = "## Error ",
             model = vim.g.copilot_model,
+            context = "buffers",
             -- Registers copilot-chat source and enables it for copilot-chat filetype (so copilot chat window)
             chat_autocomplete = false,
             debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
