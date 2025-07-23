@@ -137,7 +137,7 @@ function virtualenv_info(){
       # In case you don't have one activated
       venv=''
   fi
-  [[ -n "$venv" ]] && echo "(pyv:$venv)"
+  [[ -n "$venv" ]] && echo "(pve:$venv)"
 }
 
 # disable the default virtualenv prompt change
