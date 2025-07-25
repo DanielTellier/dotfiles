@@ -161,15 +161,6 @@ and highlight key concepts.
 
 return {
     {
-        "folke/which-key.nvim",
-        optional = true,
-        opts = {
-            spec = {
-                { "<leader>a", group = "ai", mode = { "n", "v" } },
-            },
-        },
-    },
-    {
         'zbirenbaum/copilot-cmp',
         config = function ()
             require("copilot_cmp").setup()
