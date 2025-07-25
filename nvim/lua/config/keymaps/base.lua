@@ -196,8 +196,8 @@ utils.map(
     }
 )
 utils.map(
-    'n', '<leader>ss', ':%s/^\\s\\+$//g<cr>',
-    { desc = "Remove trailing spaces on an empty line" }
+    'n', '<leader>ss', ':%s/\\s\\+$//g<cr>',
+    { desc = "Remove trailing spaces" }
 )
 
 -- Find
