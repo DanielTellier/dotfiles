@@ -305,7 +305,7 @@ return {
             opts.answer_header = "  Copilot "
             -- Override the git prompts message
             opts.prompts.Commit = {
-                prompt = '> #git:staged\n\nWrite commit message with commitizen convention. Write clear, informative commit messages that explain the "what" and "why" behind changes, not just the "how".',
+                prompt = '> #git:staged\n\nWrite commit message with commitizen convention. Keep line length at 79 characters. Write clear, informative commit messages that explain the "what" and "why" behind changes, not just the "how".',
             }
             chat.setup(opts)
             local select = require("CopilotChat.select")
