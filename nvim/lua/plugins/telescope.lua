@@ -2,6 +2,27 @@ return {
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.8",
+        config = function()
+            local actions = require('telescope.actions')
+            require("telescope").setup{
+                defaults ={
+                    mappings = {
+                        i = {
+                            ["<c-o>"] = actions.select_horizontal,
+                            -- Need to press <c-t> twice due to wezterm leader key being <c-t>
+                            ["<c-t>"] = actions.select_tab,
+                            ["<c-v>"] = actions.select_vertical, 
+                        },
+                        n = {
+                            ["<c-o>"] = actions.select_horizontal,
+                             -- Need to press <c-t> twice due to wezterm leader key being <c-t>
+                            ["<c-t>"] = actions.select_tab,
+                            ["<c-v>"] = actions.select_vertical,
+                        },
+                    },
+                },
+            }
+        end,
         dependencies = {
             { "nvim-lua/plenary.nvim" },
             {
