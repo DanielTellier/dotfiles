@@ -9,13 +9,13 @@ return {
                     mappings = {
                         i = {
                             ["<c-o>"] = actions.select_horizontal,
-                            -- Need to press <c-t> twice due to wezterm leader key being <c-t>
+                            -- Need to hold ctrl key and press 't' twice due to wezterm leader key being <c-t>
                             ["<c-t>"] = actions.select_tab,
                             ["<c-v>"] = actions.select_vertical, 
                         },
                         n = {
                             ["<c-o>"] = actions.select_horizontal,
-                             -- Need to press <c-t> twice due to wezterm leader key being <c-t>
+                            -- Need to hold ctrl key and press 't' twice due to wezterm leader key being <c-t>
                             ["<c-t>"] = actions.select_tab,
                             ["<c-v>"] = actions.select_vertical,
                         },
