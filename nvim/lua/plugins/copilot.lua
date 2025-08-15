@@ -303,7 +303,7 @@ return {
             local user = hostname or vim.env.USER or "User"
             opts.question_header = "  " .. user .. " "
             opts.answer_header = "  Copilot "
-            local commit_prompt = [[> #git:staged
+            local commit_prompt = [[#git:staged
 You are an expert Git user who writes exceptional commit messages that are clear, concise, and immediately understandable.
 Analyze the staged changes and write the most concise commit message possible while still being informative.
 ### FORMAT REQUIREMENTS

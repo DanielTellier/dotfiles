@@ -54,7 +54,7 @@ return {
                             icon = " ",
                             desc = " Restore Session",
                             group = "Number",
-                            action = [[lua require('utils').load_session()]],
+                            action = function() vim.fn.feedkeys(":LoadSession ") end,
                             key = "s",
                         },
                         {

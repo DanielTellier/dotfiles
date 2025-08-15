@@ -351,13 +351,70 @@ utils.map('n', '<leader>n', function()
 end, { desc = "Open netrw in the first tab" })
 
 -- Sessions
-utils.map('n', '<leader>im', function()
-    utils.make_session()
-end, { desc = "Make a session defined by the user" })
-utils.map('n', '<leader>il', function()
-    utils.load_session()
-end, { desc = "Load a session specified by the user" })
-
+vim.api.nvim_create_user_command(
+    'MakeSession',
+    function(opts)
+        local name = opts.args
+        if not name:match("%.vim$") then
+            name = name .. ".vim"
+        end
+        local session_path = vim.g.session_dir .. "/" .. name
+        vim.cmd("mksession! " .. vim.fn.fnameescape(session_path))
+        print("Session saved as: " .. name)
+    end,
+    {
+        desc = "Make a session defined by the user",
+        nargs = 1,
+        complete = function(arg_lead, cmd_line, cursor_pos)
+            local files = vim.fn.glob(vim.g.session_dir .. '/' .. arg_lead .. '*', false, true)
+            local results = {}
+            for _, file in ipairs(files) do
+                table.insert(results, vim.fn.fnamemodify(file, ':t'))
+            end
+            return results
+        end
+    }
+)
+utils.map(
+    'n',
+    '<leader>im',
+    ':MakeSession ',
+    { silent = false, desc = "Make a session defined by the user" }
+)
+vim.api.nvim_create_user_command(
+    'LoadSession',
+    function(opts)
+        local name = opts.args
+        if not name:match("%.vim$") then
+            name = name .. ".vim"
+        end
+        local session_path = vim.g.session_dir .. "/" .. name
+        if vim.fn.filereadable(session_path) == 0 then
+            print("Session file not found: " .. name)
+            return
+        end
+        vim.cmd("source " .. vim.fn.fnameescape(session_path))
+        print("Session loaded: " .. name)
+    end,
+    {
+        desc = "Load a session specified by the user",
+        nargs = 1,
+        complete = function(arg_lead, cmd_line, cursor_pos)
+            local files = vim.fn.glob(vim.g.session_dir .. '/' .. arg_lead .. '*', false, true)
+            local results = {}
+            for _, file in ipairs(files) do
+                table.insert(results, vim.fn.fnamemodify(file, ':t'))
+            end
+            return results
+        end
+    }
+)
+utils.map(
+    'n',
+    '<leader>il',
+    ':LoadSession ',
+    { silent=false, desc = "Load a session specified by the user" }
+)
 
 -- Misc
 utils.map('n', '<leader>qw', ':q<cr>', { desc = "Close current window"})
