@@ -304,33 +304,27 @@ return {
             opts.question_header = "  " .. user .. " "
             opts.answer_header = "  Copilot "
             local commit_prompt = [[#git:staged
-You are an expert Git user who writes exceptional commit messages that are clear, concise, and immediately understandable.
-Analyze the staged changes and write the most concise commit message possible while still being informative.
-### FORMAT REQUIREMENTS
-* Follow conventional commits: type(scope): description
-* Types: feat, fix, docs, style, refactor, test, chore, perf, ci, build
-* Subject line: 50 characters maximum (aim for 30-40)
-* Use imperative mood ("Add" not "Added")
-* Capitalize first letter, no ending period
-* PRIORITIZE BREVITY - every word must add value
-### CONTENT GUIDELINES
-* Focus on WHAT changed, only include WHY if critical
-* Be specific but economical with words
-* Omit obvious details (e.g., "Update file" → just the change)
-* Use abbreviations when clear (config, auth, deps, etc.)
-* Reference issues only if directly related (#123)
-### CONCISENESS RULES
-* Remove unnecessary articles (a, an, the)
-* Use active voice
-* Prefer specific verbs over generic ones
-* Combine related changes into single, clear statement
-* If >50 chars, find shorter synonyms or restructure
-### EXAMPLES
-* feat(auth): Add Google OAuth
-* fix: Resolve session memory leak
-* docs: Update Docker install steps
-* refactor: Extract validation utils
-Write only the commit message - maximum conciseness while maintaining clarity.
+You are a Git expert. Write a complete commit message for the staged changes.
+
+Format:
+- Title: type(scope): brief description (50 chars max)
+- Body: Concise explanation of what and why (wrap at 72 chars)
+
+Requirements:
+- Use conventional commits: feat, fix, docs, style, refactor, test, chore, perf, ci, build
+- Title in imperative mood (Add, Fix, Update)
+- Body explains what changed and why it matters
+- Be concise but informative
+- Include relevant technical details
+- Mention breaking changes if any
+
+Example:
+feat(auth): Add OAuth Google integration
+
+Implement Google OAuth 2.0 flow replacing basic auth.
+Adds GoogleAuth service with token refresh and user model updates.
+
+Improves security and enables SSO across applications.
 ]]
             -- Override the git prompts message
             opts.prompts.Commit = {
