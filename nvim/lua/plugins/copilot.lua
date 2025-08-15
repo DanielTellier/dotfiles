@@ -303,9 +303,38 @@ return {
             local user = hostname or vim.env.USER or "User"
             opts.question_header = "  " .. user .. " "
             opts.answer_header = "  Copilot "
+            local commit_prompt = [[> #git:staged
+You are an expert Git user who writes exceptional commit messages that are clear, concise, and immediately understandable.
+Analyze the staged changes and write the most concise commit message possible while still being informative.
+### FORMAT REQUIREMENTS
+* Follow conventional commits: type(scope): description
+* Types: feat, fix, docs, style, refactor, test, chore, perf, ci, build
+* Subject line: 50 characters maximum (aim for 30-40)
+* Use imperative mood ("Add" not "Added")
+* Capitalize first letter, no ending period
+* PRIORITIZE BREVITY - every word must add value
+### CONTENT GUIDELINES
+* Focus on WHAT changed, only include WHY if critical
+* Be specific but economical with words
+* Omit obvious details (e.g., "Update file" → just the change)
+* Use abbreviations when clear (config, auth, deps, etc.)
+* Reference issues only if directly related (#123)
+### CONCISENESS RULES
+* Remove unnecessary articles (a, an, the)
+* Use active voice
+* Prefer specific verbs over generic ones
+* Combine related changes into single, clear statement
+* If >50 chars, find shorter synonyms or restructure
+### EXAMPLES
+* feat(auth): Add Google OAuth
+* fix: Resolve session memory leak
+* docs: Update Docker install steps
+* refactor: Extract validation utils
+Write only the commit message - maximum conciseness while maintaining clarity.
+]]
             -- Override the git prompts message
             opts.prompts.Commit = {
-                prompt = '> #git:staged\n\nWrite commit message with commitizen convention. Keep line length at 79 characters. Write clear, informative commit messages that explain the "what" and "why" behind changes, not just the "how".',
+                prompt = commit_prompt,
             }
             chat.setup(opts)
             local select = require("CopilotChat.select")
