@@ -1,12 +1,8 @@
 local utils = require('utils')
 
-local function augroup(name)
-  return vim.api.nvim_create_augroup("nvim_ide_" .. name, { clear = true })
-end
-
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-  group = augroup("checktime"),
+  group = utils.augroup("checktime"),
   callback = function()
     if vim.o.buftype ~= "nofile" then
       vim.cmd("checktime")
@@ -16,7 +12,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
+  group = utils.augroup("highlight_yank"),
   callback = function()
     (vim.hl or vim.highlight).on_yank()
   end,
@@ -24,7 +20,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
-  group = augroup("resize_splits"),
+  group = utils.augroup("resize_splits"),
   callback = function()
     local current_tab = vim.fn.tabpagenr()
     vim.cmd("tabdo wincmd =")
@@ -34,7 +30,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
-  group = augroup("last_loc"),
+  group = utils.augroup("last_loc"),
   callback = function(event)
     local exclude = { "gitcommit" }
     local buf = event.buf
@@ -52,7 +48,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  group = augroup("auto_create_dir"),
+  group = utils.augroup("auto_create_dir"),
   callback = function(event)
     if event.match:match("^%w%w+:[\\/][\\/]") then
       return
@@ -63,7 +59,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  group = augroup("env_filetype"),
+  group = utils.augroup("env_filetype"),
   pattern = { "*.env", ".env.*" },
   callback = function()
     vim.opt_local.filetype = "sh"
@@ -72,7 +68,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 
 -- Set filetype for .code-snippets files
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  group = augroup("code_snippets_filetype"),
+  group = utils.augroup("code_snippets_filetype"),
   pattern = { "*.code-snippets" },
   callback = function()
     vim.opt_local.filetype = "json"
@@ -80,7 +76,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-    group = augroup("spellcheck"),
+    group = utils.augroup("spellcheck"),
     pattern = { 'gitcommit', 'markdown', 'tex', 'latex', 'context', 'plaintex' },
     callback = function()
         vim.opt_local.spell = true
@@ -90,7 +86,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd({'VimEnter', 'ColorScheme'}, {
-    group = augroup("colors"),
+    group = utils.augroup("colors"),
     callback = function()
         vim.cmd('hi Comment cterm=italic gui=italic')
         vim.cmd('hi SpecialComment cterm=italic gui=italic')
@@ -99,7 +95,7 @@ vim.api.nvim_create_autocmd({'VimEnter', 'ColorScheme'}, {
 })
 
 vim.api.nvim_create_autocmd('QuickFixCmdPost', {
-    group = augroup("quickfix"),
+    group = utils.augroup("quickfix"),
     pattern = '[^l]*',
     callback = function()
         utils.remove_duplicate_quickfix_entries()
@@ -107,14 +103,14 @@ vim.api.nvim_create_autocmd('QuickFixCmdPost', {
 })
 
 vim.api.nvim_create_autocmd('TermOpen', {
-    group = augroup("terminal"),
+    group = utils.augroup("terminal"),
     callback = function()
         vim.opt_local.number = false
         vim.opt_local.relativenumber = false
     end
 })
 vim.api.nvim_create_autocmd('BufLeave', {
-    group = augroup("terminal"),
+    group = utils.augroup("terminal"),
     callback = function()
         if vim.bo.buftype == 'terminal' then
             vim.g.last_term = vim.api.nvim_get_current_buf()
@@ -124,7 +120,7 @@ vim.api.nvim_create_autocmd('BufLeave', {
     end
 })
 vim.api.nvim_create_autocmd('BufDelete', {
-    group = augroup("terminal"),
+    group = utils.augroup("terminal"),
     callback = function()
         if vim.bo.buftype == 'terminal' then
             vim.g.last_term = vim.v.null
@@ -135,20 +131,20 @@ vim.api.nvim_create_autocmd('BufDelete', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-    group = augroup("misc"),
+    group = utils.augroup("misc"),
     pattern = 'xml',
     callback = function()
         vim.opt_local.eol = false
     end
 })
 vim.api.nvim_create_autocmd('VimEnter', {
-    group = augroup("misc"),
+    group = utils.augroup("misc"),
     callback = function()
         vim.cmd('silent! echo -ne "\\e[2 q"')
     end
 })
 vim.api.nvim_create_autocmd('BufReadPost', {
-    group = augroup("misc"),
+    group = utils.augroup("misc"),
     callback = function()
         if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
             vim.cmd('normal! g`"')
@@ -156,14 +152,14 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end
 })
 vim.api.nvim_create_autocmd('BufEnter', {
-    group = augroup("misc"),
+    group = utils.augroup("misc"),
     callback = function()
         vim.opt_local.formatoptions:remove('cro')
     end
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-    group = augroup("netrw"),
+    group = utils.augroup("netrw"),
     pattern = 'netrw',
     callback = function()
         local wk = require("which-key")
@@ -229,7 +225,7 @@ vim.api.nvim_create_autocmd('FileType', {
     end
 })
 vim.api.nvim_create_autocmd("SessionLoadPost", {
-    group = augroup("netrw-session"),
+    group = utils.augroup("netrw-session"),
     callback = function()
         -- Schedule this to run after Neovim's UI has fully settled.
         vim.schedule(function()
@@ -260,7 +256,7 @@ vim.api.nvim_create_autocmd("SessionLoadPost", {
 if vim.g.copilot_available then
     -- Attach Copilot to all loaded buffers after restoring session
     vim.api.nvim_create_autocmd("SessionLoadPost", {
-        group = augroup("copilot"),
+        group = utils.augroup("copilot"),
         callback = function()
             for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
                 if vim.api.nvim_buf_is_loaded(bufnr) then

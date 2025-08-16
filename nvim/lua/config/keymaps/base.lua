@@ -140,7 +140,7 @@ utils.map('n', '<leader>ta', function()
 end, { desc = "Toggle listchars and numbers" })
 utils.map(
     "n", "<leader>tw", "<cmd>set wrap!<CR>",
-    { desc = "Toggle Wrap", silent = true }
+    { desc = "Toggle Wrap" }
 )
 
 -- Substitution

@@ -1,10 +1,18 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.8",
+        dependencies = {
+            { "nvim-lua/plenary.nvim" },
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "make",
+            },
+            { "nvim-telescope/telescope-file-browser.nvim" },
+        },
         config = function()
+            local telescope = require("telescope")
             local actions = require('telescope.actions')
-            require("telescope").setup{
+            telescope.setup({
                 defaults ={
                     mappings = {
                         i = {
@@ -21,33 +29,17 @@ return {
                         },
                     },
                 },
-            }
-        end,
-        dependencies = {
-            { "nvim-lua/plenary.nvim" },
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build = "make",
-                config = function()
-                    require("telescope").setup{
-                        extensions = {
-                            fzf = {
-                                fuzzy = true,                    -- fuzzy matching
-                                override_generic_sorter = true,  -- override default sorter
-                                override_file_sorter = true,     -- override file sorter
-                                case_mode = "smart_case",        -- "smart_case" | "ignore_case" | "respect_case"
-                            }
-                        },
+                extensions = {
+                    fzf = {
+                        fuzzy = true,                    -- fuzzy matching
+                        override_generic_sorter = true,  -- override default sorter
+                        override_file_sorter = true,     -- override file sorter
+                        case_mode = "smart_case",        -- "smart_case" | "ignore_case" | "respect_case"
                     }
-                    require("telescope").load_extension("fzf")
-                end,
-            },
-            {
-                "nvim-telescope/telescope-file-browser.nvim",
-                config = function()
-                    require("telescope").load_extension("file_browser")
-                end,
-            },
-        },
+                },
+            })
+            telescope.load_extension("fzf")
+            telescope.load_extension("file_browser")
+        end,
     },
 }

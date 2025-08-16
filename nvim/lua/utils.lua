@@ -273,6 +273,9 @@ function M.mapbuf(modes, lhs, rhs, opts)
         -- 'force': use value from the rightmost map
         options = vim.tbl_extend('force', options, opts)
     end
+    if type(modes) == "string" then
+        modes = { modes }  -- Convert to table if a single mode is provided
+    end
     for _, mode in ipairs(modes) do
         vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, options)
     end
@@ -328,6 +331,11 @@ function M.get_files_from_path(path)
     end
 
     return files
+end
+
+function M.augroup(name, opts)
+    opts = opts or { clear = true }
+    return vim.api.nvim_create_augroup("nvim_ide_" .. name, opts)
 end
 
 return M
