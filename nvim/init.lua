@@ -15,6 +15,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.lsp_enabled = false
 vim.g.session_dir = vim.fn.stdpath("state") .. "/sessions"
 -- Ensure the directory exists
 if vim.fn.isdirectory(vim.g.session_dir) == 0 then

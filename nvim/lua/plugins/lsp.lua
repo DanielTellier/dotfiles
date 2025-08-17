@@ -8,8 +8,16 @@ return {
             {
                 "williamboman/mason.nvim",
                 config = function()
+                    local user = vim.fn.getenv("USER") or "unknown"
+                    local mason_root = (
+                        vim.fn.getenv("XDG_CACHE_HOME") or "/tmp/" .. user .. "/.cache"
+                    )
+                    mason_root = mason_root .. "/nvim/mason"
                     -- Ensures Mason-installed binaries are available on your PATH
-                    require("mason").setup({ PATH = "prepend" })
+                    require("mason").setup({
+                        PATH = "prepend",
+                        install_root_dir = mason_root,
+                    })
                 end,
             },
             -- Bridge between Mason and lspconfig
@@ -19,14 +27,14 @@ return {
             { "hrsh7th/cmp-nvim-lsp" },
         },
         config = function()
+            local utils = require("utils")
+            local wk = require("which-key")
+            wk.add({
+                { "<leader>l", group = "lsp", mode = "n" }
+            })
             -- Keymaps will be set inside on_attach to ensure they only apply to LSP buffers
             local on_attach = function(client, bufnr)
-                local utils = require("utils")
                 local telescope_builtin = require("telescope.builtin")
-                local wk = require("which-key")
-                wk.add({
-                    { "<leader>l", group = "lsp", buffer = bufnr, mode = "n" }
-                })
                 utils.map(
                     'n',
                     '<leader>ld',
@@ -105,6 +113,40 @@ return {
 
                 require("lspconfig")[server_name].setup(final_config)
             end
+
+            local function apply_lsp_status()
+                if vim.g.lsp_enabled then
+                    vim.cmd("doautocmd FileType")
+                else
+                    for _, client in ipairs(vim.lsp.get_clients()) do
+                        -- Stop all LSP clients except for copilot
+                        if client.name ~= "copilot" then
+                            vim.lsp.stop_client(client.id)
+                        end
+                    end
+                end
+            end
+
+            local function toggle_lsp()
+                vim.g.lsp_enabled = not vim.g.lsp_enabled
+                apply_lsp_status()
+            end
+
+            utils.map(
+                'n',
+                '<leader>lt',
+                function()
+                    toggle_lsp()
+                end,
+                { desc = 'Toggle lsp' }
+            )
+
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = utils.augroup("lsp"),
+                callback = function()
+                    apply_lsp_status()
+                end
+            })
         end,
     },
 }
