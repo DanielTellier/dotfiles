@@ -53,6 +53,13 @@ local spec = {
 }
 
 require("lazy").setup({
+    -- Can use the below for saving space in home dir for where plugins are placed
+    -- local user = vim.fn.getenv("USER") or "unknown"
+    -- local lazy_root = (
+    --     vim.fn.getenv("XDG_CACHE_HOME") or "/tmp/" .. user .. "/.cache"
+    -- )
+    -- lazy_root = lazy_root .. "/nvim/lazy"
+    -- root = lazy_root,
     spec = spec,
     {
         rocks = {

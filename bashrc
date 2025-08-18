@@ -16,7 +16,8 @@
 export EDITOR='vim'
 export TERM='xterm-256color'
 export IPYTHONDIR="$HOME/.dotfiles/ipython"
-export XDG_CACHE_HOME=/tmp/$USER/.cache
+# Can set the below for saving space in home path, related to nvim lsp servers and other apps
+# export XDG_CACHE_HOME=/tmp/$USER/.cache
 
 # Auto "cd" when entering just a path
 shopt -s autocd 2> /dev/null

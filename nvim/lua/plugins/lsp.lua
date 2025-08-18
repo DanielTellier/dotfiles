@@ -8,15 +8,16 @@ return {
             {
                 "williamboman/mason.nvim",
                 config = function()
-                    local user = vim.fn.getenv("USER") or "unknown"
-                    local mason_root = (
-                        vim.fn.getenv("XDG_CACHE_HOME") or "/tmp/" .. user .. "/.cache"
-                    )
-                    mason_root = mason_root .. "/nvim/mason"
+                    -- Can set the below for saving space in home path
+                    -- local user = vim.fn.getenv("USER") or "unknown"
+                    -- local mason_root = (
+                    --     vim.fn.getenv("XDG_CACHE_HOME") or "/tmp/" .. user .. "/.cache"
+                    -- )
+                    -- mason_root = mason_root .. "/nvim/mason"
                     -- Ensures Mason-installed binaries are available on your PATH
                     require("mason").setup({
                         PATH = "prepend",
-                        install_root_dir = mason_root,
+                        -- install_root_dir = mason_root,
                     })
                 end,
             },
