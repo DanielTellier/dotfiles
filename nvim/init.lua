@@ -15,6 +15,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Can set the below for saving space in home path, related to nvim lsp servers
+-- and other possible plugins
+-- local user = vim.fn.getenv("USER") or "unknown"
+-- vim.env.XDG_CACHE_HOME = '/tmp/' .. user .. "/.cache"
+
 vim.g.lsp_enabled = false
 vim.g.session_dir = vim.fn.stdpath("state") .. "/sessions"
 -- Ensure the directory exists
@@ -51,14 +56,9 @@ local spec = {
     { import = "editor" },
     { import = "coding" },
 }
--- Can use the below for saving space in home dir for where plugins are placed
--- local user = vim.fn.getenv("USER") or "unknown"
--- local lazy_root = (
---     vim.fn.getenv("XDG_CACHE_HOME") or "/tmp/" .. user .. "/.cache"
--- )
--- lazy_root = lazy_root .. "/nvim/lazy"
 require("lazy").setup({
-    -- root = lazy_root,
+    -- Can use the below for saving space in home dir for where plugins are placed
+    -- root = vim.env.XDG_CACHE_HOME .. "/nvim/lazy",
     spec = spec,
     {
         rocks = {
