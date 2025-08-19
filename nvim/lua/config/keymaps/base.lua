@@ -282,7 +282,7 @@ utils.map(
 )
 utils.map(
     "n",
-    "w2",
+    "<leader>w2",
     "<c-w>=z12<cr>",
     { desc = "Sets window size = ideal size for 2 buffers and 2 terms" }
 )
