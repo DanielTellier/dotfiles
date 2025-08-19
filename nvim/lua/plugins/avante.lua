@@ -28,6 +28,10 @@ return {
                 },
             },
         },
+        selection = {
+            enabled = true,
+            hint_display = "none",
+        },
     },
     dependencies = {
         "nvim-treesitter/nvim-treesitter",
