@@ -229,9 +229,11 @@ vim.api.nvim_create_autocmd("SessionLoadPost", {
     callback = function()
         -- Schedule this to run after Neovim's UI has fully settled.
         vim.schedule(function()
+            local found_netrw = false
             for _, buf in ipairs(vim.api.nvim_list_bufs()) do
                 local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
                 if filetype == "netrw" then
+                    found_netrw = true
                     -- Close all windows showing this buffer
                     local wins = vim.fn.win_findbuf(buf)
                     for _, win in ipairs(wins) do
@@ -241,14 +243,16 @@ vim.api.nvim_create_autocmd("SessionLoadPost", {
                     vim.api.nvim_buf_delete(buf, { force = true })
                 end
             end
-            print("Opening netrw with sessions cwd in the first tab")
-            vim.cmd('tabnew')
-            vim.cmd('tabmove 0')
-            local netrw_win = vim.api.nvim_get_current_win()
-            vim.cmd("tabnext 1")
-            vim.api.nvim_set_current_win(netrw_win)
-            local cwd = vim.fn.getcwd()
-            vim.cmd('edit ' .. cwd)
+            if found_netrw then
+                print("Opening netrw with sessions cwd in the first tab")
+                vim.cmd('tabnew')
+                vim.cmd('tabmove 0')
+                local netrw_win = vim.api.nvim_get_current_win()
+                vim.cmd("tabnext 1")
+                vim.api.nvim_set_current_win(netrw_win)
+                local cwd = vim.fn.getcwd()
+                vim.cmd('edit ' .. cwd)
+            end
         end)
     end
 })
