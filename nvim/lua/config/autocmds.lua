@@ -169,6 +169,25 @@ vim.api.nvim_create_autocmd('FileType', {
         utils.map('n', '<c-l>', '<c-w>l', { buffer = true })
         utils.map(
             'n',
+            '<leader>b',
+            'qb',
+            { buffer = true, nowait = true, desc = 'List bookmarks' }
+        )
+        utils.map(
+            'n',
+            '<leader>m', 'mb',
+            { buffer = true, nowait = true, desc = 'Set bookmark' }
+        )
+        for i = 1, 9 do
+            utils.map(
+                'n',
+                '<leader>g' .. i,
+                i .. 'gb',
+                { buffer = true, nowait = true, desc = 'Go to bookmark ' .. i }
+            )
+        end
+        utils.map(
+            'n',
             '<leader>i', function() utils.split_netrw("edit", false) end,
             { buffer = true, nowait = true, desc = "Open file on next tab" }
         )

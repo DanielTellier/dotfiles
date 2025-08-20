@@ -37,6 +37,9 @@ wk.add({
 wk.add({
     { "<leader>i", group = "session", mode = "n" }
 })
+wk.add({
+    { "<leader>n", group = "netrw", mode = "n" }
+})
 
 -- Navigation
 utils.map(
@@ -346,7 +349,7 @@ utils.map('n', '<leader>rM', function()
 end, { silent = false, desc = "Remove all global marks" })
 
 -- Netrw
-utils.map('n', '<leader>n', function()
+utils.map('n', '<leader>n1', function()
     utils.open_cwd_in_tab1()
 end, { desc = "Open netrw in the first tab" })
 
