@@ -37,9 +37,6 @@ wk.add({
 wk.add({
     { "<leader>i", group = "session", mode = "n" }
 })
-wk.add({
-    { "<leader>n", group = "netrw", mode = "n" }
-})
 
 -- Navigation
 utils.map(
