@@ -5,6 +5,11 @@ wk.add({
     { "<leader>c", group = "copilot", mode = { "n", "x", "v" } },
 })
 
+utils.map("n", "<leader>cm",
+    "<cmd>CopilotChatModels<cr>",
+    { desc = "CopilotChat - View/Change the current model" }
+)
+
 local ask_copilot = function()
     local input = vim.fn.input("Ask Copilot: ")
     if input ~= "" then
