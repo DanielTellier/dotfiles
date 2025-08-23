@@ -85,6 +85,8 @@ CONTENTS                                                  *MydContents*
 - Git status (n): <leader>gs
 - Git log (n): <leader>gl
 - Git diff (n): <leader>gd
+- Git diff view open (n): <leader>go
+- Git diff view close (n): <leader>gq
 - Git add all (n): <leader>ga
 - Git commit (n): <leader>gc
 - Git pull (n): <leader>gu
