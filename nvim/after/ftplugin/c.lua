@@ -1,10 +1,10 @@
 local search = require('search')
-local utils = require('utils')
-local wk = require("which-key")
+-- local utils = require('utils')
+-- local wk = require("which-key")
 
-wk.add({
-    { "<leader>d", group = "c-lang", mode = "n" }
-})
+-- wk.add({
+--     { "<leader>d", group = "c-lang", mode = "n" }
+-- })
 
 -- Define the command
 vim.api.nvim_create_user_command(
@@ -15,13 +15,13 @@ vim.api.nvim_create_user_command(
     { nargs = 1 }
 )
 
--- Key mapping for C function definition under cursor
-utils.map(
-    'n',
-    '<leader>df',
-    function() search.search_cdef(vim.fn.expand('<cword>')) end,
-    { desc = "Search C function definition under cursor" }
-)
+-- NOTE: Replaced by lsp server
+-- utils.map(
+--     'n',
+--     '<leader>df',
+--     function() search.search_cdef(vim.fn.expand('<cword>')) end,
+--     { desc = "Search C function definition under cursor" }
+-- )
 
 -- Set the compiler to gcc
 vim.cmd('compiler gcc')

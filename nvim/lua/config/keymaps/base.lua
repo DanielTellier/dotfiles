@@ -108,9 +108,6 @@ end, { desc = "Open docs that contain key mappings" })
 utils.map('n', '<leader>ev', function()
     utils.open_path(rtp .. '/init.lua')
 end, { desc = "Open init.lua" })
-utils.map('n', '<leader>ek', function()
-    utils.open_path(rtp .. '/lua/mappings.lua')
-end, { desc = "Open mappings.lua" })
 utils.map('n', '<leader>ea', function()
     utils.open_after_ft()
 end, { desc = "Open custom after file type if exists" })
@@ -213,14 +210,15 @@ utils.map(
     'n', '<leader>fg', ':%s///gn' .. string.rep('<left>', 4),
     { silent = false, desc = "Count instances globally" }
 )
-utils.map(
-    'n', '<leader>fw', ':Mgrep all "\\b<c-r><c-w>\\b"<cr>:cw<cr>',
-    { desc = "Search word under cursor recursively under current directory" }
-)
-utils.map(
-    'n', '<leader>fi', ':Mgrep all ',
-    { desc = "Search word given user input recursively under current directory" }
-)
+-- NOTE: Below replaced by telescope live grep using ripgrep
+-- utils.map(
+--     'n', '<leader>fw', ':Mgrep all "\\b<c-r><c-w>\\b"<cr>:cw<cr>',
+--     { desc = "Search word under cursor recursively under current directory" }
+-- )
+-- utils.map(
+--     'n', '<leader>fi', ':Mgrep all ',
+--     { desc = "Search word given user input recursively under current directory" }
+-- )
 utils.map(
     'n', '<leader>fm', '/\\<<c-r><c-w>\\>',
     { silent = false, desc = "Search exact match in current buffer" }
@@ -465,5 +463,5 @@ if os.getenv("SSH_TTY") then
         }
     )
 end
-utils.map({ 'i', 'x', 'n', 's' }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+utils.map({ 'i', 'x', 'n', 's' }, "<c-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 utils.map('n', "<leader>zz", "<cmd>Lazy<cr>", { desc = "Lazy" })

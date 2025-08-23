@@ -43,7 +43,6 @@ CONTENTS                                                  *CommonContents*
 
 - Open docs that contain key mappings (n): <leader>ed
 - Open init.lua (n): <leader>ev
-- Open mappings.lua (n): <leader>ek
 - Open custom after file type if exists (n): <leader>ea
 - Open bashrc (n): <leader>eb
 
@@ -75,9 +74,6 @@ CONTENTS                                                  *CommonContents*
 
 - Count instances in the current line (n): <leader>cl
 - Count instances globally (n): <leader>cg
-- Search word under cursor recursively under current directory (n): <leader>ws
-- Search word given user input recursively under
-  current directory (n): <leader>is
 - Search exact match in current buffer (n): <leader>em
 - Open quickfix list (n): <leader>co
 - Close quickfix list (n): <leader>cq
@@ -108,11 +104,11 @@ CONTENTS                                                  *CommonContents*
 ==============================================================================
 8. Surround                                                   *CommonSurround*
 
-- Surround word with <x> (n): <leader>w<x>
-- Surround line with <x> (n): <leader>l<x>
-- Surround selected with <x> (v): <leader><x>
-- Change surround from <x> to <y> (n): <leader><x><y>
-- Delete surround <x> (n): <leader>d<x>
+- Surround word with <x> (n): <leader>uw<x>
+- Surround line with <x> (n): <leader>ul<x>
+- Surround selected with <x> (v): <leader>u<x>
+- Change surround from <x> to <y> (n): <leader>u<x><y>
+- Delete surround <x> (n): <leader>ud<x>
 
 ==============================================================================
 9. Window                                                       *CommonWindow*
@@ -155,9 +151,8 @@ CONTENTS                                                  *CommonContents*
 ==============================================================================
 13. Session                                                    *CommonSession*
 
-- Save session (n): <leader>ms
-- Source session (n): <leader>ss
-- Toggle session (n): <leader>ts
+- Save session (n): <leader>im
+- Source session (n): <leader>il
 
 ==============================================================================
 14. Copilot                                                    *CommonCopilot*
@@ -218,7 +213,7 @@ CONTENTS                                                  *CommonContents*
 17. Wezterm                                                    *CommonWezterm*
 
 - leader = <c-t>
-- Activate Copy Mode: <leader>a
+- Activate Copy Mode: <leader>c
 - Close Window: <leader>w
 - Close tab: <leader>q
 - Copy: <c-s-c> or <cmd-c>
@@ -266,9 +261,8 @@ CONTENTS                                                  *CommonContents*
 ==============================================================================
 19. Misc                                                          *CommonMisc*
 
-- Quit neovim (n): <leader>qq
+- Quit neovim (n): <leader>x
 - Close current window (n): <leader>qc
-- Open Explorer (n): <leader>ex
 - Change file indent size from 2 to 4 (n): <leader>24i
 - Change file indent size from 4 to 2 (n): <leader>42i
 - Command line mode (n, v): ;

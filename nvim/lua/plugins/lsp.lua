@@ -72,6 +72,8 @@ return {
                     vim.lsp.buf.code_action,
                     { buffer = bufnr, desc = 'Code actions' }
                 )
+                -- Disable diagnostics for all LSP clients (icon indicators)
+                vim.diagnostic.enable(false, { bufnr = bufnr })
             end
 
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -127,12 +129,10 @@ return {
                     end
                 end
             end
-
             local function toggle_lsp()
                 vim.g.lsp_enabled = not vim.g.lsp_enabled
                 apply_lsp_status()
             end
-
             utils.map(
                 'n',
                 '<leader>lt',
@@ -141,13 +141,20 @@ return {
                 end,
                 { desc = 'Toggle lsp' }
             )
-
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = utils.augroup("lsp"),
                 callback = function()
                     apply_lsp_status()
                 end
             })
+            utils.map(
+                'n',
+                '<leader>lg',
+                function()
+                    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+                end,
+                { desc = 'Toggle Diagnostics' }
+            )
         end,
     },
 }

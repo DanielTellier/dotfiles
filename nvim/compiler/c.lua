@@ -1,3 +1,8 @@
+-- Check if the current compiler is already set
+if vim.g.current_compiler then
+  return
+end
+
 vim.g.current_compiler = 'gcc'
 
 -- Set the make program for the current buffer
