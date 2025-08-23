@@ -260,8 +260,8 @@ return {
             prompts = prompts,
             mappings = {
                 complete = {
-                    detail = "Use @<Tab> or /<Tab> for options.",
-                    insert = '<Tab>',
+                    detail = "Use @<c-i> or /<c-i> for options.",
+                    insert = '<c-i>',
                 },
                 -- Close the chat
                 close = {
