@@ -10,12 +10,6 @@ utils.map("n", "<leader>cm",
     { desc = "CopilotChat - View/Change the current model" }
 )
 
-local ask_copilot = function()
-    local input = vim.fn.input("Ask Copilot: ")
-    if input ~= "" then
-        vim.cmd("CopilotChat " .. input)
-    end
-end
 local quick_copilot = function()
     local input = vim.fn.input("Quick Copilot: ")
     if input ~= "" then
@@ -32,32 +26,22 @@ end
 utils.map({ "n", "v" }, "<leader>ct", function()
     toggle_copilot()
 end, { desc = "CopilotChat - Toggle Copilot" })
-utils.map("x", "<leader>cv",
-    "<cmd>CopilotChatVisual<cr>",
-    { desc = "CopilotChat - Open in vertical split" }
+utils.map("v", "<leader>ci",
+    "<cmd>CopilotChatInline ",
+    { silent = false, desc = "CopilotChat - Floating inline chat window" }
 )
-utils.map("x", "<leader>ci",
-    "<cmd>CopilotChatInline<cr>",
-    { desc = "CopilotChat - Inline chat" }
+utils.map("v", "<leader>cv",
+    "<cmd>CopilotChatVisual ",
+    { silent = false, desc = "CopilotChat - Inline chat window" }
 )
 utils.map({ "n", "v" }, "<leader>cq", function()
     quick_copilot()
 end, { desc = "CopilotChat - Quick chat" })
-utils.map({ "n", "v" }, "<leader>ca", function()
-    ask_copilot()
-end, { desc = "CopilotChat - Ask chat" })
 
 -- Prompt Keymaps
-utils.map("n", "<leader>cp", function()
-    require("CopilotChat").select_prompt({
-        context = {
-            "buffers",
-        },
-    })
-end, { desc = "CopilotChat - Prompt actions" })
-utils.map("x", "<leader>cp", function()
-    require("CopilotChat").select_prompt()
-end, { desc = "CopilotChat - Prompt actions" })
+utils.map({ "n", "v" }, "<leader>cp", function()
+    require("CopilotChat").select_prompt({ context = { "buffers" } })
+end, { desc = "CopilotChat - Prompt selection chat" })
 utils.map(
     { "n", "v" },
     "<leader>ce",

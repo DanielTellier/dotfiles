@@ -1,32 +1,33 @@
-*commonmaps.txt* list of my minimal key mappings (use :helptags ~/.vim/doc)
+*mydocs.txt* list of my key mappings (use :helptags ~/<neovim root>/doc)
 
-*CommonLeader* = \<space>
-
-==============================================================================
-CONTENTS                                                  *CommonContents*
-
-    1.  Navigation ...................................... |CommonNavigation|
-    2.  Open File ....................................... |CommonOpenFile|
-    3.  Toggle .......................................... |CommonToggle|
-    4.  Substitution .................................... |CommonSubstitution|
-    5.  Search .......................................... |CommonSearch|
-    6.  Git ............................................. |CommonGit|
-    7.  Terminal ........................................ |CommonTerminal|
-    8.  Surround ........................................ |CommonSurround|
-    9.  Window .......................................... |CommonWindow|
-    10. Path Info ....................................... |CommonPathInfo|
-    11. Buffer .......................................... |CommonBuffer|
-    12. Mark ............................................ |CommonMark|
-    13. Session ......................................... |CommonSession|
-    14. Copilot ......................................... |CommonCopilot|
-    15. Comment ......................................... |CommonComment|
-    16. Netrw ........................................... |CommonNetrw|
-    17. Wezterm ......................................... |CommonWezterm|
-    18. Bash ............................................ |CommonBash|
-    19. Misc ............................................ |CommonMisc|
+*MydLeader* = \<space>
 
 ==============================================================================
-1. Navigation                                               *CommonNavigation*
+CONTENTS                                                  *MydContents*
+
+    1.  Navigation ...................................... |MydNavigation|
+    2.  Open File ....................................... |MydOpenFile|
+    3.  Toggle .......................................... |MydToggle|
+    4.  Substitution .................................... |MydSubstitution|
+    5.  Search .......................................... |MydSearch|
+    6.  Git ............................................. |MydGit|
+    7.  Terminal ........................................ |MydTerminal|
+    8.  Surround ........................................ |MydSurround|
+    9.  Window .......................................... |MydWindow|
+    10. Path Info ....................................... |MydPathInfo|
+    11. Buffer .......................................... |MydBuffer|
+    12. Mark ............................................ |MydMark|
+    13. Session ......................................... |MydSession|
+    14. Copilot ......................................... |MydCopilot|
+    15. Comment ......................................... |MydComment|
+    16. Netrw ........................................... |MydNetrw|
+    17. Wezterm ......................................... |MydWezterm|
+    18. Bash ............................................ |MydBash|
+    19. Avante .......................................... |MydAvante|
+    20. Misc ............................................ |MydMisc|
+
+==============================================================================
+1. Navigation                                               *MydNavigation*
 
 - AutoPairs Jump (i,n): <c-p>
 - Join lines (n): J
@@ -39,7 +40,7 @@ CONTENTS                                                  *CommonContents*
 - Move the current tab page to the first one (n): <cmd>0tabm
 
 ==============================================================================
-2. Open File                                                  *CommonOpenFile*
+2. Open File                                                  *MydOpenFile*
 
 - Open docs that contain key mappings (n): <leader>ed
 - Open init.lua (n): <leader>ev
@@ -47,7 +48,7 @@ CONTENTS                                                  *CommonContents*
 - Open bashrc (n): <leader>eb
 
 ==============================================================================
-3. Toggle                                                       *CommonToggle*
+3. Toggle                                                       *MydToggle*
 
 - Toggle highlights (n): <leader>th
 - Toggle numbers (n): <leader>tn
@@ -55,7 +56,7 @@ CONTENTS                                                  *CommonContents*
 - Toggle listchars and numbers (n): <leader>ta
 
 ==============================================================================
-4. Substitution                                           *CommonSubstitution*
+4. Substitution                                           *MydSubstitution*
 
 - Global substitution with word under cursor (n, v): <leader>swg
 - Global substitution with word under cursor and
@@ -70,7 +71,7 @@ CONTENTS                                                  *CommonContents*
   under cursor (n,v): <leader>sar
 
 ==============================================================================
-5. Search                                                       *CommonSearch*
+5. Search                                                       *MydSearch*
 
 - Count instances in the current line (n): <leader>cl
 - Count instances globally (n): <leader>cg
@@ -79,7 +80,7 @@ CONTENTS                                                  *CommonContents*
 - Close quickfix list (n): <leader>cq
 
 ==============================================================================
-6. Git                                                             *CommonGit*
+6. Git                                                             *MydGit*
 
 - Git status (n): <leader>gs
 - Git log (n): <leader>gl
@@ -90,7 +91,7 @@ CONTENTS                                                  *CommonContents*
 - Git push (n): <leader>gp
 
 ==============================================================================
-7. Terminal                                                   *CommonTerminal*
+7. Terminal                                                   *MydTerminal*
 
 - Split window navigation (hjkl) (t): <c-hjkl>
 - Open terminal (n): <leader>me
@@ -102,7 +103,7 @@ CONTENTS                                                  *CommonContents*
 - Paste yanked text into terminal (t): <c-w>p
 
 ==============================================================================
-8. Surround                                                   *CommonSurround*
+8. Surround                                                   *MydSurround*
 
 - Surround word with <x> (n): <leader>uw<x>
 - Surround line with <x> (n): <leader>ul<x>
@@ -111,7 +112,7 @@ CONTENTS                                                  *CommonContents*
 - Delete surround <x> (n): <leader>ud<x>
 
 ==============================================================================
-9. Window                                                       *CommonWindow*
+9. Window                                                       *MydWindow*
 
 - Split window navigation (hjkl) (n): <c-hjkl>
 - Rotate window upwards or leftwards (n): <leader>wu
@@ -125,14 +126,14 @@ CONTENTS                                                  *CommonContents*
 - Move previous window to vertical split (n): <leader>wp
 
 ==============================================================================
-10. Path Info                                                 *CommonPathInfo*
+10. Path Info                                                 *MydPathInfo*
 
 - Yank file name (n): <leader>fy
 - Yank full file path (n): <leader>Fy
 - Paste file name (n): <leader>fp
 
 ==============================================================================
-11. Buffer                                                      *CommonBuffer*
+11. Buffer                                                      *MydBuffer*
 
 - Search buffers in list defined in commands.lua (n): <leader>bs
 - List buffers (n): <leader>bl
@@ -143,39 +144,41 @@ CONTENTS                                                  *CommonContents*
 - Remove all buffers from list (n): <leader>rB
 
 ==============================================================================
-12. Mark                                                          *CommonMark*
+12. Mark                                                          *MydMark*
 
 - Remove mark from list (n): <leader>rm
 - Remove all global marks (n): <leader>rM
 
 ==============================================================================
-13. Session                                                    *CommonSession*
+13. Session                                                    *MydSession*
 
 - Save session (n): <leader>im
 - Source session (n): <leader>il
 
 ==============================================================================
-14. Copilot                                                    *CommonCopilot*
+14. Copilot                                                    *MydCopilot*
 
-- Ask input (n): <leader>cci
-- Debug info (n): <leader>ccD
-- Git commit suggestion (n): <leader>cgc
-- Open chat window (n, v): <leader>cco
-- Explain code (n, v): <leader>cce
-- Generate tests (n, v): <leader>cct
-- Review code (n, v): <leader>ccr
-- Refactor code (n, v): <leader>ccR
-- Fix code (n, v): <leader>ccf
-- Add documentation for code (n, v): <leader>ccd
-- Add Swagger API documentation (n, v): <leader>cca
-- Add Swagger API documentation with Numpy Documentation (n, v): <leader>ccA
-- Summarize text (n, v): <leader>ccs
-- Correct spelling (n, v): <leader>ccS
-- Improve wording (n, v): <leader>ccw
-- Make text concise (n, v): <leader>ccc
+- View/Change the current model (n): <leader>cm
+- Toggle CopilotChat (n, v): <leader>ct
+- Floating inline chat window (v): <leader>ci
+- Inline chat window (v): <leader>cv
+- Quick chat (n, v): <leader>cq
+- Prompt selection chat (n, v): <leader>cp
+- Explain code (n, v): <leader>ce
+- Generate tests (n, v): <leader>cT
+- Review code (n, v): <leader>cr
+- Refactor code (n, v): <leader>cR
+- Better Naming (n, v): <leader>cb
+- Git commit suggestion (n, v): <leader>cc
+- Fix code (n, v): <leader>cf
+- Add docs to code (n, v): <leader>cd
+- Summarize text (n, v): <leader>cs
+- Correct spelling (n, v): <leader>cS
+- Improve wording (n, v): <leader>cw
+- Make text concise (n, v): <leader>cC
 
 ==============================================================================
-15. Comment                                                    *CommonComment*
+15. Comment                                                    *MydComment*
 
 - Toggle line comment (n): gcc
 - Toggle comment (v): gc
@@ -183,7 +186,7 @@ CONTENTS                                                  *CommonContents*
 - Uncomment the current and adjacent commented lines (n): gcu
 
 ==============================================================================
-16. Netrw                                                        *CommonNetrw*
+16. Netrw                                                        *MydNetrw*
 
 - Note: All mappings only apply to filetype (&ft) == 'netrw'
 - Open file and close netrw: <cr>
@@ -210,7 +213,7 @@ CONTENTS                                                  *CommonContents*
 - Changing to a successor directory: U
 
 ==============================================================================
-17. Wezterm                                                    *CommonWezterm*
+17. Wezterm                                                    *MydWezterm*
 
 - leader = <c-t>
 - Activate Copy Mode: <leader>c
@@ -236,7 +239,7 @@ CONTENTS                                                  *CommonContents*
   - Close search overlay mode: <esc>
 
 ==============================================================================
-18. Bash                                                          *CommonBash*
+18. Bash                                                          *MydBash*
 
 - Go to start of line: <c-a>
 - Go to end of line: <c-e>
@@ -259,7 +262,15 @@ CONTENTS                                                  *CommonContents*
 - Send process to foreground: fg
 
 ==============================================================================
-19. Misc                                                          *CommonMisc*
+19. Avante                                                         *MydAvante*
+
+- Toggle sidebar: <leader>aa
+- Switch sidebar focus: <leader>af
+- Select model: <leader>a?
+- New ask: <leader>an
+
+==============================================================================
+20. Misc                                                          *MydMisc*
 
 - Quit neovim (n): <leader>x
 - Close current window (n): <leader>qc

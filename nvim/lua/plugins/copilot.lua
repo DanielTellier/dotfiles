@@ -332,9 +332,6 @@ Improves security and enables SSO across applications.
             }
             chat.setup(opts)
             local select = require("CopilotChat.select")
-                vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
-                chat.ask(args.args, { selection = select.visual })
-            end, { nargs = "*", range = true })
             -- Inline chat with Copilot
             vim.api.nvim_create_user_command("CopilotChatInline", function(args)
                 chat.ask(args.args, {
@@ -348,9 +345,8 @@ Improves security and enables SSO across applications.
                     },
                 })
             end, { nargs = "*", range = true })
-            -- Restore CopilotChatBuffer
-            vim.api.nvim_create_user_command("CopilotChatBuffer", function(args)
-                chat.ask(args.args, { selection = select.buffer })
+            vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
+                chat.ask(args.args, { selection = select.visual })
             end, { nargs = "*", range = true })
             -- Custom buffer for CopilotChat
             vim.api.nvim_create_autocmd("BufEnter", {
