@@ -22,6 +22,9 @@ utils.map(
     "n", "<leader>ga", "<cmd>Git add ", { silent = false, desc = "Git add" }
 )
 utils.map(
+    "n", "<leader>gc", "<cmd>Git commit<cr>", { desc = "Git commit" }
+)
+utils.map(
     "n", "<leader>gu", "<cmd>Git pull<cr>", { desc = "Git pull" }
 )
 utils.map(
