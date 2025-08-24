@@ -54,6 +54,12 @@ return {
     -- end color schemes
     { "ibhagwan/fzf-lua" },
     { "sindrets/diffview.nvim" },
+    -- Code comment
+    {
+        "folke/ts-comments.nvim",
+        opts = {},
+        event = "VeryLazy",
+    },
     { "tpope/vim-commentary" },
     { "tpope/vim-fugitive" },
     { "tpope/vim-repeat" },

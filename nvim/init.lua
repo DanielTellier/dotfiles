@@ -54,7 +54,6 @@ end
 local spec = {
     { import = "base_plugins" },
     { import = "plugins" },
-    { import = "coding" },
 }
 require("lazy").setup({
     -- Can use the below for saving space in home dir for where plugins are placed
