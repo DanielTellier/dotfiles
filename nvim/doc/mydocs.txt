@@ -29,7 +29,7 @@ CONTENTS                                                         *MydContents*
 ==============================================================================
 1. Navigation                                                  *MydNavigation*
 
-- AutoPairs Jump (i,n): <c-p>
+- Move cursor after closing pair symbol (i, n): <c-p>
 - Join lines (n): J
 - Yank to end of line (n): Y
 - Move up a paragraph (n): K
@@ -59,10 +59,14 @@ CONTENTS                                                         *MydContents*
 - Toggle numbers (n): <leader>tn
 - Toggle listchars (n): <leader>tl
 - Toggle listchars and numbers (n): <leader>ta
+- Toggle line wrap (n): <leader>tw
+- Toggle the last terminal buffer (n): <leader>tt
 
 ==============================================================================
 4. Substitution                                              *MydSubstitution*
 
+- Global substitution (n, v): <leader>sg
+- Global substitution with confirmation (n, v): <leader>sc
 - Global substitution with word under cursor (n, v): <leader>sw
 - Global substitution with word under cursor and
   confirmation (n, v): <leader>sW
@@ -81,6 +85,8 @@ CONTENTS                                                         *MydContents*
 
 - Count instances in the current line (n): <leader>fl
 - Count instances globally (n): <leader>fg
+- Search word under cursor in current directory (n): <leader>fw
+- Search word given input in current directory (n): <leader>fi
 - Search exact match in current buffer (n): <leader>fm
 
 ==============================================================================
@@ -106,6 +112,8 @@ CONTENTS                                                         *MydContents*
 - Open horizontal terminal (n): <leader>mo
 - Open terminal in new tab (n): <leader>mt
 - Exit terminal mode (t): <esc>
+- Exit the terminal (n): <leader>mq
+- Exit insert mode in inner terminal (n): <leader>mz
 - Paste yanked text into terminal (t): <c-w>p
 
 ==============================================================================
@@ -118,16 +126,16 @@ CONTENTS                                                         *MydContents*
 - Delete surround <x> (n): <leader>ud<x>
 
 ==============================================================================
-9. Window (Pane)                                                   *MydWindow*
+9. Window                                                   *MydWindow*
 
-- Split pane navigation (hjkl) (n): <c-hjkl>
-- Rotate pane upwards or leftwards (n): <leader>wu
-- Rotate pane downwards or rightwords (n): <leader>wd
-- Move pane to left (n): <leader>wh
-- Move pane to bottom (n): <leader>wj
-- Move pane to top (n): <leader>wk
-- Move pane to right (n): <leader>wl
-- Move pane to new tab (n): <leader>wt
+- Split window navigation (hjkl) (n): <c-hjkl>
+- Rotate window upwards or leftwards (n): <leader>wu
+- Rotate window downwards or rightwords (n): <leader>wd
+- Move window to left (n): <leader>wh
+- Move window to bottom (n): <leader>wj
+- Move window to top (n): <leader>wk
+- Move window to right (n): <leader>wl
+- Move window to new tab (n): <leader>wt
 
 ==============================================================================
 10. Path Info                                                    *MydPathInfo*
@@ -277,7 +285,7 @@ CONTENTS                                                         *MydContents*
 20. Misc                                                             *MydMisc*
 
 - Quit neovim (n): <leader>x
-- Close current window (n): <leader>qc
+- Close current window (n): <leader>qw
 - Change file indent size from 2 to 4 (n): <leader>24i
 - Change file indent size from 4 to 2 (n): <leader>42i
 - Command line mode (n, v): ;

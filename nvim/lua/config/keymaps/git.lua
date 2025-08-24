@@ -19,7 +19,7 @@ utils.map(
     "n", "<leader>gd", "<cmd>Git diff<cr>", { desc = "Git diff" }
 )
 utils.map(
-    "n", "<leader>ga", "<cmd>Git add ", { silent = false, desc = "Git add" }
+    "n", "<leader>ga", ":Git add ", { silent = false, desc = "Git add" }
 )
 utils.map(
     "n", "<leader>gc", "<cmd>Git commit<cr>", { desc = "Git commit" }

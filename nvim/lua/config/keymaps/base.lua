@@ -75,12 +75,8 @@ utils.map(
 -- <buffer> (utils.mapbuf in my case) is not working for neovim so cannot do:
 -- vim.g.AutoPairsShortcutJump = "<c-p>"
 utils.map(
-    'n', '<c-p>', [=[<esc>:call search('["\]'')}]','W')<cr>a]=],
-    { desc = "Move cursor in front of closing pair symbol" }
-)
-utils.map(
-    'i', '<c-p>', [=[<esc>:call search('["\]'')}]','W')<cr>a]=],
-    { desc = "Move cursor in front of closing pair symbol in insert mode" }
+    { 'i', 'n' }, '<c-p>', [=[<esc>:call search('["\]'')}]','W')<cr>a]=],
+    { desc = "Move cursor after closing pair symbol" }
 )
 utils.map('n', 'Y', 'y$', { silent = false, desc = "Yank to end of line" })
 -- Force use of hjkl-style movement and up(c-b)/down(c-f)
@@ -148,10 +144,18 @@ utils.map('n', '<leader>ta', function()
 end, { desc = "Toggle listchars and numbers" })
 utils.map(
     "n", "<leader>tw", "<cmd>set wrap!<CR>",
-    { desc = "Toggle Wrap" }
+    { desc = "Toggle line wrap" }
 )
 
 -- Substitution
+utils.map(
+    { 'n', 'v' }, '<leader>sg', ':%s///g' .. string.rep('<left>', 3),
+    { silent = false, desc = "Global substitution" }
+)
+utils.map(
+    { 'n', 'v' }, '<leader>sc', ':%s///gc' .. string.rep('<left>', 4),
+    { silent = false, desc = "Global substitution with confirmation" }
+)
 utils.map(
     { 'n', 'v' }, '<leader>sw', ':%s/<c-r><c-w>//g' .. string.rep('<left>', 2),
     { silent = false, desc = "Global substitution with word under cursor" }
@@ -221,15 +225,14 @@ utils.map(
     'n', '<leader>fg', ':%s///gn' .. string.rep('<left>', 4),
     { silent = false, desc = "Count instances globally" }
 )
--- NOTE: Below replaced by telescope live grep using ripgrep
--- utils.map(
---     'n', '<leader>fw', ':Mgrep all "\\b<c-r><c-w>\\b"<cr>:cw<cr>',
---     { desc = "Search word under cursor recursively under current directory" }
--- )
--- utils.map(
---     'n', '<leader>fi', ':Mgrep all ',
---     { desc = "Search word given user input recursively under current directory" }
--- )
+utils.map(
+    'n', '<leader>fw', ':Mgrep all "\\b<c-r><c-w>\\b"<cr>:cw<cr>',
+    { desc = "Search word under cursor in current directory" }
+)
+utils.map(
+    'n', '<leader>fi', ':Mgrep all ',
+    { desc = "Search word given input in current directory" }
+)
 utils.map(
     'n', '<leader>fm', '/\\<<c-r><c-w>\\>',
     { silent = false, desc = "Search exact match in current buffer" }
@@ -263,24 +266,24 @@ utils.surround_mappings("change")
 utils.surround_mappings("delete")
 utils.surround_mappings("visual")
 
--- Window (Pane)
-utils.map('n', '<c-h>', '<c-w>h', { silent = false, desc = "Move to left pane" })
-utils.map('n', '<c-j>', '<c-w>j', { silent = false, desc = "Move to bottom pane" })
-utils.map('n', '<c-k>', '<c-w>k', { silent = false, desc = "Move to top pane" })
-utils.map('n', '<c-l>', '<c-w>l', { silent = false, desc = "Move to right pane" })
-utils.map('t', '<c-h>', '<c-\\><c-n><c-w>h', { silent = false, desc = "Move to left pane" })
-utils.map('t', '<c-j>', '<c-\\><c-n><c-w>j', { silent = false, desc = "Move to bottom pane" })
-utils.map('t', '<c-k>', '<c-\\><c-n><c-w>k', { silent = false, desc = "Move to top pane" })
-utils.map('t', '<c-l>', '<c-\\><c-n><c-w>l', { silent = false, desc = "Move to right pane" })
-utils.map('n', '<leader>wu', '<c-w>R', { desc = "Rotate pane upwards or leftwards" })
+-- Window
+utils.map('n', '<c-h>', '<c-w>h', { silent = false, desc = "Move to left window" })
+utils.map('n', '<c-j>', '<c-w>j', { silent = false, desc = "Move to bottom window" })
+utils.map('n', '<c-k>', '<c-w>k', { silent = false, desc = "Move to top window" })
+utils.map('n', '<c-l>', '<c-w>l', { silent = false, desc = "Move to right window" })
+utils.map('t', '<c-h>', '<c-\\><c-n><c-w>h', { silent = false, desc = "Move to left window" })
+utils.map('t', '<c-j>', '<c-\\><c-n><c-w>j', { silent = false, desc = "Move to bottom window" })
+utils.map('t', '<c-k>', '<c-\\><c-n><c-w>k', { silent = false, desc = "Move to top window" })
+utils.map('t', '<c-l>', '<c-\\><c-n><c-w>l', { silent = false, desc = "Move to right window" })
+utils.map('n', '<leader>wu', '<c-w>R', { desc = "Rotate window upwards or leftwards" })
 utils.map(
-    'n', '<leader>wd', '<c-w>r', { desc = "Rotate pane downwards or rightwords" }
+    'n', '<leader>wd', '<c-w>r', { desc = "Rotate window downwards or rightwords" }
 )
-utils.map('n', '<leader>wh', '<c-w>H', { desc = "Move pane to left" })
-utils.map('n', '<leader>wj', '<c-w>J', { desc = "Move pane to bottom" })
-utils.map('n', '<leader>wk', '<c-w>K', { desc = "Move pane to top" })
-utils.map('n', '<leader>wl', '<c-w>L', { desc = "Move pane to right" })
-utils.map('n', '<leader>wt', '<c-w>T', { desc = "Move pane to new tab" })
+utils.map('n', '<leader>wh', '<c-w>H', { desc = "Move window to left" })
+utils.map('n', '<leader>wj', '<c-w>J', { desc = "Move window to bottom" })
+utils.map('n', '<leader>wk', '<c-w>K', { desc = "Move window to top" })
+utils.map('n', '<leader>wl', '<c-w>L', { desc = "Move window to right" })
+utils.map('n', '<leader>wt', '<c-w>T', { desc = "Move window to new tab" })
 utils.map(
     'n',
     '<leader>wo',
@@ -318,19 +321,19 @@ utils.map(
     "n",
     "<leader>wz",
     "<c-w>=z12<cr>",
-    { desc = "Sets pane size = ideal size for 2 buffers and 2 terms" }
+    { desc = "Sets window size = ideal size for 2 buffers and 2 terms" }
 )
 utils.map(
     "n",
     "<leader>w=",
     "<cmd>vertical resize +5<cr>",
-    { desc = "Increase pane size vertically" }
+    { desc = "Increase window size vertically" }
 )
 utils.map(
     "n",
     "<leader>w-",
     "<cmd>vertical resize -5<cr>",
-    { desc = "Decrease pane size vertically" }
+    { desc = "Decrease window size vertically" }
 )
 
 -- Path Info
