@@ -27,11 +27,11 @@ utils.map({ "n", "v" }, "<leader>ct", function()
     toggle_copilot()
 end, { desc = "CopilotChat - Toggle Copilot" })
 utils.map("v", "<leader>ci",
-    "<cmd>CopilotChatInline ",
+    ":CopilotChatInline ",
     { silent = false, desc = "CopilotChat - Floating inline chat window" }
 )
 utils.map("v", "<leader>cv",
-    "<cmd>CopilotChatVisual ",
+    ":CopilotChatVisual ",
     { silent = false, desc = "CopilotChat - Inline chat window" }
 )
 utils.map({ "n", "v" }, "<leader>cq", function()
