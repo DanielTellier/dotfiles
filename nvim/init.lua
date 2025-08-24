@@ -52,8 +52,8 @@ if vim.g.deprecation_warnings == false then
 end
 
 local spec = {
+    { import = "base_plugins" },
     { import = "plugins" },
-    { import = "editor" },
     { import = "coding" },
 }
 require("lazy").setup({
