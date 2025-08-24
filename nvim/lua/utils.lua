@@ -338,4 +338,69 @@ function M.augroup(name, opts)
     return vim.api.nvim_create_augroup("nvim_ide_" .. name, opts)
 end
 
+--- Moves the current buffer to another tab page.
+-- Can move to the next/previous tab, or a specific tab number.
+--
+-- @param opts (table) A table of options:
+--   - tab_number (number, optional): The specific tab number to move to (e.g., 1, 2, 3).
+--                                    This option takes precedence over 'direction'.
+--   - direction (string, optional): 'next' or 'prev'. Used if 'tab_number' is not provided.
+--                                   Defaults to 'next'.
+--   - split (string, optional): 'horizontal' or 'vertical'. Defaults to 'horizontal'.
+function M.move_to_tab(opts)
+    opts = opts or {}
+    local split_type = opts.split or 'horizontal'
+
+    -- 1. Guard against moving special buffers
+    if vim.bo.buftype ~= '' then
+        vim.notify('Cannot move special buffers.', vim.log.levels.WARN)
+        return
+    end
+
+    -- 2. Get current state
+    local current_buf = vim.api.nvim_get_current_buf()
+    local original_win = vim.api.nvim_get_current_win()
+    local current_tab_num = vim.fn.tabpagenr()
+    local tab_count = vim.fn.tabpagenr('$')
+
+    -- 3. Determine the target tab number
+    local target_tab_num
+    if opts.tab_number then
+        -- Prioritize moving to a specific tab number
+        if type(opts.tab_number) == 'number' and opts.tab_number > 0 then
+            target_tab_num = opts.tab_number
+        else
+            vim.notify('Invalid tab_number provided. Must be a positive number.', vim.log.levels.ERROR)
+            return
+        end
+    else
+        -- Fallback to 'next' or 'prev' direction
+        local direction = opts.direction or 'next'
+        local offset = (direction == 'prev') and -1 or 1
+        target_tab_num = current_tab_num + offset
+    end
+
+    -- Prevent moving a buffer to its own tab if it's the only window
+    if target_tab_num == current_tab_num and #vim.api.nvim_tabpage_list_wins(0) == 1 then
+        vim.notify('Cannot move buffer to the same tab.', vim.log.levels.INFO)
+        return
+    end
+
+    -- 4. Determine the split command modifier
+    local split_modifier = (split_type == 'vertical') and 'vert' or ''
+
+    -- 5. Execute the move
+    -- Case 1: The target tab exists
+    if target_tab_num > 0 and target_tab_num <= tab_count then
+        vim.cmd(string.format('%dtabnext | %s sbuffer %d', target_tab_num, split_modifier, current_buf))
+    else
+        -- Case 2: The target tab does not exist, create a new one
+        vim.cmd('tabnew')
+        vim.api.nvim_set_current_buf(current_buf)
+    end
+
+    -- 6. Clean up the original window from our new location.
+    vim.api.nvim_win_close(original_win, false)
+end
+
 return M

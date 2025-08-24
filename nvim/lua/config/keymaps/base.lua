@@ -103,8 +103,8 @@ utils.map('', 'L', '$', { silent = false, desc = "Move to end of line" })
 
 -- Edit
 utils.map('n', '<leader>ed', function()
-    utils.open_path(rtp .. '/doc/common-maps.txt')
-end, { desc = "Open docs that contain key mappings" })
+    utils.open_path(rtp .. '/doc/mydocs.txt')
+end, { desc = "Open my docs" })
 utils.map('n', '<leader>ev', function()
     utils.open_path(rtp .. '/init.lua')
 end, { desc = "Open init.lua" })
@@ -116,6 +116,17 @@ utils.map('n', '<leader>eb', function()
 end, { desc = "Open bashrc" })
 utils.map('n', '<leader>ef', ':copen<cr>', { desc = "Open quickfix list" })
 utils.map('n', '<leader>qf', ':cclose<cr>', { desc = "Close quickfix list" })
+utils.map('n', '<leader>en', function()
+    utils.open_cwd_in_tab1()
+end, { desc = "Open netrw in the first tab" })
+utils.map(
+    'n', '<leader>et', ':exe "tabnew " .. expand("%")<cr>',
+    { desc = "Open current buffer in a new tab" }
+)
+utils.map(
+    'n', '<leader>ep', ':exe "vs " .. expand("#")<cr>',
+    { desc = "Open previous window to vertical split" }
+)
 
 -- Toggle
 utils.map('n', '<leader>th', function()
@@ -252,49 +263,74 @@ utils.surround_mappings("change")
 utils.surround_mappings("delete")
 utils.surround_mappings("visual")
 
--- Window
-utils.map('n', '<c-h>', '<c-w>h', { silent = false, desc = "Move to left window" })
-utils.map('n', '<c-j>', '<c-w>j', { silent = false, desc = "Move to bottom window" })
-utils.map('n', '<c-k>', '<c-w>k', { silent = false, desc = "Move to top window" })
-utils.map('n', '<c-l>', '<c-w>l', { silent = false, desc = "Move to right window" })
-utils.map('t', '<c-h>', '<c-\\><c-n><c-w>h', { silent = false, desc = "Move to left window" })
-utils.map('t', '<c-j>', '<c-\\><c-n><c-w>j', { silent = false, desc = "Move to bottom window" })
-utils.map('t', '<c-k>', '<c-\\><c-n><c-w>k', { silent = false, desc = "Move to top window" })
-utils.map('t', '<c-l>', '<c-\\><c-n><c-w>l', { silent = false, desc = "Move to right window" })
-utils.map('n', '<leader>wu', '<c-w>R', { desc = "Rotate window upwards or leftwards" })
+-- Window (Pane)
+utils.map('n', '<c-h>', '<c-w>h', { silent = false, desc = "Move to left pane" })
+utils.map('n', '<c-j>', '<c-w>j', { silent = false, desc = "Move to bottom pane" })
+utils.map('n', '<c-k>', '<c-w>k', { silent = false, desc = "Move to top pane" })
+utils.map('n', '<c-l>', '<c-w>l', { silent = false, desc = "Move to right pane" })
+utils.map('t', '<c-h>', '<c-\\><c-n><c-w>h', { silent = false, desc = "Move to left pane" })
+utils.map('t', '<c-j>', '<c-\\><c-n><c-w>j', { silent = false, desc = "Move to bottom pane" })
+utils.map('t', '<c-k>', '<c-\\><c-n><c-w>k', { silent = false, desc = "Move to top pane" })
+utils.map('t', '<c-l>', '<c-\\><c-n><c-w>l', { silent = false, desc = "Move to right pane" })
+utils.map('n', '<leader>wu', '<c-w>R', { desc = "Rotate pane upwards or leftwards" })
 utils.map(
-    'n', '<leader>wd', '<c-w>r', { desc = "Rotate window downwards or rightwords" }
+    'n', '<leader>wd', '<c-w>r', { desc = "Rotate pane downwards or rightwords" }
 )
-utils.map('n', '<leader>wh', '<c-w>H', { desc = "Move window to left" })
-utils.map('n', '<leader>wj', '<c-w>J', { desc = "Move window to bottom" })
-utils.map('n', '<leader>wk', '<c-w>K', { desc = "Move window to top" })
-utils.map('n', '<leader>wl', '<c-w>L', { desc = "Move window to right" })
-utils.map('n', '<leader>wt', '<c-w>T', { desc = "Move window to new tab" })
+utils.map('n', '<leader>wh', '<c-w>H', { desc = "Move pane to left" })
+utils.map('n', '<leader>wj', '<c-w>J', { desc = "Move pane to bottom" })
+utils.map('n', '<leader>wk', '<c-w>K', { desc = "Move pane to top" })
+utils.map('n', '<leader>wl', '<c-w>L', { desc = "Move pane to right" })
+utils.map('n', '<leader>wt', '<c-w>T', { desc = "Move pane to new tab" })
 utils.map(
-    'n', '<leader>wc', ':exe "tabnew " .. expand("%")<cr>',
-    { desc = "Move current window to new tab" }
+    'n',
+    '<leader>wo',
+    function()
+        utils.move_to_tab({ direction = 'next', split = 'horizontal' })
+    end, { desc = 'Move buffer to Next tab h[o]rizontally' }
 )
 utils.map(
-    'n', '<leader>wp', ':exe "vs " .. expand("#")<cr>',
-    { desc = "Move previous window to vertical split" }
+    'n',
+    '<leader>wv',
+    function()
+        utils.move_to_tab({ direction = 'next', split = 'vertical' })
+    end, { desc = 'Move buffer to Next tab [v]ertically' }
 )
+utils.map(
+    'n',
+    '<leader>wO',
+    function()
+        utils.move_to_tab({ direction = 'prev', split = 'horizontal' })
+    end, { desc = 'Move buffer to Previous tab h[O]rizontally' }
+)
+utils.map(
+    'n',
+    '<leader>wV',
+    function()
+        utils.move_to_tab({ direction = 'prev', split = 'vertical' })
+    end, { desc = 'Move buffer to Previous tab [V]ertically' }
+)
+for i = 1, 9 do
+    utils.map('n', string.format('<leader>w%d', i), function()
+        utils.move_to_tab({ tab_number = i, split = 'horizontal' })
+    end, { desc = string.format('Move buffer to tab %d', i) })
+end
 utils.map(
     "n",
-    "<leader>w2",
+    "<leader>wz",
     "<c-w>=z12<cr>",
-    { desc = "Sets window size = ideal size for 2 buffers and 2 terms" }
+    { desc = "Sets pane size = ideal size for 2 buffers and 2 terms" }
 )
 utils.map(
     "n",
     "<leader>w=",
     "<cmd>vertical resize +5<cr>",
-    { desc = "Increase window size vertically" }
+    { desc = "Increase pane size vertically" }
 )
 utils.map(
     "n",
     "<leader>w-",
     "<cmd>vertical resize -5<cr>",
-    { desc = "Decrease window size vertically" }
+    { desc = "Decrease pane size vertically" }
 )
 
 -- Path Info
@@ -342,11 +378,6 @@ utils.map(
 utils.map('n', '<leader>rM', function()
     utils.remove_all_global_marks()
 end, { silent = false, desc = "Remove all global marks" })
-
--- Netrw
-utils.map('n', '<leader>n1', function()
-    utils.open_cwd_in_tab1()
-end, { desc = "Open netrw in the first tab" })
 
 -- Sessions
 vim.api.nvim_create_user_command(

@@ -3,10 +3,10 @@
 *MydLeader* = \<space>
 
 ==============================================================================
-CONTENTS                                                  *MydContents*
+CONTENTS                                                         *MydContents*
 
     1.  Navigation ...................................... |MydNavigation|
-    2.  Open File ....................................... |MydOpenFile|
+    2.  Open ............................................ |MydOpen|
     3.  Toggle .......................................... |MydToggle|
     4.  Substitution .................................... |MydSubstitution|
     5.  Search .......................................... |MydSearch|
@@ -27,7 +27,7 @@ CONTENTS                                                  *MydContents*
     20. Misc ............................................ |MydMisc|
 
 ==============================================================================
-1. Navigation                                               *MydNavigation*
+1. Navigation                                                  *MydNavigation*
 
 - AutoPairs Jump (i,n): <c-p>
 - Join lines (n): J
@@ -40,15 +40,20 @@ CONTENTS                                                  *MydContents*
 - Move the current tab page to the first one (n): <cmd>0tabm
 
 ==============================================================================
-2. Open File                                                  *MydOpenFile*
+2. Open                                                              *MydOpen*
 
-- Open docs that contain key mappings (n): <leader>ed
+- Open my docs (n): <leader>ed
 - Open init.lua (n): <leader>ev
 - Open custom after file type if exists (n): <leader>ea
 - Open bashrc (n): <leader>eb
+- Open quickfix list (n): <leader>ef
+- Close quickfix list (n): <leader>qf
+- Open netrw in the first tab (n): <leader>en
+- Open current buffer in a new tab (n): <leader>et
+- Open previous window to vertical split (n): <leader>ep
 
 ==============================================================================
-3. Toggle                                                       *MydToggle*
+3. Toggle                                                          *MydToggle*
 
 - Toggle highlights (n): <leader>th
 - Toggle numbers (n): <leader>tn
@@ -56,31 +61,30 @@ CONTENTS                                                  *MydContents*
 - Toggle listchars and numbers (n): <leader>ta
 
 ==============================================================================
-4. Substitution                                           *MydSubstitution*
+4. Substitution                                              *MydSubstitution*
 
-- Global substitution with word under cursor (n, v): <leader>swg
+- Global substitution with word under cursor (n, v): <leader>sw
 - Global substitution with word under cursor and
-  confirmation (n, v): <leader>swc
-- Global prefix with word under cursor (n, v): <leader>sbg
-- Global prefix with word under cursor and confirmation (n, v): <leader>sbc
-- Global postfix with word under cursor (n, v): <leader>sag
-- Global postfix with word under cursor and confirmation (n, v): <leader>sac
+  confirmation (n, v): <leader>sW
+- Global prefix with word under cursor (n, v): <leader>sr
+- Global prefix with word under cursor and confirmation (n, v): <leader>sR
+- Global postfix with word under cursor (n, v): <leader>so
+- Global postfix with word under cursor and confirmation (n, v): <leader>sO
 - Global substitution across buffers with word under
-  cursor (n, v): <leader>sbr
+  cursor (n, v): <leader>sb
 - Global substitution across file in argument list with word
-  under cursor (n,v): <leader>sar
+  under cursor (n,v): <leader>sa
+- Remove trailing spaces: <leader>ss
 
 ==============================================================================
-5. Search                                                       *MydSearch*
+5. Search                                                          *MydSearch*
 
-- Count instances in the current line (n): <leader>cl
-- Count instances globally (n): <leader>cg
-- Search exact match in current buffer (n): <leader>em
-- Open quickfix list (n): <leader>co
-- Close quickfix list (n): <leader>cq
+- Count instances in the current line (n): <leader>fl
+- Count instances globally (n): <leader>fg
+- Search exact match in current buffer (n): <leader>fm
 
 ==============================================================================
-6. Git                                                             *MydGit*
+6. Git                                                                *MydGit*
 
 - Git status (n): <leader>gs
 - Git log (n): <leader>gl
@@ -93,7 +97,7 @@ CONTENTS                                                  *MydContents*
 - Git push (n): <leader>gp
 
 ==============================================================================
-7. Terminal                                                   *MydTerminal*
+7. Terminal                                                      *MydTerminal*
 
 - Split window navigation (hjkl) (t): <c-hjkl>
 - Open terminal (n): <leader>me
@@ -105,7 +109,7 @@ CONTENTS                                                  *MydContents*
 - Paste yanked text into terminal (t): <c-w>p
 
 ==============================================================================
-8. Surround                                                   *MydSurround*
+8. Surround                                                      *MydSurround*
 
 - Surround word with <x> (n): <leader>uw<x>
 - Surround line with <x> (n): <leader>ul<x>
@@ -114,51 +118,49 @@ CONTENTS                                                  *MydContents*
 - Delete surround <x> (n): <leader>ud<x>
 
 ==============================================================================
-9. Window                                                       *MydWindow*
+9. Window (Pane)                                                   *MydWindow*
 
-- Split window navigation (hjkl) (n): <c-hjkl>
-- Rotate window upwards or leftwards (n): <leader>wu
-- Rotate window downwards or rightwords (n): <leader>wd
-- Move window to left (n): <leader>wh
-- Move window to bottom (n): <leader>wj
-- Move window to top (n): <leader>wk
-- Move window to right (n): <leader>wl
-- Move window to new tab (n): <leader>wt
-- Move current window to new tab (n): <leader>wc
-- Move previous window to vertical split (n): <leader>wp
+- Split pane navigation (hjkl) (n): <c-hjkl>
+- Rotate pane upwards or leftwards (n): <leader>wu
+- Rotate pane downwards or rightwords (n): <leader>wd
+- Move pane to left (n): <leader>wh
+- Move pane to bottom (n): <leader>wj
+- Move pane to top (n): <leader>wk
+- Move pane to right (n): <leader>wl
+- Move pane to new tab (n): <leader>wt
 
 ==============================================================================
-10. Path Info                                                 *MydPathInfo*
+10. Path Info                                                    *MydPathInfo*
 
-- Yank file name (n): <leader>fy
-- Yank full file path (n): <leader>Fy
-- Paste file name (n): <leader>fp
+- Yank file name (n): <leader>yf
+- Yank full file path (n): <leader>yF
+- Paste file name (n): <leader>yp
 
 ==============================================================================
-11. Buffer                                                      *MydBuffer*
+11. Buffer                                                         *MydBuffer*
 
 - Search buffers in list defined in commands.lua (n): <leader>bs
 - List buffers (n): <leader>bl
 - Switch buffer (n): <leader>bb
 - Switch buffer in horizontal split (n): <leader>bo
 - Switch buffer in vertical split (n): <leader>bv
-- Remove buffer from list defined in commands.lua (n): <leader>rb
-- Remove all buffers from list (n): <leader>rB
+- Remove buffer from list defined in commands.lua (n): <leader>br
+- Remove all buffers from list (n): <leader>bR
 
 ==============================================================================
-12. Mark                                                          *MydMark*
+12. Mark                                                             *MydMark*
 
 - Remove mark from list (n): <leader>rm
 - Remove all global marks (n): <leader>rM
 
 ==============================================================================
-13. Session                                                    *MydSession*
+13. Session                                                       *MydSession*
 
 - Save session (n): <leader>im
 - Source session (n): <leader>il
 
 ==============================================================================
-14. Copilot                                                    *MydCopilot*
+14. Copilot                                                       *MydCopilot*
 
 - View/Change the current model (n): <leader>cm
 - Toggle CopilotChat (n, v): <leader>ct
@@ -180,7 +182,7 @@ CONTENTS                                                  *MydContents*
 - Make text concise (n, v): <leader>cC
 
 ==============================================================================
-15. Comment                                                    *MydComment*
+15. Comment                                                       *MydComment*
 
 - Toggle line comment (n): gcc
 - Toggle comment (v): gc
@@ -188,7 +190,7 @@ CONTENTS                                                  *MydContents*
 - Uncomment the current and adjacent commented lines (n): gcu
 
 ==============================================================================
-16. Netrw                                                        *MydNetrw*
+16. Netrw                                                           *MydNetrw*
 
 - Note: All mappings only apply to filetype (&ft) == 'netrw'
 - Open file and close netrw: <cr>
@@ -215,7 +217,7 @@ CONTENTS                                                  *MydContents*
 - Changing to a successor directory: U
 
 ==============================================================================
-17. Wezterm                                                    *MydWezterm*
+17. Wezterm                                                       *MydWezterm*
 
 - leader = <c-t>
 - Activate Copy Mode: <leader>c
@@ -241,7 +243,7 @@ CONTENTS                                                  *MydContents*
   - Close search overlay mode: <esc>
 
 ==============================================================================
-18. Bash                                                          *MydBash*
+18. Bash                                                             *MydBash*
 
 - Go to start of line: <c-a>
 - Go to end of line: <c-e>
@@ -272,7 +274,7 @@ CONTENTS                                                  *MydContents*
 - New ask: <leader>an
 
 ==============================================================================
-20. Misc                                                          *MydMisc*
+20. Misc                                                             *MydMisc*
 
 - Quit neovim (n): <leader>x
 - Close current window (n): <leader>qc
