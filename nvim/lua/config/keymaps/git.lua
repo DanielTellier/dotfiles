@@ -10,6 +10,9 @@ utils.map(
     "n", "<leader>gg", "<cmd>Git<cr>", { desc = "Open git status dashboard" }
 )
 utils.map(
+    "n", "<leader>gb", ":Git checkout -b ", { silent = false, desc = "Git branch and checkout" }
+)
+utils.map(
     "n", "<leader>gs", "<cmd>Git status<cr>", { desc = "Git status" }
 )
 utils.map(
@@ -17,6 +20,9 @@ utils.map(
 )
 utils.map(
     "n", "<leader>gd", "<cmd>Git diff<cr>", { desc = "Git diff" }
+)
+utils.map(
+    "n", "<leader>gh", ":Git checkout ", { silent = false, desc = "Git checkout" }
 )
 utils.map(
     "n", "<leader>ga", ":Git add ", { silent = false, desc = "Git add" }
@@ -29,6 +35,9 @@ utils.map(
 )
 utils.map(
     "n", "<leader>gp", "<cmd>Git push<cr>", { desc = "Git push" }
+)
+utils.map(
+    "n", "<leader>gm", ":Git merge ", { silent = false, desc = "Git merge" }
 )
 
 utils.map(
