@@ -25,6 +25,9 @@ utils.map(
     "n", "<leader>gh", ":Git checkout ", { silent = false, desc = "Git checkout" }
 )
 utils.map(
+    "n", "<leader>gt", "<cmd>Git add -u<cr>", { desc = "Git add tracked files" }
+)
+utils.map(
     "n", "<leader>ga", ":Git add ", { silent = false, desc = "Git add" }
 )
 utils.map(
