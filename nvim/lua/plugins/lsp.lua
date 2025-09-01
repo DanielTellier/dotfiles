@@ -28,11 +28,12 @@ return {
                     })
                 end,
             },
+            { "hrsh7th/nvim-cmp" },
+            { "hrsh7th/cmp-nvim-lsp" },
             -- Bridge between Mason and lspconfig
             { "williamboman/mason-lspconfig.nvim" },
             -- "Quality of life" plugin to show LSP status updates
             { "j-hui/fidget.nvim", opts = {} },
-            { "hrsh7th/cmp-nvim-lsp" },
         },
         config = function()
             local utils = require("utils")
