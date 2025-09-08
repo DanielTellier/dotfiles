@@ -17,6 +17,9 @@ return {
     event = "VeryLazy",
     version = false, -- Never set this value to "*"! Never!
     opts = {
+        -- agentic (default): Uses AI tools to automatically generate and apply code changes
+        -- legacy: Uses the traditional planning method without automatic tool execution
+        mode = "legacy",
         provider = "copilot",
         providers = {
             copilot = {
