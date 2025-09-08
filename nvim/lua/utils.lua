@@ -144,7 +144,13 @@ function M.surround_mappings(map_type)
 end
 
 
--- Terminal
+-- Buffers
+function M.remove_all_buffers()
+    local current_pos = vim.fn.getpos('.')
+    vim.cmd("%bd | e# | echo 'Buffers Removed'")
+    vim.fn.setpos('.', current_pos)
+end
+
 local function switch_to_buffer_if_open(desired_buf)
     local current_buf = vim.api.nvim_get_current_buf()
     local win_list = vim.api.nvim_list_wins()
@@ -165,6 +171,8 @@ local function switch_to_buffer_if_open(desired_buf)
     return found_open_window
 end
 
+
+-- Terminal
 -- Function to paste yanked text into the terminal
 function M.paste_to_terminal()
     -- Get the yanked text from the unnamed register

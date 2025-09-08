@@ -34,6 +34,9 @@ wk.add({
 wk.add({
     { "<leader>i", group = "session", mode = "n" }
 })
+wk.add({
+    { "<leader>r", group = "remove", mode = "n" }
+})
 
 -- Navigation
 utils.map(
@@ -342,13 +345,16 @@ utils.map(
 )
 utils.map('n', '<leader>yp', '"fp', { desc = "Paste file name" })
 
--- Mark
+-- Removes
 utils.map(
     'n', '<leader>rm', ':delmarks ', { silent = false, desc = "Remove mark from list" }
 )
 utils.map('n', '<leader>rM', function()
     utils.remove_all_global_marks()
 end, { silent = false, desc = "Remove all global marks" })
+utils.map('n', '<leader>rb', function()
+    utils.remove_all_buffers()
+end, { silent = false, desc = "Remove all buffers from list" })
 
 -- Sessions
 vim.api.nvim_create_user_command(
