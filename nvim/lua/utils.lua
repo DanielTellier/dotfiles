@@ -144,32 +144,7 @@ function M.surround_mappings(map_type)
 end
 
 
--- Buffers
-function M.search_buffers_(pattern)
-    local bufferlist = vim.fn.execute('ls')
-    for _, line in ipairs(vim.split(bufferlist, '\n')) do
-        if line:match(pattern) then
-            print(line)
-        end
-    end
-end
-
-function M.remove_all_buffers()
-    local current_pos = vim.fn.getpos('.')
-    vim.cmd("%bd | e# | echo 'Buffers Removed'")
-    vim.fn.setpos('.', current_pos)
-end
-
-function M.remove_matching_buffers(pattern)
-    local bufferList = vim.tbl_filter(function(val) return vim.fn.buflisted(val) == 1 end, vim.fn.range(1, vim.fn.bufnr('$')))
-    local matchingBuffers = vim.tbl_filter(function(val) return vim.fn.bufname(val):match(pattern) end, bufferList)
-    if #matchingBuffers < 1 then
-        print('No buffers found matching pattern ' .. pattern)
-        return
-    end
-    vim.cmd('bd ' .. table.concat(matchingBuffers, ' '))
-end
-
+-- Terminal
 local function switch_to_buffer_if_open(desired_buf)
     local current_buf = vim.api.nvim_get_current_buf()
     local win_list = vim.api.nvim_list_wins()
@@ -190,8 +165,6 @@ local function switch_to_buffer_if_open(desired_buf)
     return found_open_window
 end
 
-
--- Terminal
 -- Function to paste yanked text into the terminal
 function M.paste_to_terminal()
     -- Get the yanked text from the unnamed register
@@ -401,6 +374,65 @@ function M.move_to_tab(opts)
 
     -- 6. Clean up the original window from our new location.
     vim.api.nvim_win_close(original_win, false)
+end
+
+-- Example of dev_paths.json content:
+-- {
+--   "paths": [
+--     {
+--       "name": "Dotfiles",
+--       "path": "/Users/user/.dotfiles"
+--     },
+--     {
+--       "name": "Projects",
+--       "path": "/Users/user/Projects"
+--     }
+--   ]
+-- }
+function M.select_dev_path_and_find_files()
+    local config_file = vim.fn.stdpath('data') .. '/dev_paths.json'
+
+    -- Read and parse JSON
+    local file = io.open(config_file, 'r')
+    if not file then
+        vim.notify(
+            'Create ' .. config_file .. ': {"paths": [{"name": "Project", "path": "/path"}]}',
+            vim.log.levels.ERROR
+        )
+        return
+    end
+
+    local ok, data = pcall(vim.json.decode, file:read('*all'))
+    file:close()
+
+    if not ok or not data.paths then
+        vim.notify("Invalid JSON in " .. config_file, vim.log.levels.ERROR)
+        return
+    end
+
+    -- Create picker
+    require('telescope.pickers').new({}, {
+        prompt_title = "Select Development Path",
+        finder = require('telescope.finders').new_table({
+            results = data.paths,
+            entry_maker = function(entry)
+                return {
+                    value = entry.path,
+                    display = entry.name .. " (" .. entry.path .. ")",
+                    ordinal = entry.name,
+                }
+            end,
+        }),
+        sorter = require('telescope.config').values.generic_sorter({}),
+        attach_mappings = function(bufnr)
+            require('telescope.actions').select_default:replace(function()
+                require('telescope.actions').close(bufnr)
+                local path = require('telescope.actions.state').get_selected_entry().value
+                require('telescope.builtin').find_files({ cwd = path })
+            end)
+            return true
+        end,
+    }):find()
 end
 
 return M

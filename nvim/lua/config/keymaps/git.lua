@@ -1,4 +1,6 @@
 -- Using plugins: "sindrets/diffview.nvim" and "tpope/vim-fugitive"
+-- NOTE: Possibly explore this:
+-- https://github.com/nvim-telescope/telescope.nvim?tab=readme-ov-file#git-pickers
 local utils = require('utils')
 local wk = require("which-key")
 

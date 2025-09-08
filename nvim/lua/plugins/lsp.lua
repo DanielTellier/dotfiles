@@ -41,6 +41,8 @@ return {
             wk.add({
                 { "<leader>l", group = "lsp", mode = "n" }
             })
+            -- NOTE: Can find all telescope lsp options here:
+            -- https://github.com/nvim-telescope/telescope.nvim?tab=readme-ov-file#neovim-lsp-pickers
             -- Keymaps will be set inside on_attach to ensure they only apply to LSP buffers
             local on_attach = function(client, bufnr)
                 local telescope_builtin = require("telescope.builtin")

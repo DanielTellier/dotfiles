@@ -32,9 +32,6 @@ wk.add({
     { "<leader>y", group = "yank", mode = { "n", "v" } }
 })
 wk.add({
-    { "<leader>b", group = "buffer", mode = "n" }
-})
-wk.add({
     { "<leader>i", group = "session", mode = "n" }
 })
 
@@ -344,35 +341,6 @@ utils.map(
     'n', '<leader>yF', ':let @f = expand("%:p")<cr>', { desc = "Yank full file path" }
 )
 utils.map('n', '<leader>yp', '"fp', { desc = "Paste file name" })
-
--- Buffer
-vim.api.nvim_create_user_command('BuffersSearch', function(args)
-    utils.search_buffers_(args.args)
-end, { nargs = 1 })
-vim.api.nvim_create_user_command('RemoveWhichBuffer', function(args)
-    utils.remove_matching_buffers(args.args)
-end, { nargs = 1 })
-utils.map(
-    'n', '<leader>bs', ':BuffersSearch ',
-    { silent = false, desc = "Search buffers in list defined in commands.lua" }
-)
-utils.map('n', '<leader>bl', ':buffers<cr>', { silent = false, desc = "List buffers" })
-utils.map('n', '<leader>bb', ':buffer ', { silent = false, desc = "Switch buffer" })
-utils.map(
-    'n', '<leader>bo', ':sbuffer ',
-    { silent = false, desc = "Switch buffer in horizontal split" }
-)
-utils.map(
-    'n', '<leader>bv', ':vertical sbuffer ',
-    { silent = false, desc = "Switch buffer in vertical split" }
-)
-utils.map(
-    'n', '<leader>br', ':RemoveWhichBuffer ',
-    { silent = false, desc = "Remove buffer from list defined in commands.lua" }
-)
-utils.map('n', '<leader>bR', function()
-    utils.remove_all_buffers()
-end, { silent = false, desc = "Remove all buffers from list" })
 
 -- Mark
 utils.map(

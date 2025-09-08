@@ -10,7 +10,7 @@ utils.map(
     "n", "<leader>po", "<cmd>Telescope file_browser<cr>",
     { desc = "Run Telescrope file browser mode" }
 )
-utils.map('n', '<leader>pb', function()
+utils.map('n', '<leader>pw', function()
     require("telescope").extensions.file_browser.file_browser()
 end, { desc = "Open file_browser with the cwd" })
 utils.map('n', '<leader>pp', function()
@@ -22,5 +22,11 @@ utils.map('n', '<leader>pf', builtin.find_files, { desc = "Telescope find files"
 utils.map('n', '<leader>pg', builtin.git_files, { desc = "Telescope git find files" })
 utils.map('n', '<leader>pl', builtin.live_grep, { desc = "Telescope live grep" })
 utils.map('n', '<leader>ps', function()
-    builtin.grep_string({ search = vim.fn.input("Grep > ")})
+    builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end, { desc = "Telescope grep" })
+utils.map('n', '<leader>pb', builtin.buffers, { desc = "Telescope buffers" })
+utils.map('n', '<leader>ph', builtin.help_tags, { desc = "Telescope help tags" })
+utils.map(
+    'n', '<leader>pd', utils.select_dev_path_and_find_files,
+    { desc = "Select development path and find files" }
+)

@@ -8,6 +8,8 @@ return {
                 build = "make",
             },
             { "nvim-telescope/telescope-file-browser.nvim" },
+            -- https://github.com/fdschmidt93/telescope-egrepify.nvim
+            -- { "fdschmidt93/telescope-egrepify.nvim" },
         },
         config = function()
             local telescope = require("telescope")
