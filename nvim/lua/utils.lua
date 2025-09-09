@@ -443,4 +443,19 @@ function M.select_dev_path_and_find_files()
     }):find()
 end
 
+-- Add all files under a directory to the buffer list (no opening).
+function M.buf_add_dir(dir)
+    dir = vim.fn.fnamemodify(dir, ':p')
+    if vim.fn.isdirectory(dir) == 0 then
+        vim.notify('Not a directory: ' .. dir, vim.log.levels.ERROR)
+        return
+    end
+    for _, path in ipairs(vim.fn.globpath(dir, '**/*', false, true)) do
+        if vim.fn.filereadable(path) == 1 then
+            local buf = vim.fn.bufadd(path)
+            vim.api.nvim_set_option_value('buflisted', true, { buf = buf })
+        end
+    end
+end
+
 return M

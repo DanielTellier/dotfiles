@@ -107,7 +107,7 @@ end, { desc = "Open init.lua" })
 utils.map('n', '<leader>ea', function()
     utils.open_after_ft()
 end, { desc = "Open custom after file type if exists" })
-utils.map('n', '<leader>eb', function()
+utils.map('n', '<leader>er', function()
     utils.open_path(home .. '/.bashrc')
 end, { desc = "Open bashrc" })
 utils.map('n', '<leader>ef', ':copen<cr>', { desc = "Open quickfix list" })
@@ -122,6 +122,21 @@ utils.map(
 utils.map(
     'n', '<leader>ep', ':exe "vs " .. expand("#")<cr>',
     { desc = "Open previous window to vertical split" }
+)
+vim.api.nvim_create_user_command(
+    'BufAddDir',
+    function(opts)
+        utils.buf_add_dir(opts.args)
+    end,
+    {
+        nargs = 1,
+        complete = 'dir',
+        desc = 'Add all files under a directory to the buffer list'
+    }
+)
+utils.map(
+    'n', '<leader>eb', ':BufAddDir ',
+    { silent = false, desc = 'Add all files under a directory to the buffer list' }
 )
 
 -- Toggle
@@ -231,7 +246,7 @@ utils.map(
 )
 utils.map(
     'n', '<leader>fi', ':Mgrep all ',
-    { desc = "Search word given input in current directory" }
+    { silent = false, desc = "Search word given input in current directory" }
 )
 utils.map(
     'n', '<leader>fm', '/\\<<c-r><c-w>\\>',
