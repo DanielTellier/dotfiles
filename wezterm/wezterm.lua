@@ -93,6 +93,8 @@ return {
     text_background_opacity = 0.5,
     scrollback_lines = 3500,
     window_close_confirmation = 'NeverPrompt',
+    enable_kitty_keyboard = true,
+    enable_kitty_graphics = true,
 
     -- Disable ligatures
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
