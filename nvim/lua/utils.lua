@@ -452,8 +452,10 @@ function M.buf_add_dir(dir)
     end
     for _, path in ipairs(vim.fn.globpath(dir, '**/*', false, true)) do
         if vim.fn.filereadable(path) == 1 then
-            local buf = vim.fn.bufadd(path)
-            vim.api.nvim_set_option_value('buflisted', true, { buf = buf })
+            local current_win = vim.api.nvim_get_current_win()
+            vim.cmd('tabnew ' .. path)
+            vim.cmd('tabclose')
+            vim.api.nvim_set_current_win(current_win)
         end
     end
 end
