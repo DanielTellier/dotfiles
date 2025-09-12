@@ -1,5 +1,5 @@
-# nvim-config
-Neovim configuration with LSP, AI assistance, and modern tooling.
+# Neovim Configuration
+Configured with LSP, AI assistance, and modern tooling.
 
 ## Prerequisites
 
