@@ -34,20 +34,6 @@ end
 
 
 -- Files
-function M.change_file_indent_size(curr_size, new_size)
-    local curr_file = vim.fn.bufname('%')
-    local tmp_file = '/tmp/set_vim_file_indent.txt'
-    local curr_set = 'set tabstop=' .. curr_size .. ' softtabstop=' .. curr_size
-    local new_set = 'set tabstop=' .. new_size .. ' softtabstop=' .. new_size
-    vim.cmd('!cp ' .. curr_file .. ' ' .. tmp_file)
-    vim.cmd('edit ' .. tmp_file)
-    vim.cmd(curr_set .. ' noexpandtab | retab! | write')
-    vim.cmd('!cat ' .. tmp_file .. ' > ' .. curr_file)
-    vim.cmd('edit ' .. curr_file)
-    vim.cmd(new_set .. ' expandtab | retab | write')
-    vim.cmd('!rm ' .. tmp_file)
-end
-
 function M.open_path(path)
     local tabcurr = vim.fn.tabpagenr()
     local tablast = vim.fn.tabpagenr('$')

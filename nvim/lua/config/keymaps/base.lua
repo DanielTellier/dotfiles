@@ -226,6 +226,18 @@ utils.map(
     'n', '<leader>ss', ':%s/\\s\\+$//g<cr>',
     { desc = "Remove trailing spaces" }
 )
+utils.map(
+    'n',
+    '<leader>s2',
+    ':%s/^\\( \\{4\\}\\)\\+/\\=substitute(submatch(0), "    ", "  ", "g")/g<cr>',
+    { desc = "Change file indent size from 4 to 2" }
+)
+utils.map(
+    'n',
+    '<leader>s4',
+    ':%s/^\\( \\{2\\}\\)\\+/\\=substitute(submatch(0), "  ", "    ", "g")/g<cr>',
+    { desc = "Change file indent size from 2 to 4" }
+)
 
 -- Find
 vim.api.nvim_create_user_command('Mgrep', function(args)
@@ -447,12 +459,6 @@ utils.map(
 )
 vim.cmd('cmap w!! w !sudo tee > /dev/null %', { desc = "Save file as sudo" })
 vim.cmd('cmap <c-p> <c-r>*', { desc = "Paste from system clipboard in command mode" })
-utils.map('n', '<leader>24i', function()
-    utils.change_file_indent_size(2, 4)
-end, { desc = "Change file indent size from 2 to 4" })
-utils.map('n', '<leader>42i', function()
-    utils.change_file_indent_size(4, 2)
-end, { desc = "Change file indent size from 4 to 2" })
 utils.map({ "n", "v" }, ';', ':', { silent = false, desc = "Command line mode" })
 utils.map(
     'n', ',p', '"0p', { noremap = false, silent = false, desc = "Paste last yanked" }
