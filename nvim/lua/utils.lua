@@ -446,4 +446,25 @@ function M.buf_add_dir(dir)
     end
 end
 
+-- Apply indent transformation to files recursively
+function M.transform_indent_files(directory, file_pattern, from_spaces, to_spaces)
+    local files = vim.fn.glob(directory .. "/**/" .. file_pattern, false, true)
+
+    if #files == 0 then
+        vim.notify("No files found matching pattern: " .. file_pattern .. " in " .. directory, vim.log.levels.WARN)
+        return
+    end
+
+    local count = 0
+    for _, file in ipairs(files) do
+        if vim.fn.isdirectory(file) == 0 then
+            vim.cmd(('silent! edit %s | %%s/^\\( \\{%d\\}\\)\\+/\\=substitute(submatch(0), "%s", "%s", "g")/ge | write'):format(
+                vim.fn.fnameescape(file), from_spaces, string.rep(" ", from_spaces), string.rep(" ", to_spaces)))
+            count = count + 1
+        end
+    end
+
+    vim.notify(("Transformed %d files from %d-space to %d-space indent"):format(count, from_spaces, to_spaces))
+end
+
 return M

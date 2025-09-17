@@ -238,6 +238,47 @@ utils.map(
     ':%s/^\\( \\{2\\}\\)\\+/\\=substitute(submatch(0), "  ", "    ", "g")/g<cr>',
     { desc = "Change file indent size from 2 to 4" }
 )
+-- Create user commands for recursive indent transformation
+vim.api.nvim_create_user_command('IndentTo2', function(opts)
+    local args = vim.split(opts.args, '%s+')
+    if #args < 2 then
+        vim.notify("Usage: :IndentTo2 <directory> <file_pattern>", vim.log.levels.ERROR)
+        return
+    end
+    utils.transform_indent_files(args[1], args[2], 4, 2)
+end, {
+    nargs = '+',
+    desc = 'Convert 4-space indent to 2-space for files matching pattern in directory (recursive)',
+    complete = 'file'
+})
+utils.map(
+     'n', '<leader>s@',
+    ':IndentTo2 ',
+    {
+        silent = false,
+        desc = 'Convert 4-space indent to 2-space for files matching pattern in directory (recursive)'
+    }
+)
+vim.api.nvim_create_user_command('IndentTo4', function(opts)
+    local args = vim.split(opts.args, '%s+')
+    if #args < 2 then
+        vim.notify("Usage: :IndentTo4 <directory> <file_pattern>", vim.log.levels.ERROR)
+        return
+    end
+    utils.transform_indent_files(args[1], args[2], 2, 4)
+end, {
+    nargs = '+',
+    desc = 'Convert 2-space indent to 4-space for files matching pattern in directory (recursive)',
+    complete = 'file'
+})
+utils.map(
+     'n', '<leader>s$',
+    ':IndentTo4 ',
+    {
+        silent = false,
+        desc = 'Convert 2-space indent to 4-space for files matching pattern in directory (recursive)'
+    }
+)
 
 -- Find
 vim.api.nvim_create_user_command('Mgrep', function(args)
