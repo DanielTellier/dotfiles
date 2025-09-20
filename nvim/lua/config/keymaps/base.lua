@@ -227,15 +227,15 @@ utils.map(
     { desc = "Remove trailing spaces" }
 )
 utils.map(
-    'n',
-    '<leader>s2',
-    ':%s/^\\( \\{4\\}\\)\\+/\\=substitute(submatch(0), "    ", "  ", "g")/g<cr>',
+    'n', '<leader>s2', function()
+        utils.transform_indent_buffer(4, 2)
+    end,
     { desc = "Change file indent size from 4 to 2" }
 )
 utils.map(
-    'n',
-    '<leader>s4',
-    ':%s/^\\( \\{2\\}\\)\\+/\\=substitute(submatch(0), "  ", "    ", "g")/g<cr>',
+    'n', '<leader>s4', function()
+        utils.transform_indent_buffer(2, 4)
+    end,
     { desc = "Change file indent size from 2 to 4" }
 )
 -- Create user commands for recursive indent transformation

@@ -446,6 +446,92 @@ function M.buf_add_dir(dir)
     end
 end
 
+--[[
+Transform indentation in a list of lines from one spacing to another.
+
+This function intelligently handles mixed indentation by tracking scope changes and only
+converting lines that use the old indentation system. It detects when a line increases
+indentation by exactly `from_spaces` and marks that indentation level for conversion.
+
+@param lines table: Array of strings representing file lines
+@param from_spaces number: Source indentation size (e.g., 4 for 4-space indentation)
+@param to_spaces number: Target indentation size (e.g., 2 for 2-space indentation)
+@return boolean: True if any lines were modified, false otherwise
+
+Cases This Function Handles:
+1. Basic mixed indentation conversion: Lines using 4-space indents get converted to 2-space while preserving existing 2-space lines
+2. Same-level siblings: All lines at a marked indentation level get converted consistently
+3. Proper dedentation cleanup: When exiting nested blocks, deeper marked indents get cleared
+4. Scope resets: All markings reset when returning to column 0
+5. Nested blocks: Correctly handles multiple levels of nesting with mixed indentation
+
+Cases This Function Cannot Handle:
+1. Files with mixed source indentation sizes: Only converts one source indentation size per call
+2. Tab characters: Only handles spaces, ignores tab characters
+3. Files without column 0 resets: Markings persist incorrectly across unrelated code sections
+4. Non-standard jump sizes: Only detects exact from_spaces increases, misses other increment patterns
+5. Inconsistent spacing within scopes: Cannot handle mixed 4/6-space indents that should both be converted
+
+The function works best for files with a single old indentation system (4-space) being converted to a new system (2-space), with proper scope boundaries.
+
+Example:
+  if True:        -- 2 spaces (unchanged)
+      return "x"  -- 4 spaces (converted to 4 spaces for proper nesting)
+--]]
+local function transform_lines_indent(lines, from_spaces, to_spaces)
+    local changed = false
+    local prev_indent = 0
+    local marked_indents = {}
+
+    for i, line in ipairs(lines) do
+        local indent = line:match("^( *)")
+        local indent_size = #indent
+
+        if indent_size > 0 then
+            -- Clear deeper indents when we dedent
+            if indent_size < prev_indent then
+                for indent, _ in pairs(marked_indents) do
+                    if indent > indent_size then
+                        marked_indents[indent] = nil
+                    end
+                end
+            end
+
+            local indent_diff = indent_size - prev_indent
+
+            -- Mark indent for conversion if it increases by exactly from_spaces
+            if indent_diff == from_spaces then
+                marked_indents[indent_size] = true
+            end
+
+            -- Convert if this indent was marked for conversion
+            if marked_indents[indent_size] then
+                local level = indent_size / from_spaces
+                local new_indent = level * to_spaces
+
+                if new_indent ~= indent_size then
+                    lines[i] = string.rep(" ", new_indent) .. line:sub(indent_size + 1)
+                    changed = true
+                end
+            end
+
+            prev_indent = indent_size
+        else
+            prev_indent = 0
+            marked_indents = {}  -- Reset all when we hit column 0
+        end
+    end
+    return changed
+end
+
+-- Apply indent transformation to current buffer
+function M.transform_indent_buffer(from_spaces, to_spaces)
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    transform_lines_indent(lines, from_spaces, to_spaces)
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+    vim.notify(("Transformed current buffer: %d-space → %d-space indents"):format(from_spaces, to_spaces))
+end
+
 -- Apply indent transformation to files recursively
 function M.transform_indent_files(directory, file_pattern, from_spaces, to_spaces)
     local files = vim.fn.glob(directory .. "/**/" .. file_pattern, false, true)
@@ -458,13 +544,15 @@ function M.transform_indent_files(directory, file_pattern, from_spaces, to_space
     local count = 0
     for _, file in ipairs(files) do
         if vim.fn.isdirectory(file) == 0 then
-            vim.cmd(('silent! edit %s | %%s/^\\( \\{%d\\}\\)\\+/\\=substitute(submatch(0), "%s", "%s", "g")/ge | write'):format(
-                vim.fn.fnameescape(file), from_spaces, string.rep(" ", from_spaces), string.rep(" ", to_spaces)))
-            count = count + 1
+            local lines = vim.fn.readfile(file)
+            if transform_lines_indent(lines, from_spaces, to_spaces) then
+                vim.fn.writefile(lines, file)
+                count = count + 1
+            end
         end
     end
 
-    vim.notify(("Transformed %d files from %d-space to %d-space indent"):format(count, from_spaces, to_spaces))
+    vim.notify(("Transformed %d files: %d-space → %d-space indents"):format(count, from_spaces, to_spaces))
 end
 
 return M
