@@ -26,6 +26,7 @@ utils.map('n', '<leader>ps', function()
 end, { desc = "Telescope grep" })
 utils.map('n', '<leader>pb', builtin.buffers, { desc = "Telescope buffers" })
 utils.map('n', '<leader>ph', builtin.help_tags, { desc = "Telescope help tags" })
+utils.map('n', '<leader>pm', builtin.marks, { desc = "Telescope marks" })
 utils.map(
     'n', '<leader>pd', utils.select_dev_path_and_find_files,
     { desc = "Select development path and find files" }
