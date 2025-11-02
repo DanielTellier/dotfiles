@@ -9,7 +9,7 @@ vim.g.rehash256 = 1
 
 -- Colorscheme and syntax
 if vim.fn.has("termguicolors") == 1 then
-    opt.termguicolors = true
+  opt.termguicolors = true
 end
 vim.cmd("filetype plugin indent on")
 vim.cmd("syntax on")
@@ -29,12 +29,12 @@ vim.fn.setreg('f', 'f,lli\b\r\027')
 
 -- Highlight settings
 vim.cmd([[
-    highlight Visual cterm=NONE ctermbg=yellow ctermfg=white
-    highlight Visual gui=NONE guibg=yellow guifg=white
-    highlight IncSearch cterm=NONE ctermbg=blue ctermfg=white
-    highlight IncSearch gui=NONE guibg=blue guifg=white
-    highlight Search cterm=NONE ctermbg=green ctermfg=white
-    highlight Search gui=NONE guibg=green guifg=white
+  highlight Visual cterm=NONE ctermbg=yellow ctermfg=white
+  highlight Visual gui=NONE guibg=yellow guifg=white
+  highlight IncSearch cterm=NONE ctermbg=blue ctermfg=white
+  highlight IncSearch gui=NONE guibg=blue guifg=white
+  highlight Search cterm=NONE ctermbg=green ctermfg=white
+  highlight Search gui=NONE guibg=green guifg=white
 ]])
 
 -- General settings
@@ -43,9 +43,9 @@ vim.cmd([[
 --  * Only String and Number types are stored.
 opt.backspace = "start,eol,indent"
 if os.getenv("SSH_TTY") then
-    vim.cmd("let g:clipboard = 'osc52'")
+  vim.cmd("let g:clipboard = 'osc52'")
 else
-    opt.clipboard = "unnamedplus"
+  opt.clipboard = "unnamedplus"
 end
 opt.colorcolumn = "90"
 opt.complete = ".,w,b,u,t"

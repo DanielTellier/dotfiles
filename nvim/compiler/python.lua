@@ -17,14 +17,14 @@ vim.bo.makeprg = "python"
 
 -- Set the errorformat to handle Python tracebacks
 vim.bo.errorformat = [[
-    \%A\ \ File\ \"%f\"\\\,\ line\ %l\\\,%m,
-    \%C\ \ \ \ %.%#,
-    \%+Z%.%#Error\:\ %.%#,
-    \%A\ \ File\ \"%f\"\\\,\ line\ %l,
-    \%+C\ \ %.%#,
-    \%-C%p^,
-    \%Z%m,
-    \%-G%.%#
+  \%A\ \ File\ \"%f\"\\\,\ line\ %l\\\,%m,
+  \%C\ \ \ \ %.%#,
+  \%+Z%.%#Error\:\ %.%#,
+  \%A\ \ File\ \"%f\"\\\,\ line\ %l,
+  \%+C\ \ %.%#,
+  \%-C%p^,
+  \%Z%m,
+  \%-G%.%#
 ]]
 
 -- Restore the original value of 'cpo'

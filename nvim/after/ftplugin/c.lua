@@ -8,11 +8,11 @@ local search = require('search')
 
 -- Define the command
 vim.api.nvim_create_user_command(
-    'Cdef',
-    function(opts)
-        search.search_cdef(opts.args)
-    end,
-    { nargs = 1 }
+  'Cdef',
+  function(opts)
+    search.search_cdef(opts.args)
+  end,
+  { nargs = 1 }
 )
 
 -- NOTE: Replaced by lsp server
