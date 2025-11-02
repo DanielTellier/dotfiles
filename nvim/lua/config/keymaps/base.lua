@@ -252,12 +252,12 @@ end, {
   complete = 'file'
 })
 utils.map(
-     'n', '<leader>s@',
-    ':IndentTo2 ',
-    {
+  'n', '<leader>s@',
+  ':IndentTo2 ',
+  {
     silent = false,
     desc = 'Convert 4-space indent to 2-space for files matching pattern in directory (recursive)'
-    }
+  }
 )
 vim.api.nvim_create_user_command('IndentTo4', function(opts)
   local args = vim.split(opts.args, '%s+')
@@ -272,12 +272,12 @@ end, {
   complete = 'file'
 })
 utils.map(
-     'n', '<leader>s$',
-    ':IndentTo4 ',
-    {
+  'n', '<leader>s$',
+  ':IndentTo4 ',
+  {
     silent = false,
     desc = 'Convert 2-space indent to 4-space for files matching pattern in directory (recursive)'
-    }
+  }
 )
 
 -- Find
@@ -515,14 +515,14 @@ utils.map(
 if os.getenv("SSH_TTY") then
   local yanks = {'yy', 'yw', 'y^', 'y$', 'yi', 'ya'}
   for _, key in ipairs(yanks) do
-            utils.map(
-        'n', "<leader>" .. key, '"+' .. key,
-        {
-          silent = false,
-          desc = "Yank to system clipboard if using the default " ..
-          "OSC 52 clipboard for Neovim"
-        }
-            )
+    utils.map(
+      'n', "<leader>" .. key, '"+' .. key,
+      {
+        silent = false,
+        desc = "Yank to system clipboard if using the default " ..
+        "OSC 52 clipboard for Neovim"
+      }
+    )
   end
   utils.map(
     'v', '<leader>yy', '"+y',

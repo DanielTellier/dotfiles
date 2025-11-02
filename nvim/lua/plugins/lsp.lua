@@ -85,11 +85,10 @@ return {
         -- Disable diagnostics for all LSP clients (icon indicators)
         vim.diagnostic.enable(false, { bufnr = bufnr })
       end
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-            -- Central table for server configurations
-            local servers = {
+      -- Central table for server configurations
+      local servers = {
         -- Refined lua_ls setup from your examples
         lua_ls = {
           settings = {
@@ -113,21 +112,21 @@ return {
         },
         -- Pyright works best with default settings, automatically detecting venvs
         pyright = {},
-            }
+      }
 
-            require("mason-lspconfig").setup({
+      require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(servers),
-            })
-            for server_name, server_opts in pairs(servers) do
+      })
+      for server_name, server_opts in pairs(servers) do
         local final_config = vim.tbl_deep_extend("force", {
           on_attach = on_attach,
           capabilities = capabilities,
         }, server_opts or {})
 
-                vim.lsp.config[server_name] = final_config
-            end
+        vim.lsp.config[server_name] = final_config
+      end
 
-            local function apply_lsp_status()
+      local function apply_lsp_status()
         if vim.g.lsp_enabled then
           vim.cmd("doautocmd FileType")
         else
@@ -138,33 +137,33 @@ return {
             end
           end
         end
-            end
-            local function toggle_lsp()
+      end
+      local function toggle_lsp()
         vim.g.lsp_enabled = not vim.g.lsp_enabled
         apply_lsp_status()
-            end
-            utils.map(
+      end
+      utils.map(
         'n',
         '<leader>lt',
         function()
           toggle_lsp()
         end,
         { desc = 'Toggle lsp' }
-            )
-            vim.api.nvim_create_autocmd("LspAttach", {
+      )
+      vim.api.nvim_create_autocmd("LspAttach", {
         group = utils.augroup("lsp"),
         callback = function()
           apply_lsp_status()
         end
-            })
-            utils.map(
+      })
+      utils.map(
         'n',
         '<leader>lg',
         function()
           vim.diagnostic.enable(not vim.diagnostic.is_enabled())
         end,
         { desc = 'Toggle Diagnostics' }
-            )
-        end,
-    },
+      )
+    end,
+  },
 }

@@ -80,26 +80,25 @@ function M.search_cdef(funcName)
     if isLoaded == 0 then
       vim.cmd('tabnew ' .. fpath)
     end
-
-        local lineEOF = vim.fn.getbufline(fpath, '$')[1]
-        local lineNum = qfi.lnum
-        local lineStr = vim.fn.getbufline(fpath, lineNum)[1]
-        local matches = string.find(lineStr, '[/{;]')
-        while not matches do
+    local lineEOF = vim.fn.getbufline(fpath, '$')[1]
+    local lineNum = qfi.lnum
+    local lineStr = vim.fn.getbufline(fpath, lineNum)[1]
+    local matches = string.find(lineStr, '[/{;]')
+    while not matches do
       if lineEOF == lineStr then break end
       lineNum = lineNum + 1
       lineStr = vim.fn.getbufline(fpath, lineNum)[1]
       matches = string.find(lineStr, '[/{;]')
-        end
-
-        if isLoaded == 0 then
-      vim.cmd('bdelete ' .. fpath)
-        end
-
-        if string.find(lineStr, '{') then
-      table.insert(newqfLst, qfi)
-        end
     end
+
+    if isLoaded == 0 then
+      vim.cmd('bdelete ' .. fpath)
+    end
+
+    if string.find(lineStr, '{') then
+      table.insert(newqfLst, qfi)
+    end
+  end
 
   check_qflist(newqfLst)
 end
@@ -116,17 +115,17 @@ function M.search_pydef(funcName, def_type)
       vim.cmd('tabnew ' .. fpath)
     end
 
-        local lineEOF = vim.fn.getbufline(fpath, '$')[1]
-        local lineNum = qfi.lnum
-        local lineStr = vim.fn.getbufline(fpath, lineNum)[1]
-        if isLoaded == 0 then
+    local lineEOF = vim.fn.getbufline(fpath, '$')[1]
+    local lineNum = qfi.lnum
+    local lineStr = vim.fn.getbufline(fpath, lineNum)[1]
+    if isLoaded == 0 then
       vim.cmd('bdelete ' .. fpath)
-        end
-
-        if string.find(lineStr, def_type) then
-      table.insert(newqfLst, qfi)
-        end
     end
+
+    if string.find(lineStr, def_type) then
+      table.insert(newqfLst, qfi)
+    end
+  end
 
   check_qflist(newqfLst)
 end

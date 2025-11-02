@@ -326,14 +326,14 @@ Adds GoogleAuth service with token refresh and user model updates.
 
 Improves security and enables SSO across applications.
 ]]
-            -- Override the git prompts message
-            opts.prompts.Commit = {
+      -- Override the git prompts message
+      opts.prompts.Commit = {
         prompt = commit_prompt,
-            }
-            chat.setup(opts)
-            local select = require("CopilotChat.select")
-            -- Inline chat with Copilot
-            vim.api.nvim_create_user_command("CopilotChatInline", function(args)
+      }
+      chat.setup(opts)
+      local select = require("CopilotChat.select")
+      -- Inline chat with Copilot
+      vim.api.nvim_create_user_command("CopilotChatInline", function(args)
         chat.ask(args.args, {
           selection = select.visual,
           window = {
@@ -344,18 +344,18 @@ Improves security and enables SSO across applications.
             row = 1,
           },
         })
-            end, { nargs = "*", range = true })
-            vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
+      end, { nargs = "*", range = true })
+      vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
         chat.ask(args.args, { selection = select.visual })
-            end, { nargs = "*", range = true })
-            -- Custom buffer for CopilotChat
-            vim.api.nvim_create_autocmd("BufEnter", {
+      end, { nargs = "*", range = true })
+      -- Custom buffer for CopilotChat
+      vim.api.nvim_create_autocmd("BufEnter", {
         pattern = "copilot-*",
         callback = function()
           vim.opt_local.relativenumber = true
           vim.opt_local.number = true
         end,
-            })
-        end,
-    },
+      })
+    end,
+  },
 }

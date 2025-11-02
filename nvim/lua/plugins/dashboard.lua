@@ -80,8 +80,8 @@ return {
         },
       }
 
-            -- open dashboard after closing lazy
-            if vim.o.filetype == "lazy" then
+      -- open dashboard after closing lazy
+      if vim.o.filetype == "lazy" then
         vim.api.nvim_create_autocmd("WinClosed", {
           pattern = tostring(vim.api.nvim_get_current_win()),
           once = true,
@@ -91,9 +91,9 @@ return {
             end)
           end,
         })
-            end
+      end
 
-            return opts
-        end,
-    },
+      return opts
+    end,
+  },
 }

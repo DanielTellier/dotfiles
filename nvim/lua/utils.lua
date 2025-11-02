@@ -195,10 +195,10 @@ function M.toggle_terminal()
     local win_list = vim.api.nvim_list_wins()
     local found_open_window = false
 
-        if (
+    if (
       current_buf == last_terminal_buf or
       vim.api.nvim_buf_get_option(current_buf, 'buftype') == 'terminal'
-        ) then
+    ) then
       if vim.g.last_buffer then
         alternate_buf = vim.g.last_buffer
       end
@@ -207,7 +207,7 @@ function M.toggle_terminal()
         -- Switch to the alternate buffer if not open in any window
         vim.cmd('split | buffer #')
       end
-        else
+    else
       if vim.g.last_term then
         last_terminal_buf = vim.g.last_term
       end
@@ -216,10 +216,10 @@ function M.toggle_terminal()
         -- Open the terminal buffer in a new window
         vim.cmd('split | buffer ' .. last_terminal_buf)
       end
-        end
-    else
-    print("No terminal buffer found.")
     end
+  else
+    print("No terminal buffer found.")
+  end
 end
 
 
@@ -487,7 +487,7 @@ local function transform_lines_indent(lines, from_spaces, to_spaces)
     local indent = line:match("^( *)")
     local indent_size = #indent
 
-        if indent_size > 0 then
+    if indent_size > 0 then
       -- Clear deeper indents when we dedent
       if indent_size < prev_indent then
         for indent, _ in pairs(marked_indents) do
@@ -497,31 +497,31 @@ local function transform_lines_indent(lines, from_spaces, to_spaces)
         end
       end
 
-            local indent_diff = indent_size - prev_indent
+      local indent_diff = indent_size - prev_indent
 
-            -- Mark indent for conversion if it increases by exactly from_spaces
-            if indent_diff == from_spaces then
+      -- Mark indent for conversion if it increases by exactly from_spaces
+      if indent_diff == from_spaces then
         marked_indents[indent_size] = true
-            end
+      end
 
-            -- Convert if this indent was marked for conversion
-            if marked_indents[indent_size] then
+      -- Convert if this indent was marked for conversion
+      if marked_indents[indent_size] then
         local level = indent_size / from_spaces
         local new_indent = level * to_spaces
 
-                if new_indent ~= indent_size then
+        if new_indent ~= indent_size then
           lines[i] = string.rep(" ", new_indent) .. line:sub(indent_size + 1)
           changed = true
-                end
-            end
+        end
+      end
 
-            prev_indent = indent_size
-        else
+      prev_indent = indent_size
+    else
       prev_indent = 0
       marked_indents = {}  -- Reset all when we hit column 0
-        end
     end
-    return changed
+  end
+  return changed
 end
 
 -- Apply indent transformation to current buffer
