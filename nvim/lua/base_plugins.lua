@@ -64,17 +64,4 @@ return {
     { "tpope/vim-fugitive" },
     { "tpope/vim-repeat" },
     { "tpope/vim-surround" },
-    {
-        "airblade/vim-rooter",
-        config = function()
-            vim.g.rooter_patterns = {
-                "setup.py", "init.lua", "*.sln", ".git", "=src"
-            }
-            vim.g.rooter_silent_chdir = 1
-            vim.g.rooter_ignore = 1
-            vim.g.rooter_resolve_links = 1
-            vim.g.rooter_cd_cmd = "lcd"
-            vim.g.rooter_change_directory_for_non_project_files = "current"
-        end,
-    },
 }

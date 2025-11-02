@@ -124,7 +124,7 @@ return {
                     capabilities = capabilities,
                 }, server_opts or {})
 
-                require("lspconfig")[server_name].setup(final_config)
+                vim.lsp.config[server_name] = final_config
             end
 
             local function apply_lsp_status()
