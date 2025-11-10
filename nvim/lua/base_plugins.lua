@@ -68,6 +68,36 @@ return {
     "DanielTellier/multi-tree.nvim",
     event = "VeryLazy", -- or lazy = false if you want it at startup
     main = "multi-tree",
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "multi-tree",
+        callback = function(ev)
+          local ok, wk = pcall(require, "which-key")
+          if ok then
+            wk.add({ { "<leader>", group = "multi-tree", mode = "n", buffer = ev.buf } })
+          end
+        end,
+      })
+    end,
+    opts = {
+      icons = true,
+      show_hidden = false,
+      indent = 2,
+    },
+    keys = {
+      {
+        "<leader>em",
+        function()
+          require("multi-tree").open(vim.loop.cwd())
+        end, desc = "Open MultiTree at CWD"
+      },
+      {
+        "<leader>eM",
+        function()
+          require("multi-tree").open(vim.fn.expand("%:p:h"))
+        end, desc = "Open MultiTree at file dir"
+      },
+    },
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       {
@@ -106,25 +136,6 @@ return {
             },
           })
         end,
-      },
-    },
-    opts = {
-      icons = true,
-      show_hidden = false,
-      indent = 2,
-    },
-    keys = {
-      {
-        "<leader>et",
-        function()
-          require("multi-tree").open(vim.loop.cwd())
-        end, desc = "Open MultiTree at CWD"
-      },
-      {
-        "<leader>eT",
-        function()
-          require("multi-tree").open(vim.fn.expand("%:p:h"))
-        end, desc = "Open MultiTree at file dir"
       },
     },
   },
