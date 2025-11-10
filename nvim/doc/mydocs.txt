@@ -20,7 +20,7 @@ CONTENTS                                                         *MydContents*
     13. Session ......................................... |MydSession|
     14. Copilot ......................................... |MydCopilot|
     15. Comment ......................................... |MydComment|
-    16. Netrw ........................................... |MydNetrw|
+    16. MultiTree ....................................... |MydMultiTree|
     17. Wezterm ......................................... |MydWezterm|
     18. Bash ............................................ |MydBash|
     19. Avante .......................................... |MydAvante|
@@ -48,7 +48,6 @@ CONTENTS                                                         *MydContents*
 - Open bashrc (n): <leader>eb
 - Open quickfix list (n): <leader>ef
 - Close quickfix list (n): <leader>qf
-- Open netrw in the first tab (n): <leader>en
 - Open current buffer in a new tab (n): <leader>et
 - Open previous window to vertical split (n): <leader>ep
 
@@ -198,9 +197,9 @@ CONTENTS                                                         *MydContents*
 - Uncomment the current and adjacent commented lines (n): gcu
 
 ==============================================================================
-16. Netrw                                                           *MydNetrw*
+16. MultiTree                                                   *MydMultiTree*
 
-- Note: All mappings only apply to filetype (&ft) == 'netrw'
+- Note: All mappings only apply to filetype (&ft) == 'multi-tree'
 - Open file and close netrw: <cr>
 - Open file in new tab: t
 - Open file in horizontal split: o

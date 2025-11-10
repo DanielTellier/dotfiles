@@ -112,9 +112,6 @@ utils.map('n', '<leader>er', function()
 end, { desc = "Open bashrc" })
 utils.map('n', '<leader>ef', ':copen<cr>', { desc = "Open quickfix list" })
 utils.map('n', '<leader>qf', ':cclose<cr>', { desc = "Close quickfix list" })
-utils.map('n', '<leader>en', function()
-  utils.open_cwd_in_tab1()
-end, { desc = "Open netrw in the first tab" })
 utils.map(
   'n', '<leader>et', ':exe "tabnew " .. expand("%")<cr>',
   { desc = "Open current buffer in a new tab" }

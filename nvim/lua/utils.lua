@@ -39,7 +39,7 @@ function M.open_path(path)
   local tablast = vim.fn.tabpagenr('$')
   if vim.fn.isdirectory(path) == 1 then
     for i = 1, tablast do
-      if vim.bo.filetype == "netrw" then
+      if vim.bo.filetype == "netrw" or vim.bo.filetype == "multi-tree" then
         vim.cmd('edit ' .. path)
         return
       end
@@ -260,10 +260,6 @@ function M.table_concat(table1, table2)
   for i = 1, #table2 do
     table1[#table1 + 1] = table2[i]
   end
-end
-
-function M.open_cwd_in_tab1()
-  vim.cmd('tabnew . | tabmove 0')
 end
 
 function M.remove_all_global_marks()
