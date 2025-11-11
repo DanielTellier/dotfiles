@@ -210,18 +210,11 @@ CONTENTS                                                         *MydContents*
 - Open file in next tab and stay on netrw: <leader>I
 - Open file in horizontal split in next tab and stay on netrw: <leader>O
 - Open file in vertical split in next tab and stay on netrw: <leader>V
-- Go up dir: -
 - Sort toggle: s
 - Create new file: %
 - Create new dir: d
 - Rename file/dir: R
 - Delete file/dir: D
-- Bookmark file/dir: mb
-- Delete bookmark: {cnt}mB
-- List bookmarks: qb
-- Return to a bookmark: {cnt}gb
-- Changing to a predecessor directory: u
-- Changing to a successor directory: U
 
 ==============================================================================
 17. Wezterm                                                       *MydWezterm*
