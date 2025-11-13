@@ -66,7 +66,7 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = { "branch" },
+        lualine_b = { "branch", require("codex").status() },
         lualine_c = { "filename" },
         lualine_x = { "encoding", "filetype" },
         lualine_y = { "progress" },
