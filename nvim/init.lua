@@ -39,6 +39,8 @@ if vim.g.copilot_available then
   vim.g.copilot_model = "claude-sonnet-4"
 end
 
+vim.g.codex_available = vim.fn.executable('codex') == 1
+
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)

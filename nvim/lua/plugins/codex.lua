@@ -1,3 +1,7 @@
+if not vim.g.codex_available then
+  return {}
+end
+
 return {
   'johnseth97/codex.nvim',
   lazy = true,

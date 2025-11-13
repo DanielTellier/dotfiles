@@ -43,6 +43,11 @@ local theme = function()
   }
 end
 
+local lualine_b = { "branch" }
+if vim.g.codex_available then
+  table.insert(lualine_b, require("codex").status())
+end
+
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -66,7 +71,7 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = { "branch", require("codex").status() },
+        lualine_b = lualine_b,
         lualine_c = { "filename" },
         lualine_x = { "encoding", "filetype" },
         lualine_y = { "progress" },
