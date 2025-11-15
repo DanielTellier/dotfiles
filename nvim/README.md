@@ -29,10 +29,16 @@ If you have a GitHub Copilot license:
 export COPILOT_ENABLED="true"
 ```
 
-### LSP Control
-To disable LSP servers:
+### Codex Control
+To enable Codex:
 ```bash
-export NVIM_LSP_FLAG="false"
+export NVIM_CODEX_FLAG="true"
+```
+
+### LSP Control
+To enable LSP servers:
+```bash
+export NVIM_LSP_FLAG="true"
 ```
 
 ### Cache Directory (Optional)

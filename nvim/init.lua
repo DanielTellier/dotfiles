@@ -20,12 +20,14 @@ vim.opt.rtp:prepend(lazypath)
 -- local user = vim.fn.getenv("USER") or "unknown"
 -- vim.env.XDG_CACHE_HOME = '/tmp/' .. user .. "/.cache"
 
-vim.g.lsp_enabled = false
+vim.g.lsp_enabled = vim.fn.getenv("NVIM_LSP_FLAG") == "true"
+
 vim.g.session_dir = vim.fn.stdpath("state") .. "/sessions"
 -- Ensure the directory exists
 if vim.fn.isdirectory(vim.g.session_dir) == 0 then
   vim.fn.mkdir(vim.g.session_dir, 'p')
 end
+
 local utils = require('utils')
 local copilot_enabled = os.getenv("COPILOT_ENABLED")
 vim.g.node_bin = "/usr/bin/node"
@@ -33,13 +35,16 @@ if not utils.path_exists(vim.g.node_bin) then
   -- For Mac
   vim.g.node_bin = "/opt/homebrew/opt/node/bin/node"
 end
+
 vim.g.copilot_available = copilot_enabled == "true" and utils.path_exists(vim.g.node_bin)
 if vim.g.copilot_available then
   -- To list available models, run: <cmd>CopilotChatModels
   vim.g.copilot_model = "claude-sonnet-4"
 end
 
-vim.g.codex_available = vim.fn.executable('codex') == 1
+vim.g.codex_available = (
+  vim.fn.getenv("NVIM_CODEX_FLAG") == "true" and vim.fn.executable('codex') == 1
+)
 
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.

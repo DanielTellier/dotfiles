@@ -1,14 +1,11 @@
-local enabled = true
-if vim.fn.getenv("NVIM_LSP_FLAG") == "false" then
-  enabled = false
-  print("LSP Disabled via NVIM_LSP_FLAG")
+if not vim.g.lsp_enabled then
+  return {}
 end
 
 return {
   -- LSP Configuration & Management
   {
     "neovim/nvim-lspconfig",
-    enabled = enabled,
     event = "VeryLazy",
     dependencies = {
       -- Mason, the installer for LSPs
