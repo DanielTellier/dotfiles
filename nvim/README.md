@@ -29,8 +29,14 @@ If you have a GitHub Copilot license:
 export COPILOT_ENABLED="true"
 ```
 
+### Claude Code Control
+To enable Claude Code must have the binary `claude` and set the following env variable:
+```bash
+export NVIM_CLAUDE_FLAG="true"
+```
+
 ### Codex Control
-To enable Codex:
+To enable Codex must have the binary `codex` and set the following env variable:
 ```bash
 export NVIM_CODEX_FLAG="true"
 ```
