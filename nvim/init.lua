@@ -42,6 +42,9 @@ if vim.g.copilot_available then
   vim.g.copilot_model = "claude-sonnet-4"
 end
 
+vim.g.claude_available = (
+  vim.fn.getenv("NVIM_CLAUDE_FLAG") == "true" and vim.fn.executable('claude') == 1
+)
 vim.g.codex_available = (
   vim.fn.getenv("NVIM_CODEX_FLAG") == "true" and vim.fn.executable('codex') == 1
 )

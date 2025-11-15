@@ -7,10 +7,10 @@ return {
   lazy = true,
   keys = {
     {
-      '<leader>cx', -- Change this to your preferred keybinding
+      '<leader>cx',
       function() require('codex').toggle() end,
       desc = 'Toggle Codex popup',
-      mode = { 'n', 't' }
+      mode = { 'n', 't' },
     },
   },
   opts = {
