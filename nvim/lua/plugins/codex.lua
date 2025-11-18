@@ -4,6 +4,7 @@ end
 
 return {
   'johnseth97/codex.nvim',
+  cmd = { 'Codex', 'CodexToggle' },
   lazy = true,
   keys = {
     {
