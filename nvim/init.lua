@@ -39,7 +39,7 @@ end
 vim.g.copilot_available = copilot_enabled == "true" and utils.path_exists(vim.g.node_bin)
 if vim.g.copilot_available then
   -- To list available models, run: <cmd>CopilotChatModels
-  vim.g.copilot_model = "claude-sonnet-4"
+  vim.g.copilot_model = "claude-sonnet-4-5"
 end
 
 vim.g.claude_available = (
