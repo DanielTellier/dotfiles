@@ -426,13 +426,14 @@ function M.select_dev_path_and_find_files()
 end
 
 -- Add all files under a directory to the buffer list (no opening).
-function M.buf_add_dir(dir)
+function M.buf_add_dir(dir, file_pattern)
+  file_pattern = file_pattern or '*'
   dir = vim.fn.fnamemodify(dir, ':p')
   if vim.fn.isdirectory(dir) == 0 then
     vim.notify('Not a directory: ' .. dir, vim.log.levels.ERROR)
     return
   end
-  for _, path in ipairs(vim.fn.globpath(dir, '**/*', false, true)) do
+  for _, path in ipairs(vim.fn.glob(dir .. '/**/' .. file_pattern, false, true)) do
     if vim.fn.filereadable(path) == 1 then
       local current_win = vim.api.nvim_get_current_win()
       vim.cmd('tabnew ' .. path)

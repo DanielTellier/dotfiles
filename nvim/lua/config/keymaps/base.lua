@@ -123,17 +123,24 @@ utils.map(
 vim.api.nvim_create_user_command(
   'BufAddDir',
   function(opts)
-    utils.buf_add_dir(opts.args)
+    local args = vim.split(opts.args, '%s+')
+    if #args < 1 then
+      vim.notify("Usage: :BufAddDir <directory> [file_pattern]", vim.log.levels.ERROR)
+      return
+    end
+    local dir = args[1]
+    local pattern = args[2] or '*'
+    utils.buf_add_dir(dir, pattern)
   end,
   {
-    nargs = 1,
+    nargs = '+',
     complete = 'dir',
-    desc = 'Add all files under a directory to the buffer list'
+    desc = 'Add certain files under a directory to the buffer list'
   }
 )
 utils.map(
   'n', '<leader>eb', ':BufAddDir ',
-  { silent = false, desc = 'Add all files under a directory to the buffer list' }
+  { silent = false, desc = 'Add certain files under a directory to the buffer list' }
 )
 
 -- Toggle
