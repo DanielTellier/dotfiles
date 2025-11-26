@@ -1,4 +1,4 @@
-local theme = function()
+local custom_theme = function()
   local colors = {
     lightgray = "#D3D3D3",
     innerbg = nil,
@@ -42,6 +42,8 @@ local theme = function()
     },
   }
 end
+
+local theme = vim.g.colorscheme or custom_theme
 
 local lualine_b = { "branch" }
 if vim.g.codex_available then

@@ -54,6 +54,7 @@ vim.g.codex_available = (
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+vim.g.colorscheme = "onedark"
 
 require("config.lazy").load("options")
 
@@ -80,7 +81,7 @@ require("lazy").setup({
   checker = { enabled = true, notify = false }, -- automatically check for plugin updates
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "onedark" } },
+  install = { colorscheme = { vim.g.colorscheme } },
   performance = {
     rtp = {
       -- disable some rtp plugins
@@ -96,3 +97,5 @@ require("lazy").setup({
 })
 
 require("config.lazy").setup()
+
+vim.cmd.colorscheme(vim.g.colorscheme)
