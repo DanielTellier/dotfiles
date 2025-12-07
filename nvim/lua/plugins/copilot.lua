@@ -304,27 +304,23 @@ return {
       opts.question_header = "  " .. user .. " "
       opts.answer_header = "  Copilot "
       local commit_prompt = [[#git:staged
-You are a Git expert. Write a complete commit message for the staged changes.
+You are a Git expert. Write a concise commit message for the staged changes.
 
 Format:
 - Title: type(scope): brief description (50 chars max)
-- Body: Concise explanation of what and why (wrap at 72 chars)
+- Body: As few sentences as possible (ideally 1-2 sentences) to explaining what and why (wrap at 72 chars)
 
 Requirements:
 - Use conventional commits: feat, fix, docs, style, refactor, test, chore, perf, ci, build
 - Title in imperative mood (Add, Fix, Update)
-- Body explains what changed and why it matters
-- Be concise but informative
-- Include relevant technical details
+- Body should be a high-level summary, not a detailed breakdown
+- Be brief but clear
 - Mention breaking changes if any
 
 Example:
 feat(auth): Add OAuth Google integration
 
 Implement Google OAuth 2.0 flow replacing basic auth.
-Adds GoogleAuth service with token refresh and user model updates.
-
-Improves security and enables SSO across applications.
 ]]
       -- Override the git prompts message
       opts.prompts.Commit = {
