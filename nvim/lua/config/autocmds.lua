@@ -85,15 +85,6 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 
-vim.api.nvim_create_autocmd({'VimEnter', 'ColorScheme'}, {
-  group = utils.augroup("colors"),
-  callback = function()
-    vim.cmd('hi Comment cterm=italic gui=italic')
-    vim.cmd('hi SpecialComment cterm=italic gui=italic')
-    vim.cmd('hi ColorColumn ctermbg=gray guibg=gray')
-  end
-})
-
 vim.api.nvim_create_autocmd('QuickFixCmdPost', {
   group = utils.augroup("quickfix"),
   pattern = '[^l]*',

@@ -35,6 +35,7 @@ vim.cmd([[
   highlight IncSearch gui=NONE guibg=blue guifg=white
   highlight Search cterm=NONE ctermbg=green ctermfg=white
   highlight Search gui=NONE guibg=green guifg=white
+  highlight ColorColumn ctermbg=gray guibg=gray
 ]])
 
 -- General settings

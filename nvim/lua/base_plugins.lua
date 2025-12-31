@@ -71,18 +71,21 @@ return {
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require("onedark").setup({
-        style = "dark"
+        style = "dark",
+        highlights = {
+          ["@comment.note"] = { fg = "$blue", fmt = "bold,italic" },
+          ["@comment.warning"] = { fg = "$yellow", fmt = "bold,italic" },
+          ["@comment.todo"] = { fg = "$orange", fmt = "bold,italic" },
+          ["@comment.error"] = { fg = "$red", fmt = "bold,italic" },
+        },
       })
-      require("onedark").load()
     end,
   },
   -- end color schemes
   { "ibhagwan/fzf-lua" },
   { "sindrets/diffview.nvim" },
-  -- Code comment
   {
     "folke/ts-comments.nvim",
-    opts = {},
     event = "VeryLazy",
   },
   { "tpope/vim-commentary" },
