@@ -143,11 +143,6 @@ return {
         end,
       })
     end,
-    opts = {
-      icons = true,
-      show_hidden = false,
-      indent = 2,
-    },
     keys = {
       {
         "<leader>em",
@@ -164,43 +159,6 @@ return {
     },
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      {
-        "rebelot/heirline.nvim",
-        config = function()
-          -- Heirline tabline that uses MultiTree’s per-tab titles when available.
-          local function mt_label_for_tab(tab)
-            local ok, mt = pcall(require, "multi-tree")
-            if ok and mt.tab_title then
-              return mt.tab_title(tab)
-            end
-            -- Fallback when multi-tree isn’t loaded yet.
-            local win = vim.api.nvim_tabpage_get_win(tab)
-            local buf = vim.api.nvim_win_get_buf(win)
-            local name = vim.api.nvim_buf_get_name(buf)
-            return (name ~= "" and vim.fn.fnamemodify(name, ":t")) or "[No Name]"
-          end
-
-          require("heirline").setup({
-            tabline = {
-              {
-                init = function(self)
-                  self.tabs = vim.api.nvim_list_tabpages()
-                end,
-                provider = function(self)
-                  local s, current = "", vim.api.nvim_get_current_tabpage()
-                  for _, tab in ipairs(self.tabs) do
-                    local nr = vim.api.nvim_tabpage_get_number(tab)
-                    s = s .. "%" .. nr .. "T"
-                    s = s .. (tab == current and "%#TabLineSel#" or "%#TabLine#")
-                    s = s .. " " .. mt_label_for_tab(tab) .. " "
-                  end
-                  return s .. "%#TabLineFill#%="
-                end,
-              },
-            },
-          })
-        end,
-      },
     },
   },
 }
