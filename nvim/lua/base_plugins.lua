@@ -104,14 +104,11 @@ return {
         if not file then return end
         local fullpath = vim.fn.fnamemodify(file, ":p")
         local buf = vim.fn.bufnr(fullpath)
-        if buf == -1 or not vim.api.nvim_buf_is_valid(buf) then
-          return
-        end
-        if vim.bo[buf].filetype == "multi-tree" then return end
+        if buf ~= -1 and vim.bo[buf].filetype == "multi-tree" then return end
         if vim.fn.isdirectory(file) == 1 then
           require("multi-tree").open(vim.fn.fnameescape(file))
           -- Clean up the original buffer.
-          if vim.api.nvim_buf_is_valid(buf) then
+          if buf ~= -1 and vim.api.nvim_buf_is_valid(buf) then
             vim.api.nvim_buf_delete(buf, { force = true })
           end
         end
