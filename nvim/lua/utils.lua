@@ -96,12 +96,12 @@ function M.surround_mappings(map_type)
   for _, char in ipairs(chars) do
     if map_type == "word" then
       vim.api.nvim_set_keymap(
-        'n', '<leader>uw' .. char, 'ysiw' .. char,
+        'n', '<leader>w' .. char, 'ysiw' .. char,
         { noremap = false, desc = 'Surround word with ' .. char }
       )
     elseif map_type == "line" then
       vim.api.nvim_set_keymap(
-        'n', '<leader>ul' .. char, 'yss' .. char,
+        'n', '<leader>l' .. char, 'yss' .. char,
         { noremap = false, desc = 'Surround line with ' .. char }
       )
     elseif map_type == "change" then
@@ -110,19 +110,19 @@ function M.surround_mappings(map_type)
           goto continue
         end
         vim.api.nvim_set_keymap(
-          'n', '<leader>u' .. curr_char .. char, 'cs' .. curr_char .. char,
+          'n', '<leader>' .. curr_char .. char, 'cs' .. curr_char .. char,
           { noremap = false, desc = 'Change ' .. curr_char .. ' to ' .. char }
         )
         ::continue::
       end
     elseif map_type == "delete" then
       vim.api.nvim_set_keymap(
-        'n', '<leader>ud' .. char, 'ds' .. char,
+        'n', '<leader>d' .. char, 'ds' .. char,
         { noremap = false, desc = 'Delete ' .. char }
       )
     elseif map_type == "visual" then
       vim.api.nvim_set_keymap(
-        'v', '<leader>u' .. char, 'S' .. char,
+        'v', '<leader>' .. char, 'S' .. char,
         { noremap = false, desc = 'Visual Surround with ' .. char }
       )
     end
@@ -131,9 +131,9 @@ end
 
 
 -- Buffers
-function M.remove_all_buffers()
+function M.delete_all_buffers()
   local current_pos = vim.fn.getpos('.')
-  vim.cmd("%bd | e# | echo 'Buffers Removed'")
+  vim.cmd("%bd | e# | echo 'Buffers deleted'")
   vim.fn.setpos('.', current_pos)
 end
 
@@ -262,11 +262,11 @@ function M.table_concat(table1, table2)
   end
 end
 
-function M.remove_all_global_marks()
+function M.delete_all_global_marks()
   vim.cmd("delmarks! | delmarks A-Z0-9 | echo 'All marks deleted'")
 end
 
-function M.remove_duplicate_quickfix_entries()
+function M.delete_duplicate_quickfix_entries()
   local seen = {}
   local qflist = {}
   for _, item in ipairs(vim.fn.getqflist()) do

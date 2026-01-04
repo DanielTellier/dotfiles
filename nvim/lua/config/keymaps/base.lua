@@ -14,7 +14,7 @@ wk.add({
   { "<leader>t", group = "toggle", mode = "n" }
 })
 wk.add({
-  { "<leader>s", group = "substitution", mode = { "n", "v" } }
+  { "<leader>r", group = "replace", mode = { "n", "v" } }
 })
 wk.add({
   { "<leader>f", group = "find", mode = "n" }
@@ -23,19 +23,16 @@ wk.add({
   { "<leader>m", group = "terminal", mode = "n" }
 })
 wk.add({
-  { "<leader>u", group = "surround", mode = { "n", "v" } }
-})
-wk.add({
   { "<leader>w", group = "window", mode = "n" }
 })
 wk.add({
   { "<leader>y", group = "yank", mode = { "n", "v" } }
 })
 wk.add({
-  { "<leader>i", group = "session", mode = "n" }
+  { "<leader>s", group = "session", mode = "n" }
 })
 wk.add({
-  { "<leader>r", group = "remove", mode = "n" }
+  { "<leader>d", group = "delete", mode = "n" }
 })
 
 -- Navigation
@@ -166,78 +163,78 @@ utils.map(
   { desc = "Toggle line wrap" }
 )
 
--- Substitution
+-- Replace
 utils.map(
-  { 'n', 'v' }, '<leader>sg', ':%s///g' .. string.rep('<left>', 3),
-  { silent = false, desc = "Global substitution" }
+  { 'n', 'v' }, '<leader>rg', ':%s///g' .. string.rep('<left>', 3),
+  { silent = false, desc = "Global replace" }
 )
 utils.map(
-  { 'n', 'v' }, '<leader>sc', ':%s///gc' .. string.rep('<left>', 4),
-  { silent = false, desc = "Global substitution with confirmation" }
+  { 'n', 'v' }, '<leader>rc', ':%s///gc' .. string.rep('<left>', 4),
+  { silent = false, desc = "Global replace with confirmation" }
 )
 utils.map(
-  { 'n', 'v' }, '<leader>sw', ':%s/<c-r><c-w>//g' .. string.rep('<left>', 2),
-  { silent = false, desc = "Global substitution with word under cursor" }
+  { 'n', 'v' }, '<leader>rw', ':%s/<c-r><c-w>//g' .. string.rep('<left>', 2),
+  { silent = false, desc = "Global replace with word under cursor" }
 )
 utils.map(
-  { 'n', 'v' }, '<leader>sW', ':%s/<c-r><c-w>//gc' .. string.rep('<left>', 3),
+  { 'n', 'v' }, '<leader>rW', ':%s/<c-r><c-w>//gc' .. string.rep('<left>', 3),
   {
     silent = false,
-    desc = "Global substitution with word under cursor and confirmation",
+    desc = "Global replace with word under cursor and confirmation",
   }
 )
 utils.map(
-  { 'n', 'v' }, '<leader>sr', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 4),
+  { 'n', 'v' }, '<leader>rr', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 4),
   { silent = false, desc = "Global prefix with word under cursor" }
 )
 utils.map(
-  { 'n', 'v' }, '<leader>sR', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 5),
+  { 'n', 'v' }, '<leader>rR', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 5),
   {
     silent = false,
     desc = "Global prefix with word under cursor and confirmation",
   }
 )
 utils.map(
-  { 'n', 'v' }, '<leader>so', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 3),
+  { 'n', 'v' }, '<leader>ro', ':%s/\\(<c-r><c-w>\\)/\\1/g' .. string.rep('<left>', 3),
   { silent = false, desc = "Global postfix with word under cursor" }
 )
 utils.map(
-  { 'n', 'v' }, '<leader>sO', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 4),
+  { 'n', 'v' }, '<leader>rO', ':%s/\\(<c-r><c-w>\\)/\\1/gc' .. string.rep('<left>', 4),
   {
     silent = false,
     desc = "Global postfix with word under cursor and confirmation",
   }
 )
 utils.map(
-  { 'n', 'v' }, '<leader>sb',
+  { 'n', 'v' }, '<leader>rb',
   ':bufdo %s/<c-r><c-w>//g | update' .. string.rep('<left>', 11),
   {
     silent = false,
-    desc = "Global substitution across buffers with word under cursor",
+    desc = "Global replace across buffers with word under cursor",
   }
 )
 -- Can add files to arg list via `:args *.txt` or `:args file1.txt file2.txt ...`
 utils.map(
-  { 'n', 'v' }, '<leader>sa',
+  { 'n', 'v' }, '<leader>ra',
   ':argdo %s/<c-r><c-w>//g | update' .. string.rep('<left>', 11),
   {
     silent = false,
-    desc = "Global substitution across file in argument " ..
+    desc = "Global replace across file in argument " ..
     "list with word under cursor",
   }
 )
 utils.map(
-  'n', '<leader>ss', ':%s/\\s\\+$//g<cr>',
+  'n', '<leader>rs', ':%s/\\s\\+$//g<cr>',
   { desc = "Remove trailing spaces" }
 )
 utils.map(
-  'n', '<leader>s2', function()
+  'n', '<leader>r2', function()
     utils.transform_indent_buffer(4, 2)
   end,
   { desc = "Change file indent size from 4 to 2" }
 )
 utils.map(
-  'n', '<leader>s4', function()
+  'n', '<leader>r4', function()
     utils.transform_indent_buffer(2, 4)
   end,
   { desc = "Change file indent size from 2 to 4" }
@@ -256,7 +253,7 @@ end, {
   complete = 'file'
 })
 utils.map(
-  'n', '<leader>s@',
+  'n', '<leader>r@',
   ':IndentTo2 ',
   {
     silent = false,
@@ -276,7 +273,7 @@ end, {
   complete = 'file'
 })
 utils.map(
-  'n', '<leader>s$',
+  'n', '<leader>r$',
   ':IndentTo4 ',
   {
     silent = false,
@@ -419,14 +416,14 @@ utils.map('n', '<leader>yp', '"fp', { desc = "Paste file name" })
 
 -- Removes
 utils.map(
-  'n', '<leader>rm', ':delmarks ', { silent = false, desc = "Remove mark from list" }
+  'n', '<leader>dm', ':delmarks ', { silent = false, desc = "Delete mark from list" }
 )
-utils.map('n', '<leader>rM', function()
-  utils.remove_all_global_marks()
-end, { silent = false, desc = "Remove all global marks" })
-utils.map('n', '<leader>rb', function()
-  utils.remove_all_buffers()
-end, { silent = false, desc = "Remove all buffers from list" })
+utils.map('n', '<leader>dM', function()
+  utils.delete_all_global_marks()
+end, { silent = false, desc = "Delete all global marks" })
+utils.map('n', '<leader>db', function()
+  utils.delete_all_buffers()
+end, { silent = false, desc = "Delete all buffers from list" })
 
 -- Sessions
 vim.api.nvim_create_user_command(
@@ -455,7 +452,7 @@ vim.api.nvim_create_user_command(
 )
 utils.map(
   'n',
-  '<leader>im',
+  '<leader>sm',
   ':MakeSession ',
   { silent = false, desc = "Make a session defined by the user" }
 )
@@ -489,7 +486,7 @@ vim.api.nvim_create_user_command(
 )
 utils.map(
   'n',
-  '<leader>il',
+  '<leader>sl',
   ':LoadSession ',
   { silent=false, desc = "Load a session specified by the user" }
 )

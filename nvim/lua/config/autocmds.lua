@@ -89,7 +89,7 @@ vim.api.nvim_create_autocmd('QuickFixCmdPost', {
   group = utils.augroup("quickfix"),
   pattern = '[^l]*',
   callback = function()
-    utils.remove_duplicate_quickfix_entries()
+    utils.delete_duplicate_quickfix_entries()
   end
 })
 

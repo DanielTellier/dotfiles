@@ -132,16 +132,6 @@ return {
           open_mt(ev.file, ev.buf)
         end,
       })
-
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "multi-tree",
-        callback = function(ev)
-          local ok, wk = pcall(require, "which-key")
-          if ok then
-            wk.add({ { "<leader>", group = "multi-tree", mode = "n", buffer = ev.buf } })
-          end
-        end,
-      })
     end,
     keys = {
       {
