@@ -100,8 +100,13 @@ return {
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
 
-      local function open_mt(file, buf)
+      local function open_mt(file)
         if not file then return end
+        local fullpath = vim.fn.fnamemodify(file, ":p")
+        local buf = vim.fn.bufnr(fullpath)
+        if buf == -1 or not vim.api.nvim_buf_is_valid(buf) then
+          return
+        end
         if vim.bo[buf].filetype == "multi-tree" then return end
         if vim.fn.isdirectory(file) == 1 then
           require("multi-tree").open(vim.fn.fnameescape(file))
@@ -119,8 +124,7 @@ return {
           if vim.fn.argc() == 1 then
             local arg = vim.fn.argv(0)
             if not arg then return end
-            local buf = vim.fn.bufnr(arg)
-            open_mt(arg, buf)
+            open_mt(arg)
           end
         end,
         once = true,
@@ -129,7 +133,7 @@ return {
       -- Replace :edit . (or :edit <dir>) mid-session in the current window.
       vim.api.nvim_create_autocmd("BufEnter", {
         callback = function(ev)
-          open_mt(ev.file, ev.buf)
+          open_mt(ev.file)
         end,
       })
     end,
