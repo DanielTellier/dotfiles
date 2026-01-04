@@ -414,7 +414,7 @@ utils.map(
 )
 utils.map('n', '<leader>yp', '"fp', { desc = "Paste file name" })
 
--- Removes
+-- Delete
 utils.map(
   'n', '<leader>dm', ':delmarks ', { silent = false, desc = "Delete mark from list" }
 )
