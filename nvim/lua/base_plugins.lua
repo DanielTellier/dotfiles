@@ -95,45 +95,9 @@ return {
   {
     "DanielTellier/multi-tree.nvim",
     event = "VeryLazy",
-    init = function()
-      -- Disable netrw so directories don’t open there.
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-
-      local function open_mt(file)
-        if not file then return end
-        local fullpath = vim.fn.fnamemodify(file, ":p")
-        local buf = vim.fn.bufnr(fullpath)
-        if buf ~= -1 and vim.bo[buf].filetype == "multi-tree" then return end
-        if vim.fn.isdirectory(fullpath) == 1 then
-          require("multi-tree").open(vim.fn.fnameescape(fullpath))
-          -- Clean up the original buffer.
-          if buf ~= -1 and vim.api.nvim_buf_is_valid(buf) then
-            vim.api.nvim_buf_delete(buf, { force = true })
-          end
-        end
-      end
-
-      -- Start with a directory: `nvim .` or `nvim path/`.
-      vim.api.nvim_create_autocmd("VimEnter", {
-        callback = function()
-          -- Conventional behavior: only hijack when there is exactly one arg and it's a dir.
-          if vim.fn.argc() == 1 then
-            local arg = vim.fn.argv(0)
-            if not arg then return end
-            open_mt(arg)
-          end
-        end,
-        once = true,
-      })
-
-      -- Replace :edit . (or :edit <dir>) mid-session in the current window.
-      vim.api.nvim_create_autocmd("BufEnter", {
-        callback = function(ev)
-          open_mt(ev.file)
-        end,
-      })
-    end,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
     keys = {
       {
         "<leader>em",
@@ -147,9 +111,6 @@ return {
           require("multi-tree").open(vim.fn.expand("%:p:h"))
         end, desc = "Open MultiTree at file dir"
       },
-    },
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
     },
   },
 }
