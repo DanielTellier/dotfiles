@@ -23,8 +23,7 @@ CONTENTS                                                         *MydContents*
     16. MultiTree ....................................... |MydMultiTree|
     17. Wezterm ......................................... |MydWezterm|
     18. Bash ............................................ |MydBash|
-    19. Avante .......................................... |MydAvante|
-    20. Misc ............................................ |MydMisc|
+    19. Misc ............................................ |MydMisc|
 
 ==============================================================================
 1. Navigation                                                  *MydNavigation*
@@ -266,15 +265,7 @@ CONTENTS                                                         *MydContents*
 - Send process to foreground: fg
 
 ==============================================================================
-19. Avante                                                         *MydAvante*
-
-- Toggle sidebar: <leader>aa
-- Switch sidebar focus: <leader>af
-- Select model: <leader>a?
-- New ask: <leader>an
-
-==============================================================================
-20. Misc                                                             *MydMisc*
+19. Misc                                                             *MydMisc*
 
 - Quit neovim (n): <leader>x
 - Close current window (n): <leader>qw
