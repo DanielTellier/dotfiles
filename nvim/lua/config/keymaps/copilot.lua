@@ -2,7 +2,7 @@ local utils = require('utils')
 local wk = require("which-key")
 
 wk.add({
-  { "<leader>c", group = "copilot", mode = { "n", "x", "v" } },
+  { "<leader>c", group = "AI", mode = { "n", "x", "v" } },
 })
 
 utils.map("n", "<leader>cm",
