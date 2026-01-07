@@ -27,36 +27,6 @@ return {
       end
     end,
   },
-  -- Navigate text with flash
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    keys = {
-      {
-        "s", mode = { "n", "x", "o" },
-        function()
-          require("flash").jump()
-        end, desc = "Flash"
-      },
-      {
-        "S", mode = { "n", "x", "o" },
-        function()
-          require("flash").treesitter()
-        end, desc = "Flash Treesitter"
-      },
-      {
-        "r", mode = "o",
-        function()
-          require("flash").remote()
-        end, desc = "Remote Flash" },
-      {
-        "R", mode = { "o", "x" },
-        function()
-          require("flash").treesitter_search()
-        end, desc = "Treesitter Search"
-      },
-    },
-  },
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
@@ -84,11 +54,6 @@ return {
   },
   -- end color schemes
   { "ibhagwan/fzf-lua" },
-  { "sindrets/diffview.nvim" },
-  {
-    "folke/ts-comments.nvim",
-    event = "VeryLazy",
-  },
   { "tpope/vim-commentary" },
   { "tpope/vim-fugitive" },
   { "tpope/vim-repeat" },
