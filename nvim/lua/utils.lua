@@ -429,6 +429,7 @@ end
 function M.buf_add_dir(file_pattern, dir)
   file_pattern = file_pattern or '*'
   dir = vim.fn.fnamemodify(dir, ':p')
+  dir = dir:gsub("/+$", "") -- strip trailing slashes
   if vim.fn.isdirectory(dir) == 0 then
     vim.notify('Not a directory: ' .. dir, vim.log.levels.ERROR)
     return
