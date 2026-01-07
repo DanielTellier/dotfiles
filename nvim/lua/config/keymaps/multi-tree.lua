@@ -19,5 +19,5 @@ utils.map(
 )
 utils.map(
   "n", "<leader>zo", ":sp | MultiTree ",
-  { silent = false, desc = "Open multi-tree in a vertical split with a provided path" }
+  { silent = false, desc = "Open multi-tree in a horizontal split with a provided path" }
 )
