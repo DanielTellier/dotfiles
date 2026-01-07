@@ -426,7 +426,7 @@ function M.select_dev_path_and_find_files()
 end
 
 -- Add all files under a directory to the buffer list (no opening).
-function M.buf_add_dir(dir, file_pattern)
+function M.buf_add_dir(file_pattern, dir)
   file_pattern = file_pattern or '*'
   dir = vim.fn.fnamemodify(dir, ':p')
   if vim.fn.isdirectory(dir) == 0 then

@@ -77,6 +77,7 @@ return {
           ["@comment.warning"] = { fg = "$yellow", fmt = "bold,italic" },
           ["@comment.todo"] = { fg = "$orange", fmt = "bold,italic" },
           ["@comment.error"] = { fg = "$red", fmt = "bold,italic" },
+          ["MatchParen"] = { fg = "$red", bg = "$bg1", fmt = "bold,underline" },
         },
       })
     end,

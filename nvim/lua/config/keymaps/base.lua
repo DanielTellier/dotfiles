@@ -124,13 +124,13 @@ vim.api.nvim_create_user_command(
   'BufAddDir',
   function(opts)
     local args = vim.split(opts.args, '%s+')
-    if #args < 1 then
-      vim.notify("Usage: :BufAddDir <directory> [file_pattern]", vim.log.levels.ERROR)
+    if #args < 2 then
+      vim.notify("Usage: :BufAddDir <file_pattern> <directory>", vim.log.levels.ERROR)
       return
     end
-    local dir = args[1]
-    local pattern = args[2] or '*'
-    utils.buf_add_dir(dir, pattern)
+    local pattern = args[1]
+    local dir = args[2]
+    utils.buf_add_dir(pattern, dir)
   end,
   {
     nargs = '+',
