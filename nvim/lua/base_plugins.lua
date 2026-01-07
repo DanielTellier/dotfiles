@@ -94,17 +94,8 @@ return {
   { "tpope/vim-surround" },
   {
     "DanielTellier/multi-tree.nvim",
-    event = "VeryLazy",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-    },
-    keys = {
-      {
-        "<leader>em",
-        function()
-          require("multi-tree").open(vim.loop.cwd())
-        end, desc = "Open MultiTree at CWD"
-      },
     },
   },
 }
