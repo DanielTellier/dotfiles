@@ -29,7 +29,7 @@ wk.add({
   { "<leader>t", group = "toggle", mode = "n" }
 })
 wk.add({
-  { "<leader>u", group = "surround", mode = "n" }
+  { "<leader>u", group = "surround", mode = { "n", "v" } }
 })
 wk.add({
   { "<leader>w", group = "window", mode = "n" }
