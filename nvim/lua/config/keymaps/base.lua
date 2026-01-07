@@ -5,16 +5,10 @@ local rtp = vim.split(vim.o.runtimepath, ",")[1]
 local home = os.getenv('HOME')
 
 wk.add({
+  { "<leader>d", group = "delete", mode = "n" }
+})
+wk.add({
   { "<leader>e", group = "edit", mode = "n" }
-})
-wk.add({
-  { "<leader>q", group = "close", mode = "n" }
-})
-wk.add({
-  { "<leader>t", group = "toggle", mode = "n" }
-})
-wk.add({
-  { "<leader>r", group = "replace", mode = { "n", "v" } }
 })
 wk.add({
   { "<leader>f", group = "find", mode = "n" }
@@ -23,16 +17,25 @@ wk.add({
   { "<leader>m", group = "terminal", mode = "n" }
 })
 wk.add({
-  { "<leader>w", group = "window", mode = "n" }
+  { "<leader>q", group = "close", mode = "n" }
 })
 wk.add({
-  { "<leader>y", group = "yank", mode = { "n", "v" } }
+  { "<leader>r", group = "replace", mode = { "n", "v" } }
 })
 wk.add({
   { "<leader>s", group = "session", mode = "n" }
 })
 wk.add({
-  { "<leader>d", group = "delete", mode = "n" }
+  { "<leader>t", group = "toggle", mode = "n" }
+})
+wk.add({
+  { "<leader>u", group = "surround", mode = "n" }
+})
+wk.add({
+  { "<leader>w", group = "window", mode = "n" }
+})
+wk.add({
+  { "<leader>y", group = "yank", mode = { "n", "v" } }
 })
 
 -- Navigation
@@ -535,4 +538,3 @@ if os.getenv("SSH_TTY") then
   )
 end
 utils.map({ 'i', 'x', 'n', 's' }, "<c-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
-utils.map('n', "<leader>zz", "<cmd>Lazy<cr>", { desc = "Lazy" })

@@ -2,6 +2,11 @@ if not vim.g.copilot_available then
   return {}
 end
 
+local wk = require("which-key")
+wk.add({
+  { "<leader>a", group = "avante", mode = "n" }
+})
+
 return {
   {
     "yetone/avante.nvim",
