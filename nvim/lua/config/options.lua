@@ -59,7 +59,6 @@ opt.foldenable = false
 opt.foldlevel = 2
 opt.foldmethod = "indent"
 opt.foldnestmax = 10
-opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,t:block"
 opt.ignorecase = true

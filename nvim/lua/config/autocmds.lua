@@ -1,8 +1,8 @@
 local utils = require('utils')
 
--- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = utils.augroup("checktime"),
+  desc = "Check if we need to reload the file when it changed",
   callback = function()
     if vim.o.buftype ~= "nofile" then
       vim.cmd("checktime")
@@ -13,8 +13,9 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = utils.augroup("highlight_yank"),
+  desc = "Highlight text on yank",
   callback = function()
-    (vim.hl or vim.highlight).on_yank()
+    vim.hl.on_yank({ higroup = "IncSearch", timeout = 100 })
   end,
 })
 
@@ -28,9 +29,9 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
--- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = utils.augroup("last_loc"),
+  desc = "Go to the last location when opening a buffer",
   callback = function(event)
     local exclude = { "gitcommit" }
     local buf = event.buf
@@ -46,9 +47,9 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
--- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = utils.augroup("auto_create_dir"),
+  desc = "Auto create intermidiate directory when saving a file",
   callback = function(event)
     if event.match:match("^%w%w+:[\\/][\\/]") then
       return
@@ -59,7 +60,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  group = utils.augroup("env_filetype"),
+  group = utils.augroup("env_filetype", {}),
   pattern = { "*.env", ".env.*" },
   callback = function()
     vim.opt_local.filetype = "sh"
@@ -68,7 +69,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 
 -- Set filetype for .code-snippets files
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  group = utils.augroup("code_snippets_filetype"),
+  group = utils.augroup("code_snippets_filetype", {}),
   pattern = { "*.code-snippets" },
   callback = function()
     vim.opt_local.filetype = "json"
@@ -76,7 +77,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  group = utils.augroup("spellcheck"),
+  group = utils.augroup("spellcheck", {}),
   pattern = { 'gitcommit', 'markdown', 'tex', 'latex', 'context', 'plaintex' },
   callback = function()
     vim.opt_local.spell = true
@@ -94,14 +95,14 @@ vim.api.nvim_create_autocmd('QuickFixCmdPost', {
 })
 
 vim.api.nvim_create_autocmd('TermOpen', {
-  group = utils.augroup("terminal"),
+  group = utils.augroup("terminal", {}),
   callback = function()
     vim.opt_local.number = false
     vim.opt_local.relativenumber = false
   end
 })
 vim.api.nvim_create_autocmd('BufLeave', {
-  group = utils.augroup("terminal"),
+  group = utils.augroup("terminal", {}),
   callback = function()
     if vim.bo.buftype == 'terminal' then
       vim.g.last_term = vim.api.nvim_get_current_buf()
@@ -111,7 +112,7 @@ vim.api.nvim_create_autocmd('BufLeave', {
   end
 })
 vim.api.nvim_create_autocmd('BufDelete', {
-  group = utils.augroup("terminal"),
+  group = utils.augroup("terminal", {}),
   callback = function()
     if vim.bo.buftype == 'terminal' then
       vim.g.last_term = vim.v.null
@@ -122,30 +123,26 @@ vim.api.nvim_create_autocmd('BufDelete', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  group = utils.augroup("misc"),
+  group = utils.augroup("misc", {}),
   pattern = 'xml',
   callback = function()
     vim.opt_local.eol = false
   end
 })
 vim.api.nvim_create_autocmd('VimEnter', {
-  group = utils.augroup("misc"),
+  group = utils.augroup("misc", {}),
+  desc = "Set cursor to beam shape",
   callback = function()
     vim.cmd('silent! echo -ne "\\e[2 q"')
-  end
+  end,
+  once = true,
 })
-vim.api.nvim_create_autocmd('BufReadPost', {
-  group = utils.augroup("misc"),
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = utils.augroup("no_auto_comment", {}),
+  desc = "Avoid auto continue comment on a new line",
   callback = function()
-    if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
-      vim.cmd('normal! g`"')
-    end
-  end
-})
-vim.api.nvim_create_autocmd('BufEnter', {
-  group = utils.augroup("misc"),
-  callback = function()
-    vim.opt_local.formatoptions:remove('cro')
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
   end
 })
 
