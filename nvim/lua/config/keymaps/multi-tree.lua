@@ -10,6 +10,14 @@ utils.map(
   { desc = "Open multi-tree given cwd" }
 )
 utils.map(
+  "n", "<leader>zt", "<cmd>tabnew | tabmove0 | MultiTree<cr>",
+  { desc = "Open multi-tree given cwd at first tab" }
+)
+utils.map(
+  "n", "<leader>zT", ":tabnew | tabmove0 | MultiTree ",
+  { silent = false, desc = "Open multi-tree with a provided path at first tab" }
+)
+utils.map(
   "n", "<leader>ze", ":MultiTree ",
   { silent = false, desc = "Open multi-tree in the current window with a provided path" }
 )
