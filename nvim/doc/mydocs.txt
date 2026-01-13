@@ -117,11 +117,9 @@ CONTENTS                                                         *MydContents*
 ==============================================================================
 8. Surround                                                      *MydSurround*
 
-- Surround word with <x> (n): <leader>uw<x>
-- Surround line with <x> (n): <leader>ul<x>
-- Surround selected with <x> (v): <leader>u<x>
-- Change surround from <x> to <y> (n): <leader>u<x><y>
-- Delete surround <x> (n): <leader>ud<x>
+- Add surround in Visual mode (v): S
+- Replace surround (n): cs
+- Delete surround (n): ds
 
 ==============================================================================
 9. Window                                                   *MydWindow*

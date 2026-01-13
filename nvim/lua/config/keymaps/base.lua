@@ -29,9 +29,6 @@ wk.add({
   { "<leader>t", group = "toggle", mode = "n" }
 })
 wk.add({
-  { "<leader>u", group = "surround", mode = { "n", "v" } }
-})
-wk.add({
   { "<leader>w", group = "window", mode = "n" }
 })
 wk.add({
@@ -330,13 +327,6 @@ utils.map('t', '<c-w>p', function()
 end, { desc = "Paste yanked text into terminal" })
 utils.map('n', '<leader>mq', '<cmd>q!<cr>', { desc = "Exit terminal" })
 utils.map('n', '<leader>mz', "<c-[>", { desc = "Exit insert mode in inner terminal" })
-
--- Surround
-utils.surround_mappings("word")
-utils.surround_mappings("line")
-utils.surround_mappings("change")
-utils.surround_mappings("delete")
-utils.surround_mappings("visual")
 
 -- Window
 utils.map('n', '<c-h>', '<c-w>h', { silent = false, desc = "Move to left window" })

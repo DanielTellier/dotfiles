@@ -90,46 +90,6 @@ function M.split_netrw(bufcmd, is_stay)
 end
 
 
--- Surround
-function M.surround_mappings(map_type)
-  local chars = { '`', "'", '"', '[', ']', '{', '}', '(', ')', '<', '>', 't' }
-  for _, char in ipairs(chars) do
-    if map_type == "word" then
-      vim.api.nvim_set_keymap(
-        'n', '<leader>uw' .. char, 'ysiw' .. char,
-        { noremap = false, desc = 'Surround word with ' .. char }
-      )
-    elseif map_type == "line" then
-      vim.api.nvim_set_keymap(
-        'n', '<leader>ul' .. char, 'yss' .. char,
-        { noremap = false, desc = 'Surround line with ' .. char }
-      )
-    elseif map_type == "change" then
-      for _, curr_char in ipairs(chars) do
-        if curr_char == char then
-          goto continue
-        end
-        vim.api.nvim_set_keymap(
-          'n', '<leader>u' .. curr_char .. char, 'cs' .. curr_char .. char,
-          { noremap = false, desc = 'Change ' .. curr_char .. ' to ' .. char }
-        )
-        ::continue::
-      end
-    elseif map_type == "delete" then
-      vim.api.nvim_set_keymap(
-        'n', '<leader>ud' .. char, 'ds' .. char,
-        { noremap = false, desc = 'Delete ' .. char }
-      )
-    elseif map_type == "visual" then
-      vim.api.nvim_set_keymap(
-        'v', '<leader>u' .. char, 'S' .. char,
-        { noremap = false, desc = 'Visual Surround with ' .. char }
-      )
-    end
-  end
-end
-
-
 -- Buffers
 function M.delete_all_buffers()
   local current_pos = vim.fn.getpos('.')
