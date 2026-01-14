@@ -90,7 +90,7 @@ return {
     utils.map("n", "<leader>ht", function()
       toggle_telescope(list)
     end, { desc = "Toggle harpoon telescope window" })
-    utils.map("n", "<leader>hq", function()
+    utils.map("n", "<leader>hT", function()
       harpoon.ui:toggle_quick_menu(list)
     end, { desc = "Toggle harpoon quick menu" })
   end,
