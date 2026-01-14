@@ -34,6 +34,11 @@ return {
   branch = "harpoon2",
   dependencies = {
     { "nvim-lua/plenary.nvim" },
+    { "nvim-telescope/telescope.nvim" },
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+    },
   },
   config = function(_, opts)
     local wk = require("which-key")
