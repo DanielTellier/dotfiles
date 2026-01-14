@@ -51,9 +51,6 @@ return {
     utils.map("n", "<leader>hA", function()
       list:prepend()
     end, { desc = "Prepend file to harpoon" })
-    utils.map("n", "<leader>ht", function()
-      harpoon.ui:toggle_quick_menu(list)
-    end, { desc = "Toggle harpoon menu" })
     for i = 1, 9 do
       utils.map("n", "<leader>h" .. i, function()
         list:select(i)
@@ -72,5 +69,29 @@ return {
     utils.map("n", "<leader>hn", function()
       cycle_list(list, "next")
     end, { desc = "Go to next harpoon file" })
+
+    local conf = require("telescope.config").values
+    local function toggle_telescope(harpoon_files)
+      local file_paths = {}
+      for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+      end
+
+      require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+          results = file_paths,
+        }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.generic_sorter({}),
+      }):find()
+    end
+
+    utils.map("n", "<leader>ht", function()
+      toggle_telescope(list)
+    end, { desc = "Toggle harpoon telescope window" })
+    utils.map("n", "<leader>hq", function()
+      harpoon.ui:toggle_quick_menu(list)
+    end, { desc = "Toggle harpoon quick menu" })
   end,
 }
