@@ -86,6 +86,7 @@ CONTENTS                                                         *MydContents*
 - Search word under cursor in current directory (n): <leader>fw
 - Search word given input in current directory (n): <leader>fi
 - Search exact match in current buffer (n): <leader>fm
+- Negative look ahead: ':/`pre pattern`\%(`first pattern`\>\|`second pattern`\>\)`post pattern`\@!'
 
 ==============================================================================
 6. Git                                                                *MydGit*
