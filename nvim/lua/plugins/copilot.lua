@@ -249,6 +249,7 @@ return {
       answer_header = "## Copilot ",
       error_header = "## Error ",
       model = vim.g.copilot_model,
+      temperature = 0.8, -- lower -> less random, higher -> more random (creative)
       context = "buffers",
       -- Registers copilot-chat source and enables it for copilot-chat filetype (so copilot chat window)
       chat_autocomplete = false,
