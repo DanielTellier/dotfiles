@@ -99,6 +99,7 @@ opt.viminfo:append("n~/.nviminfo")
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.wildignore = "*/__pycache__/*,*.o,*.d,*.exe,*.a,*.so,*.out,*.pyc"
 opt.wildmode = "longest:full,full"
+opt.winborder = "rounded"
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false
 opt.writebackup = true
