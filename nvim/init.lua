@@ -20,8 +20,6 @@ vim.opt.rtp:prepend(lazypath)
 -- local user = vim.fn.getenv("USER") or "unknown"
 -- vim.env.XDG_CACHE_HOME = '/tmp/' .. user .. "/.cache"
 
-vim.g.lsp_enabled = vim.fn.getenv("NVIM_LSP_FLAG") == "true"
-
 vim.g.session_dir = vim.fn.stdpath("state") .. "/sessions"
 -- Ensure the directory exists
 if vim.fn.isdirectory(vim.g.session_dir) == 0 then

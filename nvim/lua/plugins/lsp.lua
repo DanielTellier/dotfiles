@@ -1,6 +1,4 @@
-if not vim.g.lsp_enabled then
-  return {}
-end
+vim.g.lsp_enabled = false
 
 return {
   -- LSP Configuration & Management
@@ -90,8 +88,9 @@ return {
         lua_ls = {
           settings = {
             Lua = {
+              runtime = { version = "LuaJIT" },
               diagnostics = { globals = { "vim" } },
-              workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+              workspace = { library = vim.api.nvim_get_runtime_file("lua", true) },
               telemetry = { enable = false },
             },
           },

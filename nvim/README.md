@@ -42,10 +42,7 @@ export NVIM_CODEX_FLAG="true"
 ```
 
 ### LSP Control
-To enable LSP servers:
-```bash
-export NVIM_LSP_FLAG="true"
-```
+To toggle LSP server in a given file: `<leader>lt`
 
 ### Cache Directory (Optional)
 To store plugins/LSP servers outside home directory:

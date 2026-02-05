@@ -8,8 +8,9 @@ return {
         build = "make",
       },
       { "nvim-telescope/telescope-file-browser.nvim" },
-      -- https://github.com/fdschmidt93/telescope-egrepify.nvim
-      -- { "fdschmidt93/telescope-egrepify.nvim" },
+      { "fdschmidt93/telescope-egrepify.nvim" },
+      { "nvim-telescope/telescope-ui-select.nvim" },
+      { "LinArcX/telescope-env.nvim" },
     },
     config = function()
       local telescope = require("telescope")
@@ -44,16 +45,22 @@ return {
           },
         },
         extensions = {
-          fzf = {
+          ["fzf"] = {
             fuzzy = true,                    -- fuzzy matching
             override_generic_sorter = true,  -- override default sorter
             override_file_sorter = true,     -- override file sorter
             case_mode = "smart_case",        -- "smart_case" | "ignore_case" | "respect_case"
-          }
+          },
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown {},
+          },
         },
       })
       telescope.load_extension("fzf")
       telescope.load_extension("file_browser")
+      telescope.load_extension("egrepify")
+      telescope.load_extension("ui-select")
+      telescope.load_extension('env')
     end,
   },
 }
