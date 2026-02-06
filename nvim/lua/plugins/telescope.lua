@@ -54,6 +54,9 @@ return {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown {},
           },
+          ["egrepify"] = {
+            sorting_strategy = "ascending",
+          }
         },
       })
       telescope.load_extension("fzf")

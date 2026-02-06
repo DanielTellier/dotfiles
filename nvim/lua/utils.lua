@@ -400,10 +400,11 @@ function M.select_dev_path_and_find_files()
     return
   end
 
+  local telescope = require("telescope")
   -- Create picker
-  require('telescope.pickers').new({}, {
+  telescope.pickers.new({}, {
     prompt_title = "Select Development Path",
-    finder = require('telescope.finders').new_table({
+    finder = telescope.finders.new_table({
       results = data.paths,
       entry_maker = function(entry)
         return {
@@ -413,12 +414,12 @@ function M.select_dev_path_and_find_files()
         }
       end,
     }),
-    sorter = require('telescope.config').values.generic_sorter({}),
+    sorter = telescope.config.values.generic_sorter({}),
     attach_mappings = function(bufnr)
-      require('telescope.actions').select_default:replace(function()
-        require('telescope.actions').close(bufnr)
-        local path = require('telescope.actions.state').get_selected_entry().value
-        require('telescope.builtin').find_files({ cwd = path })
+      telescope.actions.select_default:replace(function()
+        telescope.actions.close(bufnr)
+        local path = telescope.actions.state.get_selected_entry().value
+        telescope.builtin.find_files({ cwd = path })
       end)
       return true
     end,
