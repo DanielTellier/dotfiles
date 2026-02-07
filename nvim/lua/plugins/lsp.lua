@@ -138,27 +138,23 @@ return {
         vim.g.lsp_enabled = not vim.g.lsp_enabled
         apply_lsp_status()
       end
-      utils.map(
-        'n',
-        '<leader>lt',
-        function()
-          toggle_lsp()
-        end,
-        { desc = 'Toggle lsp' }
-      )
+
       vim.api.nvim_create_autocmd("LspAttach", {
         group = utils.augroup("lsp"),
         callback = function()
           apply_lsp_status()
         end
       })
+
       utils.map(
-        'n',
-        '<leader>lg',
-        function()
+        'n', '<leader>lt', function()
+          toggle_lsp()
+        end, { desc = 'Toggle lsp' }
+      )
+      utils.map(
+        'n', '<leader>lg', function()
           vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-        end,
-        { desc = 'Toggle Diagnostics' }
+        end, { desc = 'Toggle Diagnostics' }
       )
     end,
   },
