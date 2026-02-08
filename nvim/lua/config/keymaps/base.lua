@@ -168,6 +168,9 @@ utils.map(
 
 -- Replace
 utils.map(
+  'n', '<leader>r-', 'ct_', { desc = "Change up to the underscore" }
+)
+utils.map(
   { 'n', 'v' }, '<leader>rg', ':%s///g' .. string.rep('<left>', 3),
   { silent = false, desc = "Global replace" }
 )
