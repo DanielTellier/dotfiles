@@ -168,9 +168,6 @@ utils.map(
 
 -- Replace
 utils.map(
-  'n', '<leader>r-', 'ct_', { desc = "Change up to the underscore" }
-)
-utils.map(
   { 'n', 'v' }, '<leader>rg', ':%s///g' .. string.rep('<left>', 3),
   { silent = false, desc = "Global replace" }
 )
@@ -540,4 +537,6 @@ if os.getenv("SSH_TTY") then
     }
   )
 end
-utils.map({ 'i', 'x', 'n', 's' }, "<c-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+utils.map(
+  { 'i', 'x', 'n', 's' }, "<c-s>", "<cmd>wa<cr><esc>", { desc = "Save all files" }
+)

@@ -232,7 +232,9 @@ return {
         event = "InsertEnter",
         config = function()
           require("copilot").setup({
-            copilot_model = vim.g.copilot_model,
+            -- NOTE: For zbirenbaum/copilot.lua the current model for
+            -- completion is 'gpt-41-copilot' and cannot be modified
+            -- copilot_model = vim.g.copilot_model,
             suggestion = { enabled = false },
             panel = { enabled = false },
             copilot_no_tab_map = true,
@@ -248,7 +250,7 @@ return {
       question_header = "## User ",
       answer_header = "## Copilot ",
       error_header = "## Error ",
-      model = vim.g.copilot_model,
+      model = vim.g.copilotchat_model,
       temperature = 0.8, -- lower -> less random, higher -> more random (creative)
       context = "buffers",
       -- Registers copilot-chat source and enables it for copilot-chat filetype (so copilot chat window)
