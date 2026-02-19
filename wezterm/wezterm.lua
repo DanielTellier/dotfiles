@@ -100,8 +100,8 @@ return {
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
 
     -- Ensure that the Alt key is sent as Meta
-    send_composed_key_when_left_alt_is_pressed = true,
-    send_composed_key_when_right_alt_is_pressed = true,
+    send_composed_key_when_left_alt_is_pressed = false,
+    send_composed_key_when_right_alt_is_pressed = false,
     -- Leader key
     --[[
     LEADER stays active until a keypress is registered (whether it matches

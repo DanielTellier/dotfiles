@@ -49,6 +49,9 @@ vim.g.claude_available = (
 vim.g.codex_available = (
   vim.fn.getenv("NVIM_CODEX_FLAG") == "true" and vim.fn.executable('codex') == 1
 )
+vim.g.opencode_available = (
+  vim.fn.getenv("NVIM_OPENCODE_FLAG") == "true" and vim.fn.executable('opencode') == 1
+)
 
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.

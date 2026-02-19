@@ -53,11 +53,15 @@ return {
     end,
   },
   -- end color schemes
-  { "ibhagwan/fzf-lua" },
-  { "tpope/vim-commentary" },
   { "tpope/vim-fugitive" },
   { "tpope/vim-repeat" },
   { "tpope/vim-surround" },
+  { "ibhagwan/fzf-lua" },
+  { 'numToStr/Comment.nvim' },
+  {
+    "j-hui/fidget.nvim",
+    version = "*", -- alternatively, pin this to a specific version, e.g., "1.6.1"
+  },
   {
     "DanielTellier/multi-tree.nvim",
     dependencies = {

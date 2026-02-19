@@ -45,9 +45,13 @@ end
 
 local theme = vim.g.colorscheme or custom_theme
 
-local lualine_b = { "branch" }
+local lualine_z = { "location" }
 if vim.g.codex_available then
-  table.insert(lualine_b, require("codex").status())
+  table.insert(lualine_z, require("codex").status())
+elseif vim.g.opencode_available then
+  table.insert(lualine_z, function()
+    return require("opencode").statusline()
+  end)
 end
 
 return {
@@ -73,11 +77,11 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = lualine_b,
+        lualine_b = { "branch" },
         lualine_c = { "filename" },
         lualine_x = { "encoding", "filetype" },
         lualine_y = { "progress" },
-        lualine_z = { "location" },
+        lualine_z = lualine_z,
       },
       inactive_sections = {
         lualine_a = {},
