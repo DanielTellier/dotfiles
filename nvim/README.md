@@ -41,6 +41,12 @@ To enable Codex must have the binary `codex` and set the following env variable:
 export NVIM_CODEX_FLAG="true"
 ```
 
+### OpenCode Control
+To enable OpenCode must have the binary `opencode` and set the following env variable:
+```bash
+export NVIM_OPENCODE_FLAG="true"
+```
+
 ### LSP Control
 To toggle LSP server in a given file: `<leader>lt`
 
