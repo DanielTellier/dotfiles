@@ -10,6 +10,8 @@
 [[ "$OSTYPE" == "darwin"* && -f ~/.bashrc_mac ]] && source ~/.bashrc_mac
 [[ "$OSTYPE" == "linux-gnu"* && -f ~/.bashrc_linux ]] && source ~/.bashrc_linux
 
+export PATH="$HOME/.local/bin:$PATH"
+
 ########
 # MISC #
 ########
