@@ -48,7 +48,8 @@ local theme = vim.g.colorscheme or custom_theme
 local lualine_z = { "location" }
 if vim.g.codex_available then
   table.insert(lualine_z, require("codex").status())
-elseif vim.g.opencode_available then
+end
+if vim.g.opencode_available then
   table.insert(lualine_z, function()
     return require("opencode").statusline()
   end)
