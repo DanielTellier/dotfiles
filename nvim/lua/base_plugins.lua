@@ -53,7 +53,6 @@ return {
     end,
   },
   -- end color schemes
-  { "tpope/vim-fugitive" },
   { "tpope/vim-repeat" },
   { "tpope/vim-surround" },
   { "ibhagwan/fzf-lua" },
