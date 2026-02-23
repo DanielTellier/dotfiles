@@ -40,7 +40,7 @@ if vim.g.copilot_available then
   -- completion is 'gpt-41-copilot' and cannot be modified
   -- vim.g.copilot_model = "gpt-41-copilot"
   -- To list available models for CopilotChat, run: <cmd>CopilotChatModels
-  vim.g.copilotchat_model = "claude-sonnet-4.5"
+  vim.g.copilotchat_model = "claude-sonnet-4.6"
 end
 
 vim.g.claude_available = (
