@@ -1,7 +1,6 @@
 local opt = vim.opt
 
 -- Variables
-vim.g.fugitive_git_executable = "/usr/bin/git"
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_preview = 1
