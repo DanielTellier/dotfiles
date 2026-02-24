@@ -45,16 +45,6 @@ end
 
 local theme = vim.g.colorscheme or custom_theme
 
-local lualine_z = { "location" }
-if vim.g.codex_available then
-  table.insert(lualine_z, require("codex").status())
-end
-if vim.g.opencode_available then
-  table.insert(lualine_z, function()
-    return require("opencode").statusline()
-  end)
-end
-
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -82,7 +72,7 @@ return {
         lualine_c = { "filename" },
         lualine_x = { "encoding", "filetype" },
         lualine_y = { "progress" },
-        lualine_z = lualine_z,
+        lualine_z = { "location" },
       },
       inactive_sections = {
         lualine_a = {},

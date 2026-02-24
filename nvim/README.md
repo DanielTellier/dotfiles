@@ -29,24 +29,6 @@ If you have a GitHub Copilot license:
 export COPILOT_ENABLED="true"
 ```
 
-### Claude Code Control
-To enable Claude Code must have the binary `claude` and set the following env variable:
-```bash
-export NVIM_CLAUDE_FLAG="true"
-```
-
-### Codex Control
-To enable Codex must have the binary `codex` and set the following env variable:
-```bash
-export NVIM_CODEX_FLAG="true"
-```
-
-### OpenCode Control
-To enable OpenCode must have the binary `opencode` and set the following env variable:
-```bash
-export NVIM_OPENCODE_FLAG="true"
-```
-
 ### LSP Control
 To toggle LSP server in a given file: `<leader>lt`
 

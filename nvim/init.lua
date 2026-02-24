@@ -43,16 +43,6 @@ if vim.g.copilot_available then
   vim.g.copilotchat_model = "claude-sonnet-4.6"
 end
 
-vim.g.claude_available = (
-  vim.fn.getenv("NVIM_CLAUDE_FLAG") == "true" and vim.fn.executable('claude') == 1
-)
-vim.g.codex_available = (
-  vim.fn.getenv("NVIM_CODEX_FLAG") == "true" and vim.fn.executable('codex') == 1
-)
-vim.g.opencode_available = (
-  vim.fn.getenv("NVIM_OPENCODE_FLAG") == "true" and vim.fn.executable('opencode') == 1
-)
-
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
