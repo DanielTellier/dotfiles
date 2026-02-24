@@ -20,6 +20,7 @@ return {
   },
   opts = {
     kind = "split_above",
+    disable_insert_on_commit = true,
     integrations = { telescope = true, diffview = true },
   },
 }
