@@ -5,7 +5,7 @@ Configured with LSP, AI assistance, and modern tooling.
 
 ### Required Binaries
 - **Neovim** (>= 0.8)
-- **Git** - for plugin management and fugitive
+- **Git** - for plugin management and neogit
 - **Node.js** - for Copilot (auto-detected at `/usr/bin/node` or `/opt/homebrew/opt/node/bin/node`)
 - **make** - for telescope-fzf-native compilation
 - **gcc** - for C/C++ development and treesitter parsers
@@ -70,7 +70,7 @@ export XDG_CACHE_HOME="/tmp/$USER/.cache"
 - **AI Integration**: GitHub Copilot with custom prompts
 - **Fuzzy Finding**: Telescope with file browser
 - **Session Management**: Save/restore workspace state
-- **Git Integration**: Fugitive and diffview
+- **Git Integration**: Neogit and diffview
 - **Modern UI**: Custom statusline and dashboard
 
 ## Storage Locations

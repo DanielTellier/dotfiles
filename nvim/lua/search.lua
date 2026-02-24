@@ -8,44 +8,25 @@ vim.g.autoloaded_search = 1
 
 local function run_grep(exts, pattern, gtype)
   local l_exts = vim.split(exts, ",")
-  local git_dir = vim.fn.FugitiveExtractGitDir('.')
   local cmd = ''
   local fincs = ''
 
-  if git_dir ~= '' then
-    if exts ~= 'all' then
-      for _, e in ipairs(l_exts) do
-        fincs = fincs .. " '*." .. e .. "'"
-      end
-      fincs = ' --' .. fincs
-    end
-    cmd = 'silent! Ggrep! -r'
-    if gtype == 'exact' then
-      cmd = cmd .. ' -w'
-    else
-      cmd = cmd .. ' -i'
-    end
-    cmd = cmd .. ' "' .. pattern .. '"' .. fincs
-    vim.cmd(cmd)
-    print("Ran " .. cmd)
+  if exts == 'all' then
+    fincs = ' --include=*'
   else
-    if exts == 'all' then
-      fincs = ' --include=*'
-    else
-      for _, e in ipairs(l_exts) do
-        fincs = fincs .. ' --include="*.' .. e .. '"'
-      end
+    for _, e in ipairs(l_exts) do
+      fincs = fincs .. ' --include="*.' .. e .. '"'
     end
-    cmd = 'silent! grep! -r'
-    if gtype == 'exact' then
-      cmd = cmd .. ' -w'
-    else
-      cmd = cmd .. ' -i'
-    end
-    cmd = cmd .. fincs .. ' ' .. pattern .. ' .'
-    vim.cmd(cmd)
-    print("Ran " .. cmd)
   end
+  cmd = 'silent! grep! -r'
+  if gtype == 'exact' then
+    cmd = cmd .. ' -w'
+  else
+    cmd = cmd .. ' -i'
+  end
+  cmd = cmd .. fincs .. ' ' .. pattern .. ' .'
+  vim.cmd(cmd)
+  print("Ran " .. cmd)
 end
 
 function M.search_grep(exts, pattern)
