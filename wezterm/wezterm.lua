@@ -52,7 +52,7 @@ keys = {
 
 if os_capture("uname", false) == "Linux" then
     table.insert(
-        keys, {key = 'c', mods="CTRL|SHIFT", action=act.CopyTo("Clipboard")}
+        keys, {key = 'c', mods="CTRL|SHIFT", action=act.CopyTo("ClipboardAndPrimarySelection")}
     )
     table.insert(
         keys, {key = 'v', mods="CTRL|SHIFT", action=act.PasteFrom("Clipboard")}
