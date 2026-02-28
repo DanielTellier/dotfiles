@@ -129,7 +129,7 @@ return {
           for _, client in ipairs(vim.lsp.get_clients()) do
             -- Stop all LSP clients except for copilot
             if client.name ~= "copilot" then
-              vim.lsp.stop_client(client.id)
+              client:stop()
             end
           end
         end

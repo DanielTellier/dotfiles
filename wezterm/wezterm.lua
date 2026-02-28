@@ -57,18 +57,12 @@ if os_capture("uname", false) == "Linux" then
     table.insert(
         keys, {key = 'v', mods="CTRL|SHIFT", action=act.PasteFrom("Clipboard")}
     )
-    table.insert(
-        keys, {key = 'v', mods="CTRL|SHIFT", action=act.PasteFrom("PrimarySelection")}
-    )
 else
     table.insert(
         keys, {key = 'c', mods="CMD", action=act.CopyTo("ClipboardAndPrimarySelection")}
     )
-    table.insert(keys,
-        {key = 'v', mods="CMD", action=act.PasteFrom("Clipboard")}
-    )
     table.insert(
-        keys, {key = 'v', mods="CMD", action=act.PasteFrom("PrimarySelection")}
+        keys, {key = 'v', mods="CMD", action=act.PasteFrom("Clipboard")}
     )
 end
 
