@@ -325,7 +325,7 @@ utils.map('n', '<leader>tt', function()
   utils.toggle_terminal()
 end, { desc = "Toggle the last terminal buffer" })
 utils.map(
-  't', '<c-n>', '<c-\\><c-n>', { silent = false, desc = "Change from terminal to normal mode" }
+  't', '<esc><esc>', '<c-\\><c-n>', { desc = "Change from terminal to normal mode" }
 )
 utils.map('t', '<c-w>p', function()
   utils.paste_to_terminal()
