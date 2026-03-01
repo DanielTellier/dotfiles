@@ -12,6 +12,7 @@
     ~/.git-prompt.sh: git-prompt.sh
     ~/.ipython: ipython
     ~/.local/bin/imgcat: imgcat
+    ~/.tmux.conf: tmux.conf
     ~/.vim: vim
 
 - shell:

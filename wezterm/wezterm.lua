@@ -70,7 +70,7 @@ return {
     -- General
     audible_bell = 'Disabled',
     check_for_updates = false,
-    color_scheme = 'Monokai (base16)',
+    color_scheme = 'OneDark (base16)',
     default_cursor_style = 'SteadyBlock',
     disable_default_key_bindings = true,
     enable_scroll_bar = true,

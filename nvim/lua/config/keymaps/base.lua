@@ -495,6 +495,9 @@ utils.map(
   ':LoadSession ',
   { silent=false, desc = "Load a session specified by the user" }
 )
+utils.map(
+  'n', "<leader>ss", "<cmd>wa<cr><esc>", { desc = "Save all files" }
+)
 
 -- Misc
 utils.map('n', '<leader>qw', ':q<cr>', { desc = "Close current window"})
@@ -539,6 +542,3 @@ if os.getenv("SSH_TTY") then
     }
   )
 end
-utils.map(
-  { 'i', 'x', 'n', 's' }, "<c-s>", "<cmd>wa<cr><esc>", { desc = "Save all files" }
-)
