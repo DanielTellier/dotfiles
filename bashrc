@@ -100,6 +100,7 @@ alias myfuncs='declare -F'
 alias wez='wezterm start &'
 alias gs='git status'
 alias cdn='nvim ~/.local/share/planner'
+alias tns='tmux new -s'
 
 ##########
 # Colors #
