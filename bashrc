@@ -99,6 +99,7 @@ alias ple='pylint -E'
 alias myfuncs='declare -F'
 alias wez='wezterm start &'
 alias gs='git status'
+alias cdn='nvim ~/.local/share/planner'
 
 ##########
 # Colors #
