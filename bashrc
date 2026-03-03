@@ -101,6 +101,8 @@ alias wez='wezterm start &'
 alias gs='git status'
 alias cdn='nvim ~/.local/share/planner'
 alias tns='tmux new -s'
+alias tas='tmux attach -t'
+alias tls='tmux ls'
 
 ##########
 # Colors #
