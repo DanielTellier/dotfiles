@@ -13,7 +13,7 @@ mouse-scroll-multiplier = 2
 confirm-close-surface = false
 
 # Keybindings
-keybind = ctrl+m>w=new_window
+keybind = ctrl+shift+m>n=new_window
 keybind = ctrl+m>t=new_tab
 keybind = ctrl+m>p=previous_tab
 keybind = ctrl+m>n=next_tab
