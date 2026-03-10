@@ -38,6 +38,5 @@ keybind = ctrl+m>h=goto_split:left
 keybind = ctrl+m>k=goto_split:up
 keybind = ctrl+m>j=goto_split:down
 keybind = ctrl+m>q=close_surface
-keybind = ctrl+m>Q=close_tab
 keybind = ctrl+m>c=close_window
 keybind = ctrl+m>f=write_scrollback_file:paste
