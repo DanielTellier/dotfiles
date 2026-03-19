@@ -13,3 +13,7 @@
   clean = git-lfs clean -- %f
 [merge]
   conflictstyle = zdiff3
+[lfs "customtransfer.xet"]
+  path = git-xet
+  args = transfer
+  concurrent = true

@@ -104,6 +104,7 @@ alias ner='nvim ~/.local/share/planner/reminders.md'
 alias tns='tmux new -s'
 alias tas='tmux attach -t'
 alias tls='tmux ls'
+alias tks='tmux kill-session -t'
 
 ##########
 # Colors #
