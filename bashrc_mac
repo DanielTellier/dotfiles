@@ -57,3 +57,10 @@ alias bup='brew update && brew upgrade && brew doctor'
 # Misc
 export BROWSER="open /Applications/Firefox.app"
 colorflag="-G"
+
+# cargo
+. "$HOME/.cargo/env"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

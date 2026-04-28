@@ -103,7 +103,7 @@ alias nep='nvim ~/.local/share/planner'
 alias ner='nvim ~/.local/share/planner/reminders.md'
 alias tns='tmux new -s'
 alias tas='tmux attach -t'
-alias tls='tmux ls'
+alias tls='tmux list-sessions 2>/dev/null || echo "no sessions are available"'
 alias tks='tmux kill-session -t'
 
 ##########
