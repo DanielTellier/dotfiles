@@ -71,6 +71,8 @@ return {
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
     },
   },
+  { "tpope/vim-fugitive" },
+  { "sindrets/diffview.nvim" },
   { "tpope/vim-repeat" },
   { "tpope/vim-surround" },
   { "ibhagwan/fzf-lua" },
