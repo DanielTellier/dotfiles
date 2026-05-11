@@ -79,14 +79,6 @@ utils.map(
   { desc = "Move cursor after closing pair symbol" }
 )
 utils.map('n', 'Y', 'y$', { silent = false, desc = "Yank to end of line" })
--- Force use of hjkl-style movement and up(c-b)/down(c-f)
-local keys_to_nop = {
-  '<up>', '<down>', '<left>', '<right>', '<pageup>', '<pagedown>', '<home>', '<end>'
-}
-for _, key in ipairs(keys_to_nop) do
-  utils.map('', key, '<nop>', { noremap = false, silent = false })
-  utils.map('i', key, '<nop>', { noremap = false, silent = false })
-end
 -- Remap these keys to work with hjkl-style movement
 utils.map('', '$', '<nop>', { noremap = false, silent = false })
 utils.map('', '^', '<nop>', { noremap = false, silent = false })
