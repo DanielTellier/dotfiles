@@ -15,7 +15,7 @@ export PATH="$HOME/.local/bin:$PATH"
 ########
 # MISC #
 ########
-export EDITOR='vim'
+export EDITOR='nvim'
 export TERM='xterm-256color'
 export IPYTHONDIR="$HOME/.dotfiles/ipython"
 # Can set the below for saving space in home path, related to nvim lsp servers and other apps
