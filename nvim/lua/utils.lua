@@ -554,4 +554,8 @@ function M.transform_indent_files(directory, file_pattern, from_spaces, to_space
   vim.notify(("Transformed %d files: %d-space → %d-space indents"):format(count, from_spaces, to_spaces))
 end
 
+function M.has_exe(exe)
+  return vim.fn.executable(exe) == 1
+end
+
 return M

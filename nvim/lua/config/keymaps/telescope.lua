@@ -19,11 +19,24 @@ utils.map('n', '<leader>pf', builtin.find_files, { desc = "Telescope find files"
 utils.map('n', '<leader>pF', builtin.git_files, { desc = "Telescope git find files" })
 utils.map('n', '<leader>po', builtin.oldfiles, { desc = "Telescope old files" })
 
-utils.map('n', '<leader>pg', builtin.live_grep, { desc = "Telescope live grep" })
-utils.map('n', '<leader>pG', function()
-  builtin.grep_string({ search = vim.fn.input("Grep > ") })
-end, { desc = "Telescope grep" })
-utils.map('n', '<leader>pe', "<cmd>Telescope egrepify<cr>", { desc = "Open egrepify" })
+
+if utils.has_exe("rg") then
+  utils.map('n', '<leader>pg', builtin.live_grep, { desc = "Telescope live grep" })
+  utils.map(
+    'n', '<leader>pG', function()
+      builtin.live_grep({
+        additional_args = function(args)
+          return { "--no-ignore", "--hidden", "--glob", "!**/.git/*" }
+        end,
+      })
+    end, { desc = "Telescope live grep, include ignored and hidden files" }
+  )
+  utils.map('n', '<leader>pe', "<cmd>Telescope egrepify<cr>", { desc = "Open egrepify" })
+else
+  utils.map('n', '<leader>pg', function()
+    builtin.grep_string({ search = vim.fn.input("Grep > ") })
+  end, { desc = "Telescope grep" })
+end
 utils.map(
   'n',
   '<leader>ps',
