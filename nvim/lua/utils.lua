@@ -250,6 +250,14 @@ end
 
 
 -- Misc
+function M.starts_with(str, prefix)
+  if type(prefix) ~= 'table' then prefix = { prefix } end
+  for _, p in ipairs(prefix) do
+    if str:sub(1, #p) == p then return true end
+  end
+  return false
+end
+
 function M.has_words_before()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
