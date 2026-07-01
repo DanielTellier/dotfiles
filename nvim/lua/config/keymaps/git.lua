@@ -21,7 +21,7 @@ local function add_worktree()
   vim.ui.select(branches, { prompt = "Worktree commitish (optional):" }, function(branch)
     local cmd = "Git worktree add "
     if local_branch_name ~= "" and path ~= "" then
-      cmd = "-b " .. local_branch_name .. " " .. path
+      cmd = cmd .. "-b " .. local_branch_name .. " " .. path
       if branch and branch ~= "None" then
         cmd = cmd .. " " .. branch
       end
