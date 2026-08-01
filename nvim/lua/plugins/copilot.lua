@@ -161,63 +161,67 @@ and highlight key concepts.
 
 return {
   {
-    'zbirenbaum/copilot-cmp',
-    config = function ()
-      require("copilot_cmp").setup()
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        -- NOTE: For zbirenbaum/copilot.lua the current model for
+        -- completion is 'gpt-41-copilot' and cannot be modified
+        -- copilot_model = vim.g.copilot_model,
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+        filetypes = {
+          markdown = true,
+          help = true,
+        },
+        copilot_no_tab_map = true,
+        copilot_node_command = vim.g.node_bin,
+      })
     end,
+  },
+  {
+    "saghen/blink.cmp",
+    version = "1.*",
     dependencies = {
       {
-        'hrsh7th/nvim-cmp',
-        config = function()
-          local cmp = require("cmp")
-          cmp.setup({
-            sources = {
-              { name = "copilot", group_index = 2 },
-            },
-            mapping = {
-              ["<tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                  cmp.select_next_item(
-                    { behavior = cmp.SelectBehavior.Select }
-                  )
-                elseif utils.has_words_before() then
-                  cmp.complete()
-                else
-                  fallback()
-                end
-              end, { 'i', 's' }),
-              ["<s-tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                  cmp.select_prev_item(
-                    { behavior = cmp.SelectBehavior.Select }
-                  )
-                elseif utils.has_words_before() then
-                  cmp.complete()
-                else
-                  fallback()
-                end
-              end, { 'i', 's' }),
-              ['<c-b>'] = cmp.mapping(
-                cmp.mapping.scroll_docs(-4), { 'i', 'c' }
-              ),
-              ['<c-f>'] = cmp.mapping(
-                cmp.mapping.scroll_docs(4), { 'i', 'c' }
-              ),
-              ['<c-space>'] = cmp.mapping(
-                cmp.mapping.complete(), { 'i', 'c' }
-              ),
-              ['<c-y>'] = cmp.config.disable,
-              ['<c-e>'] = cmp.mapping({
-                i = cmp.mapping.abort(),
-                c = cmp.mapping.close(),
-              }),
-              ["<c-c>"] = cmp.mapping.confirm({ select = true }),
-            },
-            sorting = {
-              priority_weight = 2,
-            },
-          })
-        end,
+        "fang2hou/blink-copilot",
+        opts = {
+          max_completions = 3,
+          max_attempts = 4,
+          kind_name = "Copilot", ---@type string | false
+          kind_icon = " ", ---@type string | false
+          kind_hl = false, ---@type string | false
+          debounce = 200, ---@type integer | false
+          auto_refresh = {
+            backward = true,
+            forward = true,
+          },
+        },
+      },
+      {
+        "mikavilpas/blink-ripgrep.nvim",
+        version = "*", -- use the latest stable version
+      },
+    },
+    opts = {
+      sources = {
+        default = {
+          "copilot",
+          "ripgrep",
+        },
+        providers = {
+          copilot = {
+            name = "copilot",
+            module = "blink-copilot",
+            score_offset = 100,
+            async = true,
+          },
+          ripgrep = {
+            module = "blink-ripgrep",
+            name = "Ripgrep",
+          },
+        },
       },
     },
   },
@@ -226,22 +230,6 @@ return {
     lazy = true,
     event = "VeryLazy",
     dependencies = {
-      {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-          require("copilot").setup({
-            -- NOTE: For zbirenbaum/copilot.lua the current model for
-            -- completion is 'gpt-41-copilot' and cannot be modified
-            -- copilot_model = vim.g.copilot_model,
-            suggestion = { enabled = false },
-            panel = { enabled = false },
-            copilot_no_tab_map = true,
-            copilot_node_command = vim.g.node_bin,
-          })
-        end,
-      },
       -- for curl, log and async functions
       { "nvim-lua/plenary.nvim", branch = "master" },
     },
@@ -357,5 +345,90 @@ Implement Google OAuth 2.0 flow replacing basic auth.
         end,
       })
     end,
+  },
+  {
+    "folke/sidekick.nvim",
+    opts = {
+      -- add any options here
+      cli = {
+        mux = {
+          backend = "tmux",
+          enabled = true,
+        },
+      },
+    },
+    -- TODO: Add the key maps to which key need to do this in config function
+    -- config = function()
+    --   local utils = require("utils")
+    --   local wk = require("which-key")
+    --   wk.add({
+    --     { "<leader>a", group = "ai", mode = { "n", "t", "i", "x" } }
+    --   })
+    -- end,
+    keys = {
+      {
+        "<tab>",
+        function()
+          -- if there is a next edit, jump to it, otherwise apply it if any
+          if not require("sidekick").nes_jump_or_apply() then
+            return "<Tab>" -- fallback to normal tab
+          end
+        end,
+        expr = true,
+        desc = "Goto/Apply Next Edit Suggestion",
+      },
+      {
+        "<c-.>",
+        function() require("sidekick.cli").focus() end,
+        desc = "Sidekick Focus",
+        mode = { "n", "t", "i", "x" },
+      },
+      {
+        "<leader>aa",
+        function() require("sidekick.cli").toggle() end,
+        desc = "Sidekick Toggle CLI",
+      },
+      {
+        "<leader>as",
+        function() require("sidekick.cli").select() end,
+        -- Or to select only installed tools:
+        -- require("sidekick.cli").select({ filter = { installed = true } })
+        desc = "Select CLI",
+      },
+      {
+        "<leader>ad",
+        function() require("sidekick.cli").close() end,
+        desc = "Detach a CLI Session",
+      },
+      {
+        "<leader>at",
+        function() require("sidekick.cli").send({ msg = "{this}" }) end,
+        mode = { "x", "n" },
+        desc = "Send This",
+      },
+      {
+        "<leader>af",
+        function() require("sidekick.cli").send({ msg = "{file}" }) end,
+        desc = "Send File",
+      },
+      {
+        "<leader>av",
+        function() require("sidekick.cli").send({ msg = "{selection}" }) end,
+        mode = { "x" },
+        desc = "Send Visual Selection",
+      },
+      {
+        "<leader>ap",
+        function() require("sidekick.cli").prompt() end,
+        mode = { "n", "x" },
+        desc = "Sidekick Select Prompt",
+      },
+      -- Example of a keybinding to open Claude directly
+      {
+        "<leader>ac",
+        function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
+        desc = "Sidekick Toggle Claude",
+      },
+    },
   },
 }
