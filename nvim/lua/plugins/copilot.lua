@@ -180,6 +180,24 @@ return {
       })
     end,
   },
+  --[[
+  ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+  ['<C-e>'] = { 'hide', 'fallback' },
+  ['<C-y>'] = { 'select_and_accept', 'fallback' },
+
+  ['<Up>'] = { 'select_prev', 'fallback' },
+  ['<Down>'] = { 'select_next', 'fallback' },
+  ['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
+  ['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
+
+  ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+  ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+
+  ['<Tab>'] = { 'snippet_forward', 'fallback' },
+  ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+
+  ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
+  ]]
   {
     "saghen/blink.cmp",
     version = "1.*",
@@ -199,16 +217,11 @@ return {
           },
         },
       },
-      {
-        "mikavilpas/blink-ripgrep.nvim",
-        version = "*", -- use the latest stable version
-      },
     },
     opts = {
       sources = {
         default = {
           "copilot",
-          "ripgrep",
         },
         providers = {
           copilot = {
@@ -216,10 +229,6 @@ return {
             module = "blink-copilot",
             score_offset = 100,
             async = true,
-          },
-          ripgrep = {
-            module = "blink-ripgrep",
-            name = "Ripgrep",
           },
         },
       },
@@ -357,14 +366,6 @@ Implement Google OAuth 2.0 flow replacing basic auth.
         },
       },
     },
-    -- TODO: Add the key maps to which key need to do this in config function
-    -- config = function()
-    --   local utils = require("utils")
-    --   local wk = require("which-key")
-    --   wk.add({
-    --     { "<leader>a", group = "ai", mode = { "n", "t", "i", "x" } }
-    --   })
-    -- end,
     keys = {
       {
         "<tab>",
@@ -390,9 +391,7 @@ Implement Google OAuth 2.0 flow replacing basic auth.
       },
       {
         "<leader>as",
-        function() require("sidekick.cli").select() end,
-        -- Or to select only installed tools:
-        -- require("sidekick.cli").select({ filter = { installed = true } })
+        function () require("sidekick.cli").select({ filter = { installed = true } }) end,
         desc = "Select CLI",
       },
       {
@@ -423,7 +422,6 @@ Implement Google OAuth 2.0 flow replacing basic auth.
         mode = { "n", "x" },
         desc = "Sidekick Select Prompt",
       },
-      -- Example of a keybinding to open Claude directly
       {
         "<leader>ac",
         function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
