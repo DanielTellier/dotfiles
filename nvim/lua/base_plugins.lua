@@ -78,10 +78,6 @@ return {
   { "ibhagwan/fzf-lua" },
   { 'numToStr/Comment.nvim' },
   {
-    "j-hui/fidget.nvim",
-    version = "*", -- alternatively, pin this to a specific version, e.g., "1.6.1"
-  },
-  {
     "DanielTellier/multi-tree.nvim",
     dependencies = {
       "nvim-tree/nvim-web-devicons",

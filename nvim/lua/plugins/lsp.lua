@@ -28,7 +28,7 @@ return {
       -- Bridge between Mason and lspconfig
       { "williamboman/mason-lspconfig.nvim" },
       -- "Quality of life" plugin to show LSP status updates
-      { "j-hui/fidget.nvim", opts = {} },
+      { "j-hui/fidget.nvim", version = "*" },
     },
     config = function()
       local utils = require("utils")
