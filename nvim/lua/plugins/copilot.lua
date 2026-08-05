@@ -222,6 +222,8 @@ return {
       sources = {
         default = {
           "copilot",
+          "lsp",
+          "path",
         },
         providers = {
           copilot = {

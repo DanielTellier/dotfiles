@@ -23,8 +23,6 @@ return {
           })
         end,
       },
-      { "hrsh7th/nvim-cmp" },
-      { "hrsh7th/cmp-nvim-lsp" },
       -- Bridge between Mason and lspconfig
       { "williamboman/mason-lspconfig.nvim" },
       -- "Quality of life" plugin to show LSP status updates
@@ -80,7 +78,7 @@ return {
         -- Disable diagnostics for all LSP clients (icon indicators)
         vim.diagnostic.enable(false, { bufnr = bufnr })
       end
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       -- Central table for server configurations
       local servers = {
