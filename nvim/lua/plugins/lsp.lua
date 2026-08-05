@@ -28,7 +28,34 @@ return {
       -- "Quality of life" plugin to show LSP status updates
       { "j-hui/fidget.nvim", version = "*" },
     },
-    config = function()
+    opts = {
+      servers = {
+        lua_ls = {
+          settings = {
+            Lua = {
+              runtime = { version = "LuaJIT" },
+              diagnostics = { globals = { "vim" } },
+              workspace = { library = vim.api.nvim_get_runtime_file("lua", true) },
+              telemetry = { enable = false },
+            },
+          },
+        },
+        -- Refined clangd setup with performance and completion flags
+        clangd = {
+          cmd = {
+            "clangd",
+            "--background-index",
+            "--pch-storage=memory",
+            "--all-scopes-completion",
+            "--completion-style=detailed",
+            "-j=4", -- Adjust thread count based on your CPU
+          },
+        },
+        -- Pyright works best with default settings, automatically detecting venvs
+        pyright = {},
+      },
+    },
+    config = function(_, opts)
       local utils = require("utils")
       local wk = require("which-key")
       wk.add({
@@ -78,46 +105,19 @@ return {
         -- Disable diagnostics for all LSP clients (icon indicators)
         vim.diagnostic.enable(false, { bufnr = bufnr })
       end
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-      -- Central table for server configurations
-      local servers = {
-        -- Refined lua_ls setup from your examples
-        lua_ls = {
-          settings = {
-            Lua = {
-              runtime = { version = "LuaJIT" },
-              diagnostics = { globals = { "vim" } },
-              workspace = { library = vim.api.nvim_get_runtime_file("lua", true) },
-              telemetry = { enable = false },
-            },
-          },
-        },
-        -- Refined clangd setup with performance and completion flags
-        clangd = {
-          cmd = {
-            "clangd",
-            "--background-index",
-            "--pch-storage=memory",
-            "--all-scopes-completion",
-            "--completion-style=detailed",
-            "-j=4", -- Adjust thread count based on your CPU
-          },
-        },
-        -- Pyright works best with default settings, automatically detecting venvs
-        pyright = {},
-      }
 
       require("mason-lspconfig").setup({
-        ensure_installed = vim.tbl_keys(servers),
+        ensure_installed = vim.tbl_keys(opts.servers),
       })
-      for server_name, server_opts in pairs(servers) do
+      for server, config in pairs(opts.servers) do
+        config.capabilities = require('blink.cmp').get_lsp_capabilities(
+          config.capabilities
+        )
         local final_config = vim.tbl_deep_extend("force", {
           on_attach = on_attach,
-          capabilities = capabilities,
-        }, server_opts or {})
-
-        vim.lsp.config[server_name] = final_config
+          capabilities = config.capabilities,
+        }, config or {})
+        vim.lsp.config[server] = final_config
       end
 
       local function apply_lsp_status()
