@@ -43,7 +43,7 @@ vim.cmd([[
 --  * Only String and Number types are stored.
 opt.backspace = "start,eol,indent"
 if os.getenv("SSH_TTY") then
-  vim.cmd("let g:clipboard = 'osc52'")
+  vim.g.clipboard = "osc52"
 else
   opt.clipboard = "unnamedplus"
 end
