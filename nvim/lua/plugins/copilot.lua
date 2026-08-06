@@ -306,6 +306,13 @@ Implement Google OAuth 2.0 flow replacing basic auth.
     opts = {
       -- add any options here
       cli = {
+        win = {
+          layout = "top",
+          split = {
+            width = 80, -- set to 0 for default split width
+            height = 20, -- set to 0 for default split height
+          },
+        },
         mux = {
           backend = "tmux",
           enabled = true,

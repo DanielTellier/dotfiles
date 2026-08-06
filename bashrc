@@ -105,6 +105,7 @@ alias tns='tmux new -s'
 alias tas='tmux attach -t'
 alias tls='tmux list-sessions 2>/dev/null || echo "no sessions are available"'
 alias tks='tmux kill-session -t'
+alias hist="fc -ln 1 | sed 's/^[[:space:]]*//'"
 
 ##########
 # Colors #
