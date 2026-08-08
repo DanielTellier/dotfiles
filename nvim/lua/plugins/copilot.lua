@@ -303,6 +303,7 @@ Implement Google OAuth 2.0 flow replacing basic auth.
   },
   {
     "folke/sidekick.nvim",
+    enabled = false,
     opts = {
       -- add any options here
       cli = {
