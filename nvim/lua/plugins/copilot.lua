@@ -167,7 +167,7 @@ return {
     config = function()
       require("copilot").setup({
         -- NOTE: For zbirenbaum/copilot.lua the current model for
-        -- completion is 'gpt-41-copilot' and cannot be modified
+        -- completion available on my GitHub account is 'gpt-41-copilot'
         -- copilot_model = vim.g.copilot_model,
         suggestion = { enabled = false },
         panel = { enabled = false },
