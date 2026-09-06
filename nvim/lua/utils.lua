@@ -1,18 +1,8 @@
 local M = {}
+local get_op = vim.api.nvim_get_option_value
+local set_op = vim.api.nvim_set_option_value
 
 -- Toggle
-function M.toggle_all()
-  if vim.wo.number or vim.wo.relativenumber or vim.wo.list then
-    vim.wo.number = false
-    vim.wo.relativenumber = false
-    vim.wo.list = false
-  else
-    vim.wo.number = true
-    vim.wo.relativenumber = true
-    vim.wo.list = true
-  end
-end
-
 function M.toggle_highlights()
   if vim.o.hlsearch then
     vim.o.hlsearch = false
@@ -21,14 +11,44 @@ function M.toggle_highlights()
   end
 end
 
-function M.toggle_numbers()
-  if vim.wo.relativenumber then
-    vim.wo.relativenumber = false
-  elseif vim.wo.number then
-    vim.wo.number = false
-  else
-    vim.wo.number = true
-    vim.wo.relativenumber = true
+function M.toggle_ops(all_windows, ops)
+  all_windows = all_windows or false
+  ops = ops or { 'number', 'relativenumber', 'list' }
+  -- 0 represents the active window
+  local winids = { 0 }
+  if all_windows then
+    winids = vim.api.nvim_list_wins()
+  end
+  for _, winid in ipairs(winids) do
+    if vim.api.nvim_win_is_valid(winid) then
+      for _, op in ipairs(ops) do
+        set_op(op, not get_op(op, { win = winid }), { win = winid })
+      end
+    end
+  end
+end
+
+function M.toggle_numbers(all_windows)
+  all_windows = all_windows or false
+  -- 0 represents the active window
+  local winids = { 0 }
+  if all_windows then
+    winids = vim.api.nvim_list_wins()
+  end
+
+  local num_flag = get_op('number', { win = 0 })
+  local rel_flag = get_op('relativenumber', { win = 0 })
+  for _, winid in ipairs(winids) do
+    if vim.api.nvim_win_is_valid(winid) then
+      if rel_flag then
+        set_op('relativenumber', false, { win = winid })
+      elseif num_flag then
+        set_op('number', false, { win = winid })
+      else
+        set_op('number', true, { win = winid })
+        set_op('relativenumber', true, { win = winid })
+      end
+    end
   end
 end
 
