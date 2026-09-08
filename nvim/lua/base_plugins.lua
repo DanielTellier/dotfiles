@@ -72,7 +72,18 @@ return {
     },
   },
   { "tpope/vim-fugitive" },
-  { "sindrets/diffview.nvim" },
+  {
+    "sindrets/diffview.nvim",
+    opts = {
+      hooks = {
+        -- Absolute line numbers only in the diff buffers (file panel excluded)
+        diff_buf_win_enter = function(_, winid, _)
+          vim.wo[winid].number = true
+          vim.wo[winid].relativenumber = false
+        end,
+      },
+    },
+  },
   { "tpope/vim-repeat" },
   { "tpope/vim-surround" },
   { "ibhagwan/fzf-lua" },

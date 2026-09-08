@@ -138,6 +138,21 @@ vim.api.nvim_create_autocmd('VimEnter', {
   once = true,
 })
 
+vim.api.nvim_create_autocmd('VimEnter', {
+  group = utils.augroup("diff_mode", {}),
+  desc = "Use absolute line numbers only when started with nvim -d",
+  callback = function()
+    if not vim.o.diff then
+      return
+    end
+    for _, winid in ipairs(vim.api.nvim_list_wins()) do
+      vim.wo[winid].number = true
+      vim.wo[winid].relativenumber = false
+    end
+  end,
+  once = true,
+})
+
 vim.api.nvim_create_autocmd('FileType', {
   group = utils.augroup("no_auto_comment", {}),
   desc = "Avoid auto continue comment on a new line",

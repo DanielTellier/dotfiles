@@ -20,7 +20,10 @@ function M.toggle_ops(all_windows, ops)
     winids = vim.api.nvim_list_wins()
   end
   for _, winid in ipairs(winids) do
-    if vim.api.nvim_win_is_valid(winid) then
+    if
+      vim.api.nvim_win_is_valid(winid)
+      and vim.bo[vim.api.nvim_win_get_buf(winid)].buftype ~= 'terminal'
+    then
       for _, op in ipairs(ops) do
         set_op(op, not get_op(op, { win = winid }), { win = winid })
       end
@@ -39,7 +42,10 @@ function M.toggle_numbers(all_windows)
   local num_flag = get_op('number', { win = 0 })
   local rel_flag = get_op('relativenumber', { win = 0 })
   for _, winid in ipairs(winids) do
-    if vim.api.nvim_win_is_valid(winid) then
+    if
+      vim.api.nvim_win_is_valid(winid)
+      and vim.bo[vim.api.nvim_win_get_buf(winid)].buftype ~= 'terminal'
+    then
       if rel_flag then
         set_op('relativenumber', false, { win = winid })
       elseif num_flag then
