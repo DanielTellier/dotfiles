@@ -10,7 +10,6 @@ return {
       { "nvim-telescope/telescope-file-browser.nvim" },
       { "fdschmidt93/telescope-egrepify.nvim" },
       { "nvim-telescope/telescope-ui-select.nvim" },
-      { "LinArcX/telescope-env.nvim" },
     },
     config = function()
       local telescope = require("telescope")
@@ -80,7 +79,6 @@ return {
       telescope.load_extension("file_browser")
       telescope.load_extension("egrepify")
       telescope.load_extension("ui-select")
-      telescope.load_extension('env')
     end,
   },
 }
