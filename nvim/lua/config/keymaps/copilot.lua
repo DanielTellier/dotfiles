@@ -3,8 +3,11 @@ local wk = require("which-key")
 
 wk.add({
   { "<leader>c", group = "copilot", mode = { "n", "x", "v" } },
-  { "<leader>a", group = "sidekick", mode = { "n", "x" } },
 })
+local plugin = require("lazy.core.config").plugins["sidekick.nvim"]
+if plugin and plugin.enabled then
+  wk.add({ { "<leader>a", group = "sidekick", mode = { "n", "x" } } })
+end
 
 utils.map("n", "<leader>cm",
   "<cmd>CopilotChatModels<cr>",

@@ -138,21 +138,27 @@ utils.map(
 -- Toggle
 utils.map('n', '<leader>th', function()
   utils.toggle_highlights()
-end, { desc = "Toggle highlights" })
+end, { desc = "Toggle highlights globally" })
 utils.map(
   'n', '/', ':set hlsearch<cr>/',
   { silent = false, desc = "Ensure highlighting is on when searching" }
 )
 utils.map('n', '<leader>tn', function()
+  utils.toggle_numbers(true)
+end, { desc = "Toggle numbers globally" })
+utils.map('n', '<leader>tN', function()
   utils.toggle_numbers()
-end, { desc = "Toggle numbers" })
+end, { desc = "Toggle numbers for local window" })
 utils.map(
   'n', '<leader>tl', ':if (&list) | set nolist | else | set list | endif<cr>',
   { desc = "Toggle listchars" }
 )
 utils.map('n', '<leader>ta', function()
-  utils.toggle_all()
-end, { desc = "Toggle listchars and numbers" })
+  utils.toggle_ops(true)
+end, { desc = "Toggle listchars and numbers globally" })
+utils.map('n', '<leader>tA', function()
+  utils.toggle_ops()
+end, { desc = "Toggle listchars and numbers for local window" })
 utils.map(
   "n", "<leader>tw", "<cmd>set wrap!<CR>",
   { desc = "Toggle line wrap" }

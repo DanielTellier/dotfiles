@@ -37,10 +37,10 @@ end
 vim.g.copilot_available = copilot_enabled == "true" and utils.path_exists(vim.g.node_bin)
 if vim.g.copilot_available then
   -- NOTE: For zbirenbaum/copilot.lua the current model for
-  -- completion is 'gpt-41-copilot' and cannot be modified
+  -- completion availabe on my GitHub account is 'gpt-41-copilot'
   -- vim.g.copilot_model = "gpt-41-copilot"
   -- To list available models for CopilotChat, run: <cmd>CopilotChatModels
-  vim.g.copilotchat_model = "claude-sonnet-4.6"
+  vim.g.copilotchat_model = "claude-opus-5"
 end
 
 -- Make sure to setup `mapleader` and `maplocalleader` before
