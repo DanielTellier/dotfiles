@@ -15,6 +15,7 @@ export PATH="$HOME/.local/bin:$PATH"
 ########
 # MISC #
 ########
+export GIT_EDITOR=$(which nvim)
 export EDITOR='nvim'
 export TERM='xterm-256color'
 export IPYTHONDIR="$HOME/.dotfiles/ipython"

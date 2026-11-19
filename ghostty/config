@@ -44,3 +44,4 @@ keybind = ctrl+t>j=goto_split:down
 keybind = ctrl+t>q=close_surface
 keybind = ctrl+t>c=close_window
 keybind = ctrl+t>f=write_scrollback_file:paste
+keybind = ctrl+t>r=prompt_tab_title
