@@ -198,7 +198,7 @@ return {
       context = "buffers",
       -- Registers copilot-chat source and enables it for copilot-chat filetype (so copilot chat window)
       chat_autocomplete = false,
-      debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
+      debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.log.
       selection = function(source)
         local select = require("CopilotChat.select")
         return select.visual(source) or select.buffer(source)

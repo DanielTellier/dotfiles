@@ -40,7 +40,7 @@ if vim.g.copilot_available then
   -- completion availabe on my GitHub account is 'gpt-41-copilot'
   -- vim.g.copilot_model = "gpt-41-copilot"
   -- To list available models for CopilotChat, run: <cmd>CopilotChatModels
-  vim.g.copilotchat_model = "claude-opus-5"
+  vim.g.copilotchat_model = "gpt-6.1-terra"
 end
 
 -- Make sure to setup `mapleader` and `maplocalleader` before
